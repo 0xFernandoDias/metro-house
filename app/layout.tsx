@@ -5,6 +5,7 @@ import { CacheProvider } from "@chakra-ui/next-js"
 import { ChakraProvider } from "@chakra-ui/react"
 import { extendTheme } from "@chakra-ui/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ThirdwebProvider } from "@thirdweb-dev/react"
 
 const colors = {
 	brand: {
@@ -26,13 +27,15 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<QueryClientProvider client={queryClient}>
-					<GlobalContextProvider>
-						<CacheProvider>
-							<ChakraProvider theme={theme}>{children}</ChakraProvider>
-						</CacheProvider>
-					</GlobalContextProvider>
-				</QueryClientProvider>
+				<ThirdwebProvider activeChain="mumbai">
+					<QueryClientProvider client={queryClient}>
+						<GlobalContextProvider>
+							<CacheProvider>
+								<ChakraProvider theme={theme}>{children}</ChakraProvider>
+							</CacheProvider>
+						</GlobalContextProvider>
+					</QueryClientProvider>
+				</ThirdwebProvider>
 			</body>
 		</html>
 	)

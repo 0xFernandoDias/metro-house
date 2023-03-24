@@ -1,29 +1,41 @@
 {
-  "name": "metro-house",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@chakra-ui/next-js": "^2.1.0",
-    "@chakra-ui/react": "^2.5.3",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@tanstack/react-query": "^4.28.0",
-    "@types/node": "18.15.6",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "axios": "^1.3.4",
-    "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
-    "framer-motion": "^10.8.5",
-    "next": "13.2.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.2"
-  }
+	"name": "metro-house",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"generate": "graphql-codegen",
+		"prestart": "yarn generate"
+	},
+	"dependencies": {
+		"@chakra-ui/next-js": "^2.1.0",
+		"@chakra-ui/react": "^2.5.3",
+		"@emotion/react": "^11.10.6",
+		"@emotion/styled": "^11.10.6",
+		"@tanstack/react-query": "^4.28.0",
+		"@thirdweb-dev/react": "^3.10.3",
+		"@thirdweb-dev/sdk": "^3.10.3",
+		"@types/node": "18.15.6",
+		"@types/react": "18.0.28",
+		"@types/react-dom": "18.0.11",
+		"axios": "^1.3.4",
+		"eslint": "8.36.0",
+		"eslint-config-next": "13.2.4",
+		"ethers": "^5.7.2",
+		"framer-motion": "^10.8.5",
+		"graphql": "^16.6.0",
+		"graphql-request": "^5.2.0",
+		"next": "13.2.4",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"typescript": "5.0.2"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^3.2.2",
+		"@graphql-codegen/client-preset": "^2.1.1",
+		"ts-node": "^10.9.1"
+	}
 }

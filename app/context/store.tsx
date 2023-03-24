@@ -26,7 +26,9 @@ export const GlobalContextProvider = ({
 }) => {
 	const [state, dispatch] = useReducer(reducer, { count: 0 })
 
-	const increment = () => dispatch({ type: "Increment" })
+	function increment() {
+		dispatch({ type: "Increment" })
+	}
 
 	return (
 		<GlobalContext.Provider value={{ count: state.count, increment }}>
