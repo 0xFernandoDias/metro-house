@@ -1,10 +1,16 @@
 "use client"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
+import { LensConfig, LensProvider, staging } from "@lens-protocol/react-web"
+import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { CacheProvider } from "@chakra-ui/next-js"
 import { ChakraProvider } from "@chakra-ui/react"
 import { extendTheme } from "@chakra-ui/react"
+
+const lensConfig: LensConfig = {
+	bindings: wagmiBindings(),
+	environment: staging,
+}
 
 const theme = extendTheme({})
 
@@ -13,19 +19,17 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
-	const queryClient = new QueryClient()
-
 	return (
 		<html lang="en">
 			<body>
 				<ThirdwebProvider activeChain="mumbai">
-					<QueryClientProvider client={queryClient}>
+					<LensProvider config={lensConfig}>
 						<GlobalContextProvider>
 							<CacheProvider>
 								<ChakraProvider theme={theme}>{children}</ChakraProvider>
 							</CacheProvider>
 						</GlobalContextProvider>
-					</QueryClientProvider>
+					</LensProvider>
 				</ThirdwebProvider>
 			</body>
 		</html>

@@ -1,33 +1,33 @@
 "use client"
 // @ts-ignore
-import { Button } from "@chakra-ui/react"
 import { useGlobalContext } from "./context/store"
-// import { graphql } from "./gql"
-// import { useGraphQL } from "./helpers/useGraphql"
 import { ConnectWallet } from "@thirdweb-dev/react"
-
-// const allFilmsWithVariablesQueryDocument = graphql(/* GraphQL */ `
-// 	query allFilmsWithVariablesQuery($first: Int!) {
-// 		allFilms(first: $first) {
-// 			edges {
-// 				node {
-// 					title
-// 				}
-// 			}
-// 		}
-// 	}
-// `)
+import {
+	useExplorePublications,
+	PublicationSortCriteria,
+	PublicationTypes,
+	AnyPublicationFragment,
+	isMirrorPublication,
+	ContentPublicationFragment,
+	useEncryptedPublication,
+} from "@lens-protocol/react-web"
+import { Button } from "@chakra-ui/react"
 
 export default function Home() {
 	const { count, increment } = useGlobalContext()
+	const {
+		data: publications,
+		loading,
+		hasMore,
+		next,
+	} = useExplorePublications({
+		sortCriteria: PublicationSortCriteria.Latest,
+		publicationTypes: [PublicationTypes.Post],
+	})
 
-	// const { data, isLoading } = useGraphQL(
-	// 	allFilmsWithVariablesQueryDocument,
-	// 	// variables are also properly type-checked.
-	// 	{ first: 10 }
-	// )
-
-	// if (isLoading) return <>...loading</>
+	if (loading) {
+		return <div>Loading...</div>
+	}
 
 	return (
 		<>
@@ -41,14 +41,32 @@ export default function Home() {
 				</Button>
 			</div>
 			<div>
-				<>
-					Map
-					{/* {data?.allFilms?.edges?.map((edge) => (
-						<div key={edge?.node?.title}>{edge?.node?.title}</div>
-					))} */}
-				</>
+				{publications?.map((publication: AnyPublicationFragment) => {
+					return (
+						<Content
+							key={publication.id}
+							publication={
+								isMirrorPublication(publication)
+									? publication.mirrorOf
+									: publication
+							}
+						/>
+					)
+				})}
 				<ConnectWallet />
 			</div>
 		</>
 	)
+}
+
+const Content = ({
+	publication,
+}: {
+	publication: ContentPublicationFragment
+}) => {
+	const { decrypt, data, error, isPending } = useEncryptedPublication({
+		publication,
+	})
+
+	return <p>{data.metadata.content}</p>
 }
