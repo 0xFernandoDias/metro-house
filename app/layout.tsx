@@ -22,7 +22,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain="mumbai">
+				<ThirdwebProvider activeChain="polygon">
 					<LensProvider config={lensConfig}>
 						<GlobalContextProvider>
 							<CacheProvider>
