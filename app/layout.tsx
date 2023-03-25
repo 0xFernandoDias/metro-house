@@ -1,21 +1,12 @@
 "use client"
-import "./globals.css"
+import { ThirdwebProvider } from "@thirdweb-dev/react"
 import { GlobalContextProvider } from "./context/store"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { CacheProvider } from "@chakra-ui/next-js"
 import { ChakraProvider } from "@chakra-ui/react"
 import { extendTheme } from "@chakra-ui/react"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ThirdwebProvider } from "@thirdweb-dev/react"
 
-const colors = {
-	brand: {
-		900: "#1a365d",
-		800: "#153e75",
-		700: "#2a69ac",
-	},
-}
-
-const theme = extendTheme({ colors })
+const theme = extendTheme({})
 
 export default function RootLayout({
 	children,

@@ -1,12 +1,17 @@
-import { CodegenConfig } from "@graphql-codegen/cli"
+import type { CodegenConfig } from "@graphql-codegen/cli"
 
 const config: CodegenConfig = {
-	schema: "https://swapi-graphql.netlify.app/.netlify/functions/index",
-	documents: ["app/**/*.tsx"],
-	ignoreNoDocuments: true, // for better experience with the watcher
+	overwrite: true,
+	schema: "https://api.lens.dev",
+	documents: "./app/**/*.graphql",
 	generates: {
-		"./app/gql/": {
+		"./app/gql/generated/": {
 			preset: "client",
+			plugins: [],
+			config: {
+				dedupeFragments: true,
+				mergeFragmentTypes: true,
+			},
 		},
 	},
 }
