@@ -13,6 +13,7 @@
 		"@chakra-ui/react": "^2.5.3",
 		"@emotion/react": "^11.10.6",
 		"@emotion/styled": "^11.10.6",
+		"@lens-protocol/client": "^0.3.0",
 		"@lens-protocol/react-web": "^0.6.0",
 		"@lens-protocol/wagmi": "^0.6.0",
 		"@thirdweb-dev/react": "^3.10.3",

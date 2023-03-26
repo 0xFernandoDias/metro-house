@@ -1,6 +1,11 @@
 "use client"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
-import { LensConfig, LensProvider, staging } from "@lens-protocol/react-web"
+import {
+	LensConfig,
+	LensProvider,
+	production,
+	staging,
+} from "@lens-protocol/react-web"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
 import { CacheProvider } from "@chakra-ui/next-js"
@@ -22,7 +27,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain="polygon">
+				<ThirdwebProvider activeChain="mumbai">
 					<LensProvider config={lensConfig}>
 						<GlobalContextProvider>
 							<CacheProvider>
