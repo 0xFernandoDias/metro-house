@@ -11,6 +11,19 @@ import { GlobalContextProvider } from "./context/store"
 import { CacheProvider } from "@chakra-ui/next-js"
 import { ChakraProvider } from "@chakra-ui/react"
 import { extendTheme } from "@chakra-ui/react"
+import { WagmiConfig, configureChains, createClient } from "wagmi"
+import { polygon, polygonMumbai } from "wagmi/chains"
+import { publicProvider } from "wagmi/providers/public"
+
+const { provider } = configureChains(
+	[polygonMumbai, polygon],
+	[publicProvider()]
+)
+
+const wagmiClient = createClient({
+	autoConnect: true,
+	provider,
+})
 
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
@@ -28,13 +41,15 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<ThirdwebProvider activeChain="mumbai">
-					<LensProvider config={lensConfig}>
-						<GlobalContextProvider>
-							<CacheProvider>
-								<ChakraProvider theme={theme}>{children}</ChakraProvider>
-							</CacheProvider>
-						</GlobalContextProvider>
-					</LensProvider>
+					<WagmiConfig client={wagmiClient}>
+						<LensProvider config={lensConfig}>
+							<GlobalContextProvider>
+								<CacheProvider>
+									<ChakraProvider theme={theme}>{children}</ChakraProvider>
+								</CacheProvider>
+							</GlobalContextProvider>
+						</LensProvider>
+					</WagmiConfig>
 				</ThirdwebProvider>
 			</body>
 		</html>

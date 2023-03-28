@@ -9,8 +9,10 @@ import {
 	isMirrorPublication,
 	ContentPublicationFragment,
 	useEncryptedPublication,
+	useActiveProfile,
 } from "@lens-protocol/react-web"
 import { Flex, Text } from "@chakra-ui/react"
+import LoginButton from "./components/auth/LoginButton"
 
 const Content = ({
 	publication,
@@ -46,6 +48,8 @@ export default function Home() {
 		publicationTypes: [PublicationTypes.Post],
 	})
 
+	const { data: profile, error, loading: profileLoading } = useActiveProfile()
+
 	if (loading) {
 		return <div>Loading...</div>
 	}
@@ -55,9 +59,10 @@ export default function Home() {
 			<title>Metro House</title>
 			{/* @ts-ignore */}
 			<Flex direction="column" gap="24px">
+				<h1>Hello {profile?.handle}</h1>
 				{publications?.map((publication: AnyPublicationFragment) => {
 					return (
-						<div key={publication?.id}>
+						<div key={publication.id + 1}>
 							<Content
 								publication={
 									isMirrorPublication(publication)
@@ -68,7 +73,7 @@ export default function Home() {
 						</div>
 					)
 				})}
-				<ConnectWallet />
+				<LoginButton />
 			</Flex>
 		</>
 	)
