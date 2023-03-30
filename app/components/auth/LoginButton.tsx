@@ -1,10 +1,13 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import {
 	useWalletLogin,
 	useWalletLogout,
 	useActiveWallet,
 	useActiveProfile,
+	PendingSigningRequestError,
+	WalletConnectionError,
+	UserRejectedError,
 } from "@lens-protocol/react-web"
 import { ChainId } from "@thirdweb-dev/sdk"
 import { WhenLoggedInWithProfile } from "./WhenLoggedInWithProfile"
@@ -16,26 +19,26 @@ import {
 	useNetwork,
 	useSwitchNetwork,
 } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
+import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 
 export function LoginButton() {
 	const {
 		execute: login,
-		error: loginError,
 		isPending: isLoginPending,
+		error: loginError,
 	} = useWalletLogin()
 	const { execute: logout, isPending: isLogoutPending } = useWalletLogout()
 	const { data: activeWallet, loading: activeWalletLoading } = useActiveWallet()
-	const {
-		data: profile,
-		loading: profileLoading,
-		error: profileError,
-	} = useActiveProfile()
+	const { data: profile, error: profileError } = useActiveProfile()
 
 	const { isConnected } = useAccount()
-	const { disconnectAsync } = useDisconnect()
-	const { connectAsync } = useConnect({
-		connector: new InjectedConnector({
+	const { disconnectAsync, isLoading: isDisconnectLoading } = useDisconnect()
+	const {
+		connectAsync,
+		isLoading: isConnectLoading,
+		error: connectError,
+	} = useConnect({
+		connector: new MetaMaskConnector({
 			options: {
 				shimDisconnect: true,
 			},
@@ -44,14 +47,35 @@ export function LoginButton() {
 
 	const { chain } = useNetwork()
 	const isWrongNetwork = isConnected && chain?.id !== 80001
-	const { chains, error, isLoading, pendingChainId, switchNetwork } =
-		useSwitchNetwork()
+	const {
+		switchNetwork,
+		isLoading: isSwitchNetworkLoading,
+		error: switchNetworkError,
+	} = useSwitchNetwork()
+
+	const [walletError, setWalletError] = useState<
+		| PendingSigningRequestError
+		| WalletConnectionError
+		| UserRejectedError
+		| ""
+		| undefined
+	>()
 
 	useEffect(() => {
 		if (!isConnected && activeWallet) {
 			logout()
 		}
 	}, [isConnected, activeWallet, logout])
+
+	useEffect(() => {
+		if (loginError || profileError || connectError) {
+			setWalletError(loginError! || connectError || profileError)
+		}
+	}, [loginError, profileError, connectError])
+
+	useEffect(() => {
+		setWalletError("")
+	}, [isConnected, activeWallet, profile])
 
 	const onLoginClick = async () => {
 		if (isConnected) {
@@ -60,7 +84,7 @@ export function LoginButton() {
 
 		const { connector } = await connectAsync()
 
-		if (connector instanceof InjectedConnector) {
+		if (connector instanceof MetaMaskConnector) {
 			const signer = await connector.getSigner()
 			await login(signer)
 		}
@@ -73,9 +97,20 @@ export function LoginButton() {
 
 	if (isWrongNetwork) {
 		return (
-			<button onClick={() => switchNetwork?.(ChainId.Mumbai)}>
-				Switch to Mumbai Network
-			</button>
+			<>
+				<button
+					type="button"
+					onClick={() => switchNetwork?.(ChainId.Mumbai)}
+					disabled={isSwitchNetworkLoading}
+				>
+					Switch to Mumbai Network
+				</button>
+				{switchNetworkError && (
+					<span style={{ color: "red" }}>
+						User did not switch to correct network.
+					</span>
+				)}
+			</>
 		)
 	}
 
@@ -87,18 +122,11 @@ export function LoginButton() {
 					await logout()
 					await disconnectAsync()
 				}}
+				disabled={isDisconnectLoading || isLogoutPending}
 			>
 				Mint a profile to continue
 			</button>
 		)
-	}
-
-	if (profileLoading) {
-		return <>...Loading</>
-	}
-
-	if (loginError || profileError) {
-		window.location.reload()
 	}
 
 	return (
@@ -108,7 +136,7 @@ export function LoginButton() {
 					<button
 						type="button"
 						onClick={onLogoutClick}
-						disabled={isLogoutPending}
+						disabled={isDisconnectLoading || isLogoutPending}
 					>
 						Logout
 					</button>
@@ -126,11 +154,14 @@ export function LoginButton() {
 									connectAsync()
 							  }
 					}
-					disabled={activeWalletLoading || isLoginPending}
+					disabled={isConnectLoading || isLoginPending || activeWalletLoading}
 				>
 					{isConnected ? "Sign in with Lens" : "Connect Wallet"}
 				</button>
 			</WhenLoggedOut>
+			{walletError && (
+				<span style={{ color: "red" }}>{walletError.message}</span>
+			)}
 		</>
 	)
 }

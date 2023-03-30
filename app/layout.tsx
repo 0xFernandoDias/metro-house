@@ -12,13 +12,14 @@ import {
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
 
-const { provider } = configureChains(
+const { provider, webSocketProvider } = configureChains(
 	[polygonMumbai, polygon],
 	[publicProvider()]
 )
 
 const wagmiClient = createClient({
 	autoConnect: true,
+	webSocketProvider,
 	provider,
 })
 

@@ -20,7 +20,7 @@ export default function Home() {
 
 	const {
 		data: publications,
-		loading,
+		loading: loadingPublications,
 		hasMore,
 		next,
 	} = useExplorePublications({
@@ -29,9 +29,9 @@ export default function Home() {
 	})
 
 	const { data: wallet } = useActiveWallet()
-	const { data: profile, error, loading: profileLoading } = useActiveProfile()
+	const { data: profile } = useActiveProfile()
 
-	if (loading) {
+	if (loadingPublications) {
 		return <div>Loading...</div>
 	}
 
@@ -68,7 +68,7 @@ const Content = ({
 }: {
 	publication: ContentPublicationFragment
 }) => {
-	const { decrypt, data, error, isPending } = useEncryptedPublication({
+	const { data, isPending } = useEncryptedPublication({
 		publication,
 	})
 
@@ -79,7 +79,7 @@ const Content = ({
 	return (
 		<div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
 			<b>@{data.profile.handle}</b>
-			<p>{data.metadata.content}</p>
+			<span>{data.metadata.content}</span>
 		</div>
 	)
 }
