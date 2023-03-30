@@ -12,6 +12,7 @@ import {
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
 import "./global.css"
+import { LoginButton } from "./components/auth/LoginButton"
 
 const { provider, webSocketProvider } = configureChains(
 	[polygonMumbai, polygon],
@@ -40,7 +41,10 @@ export default function RootLayout({
 				<WagmiConfig client={wagmiClient}>
 					<ThirdwebProvider activeChain="mumbai">
 						<LensProvider config={lensConfig}>
-							<GlobalContextProvider>{children}</GlobalContextProvider>
+							<GlobalContextProvider>
+								<LoginButton />
+								{children}
+							</GlobalContextProvider>
 						</LensProvider>
 					</ThirdwebProvider>
 				</WagmiConfig>

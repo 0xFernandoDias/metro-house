@@ -1,6 +1,6 @@
 "use client"
 // import { useGlobalContext } from "./context/store"
-import { useAccount } from "wagmi"
+import { useAccount, useDisconnect } from "wagmi"
 import {
 	useExplorePublications,
 	PublicationSortCriteria,
@@ -11,10 +11,12 @@ import {
 	isMirrorPublication,
 	ContentPublicationFragment,
 	useEncryptedPublication,
+	useWalletLogout,
 } from "@lens-protocol/react-web"
 import { LoginButton } from "./components/auth/LoginButton"
 import { Alert } from "flowbite-react"
 import Link from "next/link"
+import { useEffect } from "react"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -32,6 +34,16 @@ export default function Home() {
 
 	const { data: wallet } = useActiveWallet()
 	const { data: profile } = useActiveProfile()
+	const { isConnected } = useAccount()
+	const { execute: logout, isPending: isLogoutPending } = useWalletLogout()
+	const { disconnectAsync, isLoading: isDisconnectLoading } = useDisconnect()
+
+	useEffect(() => {
+		if (!isConnected && wallet) {
+			logout()
+			disconnectAsync()
+		}
+	}, [isConnected, wallet, logout, disconnectAsync])
 
 	if (loadingPublications) {
 		return <div>Loading...</div>
@@ -42,7 +54,6 @@ export default function Home() {
 			<>
 				<title>Metro House</title>
 				<div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-					<LoginButton />
 					<div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
 						<b>Address: {address}</b>
 						<b>Active wallet: {wallet?.address}</b>
