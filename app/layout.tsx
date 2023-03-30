@@ -1,4 +1,7 @@
 "use client"
+import { configureChains, createClient, WagmiConfig } from "wagmi"
+import { polygon, polygonMumbai } from "wagmi/chains"
+import { publicProvider } from "wagmi/providers/public"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
 import {
 	LensConfig,
@@ -8,12 +11,8 @@ import {
 } from "@lens-protocol/react-web"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
+import { extendTheme, ChakraProvider } from "@chakra-ui/react"
 import { CacheProvider } from "@chakra-ui/next-js"
-import { ChakraProvider } from "@chakra-ui/react"
-import { extendTheme } from "@chakra-ui/react"
-import { WagmiConfig, configureChains, createClient } from "wagmi"
-import { polygon, polygonMumbai } from "wagmi/chains"
-import { publicProvider } from "wagmi/providers/public"
 
 const { provider } = configureChains(
 	[polygonMumbai, polygon],
@@ -40,8 +39,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain="mumbai">
-					<WagmiConfig client={wagmiClient}>
+				<WagmiConfig client={wagmiClient}>
+					<ThirdwebProvider activeChain="mumbai">
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
 								<CacheProvider>
@@ -49,8 +48,8 @@ export default function RootLayout({
 								</CacheProvider>
 							</GlobalContextProvider>
 						</LensProvider>
-					</WagmiConfig>
-				</ThirdwebProvider>
+					</ThirdwebProvider>
+				</WagmiConfig>
 			</body>
 		</html>
 	)
