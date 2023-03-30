@@ -11,8 +11,6 @@ import {
 } from "@lens-protocol/react-web"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
-import { extendTheme, ChakraProvider } from "@chakra-ui/react"
-import { CacheProvider } from "@chakra-ui/next-js"
 
 const { provider } = configureChains(
 	[polygonMumbai, polygon],
@@ -29,8 +27,6 @@ const lensConfig: LensConfig = {
 	environment: staging,
 }
 
-const theme = extendTheme({})
-
 export default function RootLayout({
 	children,
 }: {
@@ -42,11 +38,7 @@ export default function RootLayout({
 				<WagmiConfig client={wagmiClient}>
 					<ThirdwebProvider activeChain="mumbai">
 						<LensProvider config={lensConfig}>
-							<GlobalContextProvider>
-								<CacheProvider>
-									<ChakraProvider theme={theme}>{children}</ChakraProvider>
-								</CacheProvider>
-							</GlobalContextProvider>
+							<GlobalContextProvider>{children}</GlobalContextProvider>
 						</LensProvider>
 					</ThirdwebProvider>
 				</WagmiConfig>

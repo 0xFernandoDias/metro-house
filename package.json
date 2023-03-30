@@ -9,10 +9,6 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@chakra-ui/next-js": "^2.1.0",
-		"@chakra-ui/react": "^2.5.3",
-		"@emotion/react": "^11.10.6",
-		"@emotion/styled": "^11.10.6",
 		"@lens-protocol/client": "^0.3.0",
 		"@lens-protocol/react-web": "^0.6.0",
 		"@lens-protocol/wagmi": "^0.6.0",
@@ -24,7 +20,6 @@
 		"eslint": "8.36.0",
 		"eslint-config-next": "13.2.4",
 		"ethers": "^5.7.2",
-		"framer-motion": "^10.8.5",
 		"next": "13.2.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",

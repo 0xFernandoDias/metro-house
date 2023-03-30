@@ -1,13 +1,6 @@
 "use client"
 import { useEffect } from "react"
 import {
-	useMetamask,
-	useAddress,
-	useSigner,
-	useNetworkMismatch,
-	useNetwork,
-} from "@thirdweb-dev/react"
-import {
 	useWalletLogin,
 	useWalletLogout,
 	useActiveWallet,
@@ -16,16 +9,16 @@ import {
 import { ChainId } from "@thirdweb-dev/sdk"
 import { WhenLoggedInWithProfile } from "./WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "./WhenLoggedOut"
-import { Button } from "@chakra-ui/react"
-
-import { useAccount, useConnect, useDisconnect } from "wagmi"
+import {
+	useAccount,
+	useConnect,
+	useDisconnect,
+	useNetwork,
+	useSwitchNetwork,
+} from "wagmi"
 import { InjectedConnector } from "wagmi/connectors/injected"
 
 export function LoginButton() {
-	// const connect = useMetamask()
-	// const disconnect = useDisconnect()
-	// const address = useAddress()
-	// const signer = useSigner()
 	const {
 		execute: login,
 		error: loginError,
@@ -39,9 +32,6 @@ export function LoginButton() {
 		error: profileError,
 	} = useActiveProfile()
 
-	const isWrongNetwork = useNetworkMismatch()
-	const [, switchNetwork] = useNetwork()
-
 	const { isConnected } = useAccount()
 	const { disconnectAsync } = useDisconnect()
 	const { connectAsync } = useConnect({
@@ -52,20 +42,16 @@ export function LoginButton() {
 		}),
 	})
 
+	const { chain } = useNetwork()
+	const isWrongNetwork = isConnected && chain?.id !== 80001
+	const { chains, error, isLoading, pendingChainId, switchNetwork } =
+		useSwitchNetwork()
+
 	useEffect(() => {
 		if (!isConnected && activeWallet) {
 			logout()
 		}
 	}, [isConnected, activeWallet, logout])
-
-	// const onLoginClick = async (e: any) => {
-	// 	e.preventDefault()
-	// 	if (!signer || !address) {
-	// 		return
-	// 	}
-
-	// 	await login(signer)
-	// }
 
 	const onLoginClick = async () => {
 		if (isConnected) {

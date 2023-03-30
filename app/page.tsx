@@ -1,5 +1,6 @@
 "use client"
 // import { useGlobalContext } from "./context/store"
+import { useAccount } from "wagmi"
 import {
 	useExplorePublications,
 	PublicationSortCriteria,
@@ -11,10 +12,7 @@ import {
 	ContentPublicationFragment,
 	useEncryptedPublication,
 } from "@lens-protocol/react-web"
-// import { useAddress } from "@thirdweb-dev/react"
 import { LoginButton } from "./components/auth/LoginButton"
-import { Flex, Text } from "@chakra-ui/react"
-import { useAccount } from "wagmi"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -41,9 +39,8 @@ export default function Home() {
 		return (
 			<>
 				<title>Metro House</title>
-				{/* @ts-ignore */}
-				<Flex direction="column" gap="24px">
-					<p>Address: {address}</p>
+				<div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+					<h1>Address: {address}</h1>
 					<h1>Active wallet: {wallet?.address}</h1>
 					<h1>Hello {profile?.handle}</h1>
 					<h1>Active profile: {profile?.handle}</h1>
@@ -60,7 +57,7 @@ export default function Home() {
 						)
 					})}
 					<LoginButton />
-				</Flex>
+				</div>
 			</>
 		)
 	}
@@ -80,9 +77,9 @@ const Content = ({
 	}
 
 	return (
-		<Flex direction="column" gap="14px">
-			<Text fontWeight="bold">@{data.profile.handle}</Text>
-			<Text>{data.metadata.content}</Text>
-		</Flex>
+		<div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+			<b>@{data.profile.handle}</b>
+			<p>{data.metadata.content}</p>
+		</div>
 	)
 }
