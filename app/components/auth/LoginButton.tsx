@@ -77,7 +77,9 @@ export function LoginButton() {
 		setWalletError("")
 	}, [isConnected, activeWallet, profile])
 
-	const onLoginClick = async () => {
+	const onLoginClick = async (e: any) => {
+		e.preventDefault()
+
 		if (isConnected) {
 			await disconnectAsync()
 		}
@@ -90,7 +92,8 @@ export function LoginButton() {
 		}
 	}
 
-	const onLogoutClick = async () => {
+	const onLogoutClick = async (e: any) => {
+		e.preventDefault()
 		await logout()
 		await disconnectAsync()
 	}
@@ -100,16 +103,18 @@ export function LoginButton() {
 			<>
 				<button
 					type="button"
-					onClick={() => switchNetwork?.(ChainId.Mumbai)}
+					className="max-w-[10%] focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+					onClick={(e) => {
+						e.preventDefault
+						switchNetwork?.(ChainId.Mumbai)
+					}}
 					disabled={isSwitchNetworkLoading}
 				>
-					Switch to Mumbai Network
+					Switch to Mumbai
 				</button>
-				{switchNetworkError && (
-					<span style={{ color: "red" }}>
-						User did not switch to correct network.
-					</span>
-				)}
+				<span style={{ color: "red" }}>
+					{switchNetworkError && "User did not switch to correct network."}
+				</span>
 			</>
 		)
 	}
@@ -118,13 +123,15 @@ export function LoginButton() {
 		return (
 			<button
 				type="button"
-				onClick={async () => {
+				className="max-w-[10%] focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+				onClick={async (e) => {
+					e.preventDefault
 					await logout()
 					await disconnectAsync()
 				}}
 				disabled={isDisconnectLoading || isLogoutPending}
 			>
-				Mint a profile to continue
+				Mint a profile
 			</button>
 		)
 	}
@@ -135,6 +142,7 @@ export function LoginButton() {
 				{() => (
 					<button
 						type="button"
+						className="max-w-[10%] py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 						onClick={onLogoutClick}
 						disabled={isDisconnectLoading || isLogoutPending}
 					>
@@ -145,10 +153,11 @@ export function LoginButton() {
 			<WhenLoggedOut>
 				<button
 					type="button"
+					className="max-w-[10%] text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
 					onClick={
 						isConnected
-							? () => {
-									onLoginClick()
+							? (e) => {
+									onLoginClick(e)
 							  }
 							: () => {
 									connectAsync()

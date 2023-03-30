@@ -11,6 +11,7 @@ import {
 } from "@lens-protocol/react-web"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
+import "./global.css"
 
 const { provider, webSocketProvider } = configureChains(
 	[polygonMumbai, polygon],

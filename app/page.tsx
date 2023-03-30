@@ -13,6 +13,7 @@ import {
 	useEncryptedPublication,
 } from "@lens-protocol/react-web"
 import { LoginButton } from "./components/auth/LoginButton"
+import { Alert } from "flowbite-react"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -40,10 +41,13 @@ export default function Home() {
 			<>
 				<title>Metro House</title>
 				<div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-					<h1>Address: {address}</h1>
-					<h1>Active wallet: {wallet?.address}</h1>
-					<h1>Hello {profile?.handle}</h1>
-					<h1>Active profile: {profile?.handle}</h1>
+					<LoginButton />
+					<div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
+						<b>Address: {address}</b>
+						<b>Active wallet: {wallet?.address}</b>
+						<b>Hello {profile?.handle}</b>
+						<b>Active profile: {profile?.handle}</b>
+					</div>
 					{publications.map((publication: AnyPublicationFragment, idx) => {
 						return (
 							<Content
@@ -56,7 +60,6 @@ export default function Home() {
 							/>
 						)
 					})}
-					<LoginButton />
 				</div>
 			</>
 		)
