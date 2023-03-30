@@ -14,6 +14,7 @@ import {
 } from "@lens-protocol/react-web"
 import { LoginButton } from "./components/auth/LoginButton"
 import { Alert } from "flowbite-react"
+import Link from "next/link"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -50,7 +51,7 @@ export default function Home() {
 					</div>
 					{publications.map((publication: AnyPublicationFragment, idx) => {
 						return (
-							<Content
+							<Publication
 								key={parseFloat(publication.id) + idx}
 								publication={
 									isMirrorPublication(publication)
@@ -66,7 +67,7 @@ export default function Home() {
 	}
 }
 
-const Content = ({
+const Publication = ({
 	publication,
 }: {
 	publication: ContentPublicationFragment
@@ -81,7 +82,9 @@ const Content = ({
 
 	return (
 		<div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-			<b>@{data.profile.handle}</b>
+			<Link className="font-bold" href={`/profile/${data.profile.handle}`}>
+				@{data.profile.handle}
+			</Link>
 			<span>{data.metadata.content}</span>
 		</div>
 	)
