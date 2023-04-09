@@ -7,7 +7,7 @@ export function Navbar() {
 
             useUnreadNotificationsCount AUTHENTICATED
             
-            Metro House Login (https://flowbite.com/docs/components/avatar/) https://flowbite.com/docs/components/sidebar/#sidebar-with-navbar
+            Metro House PAGE NAME Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network (https://flowbite.com/docs/components/avatar/) https://flowbite.com/docs/components/sidebar/#sidebar-with-navbar
             Latest Top Collected Top Commented Top Mirrored AUTHENTICATED https://flowbite.com/docs/components/tabs/#interactive-tabs
             (Audio) (Image) (Text) (Only) (Video) with icons https://flowbite.com/docs/components/tabs/#pills-tabs
             
@@ -16,10 +16,14 @@ export function Navbar() {
             each https://flowbite.com/docs/components/badge/#button-with-badge
             Contacts AUTHENTICATED
             Discovery
+            Latest
+            Top Collected
+            Top Commented
+            Top Mirrored
             Notifications (count) AUTHENTICATED https://flowbite.com/docs/components/badge/#button-with-badge
             Profile AUTHENTICATED
             (CREATE POST) AUTHENTICATED
-            Login/Profile/Settings https://flowbite.com/docs/components/avatar/
+            Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network https://flowbite.com/docs/components/avatar/
 
             RIGHT
             Search

@@ -1,3 +1,4 @@
+// https://testnet.lenster.xyz/ + https://lenster.xyz/ + https://www.lensfrens.xyz/ + https://lens-do-it.vercel.app/ +
 "use client"
 import { configureChains, createClient, WagmiConfig } from "wagmi"
 import { polygon, polygonMumbai } from "wagmi/chains"

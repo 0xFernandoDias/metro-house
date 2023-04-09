@@ -79,7 +79,7 @@ function FollowButton({
 // https://flowbite.com/docs/components/rating/#review-content
 // https://flowbite.com/docs/components/skeleton/#card-placeholder
 // https://flowbite.com/docs/components/popover/#user-profile
-// @handle
+// @handle - switch
 // Contacts (Followers, Following, Mutual)
 // Feed https://flowbite.com/docs/components/tabs/#tabs-with-icons https://flowbite.com/docs/components/tabs/#pills-tabs
 // (CREATE POST) IF ITS MINE https://flowbite.com/docs/forms/textarea/#wysiwyg-editor
@@ -87,12 +87,13 @@ function FollowButton({
 // bio
 // picture - https://flowbite.com/docs/components/avatar/
 // cover picture - https://flowbite.com/docs/typography/images/#image-caption
-// Follow AUTHENTICATED - https://flowbite.com/docs/components/buttons/#default-button
+// Follow AUTHENTICATE AT LEAST WITH METAMASK hash  - https://flowbite.com/docs/components/buttons/#default-button
 // View on Opensea
 // Attributes - https://flowbite.com/docs/typography/lists/#list-with-icons
 // Name
 // Proof of humanity - https://flowbite.com/docs/components/badge/#badges-with-icon
-// (id) not visual
+// (id)
 // Edit things IF ITS MINE AUTHENTICATED
 // Profile price
 // Member since??
+// Transfer cash

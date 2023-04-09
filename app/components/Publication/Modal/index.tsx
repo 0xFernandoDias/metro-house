@@ -11,10 +11,11 @@
 // profile - @handle
 // 	Contacts (Followers, Following, Mutual)
 // 	picture
-// 	Follow AUTHENTICATED
+// 	Follow AUTHENTICATE AT LEAST WITH METAMASK hash
 // 	Name
 // 	Proof of humanity
 // useEncryptedPublication
+// LOGIN TO DECRYPT - https://testnet.lenster.xyz/posts/0x1b-0x0133
 // canObserverDecrypt?
 // can COMMENT, can MIRROR, Has Collected by me? AUTHENTICATED
 // Metadata

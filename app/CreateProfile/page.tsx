@@ -5,3 +5,4 @@ export default function CreateProfile({
 }) {
 	return <div></div>
 }
+// I think you don't need to be authenticated
