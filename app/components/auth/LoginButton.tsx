@@ -168,3 +168,5 @@ export function LoginButton() {
 		</>
 	)
 }
+
+// https://flowbite.com/docs/components/buttons/#payment-buttons

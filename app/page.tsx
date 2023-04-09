@@ -12,6 +12,7 @@ import {
 	ContentPublicationFragment,
 	useEncryptedPublication,
 	useWalletLogout,
+	PublicationMainFocus,
 } from "@lens-protocol/react-web"
 import { LoginButton } from "./components/auth/LoginButton"
 import { Alert } from "flowbite-react"
