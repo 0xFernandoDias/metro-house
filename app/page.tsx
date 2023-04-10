@@ -7,17 +7,11 @@ import {
 	PublicationTypes,
 	useActiveWallet,
 	useActiveProfile,
-	AnyPublicationFragment,
-	isMirrorPublication,
-	ContentPublicationFragment,
-	useEncryptedPublication,
 	useWalletLogout,
 	PublicationMainFocus,
 } from "@lens-protocol/react-web"
-import { LoginButton } from "./components/auth/LoginButton"
-import { Alert } from "flowbite-react"
-import Link from "next/link"
 import { useEffect } from "react"
+import { Publications } from "./components/Publications"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -55,49 +49,15 @@ export default function Home() {
 			<>
 				<title>Metro House</title>
 				<div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-					<div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
+					{/* <div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
 						<b>Address: {address}</b>
 						<b>Active wallet: {wallet?.address}</b>
 						<b>Hello {profile?.handle}</b>
 						<b>Active profile: {profile?.handle}</b>
-					</div>
-					{publications.map((publication: AnyPublicationFragment, idx) => {
-						return (
-							<Publication
-								key={parseFloat(publication.id) + idx}
-								publication={
-									isMirrorPublication(publication)
-										? publication.mirrorOf
-										: publication
-								}
-							/>
-						)
-					})}
+					</div> */}
+					<Publications publications={publications} />
 				</div>
 			</>
 		)
 	}
-}
-
-const Publication = ({
-	publication,
-}: {
-	publication: ContentPublicationFragment
-}) => {
-	const { data, isPending } = useEncryptedPublication({
-		publication,
-	})
-
-	if (isPending) {
-		return <div>Loading...</div>
-	}
-
-	return (
-		<div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-			<Link className="font-bold" href={`/profile/${data.profile.handle}`}>
-				@{data.profile.handle}
-			</Link>
-			<span>{data.metadata.content}</span>
-		</div>
-	)
 }
