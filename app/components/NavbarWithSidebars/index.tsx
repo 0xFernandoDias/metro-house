@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image"
 
 export function NavbarWithSidebars({
 	children,
@@ -7,7 +8,7 @@ export function NavbarWithSidebars({
 }) {
 	return (
 		<div className="flex flex-col">
-			<nav className="top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+			<nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
 				<div className="px-3 py-3 lg:px-5 lg:pl-3">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center justify-start">
@@ -36,7 +37,9 @@ export function NavbarWithSidebars({
 							<a href="https://flowbite.com" className="flex ml-2 md:mr-24">
 								<img
 									src="https://flowbite.com/docs/images/logo.svg"
-									className="h-8 mr-3"
+									width={40}
+									height={40}
+									className="mr-3"
 									alt="FlowBite Logo"
 								/>
 								<span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
@@ -58,7 +61,9 @@ export function NavbarWithSidebars({
 									>
 										<span className="sr-only">Open user menu</span>
 										<img
-											className="w-8 h-8 rounded-full"
+											className="rounded-full"
+											width={40}
+											height={40}
 											src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 											alt="user photo"
 										/>
@@ -79,7 +84,7 @@ export function NavbarWithSidebars({
 											className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
 											role="none"
 										>
-											neil.sims@flowbite.com
+											@neil.sims
 										</p>
 									</div>
 									<ul className="py-1" role="none">
@@ -134,6 +139,12 @@ export function NavbarWithSidebars({
 					aria-label="Sidebar"
 				>
 					<div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+						<a
+							href="#"
+							className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+						>
+							Hello @fernando.dias
+						</a>
 						<ul className="space-y-2 font-medium">
 							{[
 								"Contacts",
@@ -160,7 +171,14 @@ export function NavbarWithSidebars({
 												<path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
 												<path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
 											</svg>
-											<span className="ml-3">{item}</span>
+											<span className="ml-3">
+												{item}{" "}
+												{item === "Notifications" && (
+													<span className="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+														2
+													</span>
+												)}
+											</span>
 										</a>
 									</li>
 								)
@@ -205,14 +223,16 @@ export function NavbarWithSidebars({
 									required
 								/>
 							</div>
-
+							<span className="m-3">Suggested</span>
 							<ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
 								<li className="pb-3 sm:pb-4">
 									<div className="flex items-center space-x-4">
 										<div className="flex-shrink-0">
 											<img
-												className="w-8 h-8 rounded-full"
-												src="/docs/images/people/profile-picture-1.jpg"
+												className="rounded-full"
+												width={40}
+												height={40}
+												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
 										</div>
@@ -221,20 +241,25 @@ export function NavbarWithSidebars({
 												Neil Sims
 											</p>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
-												email@flowbite.com
+												@neil.sims
 											</p>
 										</div>
-										<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-											$320
-										</div>
+										<button
+											type="button"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+										>
+											Follow
+										</button>
 									</div>
 								</li>
 								<li className="py-3 sm:py-4">
 									<div className="flex items-center space-x-4">
 										<div className="flex-shrink-0">
 											<img
-												className="w-8 h-8 rounded-full"
-												src="/docs/images/people/profile-picture-3.jpg"
+												className="rounded-full"
+												width={40}
+												height={40}
+												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
 										</div>
@@ -243,20 +268,25 @@ export function NavbarWithSidebars({
 												Bonnie Green
 											</p>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
-												email@flowbite.com
+												@neil.sims
 											</p>
 										</div>
-										<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-											$3467
-										</div>
+										<button
+											type="button"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+										>
+											Follow
+										</button>
 									</div>
 								</li>
 								<li className="py-3 sm:py-4">
 									<div className="flex items-center space-x-4">
 										<div className="flex-shrink-0">
 											<img
-												className="w-8 h-8 rounded-full"
-												src="/docs/images/people/profile-picture-2.jpg"
+												className="rounded-full"
+												width={40}
+												height={40}
+												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
 										</div>
@@ -265,20 +295,25 @@ export function NavbarWithSidebars({
 												Michael Gough
 											</p>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
-												email@flowbite.com
+												@neil.sims
 											</p>
 										</div>
-										<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-											$67
-										</div>
+										<button
+											type="button"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+										>
+											Follow
+										</button>
 									</div>
 								</li>
 								<li className="py-3 sm:py-4">
 									<div className="flex items-center space-x-4">
 										<div className="flex-shrink-0">
 											<img
-												className="w-8 h-8 rounded-full"
-												src="/docs/images/people/profile-picture-5.jpg"
+												className="rounded-full"
+												width={40}
+												height={40}
+												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
 										</div>
@@ -287,20 +322,25 @@ export function NavbarWithSidebars({
 												Thomas Lean
 											</p>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
-												email@flowbite.com
+												@neil.sims
 											</p>
 										</div>
-										<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-											$2367
-										</div>
+										<button
+											type="button"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+										>
+											Follow
+										</button>
 									</div>
 								</li>
 								<li className="pt-3 pb-0 sm:pt-4">
 									<div className="flex items-center space-x-4">
 										<div className="flex-shrink-0">
 											<img
-												className="w-8 h-8 rounded-full"
-												src="/docs/images/people/profile-picture-4.jpg"
+												className="rounded-full"
+												width={40}
+												height={40}
+												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
 										</div>
@@ -309,12 +349,15 @@ export function NavbarWithSidebars({
 												Lana Byrd
 											</p>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
-												email@flowbite.com
+												@neil.sims
 											</p>
 										</div>
-										<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-											$367
-										</div>
+										<button
+											type="button"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+										>
+											Follow
+										</button>
 									</div>
 								</li>
 							</ul>
@@ -387,7 +430,7 @@ export function NavbarWithSidebars({
             RIGHT
             Search
             Suggested
-            Footer https://flowbite.com/docs/components/footer/#default-footer
+            Footer https://flowbite.com/docs/components/footer/#Follow-footer
 
             */
 }

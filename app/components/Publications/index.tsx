@@ -28,7 +28,7 @@
 // use Reaction AUTHENTICATED
 // use Hide Publication AUTHENTICATED
 // https://flowbite.com/docs/components/card/#card-with-list
-
+"use client"
 import {
 	AnyPublicationFragment,
 	isMirrorPublication,
@@ -219,18 +219,20 @@ export function Publications({
 				</li> */}
 			</ul>
 
-			{publications.map((publication: AnyPublicationFragment, idx) => {
-				return (
-					<Publication
-						key={parseFloat(publication.id) + idx}
-						publication={
-							isMirrorPublication(publication)
-								? publication.mirrorOf
-								: publication
-						}
-					/>
-				)
-			})}
+			<div className="flex flex-col gap-8">
+				{publications.map((publication: AnyPublicationFragment, idx) => {
+					return (
+						<Publication
+							key={parseFloat(publication.id) + idx}
+							publication={
+								isMirrorPublication(publication)
+									? publication.mirrorOf
+									: publication
+							}
+						/>
+					)
+				})}
+			</div>
 		</div>
 	)
 }
