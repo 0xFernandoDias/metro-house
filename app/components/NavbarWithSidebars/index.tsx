@@ -34,7 +34,7 @@ export function NavbarWithSidebars({
 									></path>
 								</svg>
 							</button>
-							<a href="https://flowbite.com" className="flex ml-2 md:mr-24">
+							<a href="/" className="flex ml-2 md:mr-24">
 								<img
 									src="https://flowbite.com/docs/images/logo.svg"
 									width={40}
@@ -184,7 +184,7 @@ export function NavbarWithSidebars({
 					</div>
 				</aside>
 
-				<div className="p-4 sm:ml-64 sm:mr-64">{children}</div>
+				<div className="flex min-w-full p-4 sm:ml-64 sm:mr-64">{children}</div>
 
 				<aside
 					id="logo-sidebar"

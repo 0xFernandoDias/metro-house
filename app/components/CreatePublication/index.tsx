@@ -11,7 +11,7 @@ export function CreatePublication() {
 	return (
 		<div>
 			<form>
-				<div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+				<div className="w-full h-40 mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 					<div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
 						<div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
 							<div className="flex items-center space-x-1 sm:pr-4">

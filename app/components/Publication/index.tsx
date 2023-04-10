@@ -39,7 +39,7 @@ export const Publication = ({
 						alt=""
 					/>
 					<div className="space-y-1 font-medium dark:text-white">
-						<p>
+						<Link href="/Profile">
 							Jese Leos{" "}
 							<span className=" text-blue-800 text-xs font-medium inline-flex items-center px-0.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400">
 								<svg
@@ -56,7 +56,7 @@ export const Publication = ({
 									></path>
 								</svg>
 							</span>
-						</p>
+						</Link>
 						<div className="text-sm text-gray-500 dark:text-gray-400">
 							<p>257 followers, 18 mutual</p>
 						</div>
@@ -122,7 +122,7 @@ export const Publication = ({
 						</a>
 					</div>
 				</aside>
-				<Comment />
+				{/* <Comment /> */}
 			</article>
 		</div>
 	)
