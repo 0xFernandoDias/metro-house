@@ -12,6 +12,7 @@ import {
 } from "@lens-protocol/react-web"
 import { useEffect } from "react"
 import { Publications } from "./components/Publications"
+import { CreatePublication } from "./components/CreatePublication"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -55,6 +56,7 @@ export default function Home() {
 						<b>Hello {profile?.handle}</b>
 						<b>Active profile: {profile?.handle}</b>
 					</div> */}
+					<CreatePublication />
 					<Publications publications={publications} />
 				</div>
 			</>

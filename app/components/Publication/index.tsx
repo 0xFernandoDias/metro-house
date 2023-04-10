@@ -3,6 +3,7 @@ import {
 	ContentPublicationFragment,
 	useEncryptedPublication,
 } from "@lens-protocol/react-web"
+import { Comment } from "../Comments"
 import Link from "next/link"
 
 export const Publication = ({
@@ -67,13 +68,13 @@ export const Publication = ({
 				>
 					Created At August 25
 				</time>
-				<p className="mb-2 text-gray-500 dark:text-gray-400">
+				<p className="mb-2  dark:text-gray-400">
 					This is my third Invicta Pro Diver. They are just fantastic value for
 					money. This one arrived yesterday and the first thing I did was set
 					the time, popped on an identical strap from another Invicta and went
 					in the shower with it to test the waterproofing.... No problems.
 				</p>
-				<p className="mb-3 text-gray-500 dark:text-gray-400">
+				<p className="mb-3  dark:text-gray-400">
 					It is obviously not the same build quality as those very expensive
 					watches. But that is like comparing a Citroën to a Ferrari. This watch
 					was well under £100! An absolute bargain.
@@ -105,6 +106,12 @@ export const Publication = ({
 							href="#"
 							className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 						>
+							Comment
+						</a>
+						<a
+							href="#"
+							className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+						>
 							Mirror
 						</a>
 						<a
@@ -115,6 +122,7 @@ export const Publication = ({
 						</a>
 					</div>
 				</aside>
+				<Comment />
 			</article>
 		</div>
 	)
