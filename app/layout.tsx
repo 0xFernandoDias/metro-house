@@ -14,6 +14,7 @@ import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
 import "./global.css"
 import { LoginButton } from "./components/auth/LoginButton"
+import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 
 const { provider, webSocketProvider } = configureChains(
 	[polygonMumbai, polygon],
@@ -43,8 +44,10 @@ export default function RootLayout({
 					<ThirdwebProvider activeChain="mumbai">
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
-								<LoginButton />
-								{children}
+								<NavbarWithSidebars>
+									{/* <LoginButton /> */}
+									{children}
+								</NavbarWithSidebars>
 							</GlobalContextProvider>
 						</LensProvider>
 					</ThirdwebProvider>
