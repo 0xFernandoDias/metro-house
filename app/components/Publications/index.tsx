@@ -52,53 +52,53 @@ export function Publications({
 					<li className="mr-2" role="presentation">
 						<button
 							className="inline-block p-4 border-b-2 rounded-t-lg"
-							id="profile-tab"
-							data-tabs-target="#profile"
+							id="latest-tab"
+							data-tabs-target="#latest"
 							type="button"
 							role="tab"
-							aria-controls="profile"
+							aria-controls="latest"
 							aria-selected="false"
 						>
-							Profile
+							Latest
 						</button>
 					</li>
 					<li className="mr-2" role="presentation">
 						<button
 							className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-							id="dashboard-tab"
-							data-tabs-target="#dashboard"
+							id="topcollected-tab"
+							data-tabs-target="#topcollected"
 							type="button"
 							role="tab"
-							aria-controls="dashboard"
+							aria-controls="topcollected"
 							aria-selected="false"
 						>
-							Dashboard
+							Top Collected
 						</button>
 					</li>
 					<li className="mr-2" role="presentation">
 						<button
 							className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-							id="settings-tab"
-							data-tabs-target="#settings"
+							id="topcommented-tab"
+							data-tabs-target="#topcommented"
 							type="button"
 							role="tab"
-							aria-controls="settings"
+							aria-controls="topcommented"
 							aria-selected="false"
 						>
-							Settings
+							Top Commented
 						</button>
 					</li>
 					<li role="presentation">
 						<button
 							className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-							id="contacts-tab"
-							data-tabs-target="#contacts"
+							id="topmirrored-tab"
+							data-tabs-target="#topmirrored"
 							type="button"
 							role="tab"
-							aria-controls="contacts"
+							aria-controls="topmirrored"
 							aria-selected="false"
 						>
-							Contacts
+							Top Mirrored
 						</button>
 					</li>
 				</ul>
@@ -177,7 +177,7 @@ export function Publications({
 						className="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active"
 						aria-current="page"
 					>
-						Tab 1
+						All
 					</a>
 				</li>
 				<li className="mr-2">
@@ -185,7 +185,7 @@ export function Publications({
 						href="#"
 						className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
 					>
-						Tab 2
+						Audio
 					</a>
 				</li>
 				<li className="mr-2">
@@ -193,7 +193,7 @@ export function Publications({
 						href="#"
 						className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
 					>
-						Tab 3
+						Image
 					</a>
 				</li>
 				<li className="mr-2">
@@ -201,14 +201,22 @@ export function Publications({
 						href="#"
 						className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
 					>
-						Tab 4
+						Text Only
 					</a>
 				</li>
-				<li>
+				<li className="mr-2">
+					<a
+						href="#"
+						className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+					>
+						Video
+					</a>
+				</li>
+				{/* <li>
 					<a className="inline-block px-4 py-3 text-gray-400 cursor-not-allowed dark:text-gray-500">
 						Tab 5
 					</a>
-				</li>
+				</li> */}
 			</ul>
 
 			{publications.map((publication: AnyPublicationFragment, idx) => {
