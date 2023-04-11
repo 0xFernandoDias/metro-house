@@ -28,12 +28,15 @@
 // use Reaction AUTHENTICATED
 // use Hide Publication AUTHENTICATED
 // https://flowbite.com/docs/components/card/#card-with-list
+// ancora no comentario
+
 "use client"
 import {
 	AnyPublicationFragment,
 	isMirrorPublication,
 } from "@lens-protocol/react-web"
 import { Publication } from "../Publication"
+import Link from "next/link"
 
 export function Publications({
 	publications,
@@ -222,14 +225,20 @@ export function Publications({
 			<div className="flex flex-col gap-8">
 				{publications.map((publication: AnyPublicationFragment, idx) => {
 					return (
-						<Publication
+						<Link
+							style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+							className="max-w-5xl"
+							href="/Publication"
 							key={parseFloat(publication.id) + idx}
-							publication={
-								isMirrorPublication(publication)
-									? publication.mirrorOf
-									: publication
-							}
-						/>
+						>
+							<Publication
+								publication={
+									isMirrorPublication(publication)
+										? publication.mirrorOf
+										: publication
+								}
+							/>
+						</Link>
 					)
 				})}
 			</div>

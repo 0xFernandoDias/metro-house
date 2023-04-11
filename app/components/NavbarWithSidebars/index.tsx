@@ -438,5 +438,7 @@ export function NavbarWithSidebars({
             https://flowbite.com/docs/components/bottom-navigation/#application-bar-example
             https://flowbite.com/docs/components/sidebar/#off-canvas-sidebar
             https://flowbite.com/docs/components/dropdowns/#menu-icon
-            Home Discovery (CREATE POST) AUTHENTICATED (LOGIN) Notifications  ...More */
+            Home Discovery (CREATE POST) AUTHENTICATED (LOGIN) Notifications  ...More 
+				invisible transition-opacity opacity-0
+			*/
 }
