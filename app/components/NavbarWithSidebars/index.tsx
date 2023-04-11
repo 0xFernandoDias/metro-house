@@ -30,7 +30,7 @@ export function NavbarWithSidebars({
 								>
 									<path
 										clip-rule="evenodd"
-										fill-rule="evenodd"
+										fillRule="evenodd"
 										d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
 									></path>
 								</svg>
@@ -207,7 +207,7 @@ export function NavbarWithSidebars({
 										xmlns="http://www.w3.org/2000/svg"
 									>
 										<path
-											fill-rule="evenodd"
+											fillRule="evenodd"
 											d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
 											clip-rule="evenodd"
 										></path>
@@ -221,7 +221,9 @@ export function NavbarWithSidebars({
 									required
 								/>
 							</div>
-							<span className="m-3">Suggested</span>
+							<Link href={"/Suggested"} className="m-3">
+								Suggested
+							</Link>
 							<ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
 								<li className="pb-3 sm:pb-4">
 									<div className="flex items-center space-x-4">
@@ -235,9 +237,12 @@ export function NavbarWithSidebars({
 											/>
 										</div>
 										<div className="flex-1 min-w-0">
-											<p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+											<Link
+												href={"/Profile"}
+												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+											>
 												Neil Sims
-											</p>
+											</Link>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
@@ -262,9 +267,12 @@ export function NavbarWithSidebars({
 											/>
 										</div>
 										<div className="flex-1 min-w-0">
-											<p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+											<Link
+												href={"/Profile"}
+												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+											>
 												Bonnie Green
-											</p>
+											</Link>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
@@ -289,9 +297,12 @@ export function NavbarWithSidebars({
 											/>
 										</div>
 										<div className="flex-1 min-w-0">
-											<p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+											<Link
+												href={"/Profile"}
+												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+											>
 												Michael Gough
-											</p>
+											</Link>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
@@ -316,9 +327,12 @@ export function NavbarWithSidebars({
 											/>
 										</div>
 										<div className="flex-1 min-w-0">
-											<p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+											<Link
+												href={"/Profile"}
+												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+											>
 												Thomas Lean
-											</p>
+											</Link>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
@@ -343,9 +357,12 @@ export function NavbarWithSidebars({
 											/>
 										</div>
 										<div className="flex-1 min-w-0">
-											<p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+											<Link
+												href={"/Profile"}
+												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+											>
 												Lana Byrd
-											</p>
+											</Link>
 											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
