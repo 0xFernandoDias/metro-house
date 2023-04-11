@@ -33,8 +33,8 @@ export const Publication = ({
 				<div className="flex items-center mb-4 space-x-4">
 					<img
 						className="rounded-full"
-						width={40}
-						height={40}
+						width={44}
+						height={44}
 						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 						alt=""
 					/>

@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image"
+import Link from "next/link"
 
 export function NavbarWithSidebars({
 	children,
@@ -37,8 +38,8 @@ export function NavbarWithSidebars({
 							<a href="/" className="flex ml-2 md:mr-24">
 								<img
 									src="https://flowbite.com/docs/images/logo.svg"
-									width={40}
-									height={40}
+									width={44}
+									height={44}
 									className="mr-3"
 									alt="FlowBite Logo"
 								/>
@@ -62,8 +63,8 @@ export function NavbarWithSidebars({
 										<span className="sr-only">Open user menu</span>
 										<img
 											className="rounded-full"
-											width={40}
-											height={40}
+											width={44}
+											height={44}
 											src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 											alt="user photo"
 										/>
@@ -154,8 +155,8 @@ export function NavbarWithSidebars({
 							].map((item, idx) => {
 								return (
 									<li key={idx}>
-										<a
-											href="#"
+										<Link
+											href={`/${item}`}
 											className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
 										>
 											<svg
@@ -176,7 +177,7 @@ export function NavbarWithSidebars({
 													</span>
 												)}
 											</span>
-										</a>
+										</Link>
 									</li>
 								)
 							})}
@@ -227,8 +228,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={40}
-												height={40}
+												width={44}
+												height={44}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -254,8 +255,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={40}
-												height={40}
+												width={44}
+												height={44}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -281,8 +282,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={40}
-												height={40}
+												width={44}
+												height={44}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -308,8 +309,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={40}
-												height={40}
+												width={44}
+												height={44}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -335,8 +336,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={40}
-												height={40}
+												width={44}
+												height={44}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
