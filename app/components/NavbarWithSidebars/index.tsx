@@ -18,7 +18,7 @@ export function NavbarWithSidebars({
 								data-drawer-toggle="logo-sidebar"
 								aria-controls="logo-sidebar"
 								type="button"
-								className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+								className="inline-flex items-center p-2 text-lg text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
 							>
 								<span className="sr-only">Open sidebar</span>
 								<svg
@@ -38,8 +38,8 @@ export function NavbarWithSidebars({
 							<a href="/" className="flex ml-2 md:mr-24">
 								<img
 									src="https://flowbite.com/docs/images/logo.svg"
-									width={44}
-									height={44}
+									width={48}
+									height={48}
 									className="mr-3"
 									alt="FlowBite Logo"
 								/>
@@ -49,22 +49,22 @@ export function NavbarWithSidebars({
 							</a>
 						</div>
 						<span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-							Home
+							Hello @fernando.dias
 						</span>
 						<div className="flex items-center">
 							<div className="flex items-center ml-3">
 								<div>
 									<button
 										type="button"
-										className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+										className="flex text-lg bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
 										aria-expanded="false"
 										data-dropdown-toggle="dropdown-user"
 									>
 										<span className="sr-only">Open user menu</span>
 										<img
 											className="rounded-full"
-											width={44}
-											height={44}
+											width={48}
+											height={48}
 											src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 											alt="user photo"
 										/>
@@ -76,13 +76,13 @@ export function NavbarWithSidebars({
 								>
 									<div className="px-4 py-3" role="none">
 										<p
-											className="text-sm text-gray-900 dark:text-white"
+											className="text-lg text-gray-900 dark:text-white"
 											role="none"
 										>
 											Neil Sims
 										</p>
 										<p
-											className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
+											className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
 											role="none"
 										>
 											@neil.sims
@@ -92,7 +92,7 @@ export function NavbarWithSidebars({
 										<li>
 											<a
 												href="#"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+												className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
 												role="menuitem"
 											>
 												Dashboard
@@ -101,7 +101,7 @@ export function NavbarWithSidebars({
 										<li>
 											<a
 												href="#"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+												className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
 												role="menuitem"
 											>
 												Settings
@@ -110,7 +110,7 @@ export function NavbarWithSidebars({
 										<li>
 											<a
 												href="#"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+												className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
 												role="menuitem"
 											>
 												Earnings
@@ -119,7 +119,7 @@ export function NavbarWithSidebars({
 										<li>
 											<a
 												href="#"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+												className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
 												role="menuitem"
 											>
 												Sign out
@@ -136,13 +136,10 @@ export function NavbarWithSidebars({
 			<div className="flex flex-row">
 				<aside
 					id="logo-sidebar"
-					className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+					className="fixed top-0 left-0 z-40 w-72 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
 					aria-label="Sidebar"
 				>
-					<div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-						<span className="self-center text-xl font-semibold sm:text-lg whitespace-nowrap dark:text-white">
-							Hello @fernando.dias
-						</span>
+					<div className="h-full px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
 						<ul className="space-y-2 font-medium">
 							{[
 								"Contacts",
@@ -157,11 +154,11 @@ export function NavbarWithSidebars({
 									<li key={idx}>
 										<Link
 											href={`/${item}`}
-											className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+											className="flex text-xl items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
 										>
 											<svg
 												aria-hidden="true"
-												className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+												className="w-8 h-8 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 												fill="currentColor"
 												viewBox="0 0 20 20"
 												xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +169,7 @@ export function NavbarWithSidebars({
 											<span className="ml-3">
 												{item}{" "}
 												{item === "Notifications" && (
-													<span className="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+													<span className="inline-flex items-center justify-center w-4 h-4 ml-2 text-md font-semibold text-blue-800 bg-blue-200 rounded-full">
 														2
 													</span>
 												)}
@@ -185,14 +182,84 @@ export function NavbarWithSidebars({
 					</div>
 				</aside>
 
-				<div className="flex min-w-full p-4 sm:ml-64 sm:mr-64">{children}</div>
+				<div className="flex flex-col p-8 sm:ml-72 sm:mr-72">
+					<nav
+						className="flex max-w-min px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+						aria-label="Breadcrumb"
+					>
+						<ol className="inline-flex items-center space-x-1 md:space-x-3">
+							<li className="inline-flex items-center">
+								<a
+									href="#"
+									className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+								>
+									<svg
+										aria-hidden="true"
+										className="w-4 h-4 mr-2"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+									</svg>
+									Home
+								</a>
+							</li>
+							{/* <li>
+								<div className="flex items-center">
+									<svg
+										aria-hidden="true"
+										className="w-6 h-6 text-gray-400"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+											clip-rule="evenodd"
+										></path>
+									</svg>
+									<a
+										href="#"
+										className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
+									>
+										Templates
+									</a>
+								</div>
+							</li>
+							<li aria-current="page">
+								<div className="flex items-center">
+									<svg
+										aria-hidden="true"
+										className="w-6 h-6 text-gray-400"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+											clip-rule="evenodd"
+										></path>
+									</svg>
+									<span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+										Flowbite
+									</span>
+								</div>
+							</li> */}
+						</ol>
+					</nav>
+
+					{children}
+				</div>
 
 				<aside
 					id="logo-sidebar"
-					className="fixed top-0 right-0 z-40 w-64 h-screen pt-20 transition-transform translate-x-full bg-white border-l border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+					className="fixed top-0 right-0 z-40 w-72 h-screen pt-20 transition-transform translate-x-full bg-white border-l border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
 					aria-label="Sidebar"
 				>
-					<div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+					<div className="h-full px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800 justify-between flex flex-col">
 						<form className="flex flex-col items-center">
 							<label htmlFor="simple-search" className="sr-only">
 								Search
@@ -216,12 +283,12 @@ export function NavbarWithSidebars({
 								<input
 									type="text"
 									id="simple-search"
-									className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="Search"
 									required
 								/>
 							</div>
-							<Link href={"/Suggested"} className="m-3">
+							<Link href={"/Suggested"} className="m-4 text-xl">
 								Suggested
 							</Link>
 							<ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
@@ -230,8 +297,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={44}
-												height={44}
+												width={48}
+												height={48}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -239,17 +306,17 @@ export function NavbarWithSidebars({
 										<div className="flex-1 min-w-0">
 											<Link
 												href={"/Profile"}
-												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+												className="text-xl font-medium text-gray-900 truncate dark:text-white"
 											>
 												Neil Sims
 											</Link>
-											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
+											<p className="text-xl text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
 										</div>
 										<button
 											type="button"
-											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 										>
 											Follow
 										</button>
@@ -260,8 +327,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={44}
-												height={44}
+												width={48}
+												height={48}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -269,17 +336,17 @@ export function NavbarWithSidebars({
 										<div className="flex-1 min-w-0">
 											<Link
 												href={"/Profile"}
-												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+												className="text-xl font-medium text-gray-900 truncate dark:text-white"
 											>
 												Bonnie Green
 											</Link>
-											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
+											<p className="text-xl text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
 										</div>
 										<button
 											type="button"
-											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 										>
 											Follow
 										</button>
@@ -290,8 +357,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={44}
-												height={44}
+												width={48}
+												height={48}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -299,17 +366,17 @@ export function NavbarWithSidebars({
 										<div className="flex-1 min-w-0">
 											<Link
 												href={"/Profile"}
-												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+												className="text-xl font-medium text-gray-900 truncate dark:text-white"
 											>
 												Michael Gough
 											</Link>
-											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
+											<p className="text-xl text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
 										</div>
 										<button
 											type="button"
-											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 										>
 											Follow
 										</button>
@@ -320,8 +387,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={44}
-												height={44}
+												width={48}
+												height={48}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -329,17 +396,17 @@ export function NavbarWithSidebars({
 										<div className="flex-1 min-w-0">
 											<Link
 												href={"/Profile"}
-												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+												className="text-xl font-medium text-gray-900 truncate dark:text-white"
 											>
 												Thomas Lean
 											</Link>
-											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
+											<p className="text-xl text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
 										</div>
 										<button
 											type="button"
-											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 										>
 											Follow
 										</button>
@@ -350,8 +417,8 @@ export function NavbarWithSidebars({
 										<div className="flex-shrink-0">
 											<img
 												className="rounded-full"
-												width={44}
-												height={44}
+												width={48}
+												height={48}
 												src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 												alt="Neil image"
 											/>
@@ -359,17 +426,17 @@ export function NavbarWithSidebars({
 										<div className="flex-1 min-w-0">
 											<Link
 												href={"/Profile"}
-												className="text-sm font-medium text-gray-900 truncate dark:text-white"
+												className="text-xl font-medium text-gray-900 truncate dark:text-white"
 											>
 												Lana Byrd
 											</Link>
-											<p className="text-sm text-gray-500 truncate dark:text-gray-400">
+											<p className="text-xl text-gray-500 truncate dark:text-gray-400">
 												@neil.sims
 											</p>
 										</div>
 										<button
 											type="button"
-											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 										>
 											Follow
 										</button>
@@ -378,16 +445,9 @@ export function NavbarWithSidebars({
 							</ul>
 						</form>
 
-						<footer className="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
-							<div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-								<span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-									© 2023{" "}
-									<a href="https://flowbite.com/" className="hover:underline">
-										Flowbite™
-									</a>
-									. All Rights Reserved.
-								</span>
-								<ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+						<footer className="bg-white rounded-lg dark:bg-gray-800 max-w-max">
+							<div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
+								<ul className="flex flex-wrap items-center mt-3 text-lg font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
 									<li>
 										<a href="#" className="mr-4 hover:underline md:mr-6 ">
 											About
@@ -409,6 +469,13 @@ export function NavbarWithSidebars({
 										</a>
 									</li>
 								</ul>
+								<span className="text-lg text-gray-500 sm:text-center dark:text-gray-400">
+									© 2023{" "}
+									<a href="https://flowbite.com/" className="hover:underline">
+										Flowbite™
+									</a>
+									. All Rights Reserved.
+								</span>
 							</div>
 						</footer>
 					</div>

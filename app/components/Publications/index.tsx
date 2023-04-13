@@ -47,7 +47,7 @@ export function Publications({
 		<div className="flex flex-col">
 			<div className="mb-4 border-b border-gray-200 dark:border-gray-700">
 				<ul
-					className="flex flex-wrap -mb-px text-sm font-medium text-center"
+					className="flex flex-wrap -mb-px text-lg font-medium text-center"
 					id="myTab"
 					data-tabs-toggle="#myTabContent"
 					role="tablist"
@@ -113,7 +113,7 @@ export function Publications({
 					role="tabpanel"
 					aria-labelledby="profile-tab"
 				>
-					<p className="text-sm text-gray-500 dark:text-gray-400">
+					<p className="text-lg text-gray-500 dark:text-gray-400">
 						This is some placeholder content the{" "}
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Profile tabs associated content
@@ -129,7 +129,7 @@ export function Publications({
 					role="tabpanel"
 					aria-labelledby="dashboard-tab"
 				>
-					<p className="text-sm text-gray-500 dark:text-gray-400">
+					<p className="text-lg text-gray-500 dark:text-gray-400">
 						This is some placeholder content the{" "}
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Dashboard tabs associated content
@@ -145,7 +145,7 @@ export function Publications({
 					role="tabpanel"
 					aria-labelledby="settings-tab"
 				>
-					<p className="text-sm text-gray-500 dark:text-gray-400">
+					<p className="text-lg text-gray-500 dark:text-gray-400">
 						This is some placeholder content the{" "}
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Settings tabs associated content
@@ -161,7 +161,7 @@ export function Publications({
 					role="tabpanel"
 					aria-labelledby="contacts-tab"
 				>
-					<p className="text-sm text-gray-500 dark:text-gray-400">
+					<p className="text-lg text-gray-500 dark:text-gray-400">
 						This is some placeholder content the{" "}
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Contacts tabs associated content
@@ -173,7 +173,7 @@ export function Publications({
 				</div>
 			</div>
 
-			<ul className="flex mb-4 flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+			<ul className="flex mb-4 flex-wrap text-lg font-medium text-center text-gray-500 dark:text-gray-400">
 				<li className="mr-2">
 					<a
 						href="#"

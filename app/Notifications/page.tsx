@@ -8,7 +8,7 @@ export default function Notifications({
 	return (
 		<div>
 			<div className="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-				<time className="text-lg font-semibold text-gray-900 dark:text-white">
+				<time className="text-xl font-semibold text-gray-900 dark:text-white">
 					January 13th, 2022
 				</time>
 				<ol className="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
@@ -56,10 +56,10 @@ export default function Notifications({
 										How to start with Flowbite library
 									</span>
 								</div>
-								<div className="text-sm font-normal">
+								<div className="text-lg font-normal">
 									I wanted to share a webinar zeroheight.
 								</div>
-								<span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+								<span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 									<svg
 										aria-hidden="true"
 										className="w-3 h-3 mr-1"
@@ -118,7 +118,7 @@ export default function Notifications({
 									</span>{" "}
 									comment
 								</div>
-								<span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+								<span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 									<svg
 										aria-hidden="true"
 										className="w-3 h-3 mr-1"
@@ -141,7 +141,7 @@ export default function Notifications({
 				</ol>
 			</div>
 			<div className="p-5 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-				<time className="text-lg font-semibold text-gray-900 dark:text-white">
+				<time className="text-xl font-semibold text-gray-900 dark:text-white">
 					January 12th, 2022
 				</time>
 				<ol className="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
@@ -189,10 +189,10 @@ export default function Notifications({
 										How to start with Flowbite library
 									</span>
 								</div>
-								<div className="text-sm font-normal">
+								<div className="text-lg font-normal">
 									I wanted to share a webinar zeroheight.
 								</div>
-								<span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+								<span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 									<svg
 										aria-hidden="true"
 										className="w-3 h-3 mr-1"
@@ -252,7 +252,7 @@ export default function Notifications({
 									</span>{" "}
 									comment
 								</div>
-								<span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+								<span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 									<svg
 										aria-hidden="true"
 										className="w-3 h-3 mr-1"
@@ -315,10 +315,10 @@ export default function Notifications({
 										How to start with Flowbite library
 									</span>
 								</div>
-								<div className="text-sm font-normal">
+								<div className="text-lg font-normal">
 									I wanted to share a webinar zeroheight.
 								</div>
-								<span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+								<span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 									<svg
 										aria-hidden="true"
 										className="w-3 h-3 mr-1"
@@ -381,10 +381,10 @@ export default function Notifications({
 										Top figma designs
 									</span>
 								</div>
-								<div className="text-sm font-normal">
+								<div className="text-lg font-normal">
 									I wanted to share a webinar zeroheight.
 								</div>
-								<span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+								<span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 									<svg
 										aria-hidden="true"
 										className="w-3 h-3 mr-1"

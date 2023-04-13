@@ -213,7 +213,7 @@ export function CreatePublication() {
 						<div
 							id="tooltip-fullscreen"
 							role="tooltip"
-							className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+							className="absolute z-10 invisible inline-block px-3 py-2 text-lg font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
 						>
 							Show full screen
 							<div className="tooltip-arrow" data-popper-arrow></div>
@@ -226,7 +226,7 @@ export function CreatePublication() {
 						<textarea
 							id="editor"
 							rows={8}
-							className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+							className="block w-full px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
 							placeholder="Write an article..."
 							required
 						></textarea>
@@ -234,7 +234,7 @@ export function CreatePublication() {
 				</div>
 				<button
 					type="submit"
-					className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+					className="inline-flex items-center px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
 				>
 					Publish post
 				</button>
