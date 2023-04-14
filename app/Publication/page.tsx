@@ -70,6 +70,29 @@ export default function Publication({ params }: { params: { slug: string } }) {
 					Read more
 				</a>
 				<aside>
+					<div className="flex mb-3 -space-x-3">
+						<img
+							className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+							alt=""
+						/>
+						<img
+							className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+							alt=""
+						/>
+						<img
+							className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+							alt=""
+						/>
+						<a
+							className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
+							href="#"
+						>
+							+3
+						</a>
+					</div>
 					<p className="mt-1 text-md text-gray-500 dark:text-gray-400">
 						19 people found this helpful
 					</p>
