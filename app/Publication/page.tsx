@@ -23,8 +23,14 @@ export default function Publication({ params }: { params: { slug: string } }) {
 						alt=""
 					/>
 					<div className="space-y-1 font-medium dark:text-white">
-						<Link className="text-xl" href="/Profile">
+						<Link className="text-xl flex flex-row gap-3" href="/Profile">
 							Jese Leos{" "}
+							<p
+								className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
+								role="none"
+							>
+								@neil.sims
+							</p>
 							<span className=" text-blue-800 text-md font-medium inline-flex items-center px-0.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400">
 								<svg
 									aria-hidden="true"
@@ -41,6 +47,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 								</svg>
 							</span>
 						</Link>
+
 						<div className="text-md text-gray-500 dark:text-gray-400">
 							<p>257 followers, 18 mutual</p>
 						</div>

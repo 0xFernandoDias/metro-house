@@ -48,7 +48,6 @@ export default function Profile() {
 								alt="Jese Leos"
 							/>
 						</a>
-						<div></div>
 					</div>
 					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white">
 						<a href="#">Jese Leos</a>{" "}
@@ -156,7 +155,7 @@ export default function Profile() {
 					<div className="mt-2 text-3xl text-black dark:text-gray-400">
 						Jese Leos
 					</div>
-					<Publications publications={publications} />
+					<Publications isProfile publications={publications} />
 				</div>
 			</div>
 		</div>
