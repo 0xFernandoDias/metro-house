@@ -35,14 +35,20 @@ export function NavbarWithSidebars({
 									></path>
 								</svg>
 							</button>
-							<a href="/" className="flex ml-2 md:mr-24">
-								<img
-									src="https://flowbite.com/docs/images/logo.svg"
-									width={48}
-									height={48}
-									className="mr-3"
-									alt="FlowBite Logo"
-								/>
+							<a href="/" className="flex ml-2 md:mr-24 gap-3">
+								<svg
+									className="h-12 w-12 fill-white stroke-gray-500"
+									strokeWidth={1.5}
+									viewBox="0 0 24 24"
+									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+									/>
+								</svg>
 								<span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
 									Metro House
 								</span>
@@ -922,7 +928,7 @@ export function NavbarWithSidebars({
 										</div>
 										<button
 											type="button"
-											className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+											className="text-white shadow-white shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 										>
 											Follow
 										</button>
@@ -993,35 +999,43 @@ export function NavbarWithSidebars({
 
 						<footer className="bg-white rounded-lg dark:bg-gray-800 max-w-max">
 							<div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
-								<ul className="flex flex-wrap items-center mt-3 text-lg font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+								<ul className="flex flex-wrap gap-2 items-center justify-center mt-3 text-md font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
 									<li>
-										<a href="#" className="mr-4 hover:underline md:mr-6 ">
+										<a href="/" className="hover:underline">
+											Home
+										</a>
+									</li>
+									<li>
+										<a href="/About" className="hover:underline">
 											About
 										</a>
 									</li>
 									<li>
-										<a href="#" className="mr-4 hover:underline md:mr-6">
-											Privacy Policy
+										<a href="/CreateProfile" className="hover:underline">
+											Create Profile
 										</a>
 									</li>
 									<li>
-										<a href="#" className="mr-4 hover:underline md:mr-6">
-											Licensing
+										<a href="/Discovery" className="hover:underline">
+											Discovery
 										</a>
 									</li>
 									<li>
-										<a href="#" className="hover:underline">
-											Contact
+										<a href="/Settings" className="hover:underline">
+											Settings
+										</a>
+									</li>
+									<li>
+										<a href="/Suggested" className="hover:underline">
+											Suggested
+										</a>
+									</li>
+									<li>
+										<a href="/TermsAndPrivacy" className="hover:underline">
+											Terms and Privacy
 										</a>
 									</li>
 								</ul>
-								<span className="text-lg text-gray-500 sm:text-center dark:text-gray-400">
-									© 2023{" "}
-									<a href="https://flowbite.com/" className="hover:underline">
-										Flowbite™
-									</a>
-									. All Rights Reserved.
-								</span>
 							</div>
 						</footer>
 					</div>
