@@ -486,9 +486,9 @@ export function Publications({
 							xmlns="http://www.w3.org/2000/svg"
 						>
 							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
 								d="M19 9l-7 7-7-7"
 							></path>
 						</svg>
@@ -562,20 +562,20 @@ export function Publications({
 			<div className="flex flex-col gap-10 mb-6">
 				{publications.map((publication: AnyPublicationFragment, idx) => {
 					return (
-						<Link
-							style={{ display: "flex", flexDirection: "column", gap: "14px" }}
-							className="max-w-5xl"
-							href="/Publication"
+						<div
+							className="flex flex-col gap-4 max-w-5xl"
 							key={parseFloat(publication.id) + idx}
 						>
-							<Publication
-								publication={
-									isMirrorPublication(publication)
-										? publication.mirrorOf
-										: publication
-								}
-							/>
-						</Link>
+							<Link href="/Publication">
+								<Publication
+									publication={
+										isMirrorPublication(publication)
+											? publication.mirrorOf
+											: publication
+									}
+								/>
+							</Link>
+						</div>
 					)
 				})}
 			</div>

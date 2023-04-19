@@ -1,12 +1,13 @@
 "use client"
 import Link from "next/link"
 import { Comment } from "../components/Comments"
+import Image from "next/image"
 
 export default function Publication({ params }: { params: { slug: string } }) {
 	return (
 		<article className="max-w-5xl flex flex-col gap-4">
 			<div className="flex items-center space-x-4">
-				<img
+				<Image
 					className="rounded-full"
 					width={48}
 					height={48}
@@ -22,7 +23,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 						>
 							@neil.sims
 						</p>
-						<span className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"
@@ -31,13 +32,13 @@ export default function Publication({ params }: { params: { slug: string } }) {
 								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
-									fill-rule="evenodd"
+									fillRule="evenodd"
 									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-									clip-rule="evenodd"
+									clipRule="evenodd"
 								></path>
 							</svg>
 							<span className="sr-only">Icon description</span>
-						</span>
+						</div>
 					</Link>
 					<div className="text-md text-gray-500 dark:text-gray-400">
 						<p>257 followers, 18 mutual</p>
@@ -61,41 +62,47 @@ export default function Publication({ params }: { params: { slug: string } }) {
 				watches. But that is like comparing a Citroën to a Ferrari. This watch
 				was well under £100! An absolute bargain.
 			</p>
-			<a
+			<Link
 				href="#"
 				className="block text-md font-medium text-blue-600 hover:underline dark:text-blue-500"
 			>
 				Read more
-			</a>
+			</Link>
 			<aside>
 				<div className="flex mb-3 -space-x-3">
-					<img
-						className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+					<Image
+						width={32}
+						height={32}
+						className="border-2 border-white rounded-full dark:border-gray-800"
 						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 						alt=""
 					/>
-					<img
-						className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+					<Image
+						width={32}
+						height={32}
+						className="border-2 border-white rounded-full dark:border-gray-800"
 						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 						alt=""
 					/>
-					<img
-						className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+					<Image
+						width={32}
+						height={32}
+						className="border-2 border-white rounded-full dark:border-gray-800"
 						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 						alt=""
 					/>
-					<a
+					<Link
 						className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
 						href="#"
 					>
 						+3
-					</a>
+					</Link>
 				</div>
 				<p className="mt-1 text-md text-gray-500 dark:text-gray-400">
 					See who liked, shared or collected
 				</p>
 				<div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
-					<a
+					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
@@ -113,8 +120,8 @@ export default function Publication({ params }: { params: { slug: string } }) {
 							/>
 						</svg>
 						88
-					</a>
-					<a
+					</Link>
+					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
@@ -132,8 +139,8 @@ export default function Publication({ params }: { params: { slug: string } }) {
 							/>
 						</svg>
 						23
-					</a>
-					<a
+					</Link>
+					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
@@ -151,8 +158,8 @@ export default function Publication({ params }: { params: { slug: string } }) {
 							/>
 						</svg>
 						16
-					</a>
-					<a
+					</Link>
+					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
@@ -170,7 +177,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 							/>
 						</svg>
 						8
-					</a>
+					</Link>
 				</div>
 			</aside>
 			<Comment />
@@ -178,7 +185,6 @@ export default function Publication({ params }: { params: { slug: string } }) {
 	)
 }
 
-;<Comment />
 // https://flowbite.com/docs/components/rating/#rating-comment
 // (publication id)
 // typename

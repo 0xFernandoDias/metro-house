@@ -11,6 +11,8 @@ import {
 	useUnfollow,
 } from "@lens-protocol/react-web"
 import { Publications } from "../components/Publications"
+import Image from "next/image"
+import Link from "next/link"
 
 // export default function Profile({ params }: { params: { slug: string } }) {
 export default function Profile() {
@@ -35,23 +37,23 @@ export default function Profile() {
 	}
 
 	return (
-		<div style={{ display: "flex", flexDirection: "column" }}>
+		<div className="flex flex-col">
 			<div className="md:gap-8 md:grid md:grid-cols-2">
 				<div className="flex flex-col gap-4">
 					<div className="flex items-center justify-between space-x-4">
-						<a href="#">
-							<img
+						<Link href="#">
+							<Image
 								className="rounded-full"
 								width={144}
 								height={144}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 								alt="Jese Leos"
 							/>
-						</a>
+						</Link>
 					</div>
 					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white">
-						<a href="#">Jese Leos</a>{" "}
-						<span className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
+						Jese Leos{" "}
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"
@@ -60,24 +62,16 @@ export default function Profile() {
 								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
-									fill-rule="evenodd"
+									fillRule="evenodd"
 									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-									clip-rule="evenodd"
+									clipRule="evenodd"
 								></path>
 							</svg>
 							<span className="sr-only">Icon description</span>
-						</span>
+						</div>
 					</p>
-					<p className="text-xl font-normal">
-						<a href="#" className="hover:underline">
-							@jeseleos
-						</a>
-					</p>
-					<p className="text-xl font-normal">
-						<a href="#" className="hover:underline">
-							0x798989678DfF778D6e6957761f0d9A4ccc36E559
-						</a>
-					</p>
+					<p className="text-xl font-normal hover:underline">@jeseleos</p>
+					<p className="text-xl font-normal hover:underline">0x798...E559</p>
 					<button
 						type="button"
 						className="flex-row max-w-min flex gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -97,69 +91,68 @@ export default function Profile() {
 						</svg>
 						Follow
 					</button>
-					<p className="text-xl">
-						Open-source contributor. Building{" "}
-						<a
-							href="#"
-							className="text-blue-600 dark:text-blue-500 hover:underline"
-						>
-							flowbite.com
-						</a>
-						.
-					</p>
+					<p className="text-xl">Open-source contributor. Building </p>
 					<ul className="flex text-xl flex-col gap-4">
 						<div className="flex flex-row gap-4">
-							<a href="#" className="hover:underline">
-								<span className="font-semibold text-gray-900 dark:text-white">
-									799
-								</span>
-								<span>Following</span>
-							</a>
+							<Link
+								href="#"
+								className="font-semibold hover:underline text-gray-900 dark:text-white"
+							>
+								799 Following
+							</Link>
 
-							<a href="#" className="hover:underline">
-								<span className="font-semibold text-gray-900 dark:text-white">
-									3,758
-								</span>
-								<span>Followers</span>
-							</a>
+							<Link
+								href="#"
+								className="font-semibold hover:underline text-gray-900 dark:text-white"
+							>
+								3,758 Followers
+							</Link>
 						</div>
 
-						<a href="#" className="hover:underline">
-							<span className="font-semibold text-gray-900 dark:text-white">
-								18
-							</span>
-							<span>Mutual</span>
-						</a>
+						<Link
+							href="#"
+							className="font-semibold hover:underline text-gray-900 dark:text-white"
+						>
+							18 Mutual
+						</Link>
 
 						<div className="flex mb-3 -space-x-3">
-							<img
-								className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+							<Image
+								width={40}
+								height={40}
+								className="border-2 border-white rounded-full dark:border-gray-800"
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 								alt=""
 							/>
-							<img
-								className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+							<Image
+								width={40}
+								height={40}
+								className="border-2 border-white rounded-full dark:border-gray-800"
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 								alt=""
 							/>
-							<img
-								className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+							<Image
+								width={40}
+								height={40}
+								className="border-2 border-white rounded-full dark:border-gray-800"
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 								alt=""
 							/>
-							<a
+							<Link
 								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
 								href="#"
 							>
 								+3
-							</a>
+							</Link>
 						</div>
 					</ul>
 				</div>
 
 				<div className="flex flex-col gap-4">
-					<img
-						className="w-full rounded-lg"
+					<Image
+						width={650}
+						height={100}
+						className="rounded-lg"
 						src="https://i0.wp.com/www.bestcoverpix.com/wp-content/uploads/2013/12/ilovemyfriends.jpg?ssl=1"
 						alt="image description"
 					/>

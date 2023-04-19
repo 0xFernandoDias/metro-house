@@ -7,6 +7,8 @@
 // collect: policy
 // reference: policy
 
+"use client"
+
 export function CreatePublication() {
 	return (
 		<form>
@@ -46,7 +48,7 @@ export function CreatePublication() {
 									<path
 										fillRule="evenodd"
 										d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
-										clip-rule="evenodd"
+										clipRule="evenodd"
 									></path>
 								</svg>
 								<span className="sr-only">Add emoji</span>
@@ -65,7 +67,7 @@ export function CreatePublication() {
 									<path
 										fillRule="evenodd"
 										d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-										clip-rule="evenodd"
+										clipRule="evenodd"
 									></path>
 								</svg>
 
@@ -105,7 +107,7 @@ export function CreatePublication() {
 									<path
 										fillRule="evenodd"
 										d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-										clip-rule="evenodd"
+										clipRule="evenodd"
 									></path>
 								</svg>
 								<span className="sr-only">Format code</span>

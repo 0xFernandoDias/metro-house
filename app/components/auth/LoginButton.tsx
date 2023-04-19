@@ -106,7 +106,7 @@ export function LoginButton() {
 				>
 					Switch to Mumbai
 				</button>
-				<span style={{ color: "red" }}>
+				<span className="text-red-500">
 					{switchNetworkError && "User did not switch to correct network."}
 				</span>
 			</>
@@ -163,7 +163,7 @@ export function LoginButton() {
 				</button>
 			</WhenLoggedOut>
 			{walletError && (
-				<span style={{ color: "red" }}>{walletError.message}</span>
+				<span className="text-red-600">{walletError.message}</span>
 			)}
 		</>
 	)

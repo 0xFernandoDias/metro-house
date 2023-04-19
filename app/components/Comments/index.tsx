@@ -1,4 +1,8 @@
 "use client"
+
+import Image from "next/image"
+import Link from "next/link"
+
 // https://flowbite.com/docs/components/timeline/#grouped-timeline
 
 // (comment id)
@@ -100,7 +104,7 @@ export function Comment() {
 										<path
 											fillRule="evenodd"
 											d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
-											clip-rule="evenodd"
+											clipRule="evenodd"
 										></path>
 									</svg>
 									<span className="sr-only">Add emoji</span>
@@ -119,7 +123,7 @@ export function Comment() {
 										<path
 											fillRule="evenodd"
 											d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-											clip-rule="evenodd"
+											clipRule="evenodd"
 										></path>
 									</svg>
 
@@ -159,7 +163,7 @@ export function Comment() {
 										<path
 											fillRule="evenodd"
 											d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-											clip-rule="evenodd"
+											clipRule="evenodd"
 										></path>
 									</svg>
 									<span className="sr-only">Format code</span>
@@ -231,27 +235,26 @@ export function Comment() {
 
 			<ol className="border-l border-gray-200 dark:border-gray-700 flex w-full flex-col gap-6 justify-between">
 				<li className="flex gap-6">
-					<span className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-						<img
-							className="rounded-full"
-							width={48}
-							height={48}
-							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-							alt=""
-						/>
-					</span>
+					<Image
+						className="flex items-center justify-center bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+						width={48}
+						height={48}
+						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+						alt=""
+					/>
+
 					<div className="items-center max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
 						<time className="mb-1 text-md font-normal text-gray-400 sm:order-last sm:mb-0">
 							just now
 						</time>
 						<div className="text-lg font-normal text-gray-500 dark:text-gray-300">
 							Bonnie moved{" "}
-							<a
+							<Link
 								href="#"
 								className="font-semibold text-blue-600 dark:text-blue-500 hover:underline"
 							>
 								Jese Leos
-							</a>{" "}
+							</Link>{" "}
 							to{" "}
 							<span className="bg-gray-100 text-gray-800 text-md font-normal mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
 								Funny Group
@@ -261,27 +264,26 @@ export function Comment() {
 				</li>
 
 				<li className="flex gap-6">
-					<span className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-						<img
-							className="rounded-full"
-							width={48}
-							height={48}
-							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-							alt=""
-						/>
-					</span>
+					<Image
+						className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+						width={48}
+						height={48}
+						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+						alt=""
+					/>
+
 					<div className="items-center max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
 						<time className="mb-1 text-md font-normal text-gray-400 sm:order-last sm:mb-0">
 							1 day ago
 						</time>
 						<div className="text-lg font-normal text-gray-500 lex dark:text-gray-300">
 							Jese Leos has changed{" "}
-							<a
+							<Link
 								href="#"
 								className="font-semibold text-blue-600 dark:text-blue-500 hover:underline"
 							>
 								Pricing page
-							</a>{" "}
+							</Link>{" "}
 							task status to{" "}
 							<span className="font-semibold text-gray-900 dark:text-white">
 								Finished
@@ -291,27 +293,25 @@ export function Comment() {
 				</li>
 
 				<li className="flex gap-6">
-					<span className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-						<img
-							className="rounded-full"
-							width={48}
-							height={48}
-							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-							alt=""
-						/>
-					</span>
+					<Image
+						className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+						width={48}
+						height={48}
+						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+						alt=""
+					/>
 					<div className="items-center max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
 						<time className="mb-1 text-md font-normal text-gray-400 sm:order-last sm:mb-0">
 							just now
 						</time>
 						<div className="text-lg font-normal text-gray-500 dark:text-gray-300">
 							Bonnie moved{" "}
-							<a
+							<Link
 								href="#"
 								className="font-semibold text-blue-600 dark:text-blue-500 hover:underline"
 							>
 								Jese Leos
-							</a>{" "}
+							</Link>{" "}
 							to{" "}
 							<span className="bg-gray-100 text-gray-800 text-md font-normal mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
 								Funny Group
@@ -321,27 +321,25 @@ export function Comment() {
 				</li>
 
 				<li className="flex gap-6">
-					<span className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-						<img
-							className="rounded-full"
-							width={48}
-							height={48}
-							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-							alt=""
-						/>
-					</span>
+					<Image
+						className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+						width={48}
+						height={48}
+						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+						alt=""
+					/>
 					<div className="items-center max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
 						<time className="mb-1 text-md font-normal text-gray-400 sm:order-last sm:mb-0">
 							1 day ago
 						</time>
 						<div className="text-lg font-normal text-gray-500 lex dark:text-gray-300">
 							Jese Leos has changed{" "}
-							<a
+							<Link
 								href="#"
 								className="font-semibold text-blue-600 dark:text-blue-500 hover:underline"
 							>
 								Pricing page
-							</a>{" "}
+							</Link>{" "}
 							task status to{" "}
 							<span className="font-semibold text-gray-900 dark:text-white">
 								Finished
