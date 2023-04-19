@@ -24,7 +24,7 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 
 	if (publications) {
 		return (
-			<div>
+			<div className="flex flex-col gap-6">
 				<form className="flex items-center">
 					<label htmlFor="simple-search" className="sr-only">
 						Search
@@ -88,3 +88,5 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 
 // when searchbar empty:
 // use explore profiles, suggested component, use explore publications, feed
+// SUGGESTED
+// Trending

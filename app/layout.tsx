@@ -5,6 +5,7 @@ import { polygon, polygonMumbai } from "wagmi/chains"
 import { publicProvider } from "wagmi/providers/public"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
 import {
+	appId,
 	LensConfig,
 	LensProvider,
 	production,
@@ -30,6 +31,7 @@ const wagmiClient = createClient({
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
 	environment: staging,
+	appId: appId("metro-house"),
 }
 
 export default function RootLayout({

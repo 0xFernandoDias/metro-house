@@ -91,27 +91,26 @@ export default function Home() {
 								className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
 							>
 								<svg
-									className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-									fill="currentColor"
-									viewBox="0 0 20 20"
+									className="w-6 h-6 mb-1 stroke-gray-500 fill-white text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+									strokeWidth={1.5}
+									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
 									aria-hidden="true"
 								>
-									<path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
 									<path
-										clip-rule="evenodd"
-										fill-rule="evenodd"
-										d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-									></path>
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+									/>
 								</svg>
-								<span className="sr-only">Wallet</span>
+								<span className="sr-only">Discover</span>
 							</button>
 							<div
-								id="tooltip-wallet"
+								id="tooltip-discover"
 								role="tooltip"
 								className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
 							>
-								Wallet
+								Discover
 								<div className="tooltip-arrow" data-popper-arrow></div>
 							</div>
 							<div className="flex items-center justify-center">
@@ -150,22 +149,26 @@ export default function Home() {
 								className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
 							>
 								<svg
-									className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-									fill="currentColor"
-									viewBox="0 0 20 20"
+									className="w-6 h-6 mb-1 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
+									strokeWidth={1.5}
+									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
 									aria-hidden="true"
 								>
-									<path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+									/>
 								</svg>
-								<span className="sr-only">Settings</span>
+								<span className="sr-only">Notifications</span>
 							</button>
 							<div
-								id="tooltip-settings"
+								id="tooltip-notifications"
 								role="tooltip"
 								className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
 							>
-								Settings
+								Notifications
 								<div className="tooltip-arrow" data-popper-arrow></div>
 							</div>
 							<button
@@ -174,26 +177,26 @@ export default function Home() {
 								className="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
 							>
 								<svg
-									className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-									fill="currentColor"
-									viewBox="0 0 20 20"
+									className="w-6 h-6 mb-1 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
+									stroke-width="1.5"
+									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
 									aria-hidden="true"
 								>
 									<path
-										clip-rule="evenodd"
-										fill-rule="evenodd"
-										d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
 									></path>
 								</svg>
-								<span className="sr-only">Profile</span>
+								<span className="sr-only">More</span>
 							</button>
 							<div
-								id="tooltip-profile"
+								id="tooltip-more"
 								role="tooltip"
 								className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
 							>
-								Profile
+								More
 								<div className="tooltip-arrow" data-popper-arrow></div>
 							</div>
 						</div>

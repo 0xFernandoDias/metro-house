@@ -37,8 +37,8 @@ export default function Profile() {
 	return (
 		<div style={{ display: "flex", flexDirection: "column" }}>
 			<div className="md:gap-8 md:grid md:grid-cols-2">
-				<div>
-					<div className="flex items-center justify-between mb-8 space-x-4">
+				<div className="flex flex-col gap-4">
+					<div className="flex items-center justify-between space-x-4">
 						<a href="#">
 							<img
 								className="rounded-full"
@@ -51,35 +51,36 @@ export default function Profile() {
 					</div>
 					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white">
 						<a href="#">Jese Leos</a>{" "}
-						<span className=" text-blue-800 text-3xl font-medium inline-flex items-center px-0.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400">
+						<span className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
 							<svg
 								aria-hidden="true"
-								className="w-4 h-4"
+								className="w-3.5 h-3.5"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
-									fillRule="evenodd"
-									d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+									fill-rule="evenodd"
+									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
 									clip-rule="evenodd"
 								></path>
 							</svg>
+							<span className="sr-only">Icon description</span>
 						</span>
 					</p>
-					<p className="mb-3 text-xl font-normal">
+					<p className="text-xl font-normal">
 						<a href="#" className="hover:underline">
 							@jeseleos
 						</a>
 					</p>
-					<p className="mb-3 text-xl font-normal">
+					<p className="text-xl font-normal">
 						<a href="#" className="hover:underline">
 							0x798989678DfF778D6e6957761f0d9A4ccc36E559
 						</a>
 					</p>
 					<button
 						type="button"
-						className="flex-row flex gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						className="flex-row max-w-min flex gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>
 						<svg
 							className="h-6 w-6 fill-white stroke-white"
@@ -96,7 +97,7 @@ export default function Profile() {
 						</svg>
 						Follow
 					</button>
-					<p className="mb-4 text-xl">
+					<p className="text-xl">
 						Open-source contributor. Building{" "}
 						<a
 							href="#"
@@ -106,33 +107,30 @@ export default function Profile() {
 						</a>
 						.
 					</p>
-					<ul className="flex text-xl flex-col">
+					<ul className="flex text-xl flex-col gap-4">
 						<div className="flex flex-row gap-4">
-							<li className="mr-2">
-								<a href="#" className="hover:underline">
-									<span className="font-semibold text-gray-900 dark:text-white">
-										799
-									</span>
-									<span>Following</span>
-								</a>
-							</li>
-							<li>
-								<a href="#" className="hover:underline">
-									<span className="font-semibold text-gray-900 dark:text-white">
-										3,758
-									</span>
-									<span>Followers</span>
-								</a>
-							</li>
-						</div>
-						<li>
 							<a href="#" className="hover:underline">
 								<span className="font-semibold text-gray-900 dark:text-white">
-									18
+									799
 								</span>
-								<span>Mutual</span>
+								<span>Following</span>
 							</a>
-						</li>
+
+							<a href="#" className="hover:underline">
+								<span className="font-semibold text-gray-900 dark:text-white">
+									3,758
+								</span>
+								<span>Followers</span>
+							</a>
+						</div>
+
+						<a href="#" className="hover:underline">
+							<span className="font-semibold text-gray-900 dark:text-white">
+								18
+							</span>
+							<span>Mutual</span>
+						</a>
+
 						<div className="flex mb-3 -space-x-3">
 							<img
 								className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
@@ -159,15 +157,12 @@ export default function Profile() {
 					</ul>
 				</div>
 
-				<div className="col-span-1 mt-10 md:mt-0">
+				<div className="flex flex-col gap-4">
 					<img
 						className="w-full rounded-lg"
 						src="https://i0.wp.com/www.bestcoverpix.com/wp-content/uploads/2013/12/ilovemyfriends.jpg?ssl=1"
 						alt="image description"
 					/>
-					<div className="mt-2 text-3xl text-black dark:text-gray-400">
-						Jese Leos
-					</div>
 					<Publications isProfile publications={publications} />
 				</div>
 			</div>
@@ -239,3 +234,4 @@ export default function Profile() {
 // Profile price
 // Member since??
 // Transfer cash
+// STATUS
