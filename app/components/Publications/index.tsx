@@ -359,7 +359,7 @@ export function Publications({
 				</div>
 			</div> */}
 
-			<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 dark:text-gray-400 gap-2">
+			{/* <ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 dark:text-gray-400 gap-2">
 				<Link
 					// href={{ query: { ...query, format: "" } }}
 					href={{ query: { format: "" } }}
@@ -465,8 +465,8 @@ export function Publications({
 					<a className="inline-block px-4 py-3 text-gray-400 cursor-not-allowed dark:text-gray-500">
 						Tab 5
 					</a>
-				</li> */}
-			</ul>
+				</li>
+			</ul> */}
 
 			{isProfile ? (
 				<>

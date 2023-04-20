@@ -121,7 +121,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 						</svg>
 						88
 					</Link>
-					<Link
+					{/* <Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
@@ -139,7 +139,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 							/>
 						</svg>
 						23
-					</Link>
+					</Link> */}
 					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
