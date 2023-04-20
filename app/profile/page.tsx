@@ -38,8 +38,8 @@ export default function Profile() {
 
 	return (
 		<div className="flex flex-col">
-			<div className="md:gap-8 md:grid md:grid-cols-2">
-				<div className="flex flex-col gap-4">
+			<div className="md:flex-row flex flex-col justify-between">
+				<div className="flex flex-col gap-4 md:max-w-[50%]">
 					<div className="flex items-center justify-between space-x-4">
 						<Link href="#">
 							<Image
@@ -148,7 +148,7 @@ export default function Profile() {
 					</ul>
 				</div>
 
-				<div className="flex flex-col gap-4">
+				<div className="flex flex-col gap-4 md:max-w-[50%]">
 					<Image
 						width={650}
 						height={100}
