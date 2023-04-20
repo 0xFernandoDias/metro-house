@@ -21,7 +21,7 @@ export default function Notifications({
 					>
 						<div className="flex-shrink-0">
 							<Image
-								className="rounded-full mx-3 sm:mb-0 "
+								className="rounded-full mx-3"
 								width={48}
 								height={48}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -43,18 +43,17 @@ export default function Notifications({
 								</svg>
 							</div>
 						</div>
-						<div className="text-gray-600 dark:text-gray-400">
-							<div className="text-base font-normal">
+						<div className="text-gray-600 dark:text-gray-400 flex gap-1">
+							<div className="text-base font-normal flex gap-1">
 								<span className="font-medium text-gray-900 dark:text-white">
 									Jese Leos
-								</span>{" "}
-								likes{" "}
+								</span>
+								likes
 								<span className="font-medium text-gray-900 dark:text-white">
 									Bonnie Greens
-								</span>{" "}
-								post in{" "}
+								</span>
+								post in
 								<span className="font-medium text-gray-900 dark:text-white">
-									{" "}
 									How to start with Flowbite library
 								</span>
 							</div>
@@ -86,7 +85,7 @@ export default function Notifications({
 					>
 						<div className="flex-shrink-0">
 							<Image
-								className="rounded-full mx-3 sm:mb-0 "
+								className="rounded-full mx-3"
 								width={48}
 								height={48}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -109,14 +108,14 @@ export default function Notifications({
 							</div>
 						</div>
 						<div>
-							<div className="text-base font-normal text-gray-600 dark:text-gray-400">
-								<span className="font-medium text-gray-900 dark:text-white">
+							<div className="text-base font-normal text-gray-600 dark:text-gray-400 flex gap-1">
+								<span className="font-medium text-gray-900 dark:text-white flex gap-1">
 									Bonnie Green
-								</span>{" "}
-								react to{" "}
+								</span>
+								react to
 								<span className="font-medium text-gray-900 dark:text-white">
 									Thomas Leans
-								</span>{" "}
+								</span>
 								comment
 							</div>
 							{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
@@ -151,7 +150,7 @@ export default function Notifications({
 					>
 						<div className="flex-shrink-0">
 							<Image
-								className="rounded-full mx-3 sm:mb-0 "
+								className="rounded-full mx-3"
 								width={48}
 								height={48}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -173,18 +172,17 @@ export default function Notifications({
 								</svg>
 							</div>
 						</div>
-						<div className="text-gray-600 dark:text-gray-400">
-							<div className="text-base font-normal">
+						<div className="text-gray-600 dark:text-gray-400 flex gap-1">
+							<div className="text-base font-normal flex gap-1">
 								<span className="font-medium text-gray-900 dark:text-white">
 									Laura Romeros
-								</span>{" "}
-								likes{" "}
+								</span>
+								likes
 								<span className="font-medium text-gray-900 dark:text-white">
 									Bonnie Greens
-								</span>{" "}
-								post in{" "}
+								</span>
+								post in
 								<span className="font-medium text-gray-900 dark:text-white">
-									{" "}
 									How to start with Flowbite library
 								</span>
 							</div>
@@ -217,7 +215,7 @@ export default function Notifications({
 					>
 						<div className="flex-shrink-0">
 							<Image
-								className="rounded-full mx-3 sm:mb-0 "
+								className="rounded-full mx-3"
 								width={48}
 								height={48}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -240,14 +238,14 @@ export default function Notifications({
 							</div>
 						</div>
 						<div>
-							<div className="text-base font-normal text-gray-600 dark:text-gray-400">
-								<span className="font-medium text-gray-900 dark:text-white">
+							<div className="text-base font-normal text-gray-600 dark:text-gray-400 flex gap-1">
+								<span className="font-medium text-gray-900 dark:text-white flex gap-1">
 									Mike Willi
-								</span>{" "}
-								react to{" "}
+								</span>
+								react to
 								<span className="font-medium text-gray-900 dark:text-white">
 									Thomas Leans
-								</span>{" "}
+								</span>
 								comment
 							</div>
 							{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
@@ -275,7 +273,7 @@ export default function Notifications({
 					>
 						<div className="flex-shrink-0">
 							<Image
-								className="rounded-full mx-3 sm:mb-0 "
+								className="rounded-full mx-3"
 								width={48}
 								height={48}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -297,18 +295,17 @@ export default function Notifications({
 								</svg>
 							</div>
 						</div>
-						<div className="text-gray-600 dark:text-gray-400">
-							<div className="text-base font-normal">
+						<div className="text-gray-600 dark:text-gray-400 flex gap-1">
+							<div className="text-base font-normal flex gap-1">
 								<span className="font-medium text-gray-900 dark:text-white">
 									Jese Leos
-								</span>{" "}
-								likes{" "}
+								</span>
+								likes
 								<span className="font-medium text-gray-900 dark:text-white">
 									Bonnie Greens
-								</span>{" "}
-								post in{" "}
+								</span>
+								post in
 								<span className="font-medium text-gray-900 dark:text-white">
-									{" "}
 									How to start with Flowbite library
 								</span>
 							</div>
@@ -340,7 +337,7 @@ export default function Notifications({
 					>
 						<div className="flex-shrink-0">
 							<Image
-								className="rounded-full mx-3 sm:mb-0 "
+								className="rounded-full mx-3"
 								width={48}
 								height={48}
 								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
@@ -362,18 +359,17 @@ export default function Notifications({
 								</svg>
 							</div>
 						</div>
-						<div className="text-gray-600 dark:text-gray-400">
-							<div className="text-base font-normal">
+						<div className="text-gray-600 dark:text-gray-400 flex gap-1">
+							<div className="text-base font-normal flex gap-1">
 								<span className="font-medium text-gray-900 dark:text-white">
 									Bonnie Green
-								</span>{" "}
-								likes{" "}
+								</span>
+								likes
 								<span className="font-medium text-gray-900 dark:text-white">
 									Bonnie Greens
-								</span>{" "}
-								post in{" "}
+								</span>
+								post in
 								<span className="font-medium text-gray-900 dark:text-white">
-									{" "}
 									Top figma designs
 								</span>
 							</div>

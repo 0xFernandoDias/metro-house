@@ -52,7 +52,7 @@ export function Publications({
 		<div className="flex flex-col gap-6">
 			<div className="border-b border-gray-200 dark:border-gray-700">
 				<ul
-					className="flex gap-2 flex-wrap -mb-px text-lg font-medium text-center"
+					className="flex gap-2 flex-wrap text-lg font-medium text-center"
 					id="myTab"
 					data-tabs-toggle="#myTabContent"
 					role="tablist"
@@ -300,7 +300,7 @@ export function Publications({
 					aria-labelledby="profile-tab"
 				>
 					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the{" "}
+						This is some placeholder content the
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Profile tabs associated content
 						</strong>
@@ -316,7 +316,7 @@ export function Publications({
 					aria-labelledby="dashboard-tab"
 				>
 					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the{" "}
+						This is some placeholder content the
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Dashboard tabs associated content
 						</strong>
@@ -332,7 +332,7 @@ export function Publications({
 					aria-labelledby="settings-tab"
 				>
 					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the{" "}
+						This is some placeholder content the
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Settings tabs associated content
 						</strong>
@@ -348,7 +348,7 @@ export function Publications({
 					aria-labelledby="contacts-tab"
 				>
 					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the{" "}
+						This is some placeholder content the
 						<strong className="font-medium text-gray-800 dark:text-white">
 							Contacts tabs associated content
 						</strong>
@@ -473,12 +473,12 @@ export function Publications({
 					<button
 						id="dropdownRadioButton"
 						data-dropdown-toggle="dropdownDefaultRadio"
-						className="text-black max-w-max bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-800 dark:hover:bg-gray-700"
+						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-800 dark:hover:bg-gray-700"
 						type="button"
 					>
-						Dropdown radio{" "}
+						Dropdown radio
 						<svg
-							className="w-4 h-4 ml-2"
+							className="w-4 h-4"
 							aria-hidden="true"
 							fill="none"
 							stroke="currentColor"

@@ -11,11 +11,11 @@
 
 export function CreatePublication() {
 	return (
-		<form>
-			<div className="mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+		<form className="flex flex-col gap-4">
+			<div className="border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 				<div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
 					<div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
-						<div className="flex items-center space-x-1 sm:pr-4">
+						<div className="flex items-center space-x-1">
 							<button
 								type="button"
 								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -113,7 +113,7 @@ export function CreatePublication() {
 								<span className="sr-only">Format code</span>
 							</button>
 						</div>
-						<div className="flex flex-wrap items-center space-x-1 sm:pl-4">
+						<div className="flex flex-wrap items-center space-x-1">
 							<button
 								type="button"
 								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -189,7 +189,7 @@ export function CreatePublication() {
 			</div>
 			<button
 				type="submit"
-				className="inline-flex items-center gap-2 px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+				className="inline-flex items-center gap-2 max-w-min px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
 			>
 				<svg
 					className="h-6 w-6 fill-blue-700 stroke-white"

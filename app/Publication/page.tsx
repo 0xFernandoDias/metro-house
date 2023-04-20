@@ -16,14 +16,14 @@ export default function Publication({ params }: { params: { slug: string } }) {
 				/>
 				<div className="space-y-1 font-medium dark:text-white">
 					<Link className="text-xl flex flex-row gap-3" href="/Profile">
-						Jese Leos{" "}
+						Jese Leos
 						<p
 							className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
 							role="none"
 						>
 							@neil.sims
 						</p>
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"
@@ -68,8 +68,8 @@ export default function Publication({ params }: { params: { slug: string } }) {
 			>
 				Read more
 			</Link>
-			<aside>
-				<div className="flex mb-3 -space-x-3">
+			<aside className="flex flex-col gap-3">
+				<div className="flex -space-x-3">
 					<Image
 						width={32}
 						height={32}
@@ -98,10 +98,10 @@ export default function Publication({ params }: { params: { slug: string } }) {
 						+3
 					</Link>
 				</div>
-				<p className="mt-1 text-md text-gray-500 dark:text-gray-400">
+				<p className="text-md text-gray-500 dark:text-gray-400">
 					See who liked, shared or collected
 				</p>
-				<div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
+				<div className="flex items-center space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
 					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
@@ -180,7 +180,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 					</Link>
 				</div>
 			</aside>
-			<Comment />
+			{/* <Comment /> */}
 		</article>
 	)
 }

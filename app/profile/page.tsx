@@ -52,8 +52,8 @@ export default function Profile() {
 						</Link>
 					</div>
 					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white">
-						Jese Leos{" "}
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
+						Jese Leos
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"
@@ -91,7 +91,7 @@ export default function Profile() {
 						</svg>
 						Follow
 					</button>
-					<p className="text-xl">Open-source contributor. Building </p>
+					<p className="text-xl">Open-source contributor.</p>
 					<ul className="flex text-xl flex-col gap-4">
 						<div className="flex flex-row gap-4">
 							<Link
@@ -116,7 +116,7 @@ export default function Profile() {
 							18 Mutual
 						</Link>
 
-						<div className="flex mb-3 -space-x-3">
+						<div className="flex -space-x-3">
 							<Image
 								width={40}
 								height={40}

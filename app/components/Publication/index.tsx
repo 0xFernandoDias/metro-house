@@ -96,8 +96,8 @@ export const Publication = ({
 			>
 				Read more
 			</Link>
-			<aside>
-				<div className="flex mb-3 -space-x-3">
+			<aside className="flex flex-col gap-3">
+				<div className="flex -space-x-3">
 					<Image
 						width={32}
 						height={32}
@@ -126,10 +126,10 @@ export const Publication = ({
 						+3
 					</Link>
 				</div>
-				<p className="mt-1 text-md text-gray-500 dark:text-gray-400">
+				<p className="text-md text-gray-500 dark:text-gray-400">
 					See who liked, shared or collected
 				</p>
-				<div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
+				<div className="flex items-center space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
 					<Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"

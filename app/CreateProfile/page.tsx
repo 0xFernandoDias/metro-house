@@ -6,8 +6,8 @@ export default function CreateProfile({
 	params: { slug: string }
 }) {
 	return (
-		<form>
-			<div className="relative z-0 w-full mb-6 group">
+		<form className="flex flex-col gap-6">
+			<div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="floating_name"
@@ -23,7 +23,7 @@ export default function CreateProfile({
 					Name*
 				</label>
 			</div>
-			<div className="relative z-0 w-full mb-6 group">
+			<div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="floating_handle"
@@ -39,7 +39,7 @@ export default function CreateProfile({
 					@Handle*
 				</label>
 			</div>
-			<div className="relative z-0 w-full mb-6 group">
+			<div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="bio"
@@ -55,7 +55,7 @@ export default function CreateProfile({
 					Bio
 				</label>
 			</div>
-			<div className="relative z-0 w-full mb-6 group">
+			<div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="location"
@@ -72,7 +72,7 @@ export default function CreateProfile({
 				</label>
 			</div>
 			<div className="grid md:grid-cols-2 md:gap-6">
-				<div className="relative z-0 w-full mb-6 group">
+				<div className="relative z-0 w-full group">
 					<input
 						type="text"
 						name="floating_website"
@@ -88,7 +88,7 @@ export default function CreateProfile({
 						Website
 					</label>
 				</div>
-				<div className="relative z-0 w-full mb-6 group">
+				<div className="relative z-0 w-full group">
 					<input
 						type="text"
 						name="floating_twitter"
@@ -104,9 +104,9 @@ export default function CreateProfile({
 						@Twitter
 					</label>
 				</div>
-				<div className="relative z-0 w-full mb-6 group">
+				<div className="relative z-0 w-full group gap-2">
 					<label
-						className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						className="block text-lg font-medium text-gray-900 dark:text-white"
 						htmlFor="user_avatar"
 					>
 						Upload file
@@ -118,15 +118,15 @@ export default function CreateProfile({
 						type="file"
 					/>
 					<div
-						className="mt-1 text-lg text-gray-500 dark:text-gray-300"
+						className="text-lg text-gray-500 dark:text-gray-300"
 						id="user_avatar_help"
 					>
 						Avatar*
 					</div>
 				</div>
-				<div className="relative z-0 w-full mb-6 group">
+				<div className="relative z-0 w-full gap-1 group">
 					<label
-						className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						className="block text-lg font-medium text-gray-900 dark:text-white"
 						htmlFor="user_avatar"
 					>
 						Upload file
@@ -138,7 +138,7 @@ export default function CreateProfile({
 						type="file"
 					/>
 					<div
-						className="mt-1 text-lg text-gray-500 dark:text-gray-300"
+						className="text-lg text-gray-500 dark:text-gray-300"
 						id="user_cover"
 					>
 						Cover
@@ -148,9 +148,9 @@ export default function CreateProfile({
 
 			<button
 				type="submit"
-				className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				className="text-white max-w-min bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 			>
-				Submit
+				Create
 			</button>
 		</form>
 	)

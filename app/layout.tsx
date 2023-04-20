@@ -57,7 +57,7 @@ export default function RootLayout({
 												className="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
 											>
 												<svg
-													className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+													className="w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
 													fill="currentColor"
 													viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function RootLayout({
 												className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
 											>
 												<svg
-													className="w-6 h-6 mb-1 stroke-gray-500 fill-white text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+													className="w-6 h-6 stroke-gray-500 fill-white text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
 													strokeWidth={1.5}
 													viewBox="0 0 24 24"
 													xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ export default function RootLayout({
 												className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
 											>
 												<svg
-													className="w-6 h-6 mb-1 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
+													className="w-6 h-6 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
 													strokeWidth={1.5}
 													viewBox="0 0 24 24"
 													xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +167,7 @@ export default function RootLayout({
 												className="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
 											>
 												<svg
-													className="w-6 h-6 mb-1 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
+													className="w-6 h-6 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
 													strokeWidth="1.5"
 													viewBox="0 0 24 24"
 													xmlns="http://www.w3.org/2000/svg"
