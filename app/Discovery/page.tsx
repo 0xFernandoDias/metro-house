@@ -25,10 +25,12 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 	if (publications) {
 		return (
 			<div className="flex flex-col gap-6">
+				{/* Search */}
 				<form className="flex items-center gap-2">
 					<label htmlFor="simple-search" className="sr-only">
 						Search
 					</label>
+
 					<div className="relative w-full">
 						<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
@@ -53,6 +55,7 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 							required
 						/>
 					</div>
+
 					<button
 						type="submit"
 						className="p-2.5 text-lg font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

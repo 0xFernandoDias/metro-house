@@ -50,316 +50,251 @@ export function Publications({
 
 	return (
 		<div className="flex flex-col gap-6">
-			<div className="border-b border-gray-200 dark:border-gray-700">
-				<ul
-					className="flex gap-2 flex-wrap text-lg font-medium text-center"
-					id="myTab"
-					data-tabs-toggle="#myTabContent"
-					role="tablist"
+			{/* Tabs */}
+			<ul
+				className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
+				id="myTab"
+				data-tabs-toggle="#myTabContent"
+				role="tablist"
+			>
+				<Link
+					className="inline-block p-4 border-b-2 rounded-t-lg"
+					id={isProfile ? "profileposts-tab" : "latest-tab"}
+					data-tabs-target={isProfile ? "/Profile" : ""}
+					href={
+						isProfile
+							? {
+									pathname: "Profile",
+							  }
+							: ""
+					}
+					role="tab"
+					aria-controls={isProfile ? "profileposts" : "latest"}
+					aria-selected="false"
 				>
-					<Link
-						className="inline-block p-4 border-b-2 rounded-t-lg"
-						id={isProfile ? "profileposts-tab" : "latest-tab"}
-						data-tabs-target={isProfile ? "/Profile" : ""}
-						href={
-							isProfile
-								? {
-										pathname: "Profile",
-								  }
-								: ""
-						}
-						role="tab"
-						aria-controls={isProfile ? "profileposts" : "latest"}
-						aria-selected="false"
-					>
-						{isProfile ? (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-									/>
-								</svg>
-								Posts
-							</div>
-						) : (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-									/>
-								</svg>
-								Latest
-							</div>
-						)}
-					</Link>
+					{isProfile ? (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
+								/>
+							</svg>
+							Posts
+						</div>
+					) : (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+								/>
+							</svg>
+							Latest
+						</div>
+					)}
+				</Link>
 
-					<Link
-						className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-						id={isProfile ? "profilecollects-tab" : "topcollected-tab"}
-						href={
-							isProfile
-								? {
-										pathname: "Profile",
-										// query: { ...query, tab: "collects" },
-										query: { tab: "collects" },
-								  }
-								: {
-										pathname: "/",
-										// query: { ...query, tab: "topcollected" },
-										query: { tab: "topcollected" },
-								  }
-						}
-						data-tabs-target={
-							isProfile ? "/Profile?tab=collects" : "?tab=topcollected"
-						}
-						role="tab"
-						aria-controls={isProfile ? "profilecollects" : "topcollected"}
-						aria-selected="false"
-					>
-						{isProfile ? (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-									/>
-								</svg>
-								Collects
-							</div>
-						) : (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-									/>
-								</svg>
-								Top Collected
-							</div>
-						)}
-					</Link>
+				<Link
+					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+					id={isProfile ? "profilecollects-tab" : "topcollected-tab"}
+					href={
+						isProfile
+							? {
+									pathname: "Profile",
+									// query: { ...query, tab: "collects" },
+									query: { tab: "collects" },
+							  }
+							: {
+									pathname: "/",
+									// query: { ...query, tab: "topcollected" },
+									query: { tab: "topcollected" },
+							  }
+					}
+					data-tabs-target={
+						isProfile ? "/Profile?tab=collects" : "?tab=topcollected"
+					}
+					role="tab"
+					aria-controls={isProfile ? "profilecollects" : "topcollected"}
+					aria-selected="false"
+				>
+					{isProfile ? (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
+								/>
+							</svg>
+							Collects
+						</div>
+					) : (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
+								/>
+							</svg>
+							Top Collected
+						</div>
+					)}
+				</Link>
 
-					<Link
-						className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-						id={isProfile ? "profilemirrors-tab" : "topcommented-tab"}
-						data-tabs-target={
-							isProfile ? "/Profile?tab=mirrors" : "?tab=topcommented"
-						}
-						href={
-							isProfile
-								? {
-										pathname: "Profile",
-										// query: { ...query, tab: "mirrors" },
-										query: { tab: "mirrors" },
-								  }
-								: {
-										pathname: "/",
-										// query: { ...query, tab: "topcommented" },
-										query: { tab: "topcommented" },
-								  }
-						}
-						role="tab"
-						aria-controls={isProfile ? "profilemirrors" : "topcommented"}
-						aria-selected="false"
-					>
-						{isProfile ? (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-									/>
-								</svg>
-								Mirrors
-							</div>
-						) : (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
-									/>
-								</svg>
-								Top Commented
-							</div>
-						)}
-					</Link>
+				<Link
+					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+					id={isProfile ? "profilemirrors-tab" : "topcommented-tab"}
+					data-tabs-target={
+						isProfile ? "/Profile?tab=mirrors" : "?tab=topcommented"
+					}
+					href={
+						isProfile
+							? {
+									pathname: "Profile",
+									// query: { ...query, tab: "mirrors" },
+									query: { tab: "mirrors" },
+							  }
+							: {
+									pathname: "/",
+									// query: { ...query, tab: "topcommented" },
+									query: { tab: "topcommented" },
+							  }
+					}
+					role="tab"
+					aria-controls={isProfile ? "profilemirrors" : "topcommented"}
+					aria-selected="false"
+				>
+					{isProfile ? (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+								/>
+							</svg>
+							Mirrors
+						</div>
+					) : (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+								/>
+							</svg>
+							Top Commented
+						</div>
+					)}
+				</Link>
 
-					<Link
-						className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-						id={isProfile ? "profilenfts-tab" : "topmirrored-tab"}
-						href={
-							isProfile
-								? {
-										pathname: "/Profile",
-										// query: { ...query, tab: "nfts" },
-										query: { tab: "nfts" },
-								  }
-								: {
-										pathname: "/",
-										// query: { ...query, tab: "topmirrored" },
-										query: { tab: "topmirrored" },
-								  }
-						}
-						data-tabs-target={
-							isProfile ? "/Profile?tab=nfts" : "?tab=topmirrored"
-						}
-						role="tab"
-						aria-controls={isProfile ? "profilenfts" : "topmirrored"}
-						aria-selected="false"
-					>
-						{isProfile ? (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
-									/>
-								</svg>
-								NFTS
-							</div>
-						) : (
-							<div className="flex flex-row gap-2 items-center">
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-									/>
-								</svg>
-								Top Mirrored
-							</div>
-						)}
-					</Link>
-				</ul>
-			</div>
-			{/* <div id="myTabContent">
-				<div
-					className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-					id="profile"
-					role="tabpanel"
-					aria-labelledby="profile-tab"
+				<Link
+					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+					id={isProfile ? "profilenfts-tab" : "topmirrored-tab"}
+					href={
+						isProfile
+							? {
+									pathname: "/Profile",
+									// query: { ...query, tab: "nfts" },
+									query: { tab: "nfts" },
+							  }
+							: {
+									pathname: "/",
+									// query: { ...query, tab: "topmirrored" },
+									query: { tab: "topmirrored" },
+							  }
+					}
+					data-tabs-target={
+						isProfile ? "/Profile?tab=nfts" : "?tab=topmirrored"
+					}
+					role="tab"
+					aria-controls={isProfile ? "profilenfts" : "topmirrored"}
+					aria-selected="false"
 				>
-					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the
-						<strong className="font-medium text-gray-800 dark:text-white">
-							Profile tabs associated content
-						</strong>
-						. Clicking another tab will toggle the visibility of this one for
-						the next. The tab JavaScript swaps classNamees to control the
-						content visibility and styling.
-					</p>
-				</div>
-				<div
-					className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-					id="dashboard"
-					role="tabpanel"
-					aria-labelledby="dashboard-tab"
-				>
-					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the
-						<strong className="font-medium text-gray-800 dark:text-white">
-							Dashboard tabs associated content
-						</strong>
-						. Clicking another tab will toggle the visibility of this one for
-						the next. The tab JavaScript swaps classNamees to control the
-						content visibility and styling.
-					</p>
-				</div>
-				<div
-					className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-					id="settings"
-					role="tabpanel"
-					aria-labelledby="settings-tab"
-				>
-					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the
-						<strong className="font-medium text-gray-800 dark:text-white">
-							Settings tabs associated content
-						</strong>
-						. Clicking another tab will toggle the visibility of this one for
-						the next. The tab JavaScript swaps classNamees to control the
-						content visibility and styling.
-					</p>
-				</div>
-				<div
-					className="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-					id="contacts"
-					role="tabpanel"
-					aria-labelledby="contacts-tab"
-				>
-					<p className="text-lg text-gray-500 dark:text-gray-400">
-						This is some placeholder content the
-						<strong className="font-medium text-gray-800 dark:text-white">
-							Contacts tabs associated content
-						</strong>
-						. Clicking another tab will toggle the visibility of this one for
-						the next. The tab JavaScript swaps classNamees to control the
-						content visibility and styling.
-					</p>
-				</div>
-			</div> */}
+					{isProfile ? (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
+								/>
+							</svg>
+							NFTS
+						</div>
+					) : (
+						<div className="flex flex-row gap-2 items-center">
+							<svg
+								className="h-6 w-6 fill-white stroke-gray-500"
+								strokeWidth={1.5}
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+								/>
+							</svg>
+							Top Mirrored
+						</div>
+					)}
+				</Link>
+			</ul>
 
-			{/* <ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 dark:text-gray-400 gap-2">
+			{/* Button tabs */}
+			{/* 
+				<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 dark:text-gray-400 gap-2">
 				<Link
 					// href={{ query: { ...query, format: "" } }}
 					href={{ query: { format: "" } }}
@@ -468,6 +403,7 @@ export function Publications({
 				</li>
 			</ul> */}
 
+			{/* Dropdown radio */}
 			{isProfile ? (
 				<>
 					<button
@@ -476,7 +412,7 @@ export function Publications({
 						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-800 dark:hover:bg-gray-700"
 						type="button"
 					>
-						Dropdown radio
+						Latest
 						<svg
 							className="w-4 h-4"
 							aria-hidden="true"
@@ -494,7 +430,7 @@ export function Publications({
 						</svg>
 					</button>
 
-					<div
+					{/* <div
 						id="dropdownDefaultRadio"
 						className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
 					>
@@ -555,27 +491,27 @@ export function Publications({
 								</div>
 							</li>
 						</ul>
-					</div>
+					</div> */}
 				</>
 			) : null}
 
+			{/* Publications */}
 			<div className="flex flex-col gap-10 mb-6">
 				{publications.map((publication: AnyPublicationFragment, idx) => {
 					return (
-						<div
+						<Link
+							href="/Publication"
 							className="flex flex-col gap-4 max-w-5xl"
 							key={parseFloat(publication.id) + idx}
 						>
-							<Link href="/Publication">
-								<Publication
-									publication={
-										isMirrorPublication(publication)
-											? publication.mirrorOf
-											: publication
-									}
-								/>
-							</Link>
-						</div>
+							<Publication
+								publication={
+									isMirrorPublication(publication)
+										? publication.mirrorOf
+										: publication
+								}
+							/>
+						</Link>
 					)
 				})}
 			</div>

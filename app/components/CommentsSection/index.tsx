@@ -33,7 +33,7 @@ import Link from "next/link"
 // useCreateComment AUTHENTICATED https://flowbite.com/docs/forms/textarea/#comment-box (publicationId, profileId, Content, ContentFocus, locale, collect, reference)
 // use Reaction?? AUTHENTICATED
 
-export function Comment() {
+export function CommentsSection() {
 	return (
 		<div className="flex flex-col gap-6 mb-6">
 			<form className="w-full flex flex-col gap-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
