@@ -12,6 +12,7 @@
 export function CreatePublication() {
 	return (
 		<form className="flex flex-col gap-4">
+			{/* Text field */}
 			<div className="border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 				<div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
 					<div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
@@ -174,6 +175,7 @@ export function CreatePublication() {
 						</div>
 					</div>
 				</div>
+
 				<div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
 					<label htmlFor="editor" className="sr-only">
 						Publish
@@ -187,6 +189,7 @@ export function CreatePublication() {
 					></textarea>
 				</div>
 			</div>
+
 			<button
 				type="submit"
 				className="inline-flex items-center gap-2 max-w-min px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"

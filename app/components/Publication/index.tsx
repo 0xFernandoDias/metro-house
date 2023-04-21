@@ -3,24 +3,25 @@ import {
 	ContentPublicationFragment,
 	useEncryptedPublication,
 } from "@lens-protocol/react-web"
-import { Comment } from "../Comments"
+import { CommentsSection } from "../CommentsSection"
 import Link from "next/link"
 import Image from "next/image"
+import { ProfileHeader } from "../ProfileHeader"
 
 export const Publication = ({
 	publication,
 	comment,
 }: {
-	publication: ContentPublicationFragment
+	publication?: ContentPublicationFragment
 	comment?: boolean
 }) => {
-	const { data, isPending } = useEncryptedPublication({
-		publication,
-	})
+	// const { data, isPending } = useEncryptedPublication({
+	// 	publication,
+	// })
 
-	if (isPending) {
-		return <div>Loading...</div>
-	}
+	// if (isPending) {
+	// 	return <div>Loading...</div>
+	// }
 
 	{
 		/* <Link className="font-bold" href={`/profile/${data.profile.handle}`}>
@@ -31,72 +32,38 @@ export const Publication = ({
 
 	return (
 		<article className="max-w-5xl flex flex-col gap-4">
-			<div className="flex items-center space-x-4">
-				<Link href="/Profile">
-					<Image
-						className="rounded-full"
-						width={48}
-						height={48}
-						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-						alt=""
-					/>
-				</Link>
-				<div className="space-y-1 font-medium dark:text-white">
-					<div className="text-xl flex flex-row gap-3">
-						<Link href="/Profile">Jese Leos</Link>
-						<Link
-							className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
-							role="none"
-							href="/Profile"
-						>
-							@neil.sims
-						</Link>
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full mr-2 dark:bg-gray-700 dark:text-gray-300">
-							<svg
-								aria-hidden="true"
-								className="w-3.5 h-3.5"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									fillRule="evenodd"
-									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-									clipRule="evenodd"
-								></path>
-							</svg>
-							<span className="sr-only">Icon description</span>
-						</div>
-					</div>
-					<div className="text-md text-gray-500 dark:text-gray-400">
-						<p>257 followers, 18 mutual</p>
-					</div>
-				</div>
-			</div>
+			{/* Post Header */}
+
+			<ProfileHeader />
+
+			{/* Created At */}
 			<time
 				dateTime="2020-08-25 19:00"
 				className="block text-md text-gray-500 dark:text-gray-400"
 			>
 				Created At August 25
 			</time>
+
+			{/* Post Metadata Content */}
 			<p className="text-lg dark:text-gray-400">
 				This is my third Invicta Pro Diver. They are just fantastic value for
 				money. This one arrived yesterday and the first thing I did was set the
 				time, popped on an identical strap from another Invicta and went in the
-				shower with it to test the waterproofing.... No problems.
+				shower with it to test the waterproofing.... No problems. It is
+				obviously not the same build quality as those very expensive watches.
+				But that is like comparing a Citroën to a Ferrari. This watch was well
+				under £100! An absolute bargain.
 			</p>
-			<p className="text-lg dark:text-gray-400">
-				It is obviously not the same build quality as those very expensive
-				watches. But that is like comparing a Citroën to a Ferrari. This watch
-				was well under £100! An absolute bargain.
-			</p>
-			<Link
+
+			{/* <Link
 				href="#"
 				className="block text-md font-medium text-blue-600 hover:underline dark:text-blue-500"
 			>
 				Read more
-			</Link>
+			</Link> */}
+
 			<aside className="flex flex-col gap-3">
+				{/* Avatars */}
 				<div className="flex -space-x-3">
 					<Image
 						width={32}
@@ -126,12 +93,16 @@ export const Publication = ({
 						+3
 					</Link>
 				</div>
+
 				<p className="text-md text-gray-500 dark:text-gray-400">
 					See who liked, shared or collected
 				</p>
+
+				{/* Reactions buttons */}
 				<div className="flex items-center space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
-					<Link
-						href="#"
+					{/* Like */}
+					<button
+						type="button"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
 						<svg
@@ -148,7 +119,9 @@ export const Publication = ({
 							/>
 						</svg>
 						88
-					</Link>
+					</button>
+
+					{/* Comment */}
 					{/* <Link
 						href="#"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
@@ -168,8 +141,10 @@ export const Publication = ({
 						</svg>
 						23
 					</Link> */}
-					<Link
-						href="#"
+
+					{/* Mirror */}
+					<button
+						type="button"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
 						<svg
@@ -186,9 +161,11 @@ export const Publication = ({
 							/>
 						</svg>
 						16
-					</Link>
-					<Link
-						href="#"
+					</button>
+
+					{/* Collect */}
+					<button
+						type="button"
 						className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
 					>
 						<svg
@@ -205,10 +182,9 @@ export const Publication = ({
 							/>
 						</svg>
 						8
-					</Link>
+					</button>
 				</div>
 			</aside>
-			{comment && <Comment />}
 		</article>
 	)
 }

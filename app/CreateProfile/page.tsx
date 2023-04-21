@@ -7,6 +7,7 @@ export default function CreateProfile({
 }) {
 	return (
 		<form className="flex flex-col gap-6">
+			{/* Name */}
 			<div className="relative z-0 w-full group">
 				<input
 					type="text"
@@ -23,6 +24,8 @@ export default function CreateProfile({
 					Name*
 				</label>
 			</div>
+
+			{/* Handle */}
 			<div className="relative z-0 w-full group">
 				<input
 					type="text"
@@ -39,6 +42,8 @@ export default function CreateProfile({
 					@Handle*
 				</label>
 			</div>
+
+			{/* Bio */}
 			<div className="relative z-0 w-full group">
 				<input
 					type="text"
@@ -55,6 +60,8 @@ export default function CreateProfile({
 					Bio
 				</label>
 			</div>
+
+			{/* Location */}
 			<div className="relative z-0 w-full group">
 				<input
 					type="text"
@@ -71,7 +78,10 @@ export default function CreateProfile({
 					Location
 				</label>
 			</div>
+
+			{/* Group */}
 			<div className="grid md:grid-cols-2 md:gap-6">
+				{/* Website */}
 				<div className="relative z-0 w-full group">
 					<input
 						type="text"
@@ -88,6 +98,8 @@ export default function CreateProfile({
 						Website
 					</label>
 				</div>
+
+				{/* Twitter */}
 				<div className="relative z-0 w-full group">
 					<input
 						type="text"
@@ -104,6 +116,8 @@ export default function CreateProfile({
 						@Twitter
 					</label>
 				</div>
+
+				{/* Avatar */}
 				<div className="relative z-0 w-full group gap-2">
 					<label
 						className="block text-lg font-medium text-gray-900 dark:text-white"
@@ -124,6 +138,8 @@ export default function CreateProfile({
 						Avatar*
 					</div>
 				</div>
+
+				{/* Cover */}
 				<div className="relative z-0 w-full gap-1 group">
 					<label
 						className="block text-lg font-medium text-gray-900 dark:text-white"
@@ -146,6 +162,7 @@ export default function CreateProfile({
 				</div>
 			</div>
 
+			{/* Create */}
 			<button
 				type="submit"
 				className="text-white max-w-min bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

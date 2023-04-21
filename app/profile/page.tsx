@@ -38,20 +38,20 @@ export default function Profile() {
 
 	return (
 		<div className="flex flex-col">
-			<div className="md:flex-row flex flex-col justify-between">
+			<div className="md:flex-row gap-8 flex flex-col justify-between">
+				{/* Left Side */}
 				<div className="flex flex-col gap-4 md:max-w-[50%]">
-					<div className="flex items-center justify-between space-x-4">
-						<Link href="#">
-							<Image
-								className="rounded-full"
-								width={144}
-								height={144}
-								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-								alt="Jese Leos"
-							/>
-						</Link>
-					</div>
-					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white">
+					{/* Avatar */}
+					<Image
+						className="rounded-full"
+						width={144}
+						height={144}
+						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+						alt="Jese Leos"
+					/>
+
+					{/* Name */}
+					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
 						Jese Leos
 						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
 							<svg
@@ -67,11 +67,17 @@ export default function Profile() {
 									clipRule="evenodd"
 								></path>
 							</svg>
-							<span className="sr-only">Icon description</span>
+							<span className="sr-only">Verified</span>
 						</div>
 					</p>
-					<p className="text-xl font-normal hover:underline">@jeseleos</p>
-					<p className="text-xl font-normal hover:underline">0x798...E559</p>
+
+					{/* Handle */}
+					<p className="text-xl font-normal">@jeseleos</p>
+
+					{/* Wallet address */}
+					<p className="text-xl font-normal">0x798...E559</p>
+
+					{/* Follow */}
 					<button
 						type="button"
 						className="flex-row max-w-min flex gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -91,7 +97,16 @@ export default function Profile() {
 						</svg>
 						Follow
 					</button>
-					<p className="text-xl">Open-source contributor.</p>
+
+					{/* Bio */}
+					<p className="text-xl max-w-[80%]">
+						This is my third Invicta Pro Diver. They are just fantastic value
+						for money. This one arrived yesterday and the first thing I did was
+						set the time, popped on an identical strap from another Invicta and
+						went in the shower with it to test the waterproofing
+					</p>
+
+					{/* Contacts */}
 					<ul className="flex text-xl flex-col gap-4">
 						<div className="flex flex-row gap-4">
 							<Link
@@ -148,7 +163,9 @@ export default function Profile() {
 					</ul>
 				</div>
 
+				{/* Right Side */}
 				<div className="flex flex-col gap-4 md:max-w-[50%]">
+					{/* Cover */}
 					<Image
 						width={650}
 						height={100}
