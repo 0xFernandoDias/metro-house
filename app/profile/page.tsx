@@ -113,14 +113,13 @@ export default function Profile() {
 								href="#"
 								className="font-semibold hover:underline text-gray-900 dark:text-white"
 							>
-								799 Following
+								3,758 Followers
 							</Link>
-
 							<Link
 								href="#"
 								className="font-semibold hover:underline text-gray-900 dark:text-white"
 							>
-								3,758 Followers
+								799 Following
 							</Link>
 						</div>
 
