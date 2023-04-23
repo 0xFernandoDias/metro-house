@@ -500,9 +500,9 @@ export function Publications({
 				{publications.map((publication: AnyPublicationFragment, idx) => {
 					return (
 						<Link
-							href="/Publication"
+							href={`/Publication/${publication.id}`}
 							className="flex flex-col gap-4 max-w-5xl"
-							key={parseFloat(publication.id) + idx}
+							key={publication.id}
 						>
 							<Publication
 								publication={

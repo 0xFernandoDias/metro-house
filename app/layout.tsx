@@ -19,7 +19,7 @@ import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
 
 const { provider, webSocketProvider } = configureChains(
-	[polygonMumbai, polygon],
+	[polygon],
 	[publicProvider()]
 )
 
@@ -31,7 +31,7 @@ const wagmiClient = createClient({
 
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
-	environment: staging,
+	environment: production,
 	appId: appId("metro-house"),
 }
 

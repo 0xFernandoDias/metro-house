@@ -1,6 +1,7 @@
 "use client"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import {
+	MediaSetFragment,
 	ProfileFragment,
 	ProfileOwnedByMeFragment,
 	PublicationSortCriteria,
@@ -9,31 +10,76 @@ import {
 	useFollow,
 	useProfile,
 	useUnfollow,
+	usePublications,
 } from "@lens-protocol/react-web"
-import { Publications } from "../components/Publications"
+import { Publications } from "../../components/Publications"
 import Image from "next/image"
 import Link from "next/link"
+import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
+import { MediaRenderer } from "@thirdweb-dev/react"
+
+function ProfilePicture({
+	picture,
+}: {
+	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
+}) {
+	if (!picture) return <>Loading...</>
+
+	switch (picture.__typename) {
+		case "MediaSet":
+			return (
+				// eslint-disable-next-line react/jsx-no-undef
+				<MediaRenderer
+					className="rounded-full"
+					height="144px"
+					width="144px"
+					src={picture.original.url}
+				/>
+			)
+		default:
+			return <>Loading...</>
+	}
+}
+
+function ProfileCover({
+	picture,
+}: {
+	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
+}) {
+	if (!picture) return <>Loading...</>
+
+	switch (picture.__typename) {
+		case "MediaSet":
+			return (
+				// eslint-disable-next-line react/jsx-no-undef
+				<MediaRenderer
+					className="rounded-full"
+					height="100px"
+					width="650px"
+					src={picture.original.url}
+				/>
+			)
+		default:
+			return <>Loading...</>
+	}
+}
 
 // export default function Profile({ params }: { params: { slug: string } }) {
-export default function Profile() {
-	const {
-		data: publications,
-		loading: loadingPublications,
-		hasMore,
-		next,
-	} = useExplorePublications({
-		sortCriteria: PublicationSortCriteria.TopCommented,
-		publicationTypes: [PublicationTypes.Post],
-	})
-	// const { slug: profileHandle } = params
-	// const {
-	// 	data: profile,
-	// 	error,
-	// 	loading,
-	// } = useProfile({ handle: profileHandle })
+export default function Profile({ params }: { params: { slug: string } }) {
+	const { slug: profileHandle } = params
 
-	if (!publications) {
-		return <div>Loading pubs...</div>
+	const {
+		data: profile,
+		error,
+		loading,
+	} = useProfile({ handle: profileHandle })
+
+	const { data: publications, loading: loadingPublications } = usePublications({
+		profileId: profile?.id || "",
+	})
+
+	if (loading || loadingPublications || !profile || !publications) {
+		return <div>Loading profile...</div>
 	}
 
 	return (
@@ -42,40 +88,37 @@ export default function Profile() {
 				{/* Left Side */}
 				<div className="flex flex-col gap-4 md:max-w-[50%]">
 					{/* Avatar */}
-					<Image
-						className="rounded-full"
-						width={144}
-						height={144}
-						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-						alt="Jese Leos"
-					/>
+
+					<ProfilePicture picture={profile.picture} />
 
 					{/* Name */}
 					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
-						Jese Leos
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
-							<svg
-								aria-hidden="true"
-								className="w-3.5 h-3.5"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									fillRule="evenodd"
-									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-									clipRule="evenodd"
-								></path>
-							</svg>
-							<span className="sr-only">Verified</span>
-						</div>
+						{profile.name}
+						{profile.onChainIdentity.proofOfHumanity && (
+							<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
+								<svg
+									aria-hidden="true"
+									className="w-3.5 h-3.5"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										fillRule="evenodd"
+										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+										clipRule="evenodd"
+									></path>
+								</svg>
+								<span className="sr-only">Verified</span>
+							</div>
+						)}
 					</p>
 
 					{/* Handle */}
-					<p className="text-xl font-normal">@jeseleos</p>
+					<p className="text-xl font-normal">@{profile.handle}</p>
 
 					{/* Wallet address */}
-					<p className="text-xl font-normal">0x798...E559</p>
+					{/* <p className="text-xl font-normal">0x798...E559</p> */}
 
 					{/* Follow */}
 					<button
@@ -99,12 +142,7 @@ export default function Profile() {
 					</button>
 
 					{/* Bio */}
-					<p className="text-xl max-w-[80%]">
-						This is my third Invicta Pro Diver. They are just fantastic value
-						for money. This one arrived yesterday and the first thing I did was
-						set the time, popped on an identical strap from another Invicta and
-						went in the shower with it to test the waterproofing
-					</p>
+					<p className="text-xl max-w-[80%]">{profile.bio}</p>
 
 					{/* Contacts */}
 					<ul className="flex text-xl flex-col gap-4">
@@ -113,13 +151,13 @@ export default function Profile() {
 								href="#"
 								className="font-semibold hover:underline text-gray-900 dark:text-white"
 							>
-								3,758 Followers
+								{profile.stats.totalFollowers} Followers
 							</Link>
 							<Link
 								href="#"
 								className="font-semibold hover:underline text-gray-900 dark:text-white"
 							>
-								799 Following
+								{profile.stats.totalFollowing} Following
 							</Link>
 						</div>
 
@@ -165,13 +203,7 @@ export default function Profile() {
 				{/* Right Side */}
 				<div className="flex flex-col gap-4 md:max-w-[50%]">
 					{/* Cover */}
-					<Image
-						width={650}
-						height={100}
-						className="rounded-lg"
-						src="https://i0.wp.com/www.bestcoverpix.com/wp-content/uploads/2013/12/ilovemyfriends.jpg?ssl=1"
-						alt="image description"
-					/>
+					<ProfileCover picture={profile.coverPicture} />
 					<Publications isProfile publications={publications} />
 				</div>
 			</div>

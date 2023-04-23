@@ -24,7 +24,7 @@ export default function Home() {
 		hasMore,
 		next,
 	} = useExplorePublications({
-		sortCriteria: PublicationSortCriteria.TopCommented,
+		sortCriteria: PublicationSortCriteria.Latest,
 		publicationTypes: [PublicationTypes.Post],
 	})
 

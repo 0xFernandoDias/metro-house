@@ -1,13 +1,30 @@
 "use client"
 import Link from "next/link"
-import { CommentsSection } from "../components/CommentsSection"
-import { Publication as PublicationComponent } from "../components/Publication"
+import { CommentsSection } from "../../components/CommentsSection"
+import { Publication as PublicationComponent } from "../../components/Publication"
 import Image from "next/image"
+import { isMirrorPublication, usePublication } from "@lens-protocol/react-web"
 
 export default function Publication({ params }: { params: { slug: string } }) {
+	const { slug } = params
+
+	const { data: publication, loading } = usePublication({
+		publicationId: slug,
+	})
+
+	if (!publication) {
+		return <div>Loading pub...</div>
+	}
+
 	return (
 		<div className="flex flex-col gap-8">
-			<PublicationComponent />
+			<PublicationComponent
+				publication={
+					publication.__typename === "Mirror"
+						? publication.mirrorOf
+						: publication
+				}
+			/>
 			{/* <CommentsSection /> */}
 		</div>
 	)
