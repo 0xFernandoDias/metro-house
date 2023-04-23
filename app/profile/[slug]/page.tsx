@@ -148,13 +148,13 @@ export default function Profile({ params }: { params: { slug: string } }) {
 					<ul className="flex text-xl flex-col gap-4">
 						<div className="flex flex-row gap-4">
 							<Link
-								href="#"
+								href={`Profile/${profile.handle}/Contacts?=followers`}
 								className="font-semibold hover:underline text-gray-900 dark:text-white"
 							>
 								{profile.stats.totalFollowers} Followers
 							</Link>
 							<Link
-								href="#"
+								href={`Profile/${profile.handle}/Contacts?=following`}
 								className="font-semibold hover:underline text-gray-900 dark:text-white"
 							>
 								{profile.stats.totalFollowing} Following
@@ -162,7 +162,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 						</div>
 
 						<Link
-							href="#"
+							href={`Profile/${profile.handle}/Contacts?=mutual`}
 							className="font-semibold hover:underline text-gray-900 dark:text-white"
 						>
 							18 Mutual

@@ -1,28 +1,20 @@
-// https://flowbite.com/docs/typography/lists/#advanced-layout
-// @handle
-// Contacts (Followers, Following, Mutual)
-// bio
-// picture - https://flowbite.com/docs/components/avatar/
-// Follow AUTHENTICATE AT LEAST WITH METAMASK hash  - https://flowbite.com/docs/components/buttons/#default-button
-// Name
-// Proof of humanity - https://flowbite.com/docs/components/badge/#badges-with-icon
-
 "use client"
 import Image from "next/image"
 import Link from "next/link"
-import { ContactsTabs } from "../../../components/ContactsTabs"
-import { MediaRenderer } from "@thirdweb-dev/react"
+import { WhoReactedTabs } from "../../../components/WhoReactedTabs"
 import {
 	MediaSetFragment,
-	useProfile,
-	useProfileFollowers,
+	useEncryptedPublication,
+	usePublication,
+	useWhoReacted,
 } from "@lens-protocol/react-web"
+import { MediaRenderer } from "@thirdweb-dev/react"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 
 function ProfilePicture({
 	picture,
 }: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | undefined | null
+	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
 }) {
 	if (!picture) return <>Loading...</>
 
@@ -41,47 +33,40 @@ function ProfilePicture({
 	}
 }
 
-export default function Contacts({ params }: { params: { slug: string } }) {
-	const { slug: profileHandle } = params
+export default function WhoReacted({ params }: { params: { slug: string } }) {
+	const { slug: publicationId } = params
 
-	const {
-		data: profile,
-		error,
-		loading,
-	} = useProfile({ handle: profileHandle })
+	const { data: whoReacted, loading } = useWhoReacted({
+		publicationId: publicationId,
+	})
 
-	const { data: profileFollowers, loading: loadingFollowers } =
-		useProfileFollowers({
-			profileId: profile?.id || "",
-		})
-
-	if (loading || loadingFollowers || !profile || !profileFollowers)
-		return <>Loading...</>
+	if (loading) {
+		return <div>Loading...</div>
+	}
 
 	return (
 		<div className="flex flex-col gap-6">
-			<ContactsTabs />
+			<WhoReactedTabs />
 			<div className="flex flex-col gap-6">
-				<a className="text-xl font-semibold">Contacts</a>
+				<a className="text-xl font-semibold">Who Reacted</a>
 
-				{profileFollowers.map((profile) => {
-					return (
+				{/* Profiles */}
+				<ul className="max-w-md gap-6 flex flex-col">
+					{whoReacted?.map((profile) => (
 						<>
 							{/* Profile Info */}
 							<Link
-								href={`/Profile/${profile?.wallet?.defaultProfile?.handle}`}
+								href={`/Profile/${profile.profile.handle}`}
 								className="flex items-center space-x-4"
 							>
-								<ProfilePicture
-									picture={profile?.wallet.defaultProfile?.picture}
-								/>
+								<ProfilePicture picture={profile.profile.picture} />
 
 								<div className="flex-1 min-w-0">
 									<div className="text-xl font-medium text-gray-900 truncate dark:text-white">
-										{profile?.wallet?.defaultProfile?.name}
+										{profile.profile.name}
 									</div>
 									<p className="text-xl text-gray-500 truncate dark:text-gray-400">
-										@{profile?.wallet?.defaultProfile?.handle}
+										@{profile.profile.handle}
 									</p>
 								</div>
 
@@ -107,8 +92,8 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 								</button>
 							</Link>
 						</>
-					)
-				})}
+					))}
+				</ul>
 			</div>
 		</div>
 	)

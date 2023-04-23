@@ -3,6 +3,7 @@ import {
 	AnyPublicationFragment,
 	ContentPublicationFragment,
 	useEncryptedPublication,
+	useWhoReacted,
 } from "@lens-protocol/react-web"
 import { CommentsSection } from "../CommentsSection"
 import Link from "next/link"
@@ -87,9 +88,12 @@ export const Publication = ({
 					</Link>
 				</div>
 
-				<p className="text-md text-gray-500 dark:text-gray-400">
+				<Link
+					href={`/Publication/${post.id}/WhoReacted`}
+					className="text-md text-gray-500 dark:text-gray-400"
+				>
 					See who liked, shared or collected
-				</p>
+				</Link>
 
 				{/* Reactions buttons */}
 				<div className="flex items-center space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
