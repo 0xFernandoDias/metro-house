@@ -2,6 +2,7 @@
 import {
 	AnyPublicationFragment,
 	ContentPublicationFragment,
+	MediaSetFragment,
 	useEncryptedPublication,
 	useWhoReacted,
 } from "@lens-protocol/react-web"
@@ -9,6 +10,35 @@ import { CommentsSection } from "../CommentsSection"
 import Link from "next/link"
 import Image from "next/image"
 import { ProfileHeader } from "../ProfileHeader"
+import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
+import { MediaRenderer } from "@thirdweb-dev/react"
+
+function ProfilePicture({
+	picture,
+}: {
+	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
+}) {
+	if (!picture)
+		return (
+			<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
+		)
+
+	switch (picture.__typename) {
+		case "MediaSet":
+			return (
+				<MediaRenderer
+					className="rounded-full"
+					height="32px"
+					width="32px"
+					src={picture.original.url}
+				/>
+			)
+		default:
+			return (
+				<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
+			)
+	}
+}
 
 export const Publication = ({
 	publication,
@@ -21,7 +51,11 @@ export const Publication = ({
 		publication,
 	})
 
-	if (isPending) {
+	const { data: whoReacted, loading } = useWhoReacted({
+		publicationId: post.id,
+	})
+
+	if (isPending || loading) {
 		return <div>Loading...</div>
 	}
 
@@ -59,27 +93,13 @@ export const Publication = ({
 			<aside className="flex flex-col gap-3">
 				{/* Avatars */}
 				<div className="flex -space-x-3">
-					<Image
-						width={32}
-						height={32}
-						className="border-2 border-white rounded-full dark:border-gray-800"
-						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-						alt=""
-					/>
-					<Image
-						width={32}
-						height={32}
-						className="border-2 border-white rounded-full dark:border-gray-800"
-						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-						alt=""
-					/>
-					<Image
-						width={32}
-						height={32}
-						className="border-2 border-white rounded-full dark:border-gray-800"
-						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-						alt=""
-					/>
+					{whoReacted?.map((profile, idx) => {
+						if (idx > 3) return null
+
+						return (
+							<ProfilePicture picture={profile.profile.picture} key={idx} />
+						)
+					})}
 					<Link
 						className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
 						href="#"

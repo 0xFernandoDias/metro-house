@@ -24,7 +24,7 @@ export default function Home() {
 		hasMore,
 		next,
 	} = useExplorePublications({
-		sortCriteria: PublicationSortCriteria.Latest,
+		sortCriteria: PublicationSortCriteria.TopMirrored,
 		publicationTypes: [PublicationTypes.Post],
 	})
 

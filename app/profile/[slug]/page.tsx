@@ -11,12 +11,40 @@ import {
 	useProfile,
 	useUnfollow,
 	usePublications,
+	useProfileFollowers,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
 import Image from "next/image"
 import Link from "next/link"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { MediaRenderer } from "@thirdweb-dev/react"
+
+function ProfileFollower({
+	picture,
+}: {
+	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null | undefined
+}) {
+	if (!picture)
+		return (
+			<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
+		)
+
+	switch (picture.__typename) {
+		case "MediaSet":
+			return (
+				<MediaRenderer
+					className="rounded-full"
+					height="40px"
+					width="40px"
+					src={picture.original.url}
+				/>
+			)
+		default:
+			return (
+				<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
+			)
+	}
+}
 
 function ProfilePicture({
 	picture,
@@ -78,7 +106,18 @@ export default function Profile({ params }: { params: { slug: string } }) {
 		profileId: profile?.id || "",
 	})
 
-	if (loading || loadingPublications || !profile || !publications) {
+	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
+		profileId: profile?.id || "",
+	})
+
+	if (
+		loading ||
+		loadingPublications ||
+		loadingFollowers ||
+		!profile ||
+		!publications ||
+		!followers
+	) {
 		return <div>Loading profile...</div>
 	}
 
@@ -169,27 +208,16 @@ export default function Profile({ params }: { params: { slug: string } }) {
 						</Link>
 
 						<div className="flex -space-x-3">
-							<Image
-								width={40}
-								height={40}
-								className="border-2 border-white rounded-full dark:border-gray-800"
-								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-								alt=""
-							/>
-							<Image
-								width={40}
-								height={40}
-								className="border-2 border-white rounded-full dark:border-gray-800"
-								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-								alt=""
-							/>
-							<Image
-								width={40}
-								height={40}
-								className="border-2 border-white rounded-full dark:border-gray-800"
-								src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-								alt=""
-							/>
+							{followers.map((follower, idx) => {
+								if (idx > 3) return null
+
+								return (
+									<ProfileFollower
+										picture={follower.wallet.defaultProfile?.picture}
+										key={idx}
+									/>
+								)
+							})}
 							<Link
 								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
 								href="#"

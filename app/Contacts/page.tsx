@@ -8,7 +8,7 @@ export default function Contacts() {
 		<div className="flex flex-col gap-6">
 			<ContactsTabs />
 			<div className="flex flex-col gap-6">
-				<a className="text-xl font-semibold">Suggested</a>
+				<a className="text-xl font-semibold">Contacts</a>
 
 				{/* Profiles */}
 				<ul className="max-w-md gap-6 flex flex-col">
