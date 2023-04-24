@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image"
 import Link from "next/link"
 import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
@@ -7,6 +6,8 @@ import { usePathname } from "next/navigation"
 import { MediaSetFragment, useExploreProfiles } from "@lens-protocol/react-web"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
+import { LoginButton } from "../auth/LoginButton"
+import { useEffect } from "react"
 
 export function NavbarWithSidebars({
 	children,
@@ -40,7 +41,7 @@ function TopNavbar() {
 				{/* User Avatar and Menu */}
 				<div className="flex items-center">
 					{/* Avatar */}
-					<button
+					{/* <button
 						type="button"
 						className="flex text-lg bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
 						aria-expanded="false"
@@ -54,7 +55,9 @@ function TopNavbar() {
 							src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 							alt="user photo"
 						/>
-					</button>
+					</button> */}
+
+					<LoginButton />
 
 					{/* User Menu */}
 					{/* <UserMenu /> */}

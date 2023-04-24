@@ -1,6 +1,6 @@
 // https://testnet.lenster.xyz/ + https://lenster.xyz/ + https://www.lensfrens.xyz/ + https://lens-do-it.vercel.app/ +
 "use client"
-import { configureChains, createClient, WagmiConfig } from "wagmi"
+import { configureChains, createClient, useAccount, WagmiConfig } from "wagmi"
 import { polygon, polygonMumbai } from "wagmi/chains"
 import { publicProvider } from "wagmi/providers/public"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
@@ -10,16 +10,18 @@ import {
 	LensProvider,
 	production,
 	staging,
+	useActiveWallet,
+	useWalletLogout,
 } from "@lens-protocol/react-web"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
 import "./global.css"
-import { LoginButton } from "./components/auth/LoginButton"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
+import { useEffect } from "react"
 
 const { provider, webSocketProvider } = configureChains(
-	[polygon],
+	[polygonMumbai],
 	[publicProvider()]
 )
 
@@ -31,7 +33,7 @@ const wagmiClient = createClient({
 
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
-	environment: production,
+	environment: staging,
 	appId: appId("metro-house"),
 }
 

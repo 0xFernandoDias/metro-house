@@ -1,14 +1,9 @@
 "use client"
 // import { useGlobalContext } from "./context/store"
-import { useAccount, useDisconnect } from "wagmi"
 import {
 	useExplorePublications,
 	PublicationSortCriteria,
 	PublicationTypes,
-	useActiveWallet,
-	useActiveProfile,
-	useWalletLogout,
-	PublicationMainFocus,
 } from "@lens-protocol/react-web"
 import { useEffect } from "react"
 import { Publications } from "./components/Publications"
@@ -16,7 +11,8 @@ import { CreatePublication } from "./components/CreatePublication"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
-	const { address } = useAccount()
+
+	//
 
 	const {
 		data: publications,
@@ -27,19 +23,6 @@ export default function Home() {
 		sortCriteria: PublicationSortCriteria.TopMirrored,
 		publicationTypes: [PublicationTypes.Post],
 	})
-
-	const { data: wallet } = useActiveWallet()
-	const { data: profile } = useActiveProfile()
-	const { isConnected } = useAccount()
-	const { execute: logout, isPending: isLogoutPending } = useWalletLogout()
-	const { disconnectAsync, isLoading: isDisconnectLoading } = useDisconnect()
-
-	useEffect(() => {
-		if (!isConnected && wallet) {
-			logout()
-			disconnectAsync()
-		}
-	}, [isConnected, wallet, logout, disconnectAsync])
 
 	if (loadingPublications) {
 		return <div>Loading...</div>
