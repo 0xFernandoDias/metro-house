@@ -1,9 +1,13 @@
 "use client"
 
+import { LoginButton } from "../auth/LoginButton"
+import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
+import { WhenLoggedOut } from "../auth/WhenLoggedOut"
+
 export function ApplicationBar() {
 	return (
 		<div className="fixed sm:invisible sm:opacity-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
-			<div className="grid h-full max-w-lg grid-cols-5 mx-auto">
+			<div className="flex h-full max-w-lg justify-between items-center mx-auto">
 				<button
 					data-tooltip-target="tooltip-home"
 					type="button"
@@ -41,48 +45,58 @@ export function ApplicationBar() {
 					<span className="sr-only">Discover</span>
 				</button>
 
-				<div className="flex items-center justify-center">
-					<button
-						data-tooltip-target="tooltip-newpost"
-						type="button"
-						className="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
-					>
-						<svg
-							className="w-6 h-6 text-white fill-white"
-							viewBox="0 0 20 20"
-							xmlns="http://www.w3.org/2000/svg"
-							aria-hidden="true"
-						>
-							<path
-								clipRule="evenodd"
-								fillRule="evenodd"
-								d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-							></path>
-						</svg>
-						<span className="sr-only">New Post</span>
-					</button>
-				</div>
+				<WhenLoggedInWithProfile>
+					{() => (
+						<>
+							<div className="flex items-center justify-center">
+								<button
+									data-tooltip-target="tooltip-newpost"
+									type="button"
+									className="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+								>
+									<svg
+										className="w-6 h-6 text-white fill-white"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+										aria-hidden="true"
+									>
+										<path
+											clipRule="evenodd"
+											fillRule="evenodd"
+											d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+										></path>
+									</svg>
+									<span className="sr-only">New Post</span>
+								</button>
+							</div>
 
-				<button
-					data-tooltip-target="tooltip-notifications"
-					type="button"
-					className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-				>
-					<svg
-						className="w-6 h-6 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
-						strokeWidth={1.5}
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-						/>
-					</svg>
-					<span className="sr-only">Notifications</span>
-				</button>
+							<button
+								data-tooltip-target="tooltip-notifications"
+								type="button"
+								className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+							>
+								<svg
+									className="w-6 h-6 fill-white dark:stroke-gray-400 group-hover:stroke-blue-600 dark:group-hover:stroke-blue-500 stroke-gray-500 fill-white"
+									strokeWidth={1.5}
+									viewBox="0 0 24 24"
+									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+									/>
+								</svg>
+								<span className="sr-only">Notifications</span>
+							</button>
+						</>
+					)}
+				</WhenLoggedInWithProfile>
+
+				<WhenLoggedOut>
+					<LoginButton />
+				</WhenLoggedOut>
 
 				<button
 					data-tooltip-target="tooltip-more"

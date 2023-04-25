@@ -12,5 +12,5 @@ export function WhenLoggedOut({ children }: WhenLoggedOutProps) {
 		return null
 	}
 
-	return <>{children}</>
+	return <div className="flex">{children}</div>
 }

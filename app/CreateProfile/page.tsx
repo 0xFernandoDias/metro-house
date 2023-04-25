@@ -1,10 +1,29 @@
 "use client"
 
+import { useAccount } from "wagmi"
+import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
+import { LoginButton } from "../components/auth/LoginButton"
+import { useActiveWallet } from "@lens-protocol/react-web"
+
 export default function CreateProfile({
 	params,
 }: {
 	params: { slug: string }
 }) {
+	const { data: activeWallet, loading: activeWalletLoading } = useActiveWallet()
+
+	if (!activeWallet) {
+		return (
+			<div className="flex flex-col gap-4">
+				<h1>
+					To create a profile you need to connect with your wallet and sign with
+					Lens
+				</h1>
+				<LoginButton />
+			</div>
+		)
+	}
+
 	return (
 		<form className="flex flex-col gap-6">
 			{/* Name */}

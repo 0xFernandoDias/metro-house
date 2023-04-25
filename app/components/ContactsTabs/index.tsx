@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 
 export function ContactsTabs() {
 	return (
@@ -34,17 +35,21 @@ export function ContactsTabs() {
 				<div className="flex flex-row gap-2 items-center">Following</div>
 			</Link>
 
-			<Link
-				className="inline-block p-4 border-b-2 rounded-t-lg"
-				id="mutual-tab"
-				data-tabs-target={"/Contacts?tab=mutual"}
-				href="/Contacts?tab=mutual"
-				role="tab"
-				aria-controls="mutual"
-				aria-selected="false"
-			>
-				<div className="flex flex-row gap-2 items-center">Mutual</div>
-			</Link>
+			<WhenLoggedInWithProfile>
+				{() => (
+					<Link
+						className="inline-block p-4 border-b-2 rounded-t-lg"
+						id="mutual-tab"
+						data-tabs-target={"/Contacts?tab=mutual"}
+						href="/Contacts?tab=mutual"
+						role="tab"
+						aria-controls="mutual"
+						aria-selected="false"
+					>
+						<div className="flex flex-row gap-2 items-center">Mutual</div>
+					</Link>
+				)}
+			</WhenLoggedInWithProfile>
 		</ul>
 	)
 }

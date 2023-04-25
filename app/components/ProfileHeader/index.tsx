@@ -8,6 +8,7 @@ import {
 	useMutualFollowers,
 } from "@lens-protocol/react-web"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
+import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 
 export function ProfileHeader({ profile }: { profile: ProfileFragment }) {
 	if (!profile) {
@@ -51,7 +52,12 @@ export function ProfileHeader({ profile }: { profile: ProfileFragment }) {
 					)}
 				</div>
 				<div className="text-md text-gray-500 dark:text-gray-400">
-					<p>{profile.stats.totalFollowers} followers, 18 mutual</p>
+					<p>
+						{profile.stats.totalFollowers} followers
+						<WhenLoggedInWithProfile>
+							{() => ", 18 mutual"}
+						</WhenLoggedInWithProfile>
+					</p>
 				</div>
 			</div>
 		</Link>

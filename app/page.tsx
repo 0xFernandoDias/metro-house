@@ -8,6 +8,7 @@ import {
 import { useEffect } from "react"
 import { Publications } from "./components/Publications"
 import { CreatePublication } from "./components/CreatePublication"
+import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -39,7 +40,10 @@ export default function Home() {
 						<b>Hello {profile?.handle}</b>
 						<b>Active profile: {profile?.handle}</b>
 					</div> */}
-					<CreatePublication />
+					<WhenLoggedInWithProfile>
+						{() => <CreatePublication />}
+					</WhenLoggedInWithProfile>
+
 					<Publications publications={publications} />
 				</div>
 			</>
