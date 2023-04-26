@@ -2,8 +2,11 @@ import Link from "next/link"
 import { LoginButton } from "../auth/LoginButton"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
+import { useActiveProfile } from "@lens-protocol/react-web"
 
 export function LeftSidebar() {
+	const { data: profile, error, loading: profileLoading } = useActiveProfile()
+
 	return (
 		<aside
 			id="logo-sidebar"
@@ -175,7 +178,7 @@ export function LeftSidebar() {
 					)}
 				</WhenLoggedInWithProfile>
 
-				<WhenLoggedOut>
+				{!profile && (
 					<ul className="space-y-2 font-medium flex flex-col justify-between">
 						{[
 							"Discovery",
@@ -304,7 +307,7 @@ export function LeftSidebar() {
 							)
 						})}
 					</ul>
-				</WhenLoggedOut>
+				)}
 			</div>
 		</aside>
 	)

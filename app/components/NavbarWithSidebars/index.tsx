@@ -3,7 +3,11 @@ import Link from "next/link"
 import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
 import { usePathname } from "next/navigation"
-import { MediaSetFragment, useExploreProfiles } from "@lens-protocol/react-web"
+import {
+	MediaSetFragment,
+	useActiveWallet,
+	useExploreProfiles,
+} from "@lens-protocol/react-web"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { LoginButton } from "../auth/LoginButton"
@@ -320,6 +324,8 @@ function SuggestedProfiles() {
 }
 
 function Footer() {
+	const { data: activeWallet, loading: activeWalletLoading } = useActiveWallet()
+
 	return (
 		<footer className="w-full bg-white rounded-lg dark:bg-gray-800 mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
 			<ul className="flex flex-wrap gap-2 items-center justify-center mt-3 text-md font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
@@ -331,13 +337,11 @@ function Footer() {
 					About
 				</Link>
 
-				<WhenLoggedInWithProfile>
-					{() => (
-						<Link href="/CreateProfile" className="hover:underline">
-							Create Profile
-						</Link>
-					)}
-				</WhenLoggedInWithProfile>
+				{activeWallet && (
+					<Link href="/CreateProfile" className="hover:underline">
+						Create Profile
+					</Link>
+				)}
 
 				<Link href="/Discovery" className="hover:underline">
 					Discovery
