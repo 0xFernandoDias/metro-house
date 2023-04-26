@@ -3,8 +3,13 @@ import {
 	ProfileOwnedByMeFragment,
 	useActiveWallet,
 	useActiveProfile,
+	useActiveWalletSigner,
+	useWalletLogin,
+	useWalletLogout,
 } from "@lens-protocol/react-web"
+import { useAccount, useConnect, useDisconnect } from "wagmi"
 import { ReactNode } from "react"
+import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 
 type LoggedInConfig = {
 	wallet: WalletData

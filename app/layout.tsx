@@ -45,8 +45,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<WagmiConfig client={wagmiClient}>
-					<ThirdwebProvider activeChain="mumbai">
+				<ThirdwebProvider activeChain="mumbai">
+					<WagmiConfig client={wagmiClient}>
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
 								<NavbarWithSidebars>
@@ -56,8 +56,8 @@ export default function RootLayout({
 								</NavbarWithSidebars>
 							</GlobalContextProvider>
 						</LensProvider>
-					</ThirdwebProvider>
-				</WagmiConfig>
+					</WagmiConfig>
+				</ThirdwebProvider>
 			</body>
 		</html>
 	)

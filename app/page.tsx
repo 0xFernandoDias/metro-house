@@ -13,8 +13,6 @@ import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfi
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
 
-	//
-
 	const {
 		data: publications,
 		loading: loadingPublications,
@@ -39,6 +37,7 @@ export default function Home() {
 						<b>Active wallet: {wallet?.address}</b>
 						<b>Hello {profile?.handle}</b>
 						<b>Active profile: {profile?.handle}</b>
+						<b>Signer: {signer}</b>
 					</div> */}
 					<WhenLoggedInWithProfile>
 						{() => <CreatePublication />}

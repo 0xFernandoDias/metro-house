@@ -8,6 +8,7 @@ import {
 	PendingSigningRequestError,
 	WalletConnectionError,
 	UserRejectedError,
+	useActiveWalletSigner,
 } from "@lens-protocol/react-web"
 import { ChainId } from "@thirdweb-dev/sdk"
 import { WhenLoggedInWithProfile } from "./WhenLoggedInWithProfile"
@@ -58,6 +59,8 @@ export function LoginButton() {
 		error: switchNetworkError,
 	} = useSwitchNetwork()
 
+	const { data: signer, loading: signerLoading } = useActiveWalletSigner()
+
 	const [walletError, setWalletError] = useState<
 		| PendingSigningRequestError
 		| WalletConnectionError
@@ -76,9 +79,7 @@ export function LoginButton() {
 		setWalletError("")
 	}, [isConnected, activeWallet, profile])
 
-	const onLoginClick = async (e: any) => {
-		e.preventDefault()
-
+	const onLoginClick = async () => {
 		if (isConnected) {
 			await disconnectAsync()
 		}
@@ -91,8 +92,7 @@ export function LoginButton() {
 		}
 	}
 
-	const onLogoutClick = async (e: any) => {
-		e.preventDefault()
+	const onLogoutClick = async () => {
 		await logout()
 		await disconnectAsync()
 	}
@@ -103,8 +103,7 @@ export function LoginButton() {
 				<button
 					type="button"
 					className="min-w-min flex focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-					onClick={(e) => {
-						e.preventDefault
+					onClick={() => {
 						switchNetwork?.(ChainId.Mumbai)
 					}}
 					disabled={isSwitchNetworkLoading}
@@ -115,6 +114,31 @@ export function LoginButton() {
 					{switchNetworkError && "User did not switch to correct network."}
 				</span>
 			</>
+		)
+	}
+
+	if (activeWallet && !signer) {
+		if (profileLoading || isDisconnectLoading || isLogoutPending) {
+			return <>...Loading</>
+		}
+
+		return (
+			<div className="flex flex-col sm:flex-row gap-3">
+				<button
+					type="button"
+					className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700`}
+					onClick={onLoginClick}
+				>
+					Sign in with Lens
+				</button>
+				<button
+					onClick={logout}
+					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+					// disabled={isDisconnectLoading || isLogoutPending}
+				>
+					Disconnect wallet
+				</button>
+			</div>
 		)
 	}
 
@@ -133,7 +157,7 @@ export function LoginButton() {
 					Create a profile
 				</Link>
 				<button
-					onClick={async () => await logout()}
+					onClick={logout}
 					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 					// disabled={isDisconnectLoading || isLogoutPending}
 				>
@@ -146,16 +170,26 @@ export function LoginButton() {
 	return (
 		<div className="flex min-w-full">
 			<WhenLoggedInWithProfile>
-				{() => (
-					<button
-						type="button"
-						className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-						onClick={onLogoutClick}
-						disabled={isDisconnectLoading || isLogoutPending}
-					>
-						Logout
-					</button>
-				)}
+				{() =>
+					signer ? (
+						<button
+							type="button"
+							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+							onClick={onLogoutClick}
+							disabled={isDisconnectLoading || isLogoutPending}
+						>
+							Logout
+						</button>
+					) : (
+						<button
+							type="button"
+							className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700`}
+							onClick={onLoginClick}
+						>
+							Sign in with Lens
+						</button>
+					)
+				}
 			</WhenLoggedInWithProfile>
 			<WhenLoggedOut>
 				<div className="flex flex-col sm:flex-row gap-3">
@@ -168,8 +202,8 @@ export function LoginButton() {
 						} hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700`}
 						onClick={
 							isConnected
-								? (e) => {
-										onLoginClick(e)
+								? () => {
+										onLoginClick()
 								  }
 								: () => {
 										connectAsync()
@@ -621,7 +655,7 @@ export function LoginButton() {
 					</button>
 					{isConnected && (
 						<button
-							onClick={async () => await disconnectAsync()}
+							onClick={() => disconnectAsync()}
 							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 							// disabled={isDisconnectLoading || isLogoutPending}
 						>
