@@ -499,19 +499,16 @@ export function Publications({
 			<div className="flex flex-col gap-10 mb-6">
 				{publications.map((publication: AnyPublicationFragment, idx) => {
 					return (
-						<Link
-							href={`/Publication/${publication.id}`}
-							className="flex flex-col gap-4 max-w-5xl"
-							key={publication.id}
-						>
+						<div className="flex flex-col gap-4 max-w-5xl" key={idx}>
 							<Publication
+								key={publication.id}
 								publication={
 									isMirrorPublication(publication)
 										? publication.mirrorOf
 										: publication
 								}
 							/>
-						</Link>
+						</div>
 					)
 				})}
 			</div>

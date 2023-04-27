@@ -54,35 +54,33 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 
 				{/* Profiles */}
 				<ul className="max-w-md gap-6 flex flex-col">
-					{whoReacted?.map((profile) => (
-						<>
-							{/* Profile Info */}
-							<Link
-								href={`/Profile/${profile.profile.handle}`}
-								className="flex items-center space-x-4"
-							>
-								<ProfilePicture picture={profile.profile.picture} />
+					{whoReacted?.map((profile, idx) => (
+						<Link
+							href={`/Profile/${profile.profile.handle}`}
+							className="flex items-center space-x-4"
+							key={idx}
+						>
+							<ProfilePicture picture={profile.profile.picture} />
 
-								<div className="flex-1 min-w-0">
-									<div className="text-xl font-medium text-gray-900 truncate dark:text-white">
-										{profile.profile.name}
-									</div>
-									<p className="text-xl text-gray-500 truncate dark:text-gray-400">
-										@{profile.profile.handle}
-									</p>
+							<div className="flex-1 min-w-0">
+								<div className="text-xl font-medium text-gray-900 truncate dark:text-white">
+									{profile.profile.name}
 								</div>
+								<p className="text-xl text-gray-500 truncate dark:text-gray-400">
+									@{profile.profile.handle}
+								</p>
+							</div>
 
-								{/* Follow Button */}
-								<WhenLoggedInWithProfile>
-									{({ profile: activeProfile }) => (
-										<FollowUnfollowButton
-											follower={activeProfile}
-											followee={profile.profile}
-										/>
-									)}
-								</WhenLoggedInWithProfile>
-							</Link>
-						</>
+							{/* Follow Button */}
+							<WhenLoggedInWithProfile>
+								{({ profile: activeProfile }) => (
+									<FollowUnfollowButton
+										follower={activeProfile}
+										followee={profile.profile}
+									/>
+								)}
+							</WhenLoggedInWithProfile>
+						</Link>
 					))}
 				</ul>
 			</div>

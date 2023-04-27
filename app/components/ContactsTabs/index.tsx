@@ -17,8 +17,11 @@ export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
 			<Link
 				className="inline-block p-4 border-b-2 rounded-t-lg"
 				id="followers-tab"
-				data-tabs-target={"/Contacts?tab=followers" || "/Contacts"}
-				href="/Contacts?tab=followers"
+				data-tabs-target={
+					`/Profile/${profile.handle}/Contacts?tab=followers` ||
+					`/Profile/${profile.handle}/Contacts`
+				}
+				href={`/Profile/${profile.handle}/Contacts?tab=followers`}
 				role="tab"
 				aria-controls="followers"
 				aria-selected="false"
@@ -29,8 +32,8 @@ export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
 			<Link
 				className="inline-block p-4 border-b-2 rounded-t-lg"
 				id="following-tab"
-				data-tabs-target={"/Contacts?tab=following"}
-				href="/Contacts?tab=following"
+				data-tabs-target={`/Profile/${profile.handle}/Contacts?tab=following`}
+				href={`/Profile/${profile.handle}/Contacts?tab=following`}
 				role="tab"
 				aria-controls="following"
 				aria-selected="false"
@@ -46,8 +49,8 @@ export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
 						<Link
 							className="inline-block p-4 border-b-2 rounded-t-lg"
 							id="mutual-tab"
-							data-tabs-target={"/Contacts?tab=mutual"}
-							href="/Contacts?tab=mutual"
+							data-tabs-target={`/Profile/${profile.handle}/Contacts?tab=mutual`}
+							href={`/Profile/${profile.handle}/Contacts?tab=mutual`}
 							role="tab"
 							aria-controls="mutual"
 							aria-selected="false"

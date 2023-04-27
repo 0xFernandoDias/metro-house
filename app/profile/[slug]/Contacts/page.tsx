@@ -14,6 +14,7 @@ import { ContactsTabs } from "../../../components/ContactsTabs"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import {
 	MediaSetFragment,
+	ProfileFragment,
 	isProfileOwnedByMe,
 	useProfile,
 	useProfileFollowers,
@@ -24,20 +25,24 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 
 function ProfilePicture({
 	picture,
+	profile,
 }: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | undefined | null
+	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null | undefined
+	profile: ProfileFragment | null | undefined
 }) {
 	if (!picture) return <>Loading...</>
 
 	switch (picture.__typename) {
 		case "MediaSet":
 			return (
-				<MediaRenderer
-					className="rounded-full"
-					height="48px"
-					width="48px"
-					src={picture.original.url}
-				/>
+				<Link href={`/Profile/${profile?.handle}`}>
+					<MediaRenderer
+						className="rounded-full"
+						height="48px"
+						width="48px"
+						src={picture.original.url}
+					/>
+				</Link>
 			)
 		default:
 			return <>Loading...</>
@@ -67,38 +72,39 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 			<div className="flex flex-col gap-6">
 				<a className="text-xl font-semibold">Contacts</a>
 
-				{profileFollowers.map((profile) => {
+				{profileFollowers.map((profile, idx) => {
 					return (
-						<>
-							{/* Profile Info */}
-							<Link
-								href={`/Profile/${profile?.wallet?.defaultProfile?.handle}`}
-								className="flex items-center space-x-4"
-							>
-								<ProfilePicture
-									picture={profile?.wallet.defaultProfile?.picture}
-								/>
+						<div className="flex items-center space-x-4" key={idx}>
+							<ProfilePicture
+								profile={profile?.wallet.defaultProfile}
+								picture={profile?.wallet.defaultProfile?.picture}
+							/>
 
-								<div className="flex-1 min-w-0">
-									<div className="text-xl font-medium text-gray-900 truncate dark:text-white">
-										{profile?.wallet?.defaultProfile?.name}
-									</div>
-									<p className="text-xl text-gray-500 truncate dark:text-gray-400">
-										@{profile?.wallet?.defaultProfile?.handle}
-									</p>
-								</div>
+							<div className="flex-1 min-w-0">
+								<Link
+									href={`/Profile/${profile?.wallet?.defaultProfile?.handle}`}
+									className="text-xl font-medium text-gray-900 truncate dark:text-white"
+								>
+									{profile?.wallet?.defaultProfile?.name}
+								</Link>
+								<Link
+									href={`/Profile/${profile?.wallet?.defaultProfile?.handle}`}
+									className="text-xl text-gray-500 truncate dark:text-gray-400"
+								>
+									@{profile?.wallet?.defaultProfile?.handle}
+								</Link>
+							</div>
 
-								{/* Follow Button */}
-								<WhenLoggedInWithProfile>
-									{({ profile: activeProfile }) => (
-										<FollowUnfollowButton
-											follower={activeProfile}
-											followee={profile.wallet.defaultProfile!}
-										/>
-									)}
-								</WhenLoggedInWithProfile>
-							</Link>
-						</>
+							{/* Follow Button */}
+							<WhenLoggedInWithProfile>
+								{({ profile: activeProfile }) => (
+									<FollowUnfollowButton
+										follower={activeProfile}
+										followee={profile.wallet.defaultProfile!}
+									/>
+								)}
+							</WhenLoggedInWithProfile>
+						</div>
 					)
 				})}
 			</div>

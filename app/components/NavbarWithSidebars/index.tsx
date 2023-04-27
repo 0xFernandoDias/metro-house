@@ -5,6 +5,7 @@ import { LeftSidebar } from "../LeftSidebar"
 import { usePathname } from "next/navigation"
 import {
 	MediaSetFragment,
+	ProfileFragment,
 	useActiveWallet,
 	useExploreProfiles,
 } from "@lens-protocol/react-web"
@@ -150,9 +151,9 @@ export function RightSidebar() {
 			className="fixed top-0 right-0 z-40 w-80 h-screen pt-28 transition-transform translate-x-full bg-white lg:translate-x-0 "
 			aria-label="Sidebar"
 		>
-			<div className="h-full px-4 pb-4 overflow-y-auto bg-white items-center dark:bg-gray-800 justify-between flex flex-col">
+			<div className="h-full px-4 pb-4 overflow-y-auto bg-white items-center dark:bg-gray-800 justify-between  flex flex-col">
 				{/* Search */}
-				<form className="flex flex-col items-center gap-6">
+				<form className="flex flex-col items-center gap-6 ">
 					<label htmlFor="discovery-search" className="sr-only">
 						Search
 					</label>
@@ -246,20 +247,24 @@ function UserMenu() {
 
 function ProfilePicture({
 	picture,
+	profile,
 }: {
 	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | undefined | null
+	profile: ProfileFragment
 }) {
 	if (!picture) return <>Loading...</>
 
 	switch (picture.__typename) {
 		case "MediaSet":
 			return (
-				<MediaRenderer
-					className="rounded-full"
-					height="48px"
-					width="48px"
-					src={picture.original.url}
-				/>
+				<Link href={`/Profile/${profile.handle}`}>
+					<MediaRenderer
+						className="rounded-full"
+						height="48px"
+						width="48px"
+						src={picture.original.url}
+					/>
+				</Link>
 			)
 		default:
 			return <>Loading...</>
@@ -277,22 +282,26 @@ function SuggestedProfiles() {
 			<ul className="max-w-md gap-6 flex flex-col">
 				{profiles?.map((profile, idx) => {
 					return (
-						<Link
-							href={`/Profile/${profile.handle}`}
-							className="flex items-center space-x-4"
-							key={idx}
-						>
-							<ProfilePicture picture={profile.picture} />
+						<div className="flex items-center gap-1 justify-between" key={idx}>
+							<div className="flex items-center gap-1 space-x-4" key={idx}>
+								<ProfilePicture profile={profile} picture={profile.picture} />
 
-							<div className="flex-1 min-w-0">
-								<p className="text-xl font-medium text-gray-900 truncate dark:text-white">
-									{profile.name}
-								</p>
-								<p className="text-xl text-gray-500 truncate dark:text-gray-400">
-									@{profile.handle}
-								</p>
+								<div className="flex flex-col min-w-0">
+									<Link
+										href={`/Profile/${profile.handle}`}
+										className="text-xl font-medium text-gray-900 truncate dark:text-white"
+									>
+										{profile.name}
+									</Link>
+									<Link
+										href={`/Profile/${profile.handle}`}
+										className="text-xl text-gray-500 truncate dark:text-gray-400"
+									>
+										@{profile.handle}
+									</Link>
+								</div>
 							</div>
-
+							{/* Follow Button */}
 							<WhenLoggedInWithProfile>
 								{({ profile: activeProfile }) => (
 									<FollowUnfollowButton
@@ -302,8 +311,7 @@ function SuggestedProfiles() {
 									/>
 								)}
 							</WhenLoggedInWithProfile>
-							{/* Follow Button */}
-						</Link>
+						</div>
 					)
 				})}
 			</ul>

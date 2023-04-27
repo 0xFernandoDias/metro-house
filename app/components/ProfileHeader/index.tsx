@@ -31,22 +31,19 @@ export function ProfileHeader({
 	}
 
 	return (
-		<Link
-			href={`/Profile/${profile.handle}`}
-			className="flex items-center space-x-4"
-		>
+		<div className="flex items-center space-x-4">
 			{/* Avatar */}
 			<ProfilePicture picture={profile.picture} />
 			{/* Profile Info */}
 			<div className="space-y-1 font-medium dark:text-white">
 				<div className="text-xl flex flex-row gap-3">
-					{profile.name}
-					<p
+					<Link href={`/Profile/${profile.handle}`}>{profile.name}</Link>
+					<Link
 						className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
-						role="none"
+						href={`/Profile/${profile.handle}`}
 					>
 						@{profile.handle}
-					</p>
+					</Link>
 					{profile.onChainIdentity.proofOfHumanity && (
 						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
 							<svg
@@ -67,40 +64,46 @@ export function ProfileHeader({
 					)}
 				</div>
 				<div className="text-md text-gray-500 dark:text-gray-400">
-					<p>
+					<Link href={`/Profile/${profile.handle}/Contacts?tab=followers`}>
 						{profile.stats.totalFollowers} followers
-						<WhenLoggedInWithProfile>
-							{() =>
-								isMyProfile
-									? ""
-									: `${mutual?.length ? `, ${mutual?.length} mutual` : ""}`
-							}
-						</WhenLoggedInWithProfile>
-					</p>
+					</Link>
+					<WhenLoggedInWithProfile>
+						{() =>
+							isMyProfile ? (
+								""
+							) : (
+								<Link href={`/Profile/${profile.handle}/Contacts?tab=mutual`}>
+									{mutual?.length ? `, ${mutual?.length} mutual` : ""}
+								</Link>
+							)
+						}
+					</WhenLoggedInWithProfile>
 				</div>
 			</div>
-		</Link>
+		</div>
 	)
 }
 
 function ProfilePicture({
 	picture,
+	profile,
 }: {
 	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
+	profile?: ProfileOwnedByMeFragment
 }) {
 	if (!picture) return <>Loading...</>
 
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
+	if (picture.__typename === "MediaSet") {
+		return (
+			<Link href={`/Profile/${profile?.handle}`}>
 				<MediaRenderer
 					className="rounded-full"
 					height="48px"
 					width="48px"
 					src={picture.original.url}
 				/>
-			)
-		default:
-			return <>Loading...</>
+			</Link>
+		)
 	}
+	return <></>
 }

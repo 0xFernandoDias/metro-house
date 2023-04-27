@@ -26,8 +26,10 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 
 function ProfileFollower({
 	picture,
+	profile,
 }: {
 	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null | undefined
+	profile: ProfileFragment | null | undefined
 }) {
 	if (!picture)
 		return (
@@ -37,12 +39,14 @@ function ProfileFollower({
 	switch (picture.__typename) {
 		case "MediaSet":
 			return (
-				<MediaRenderer
-					className="rounded-full"
-					height="40px"
-					width="40px"
-					src={picture.original.url}
-				/>
+				<Link href={`/Profile/${profile?.handle}`}>
+					<MediaRenderer
+						className="rounded-full"
+						height="40px"
+						width="40px"
+						src={picture.original.url}
+					/>
+				</Link>
 			)
 		default:
 			return (
@@ -53,21 +57,24 @@ function ProfileFollower({
 
 function ProfilePicture({
 	picture,
+	profile,
 }: {
 	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
+	profile: ProfileFragment
 }) {
 	if (!picture) return <>Loading...</>
 
 	switch (picture.__typename) {
 		case "MediaSet":
 			return (
-				// eslint-disable-next-line react/jsx-no-undef
-				<MediaRenderer
-					className="rounded-full"
-					height="144px"
-					width="144px"
-					src={picture.original.url}
-				/>
+				<Link href={`/Profile/${profile.handle}`}>
+					<MediaRenderer
+						className="rounded-full"
+						height="144px"
+						width="144px"
+						src={picture.original.url}
+					/>
+				</Link>
 			)
 		default:
 			return <>Loading...</>
@@ -128,10 +135,10 @@ export default function Profile({ params }: { params: { slug: string } }) {
 				<div className="flex flex-col gap-4 md:max-w-[50%]">
 					{/* Avatar */}
 
-					<ProfilePicture picture={profile.picture} />
+					<ProfilePicture profile={profile} picture={profile.picture} />
 
 					{/* Name */}
-					<p className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
+					<div className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
 						{profile.name}
 						{profile.onChainIdentity.proofOfHumanity && (
 							<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
@@ -151,7 +158,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 								<span className="sr-only">Verified</span>
 							</div>
 						)}
-					</p>
+					</div>
 
 					{/* Handle */}
 					<p className="text-xl font-normal">@{profile.handle}</p>
@@ -246,6 +253,7 @@ function ProfileContacts({
 					return (
 						<ProfileFollower
 							picture={follower.wallet.defaultProfile?.picture}
+							profile={follower.wallet.defaultProfile}
 							key={idx}
 						/>
 					)
