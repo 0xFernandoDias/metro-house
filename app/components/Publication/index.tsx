@@ -64,7 +64,7 @@ export const Publication = ({
 		loading: profileLoading,
 	} = useActiveProfile()
 
-	if (isPending || loading || !profile) {
+	if (isPending || loading) {
 		return <div>Loading...</div>
 	}
 
@@ -79,7 +79,7 @@ export const Publication = ({
 		<article className="max-w-5xl flex flex-col gap-4">
 			{/* Post Header */}
 
-			<ProfileHeader viewingProfileId={profile.id} profile={post.profile} />
+			<ProfileHeader viewingProfileId={profile?.id} profile={post.profile} />
 
 			{/* Created At */}
 			<time
@@ -122,8 +122,7 @@ export const Publication = ({
 					className="text-md text-gray-500 dark:text-gray-400"
 				>
 					See who liked, shared or collected
-					<WhenLoggedOut>
-						{/* Reactions buttons */}
+					{!profile && (
 						<div className="flex items-center space-x-3">
 							{/* Like */}
 							<div className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  ">
@@ -179,7 +178,7 @@ export const Publication = ({
 								{post.stats.totalAmountOfCollects}
 							</div>
 						</div>
-					</WhenLoggedOut>
+					)}
 				</Link>
 
 				<WhenLoggedInWithProfile>

@@ -17,12 +17,12 @@ export function ProfileHeader({
 	viewingProfileId,
 }: {
 	profile: ProfileFragment
-	viewingProfileId: string
+	viewingProfileId?: string
 }) {
 	const isMyProfile = isProfileOwnedByMe(profile)
 
 	const { data: mutual } = useMutualFollowers({
-		observerId: viewingProfileId,
+		observerId: viewingProfileId || "",
 		viewingProfileId: profile.id,
 	})
 

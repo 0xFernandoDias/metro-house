@@ -117,13 +117,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 		profileId: profile?.id,
 	} as { profileId: string })
 
-	if (
-		loading ||
-		loadingPublications ||
-		!profile ||
-		!publications ||
-		!myProfile
-	) {
+	if (loading || loadingPublications || !profile || !publications) {
 		return <div>Loading profile...</div>
 	}
 
@@ -179,7 +173,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 					<p className="text-xl max-w-[80%]">{profile.bio}</p>
 
 					{/* Contacts */}
-					<ProfileContacts viewingProfileId={myProfile.id} profile={profile} />
+					<ProfileContacts viewingProfileId={myProfile?.id} profile={profile} />
 				</div>
 
 				{/* Right Side */}
@@ -198,7 +192,7 @@ function ProfileContacts({
 	viewingProfileId,
 }: {
 	profile: ProfileFragment
-	viewingProfileId: string
+	viewingProfileId?: string
 }) {
 	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
 		profileId: profile.id,
@@ -207,7 +201,7 @@ function ProfileContacts({
 	const isMyProfile = isProfileOwnedByMe(profile)
 
 	const { data: mutual } = useMutualFollowers({
-		observerId: viewingProfileId,
+		observerId: viewingProfileId || "",
 		viewingProfileId: profile.id,
 	})
 
