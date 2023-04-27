@@ -14,6 +14,8 @@ import {
 	useProfileFollowers,
 	useActiveWalletSigner,
 	isProfileOwnedByMe,
+	useMutualFollowers,
+	useActiveProfile,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
 import Image from "next/image"
@@ -100,6 +102,12 @@ export default function Profile({ params }: { params: { slug: string } }) {
 	const { slug: profileHandle } = params
 
 	const {
+		data: myProfile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
+	const {
 		data: profile,
 		error,
 		loading,
@@ -109,7 +117,13 @@ export default function Profile({ params }: { params: { slug: string } }) {
 		profileId: profile?.id,
 	} as { profileId: string })
 
-	if (loading || loadingPublications || !profile || !publications) {
+	if (
+		loading ||
+		loadingPublications ||
+		!profile ||
+		!publications ||
+		!myProfile
+	) {
 		return <div>Loading profile...</div>
 	}
 
@@ -165,7 +179,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 					<p className="text-xl max-w-[80%]">{profile.bio}</p>
 
 					{/* Contacts */}
-					<ProfileContacts profile={profile} />
+					<ProfileContacts viewingProfileId={myProfile.id} profile={profile} />
 				</div>
 
 				{/* Right Side */}
@@ -179,12 +193,23 @@ export default function Profile({ params }: { params: { slug: string } }) {
 	)
 }
 
-function ProfileContacts({ profile }: { profile: ProfileFragment }) {
+function ProfileContacts({
+	profile,
+	viewingProfileId,
+}: {
+	profile: ProfileFragment
+	viewingProfileId: string
+}) {
 	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
 		profileId: profile.id,
 	})
 
 	const isMyProfile = isProfileOwnedByMe(profile)
+
+	const { data: mutual } = useMutualFollowers({
+		observerId: viewingProfileId,
+		viewingProfileId: profile.id,
+	})
 
 	return (
 		<ul className="flex text-xl flex-col gap-4">
@@ -212,7 +237,9 @@ function ProfileContacts({ profile }: { profile: ProfileFragment }) {
 							href={`Profile/${profile.handle}/Contacts?=mutual`}
 							className="font-semibold hover:underline text-gray-900 dark:text-white"
 						>
-							18 Mutual
+							{isMyProfile
+								? ""
+								: `${mutual?.length ? `${mutual?.length} mutual` : ""}`}
 						</Link>
 					)
 				}

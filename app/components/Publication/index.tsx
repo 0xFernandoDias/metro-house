@@ -3,6 +3,7 @@ import {
 	AnyPublicationFragment,
 	ContentPublicationFragment,
 	MediaSetFragment,
+	useActiveProfile,
 	useEncryptedPublication,
 	useWhoReacted,
 } from "@lens-protocol/react-web"
@@ -57,7 +58,13 @@ export const Publication = ({
 		publicationId: post.id,
 	})
 
-	if (isPending || loading) {
+	const {
+		data: profile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
+	if (isPending || loading || !profile) {
 		return <div>Loading...</div>
 	}
 
@@ -72,7 +79,7 @@ export const Publication = ({
 		<article className="max-w-5xl flex flex-col gap-4">
 			{/* Post Header */}
 
-			<ProfileHeader profile={post.profile} />
+			<ProfileHeader viewingProfileId={profile.id} profile={post.profile} />
 
 			{/* Created At */}
 			<time

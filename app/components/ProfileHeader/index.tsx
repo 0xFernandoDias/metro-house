@@ -5,14 +5,26 @@ import { MediaRenderer } from "@thirdweb-dev/react"
 import {
 	MediaSetFragment,
 	ProfileFragment,
+	ProfileOwnedByMeFragment,
 	isProfileOwnedByMe,
 	useMutualFollowers,
 } from "@lens-protocol/react-web"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 
-export function ProfileHeader({ profile }: { profile: ProfileFragment }) {
+export function ProfileHeader({
+	profile,
+	viewingProfileId,
+}: {
+	profile: ProfileFragment
+	viewingProfileId: string
+}) {
 	const isMyProfile = isProfileOwnedByMe(profile)
+
+	const { data: mutual } = useMutualFollowers({
+		observerId: viewingProfileId,
+		viewingProfileId: profile.id,
+	})
 
 	if (!profile) {
 		return <>Loading profile</>
@@ -58,7 +70,11 @@ export function ProfileHeader({ profile }: { profile: ProfileFragment }) {
 					<p>
 						{profile.stats.totalFollowers} followers
 						<WhenLoggedInWithProfile>
-							{() => (isMyProfile ? "" : ", 18 mutual")}
+							{() =>
+								isMyProfile
+									? ""
+									: `${mutual?.length ? `, ${mutual?.length} mutual` : ""}`
+							}
 						</WhenLoggedInWithProfile>
 					</p>
 				</div>
