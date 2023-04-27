@@ -17,7 +17,7 @@ export function LeftSidebar() {
 				{/* Menu Buttons */}
 
 				<WhenLoggedInWithProfile>
-					{() => (
+					{({ profile }) => (
 						<ul className="space-y-2 font-medium flex flex-col justify-between">
 							{[
 								"Contacts",
@@ -34,7 +34,7 @@ export function LeftSidebar() {
 										className="flex p-2 text-xl items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
 										href={
 											item === "Contacts"
-												? "/Contacts"
+												? `/Profile/${profile.handle}/Contacts`
 												: item === "Discovery"
 												? "/Discovery"
 												: item === "Latest"

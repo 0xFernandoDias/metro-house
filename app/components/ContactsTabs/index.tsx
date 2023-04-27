@@ -2,8 +2,11 @@
 
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
+import { ProfileFragment, isProfileOwnedByMe } from "@lens-protocol/react-web"
 
-export function ContactsTabs() {
+export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
+	const isMyProfile = isProfileOwnedByMe(profile)
+
 	return (
 		<ul
 			className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
@@ -36,19 +39,23 @@ export function ContactsTabs() {
 			</Link>
 
 			<WhenLoggedInWithProfile>
-				{() => (
-					<Link
-						className="inline-block p-4 border-b-2 rounded-t-lg"
-						id="mutual-tab"
-						data-tabs-target={"/Contacts?tab=mutual"}
-						href="/Contacts?tab=mutual"
-						role="tab"
-						aria-controls="mutual"
-						aria-selected="false"
-					>
-						<div className="flex flex-row gap-2 items-center">Mutual</div>
-					</Link>
-				)}
+				{() =>
+					isMyProfile ? (
+						<></>
+					) : (
+						<Link
+							className="inline-block p-4 border-b-2 rounded-t-lg"
+							id="mutual-tab"
+							data-tabs-target={"/Contacts?tab=mutual"}
+							href="/Contacts?tab=mutual"
+							role="tab"
+							aria-controls="mutual"
+							aria-selected="false"
+						>
+							<div className="flex flex-row gap-2 items-center">Mutual</div>
+						</Link>
+					)
+				}
 			</WhenLoggedInWithProfile>
 		</ul>
 	)

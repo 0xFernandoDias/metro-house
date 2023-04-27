@@ -13,6 +13,7 @@ import {
 	usePublications,
 	useProfileFollowers,
 	useActiveWalletSigner,
+	isProfileOwnedByMe,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
 import Image from "next/image"
@@ -105,21 +106,10 @@ export default function Profile({ params }: { params: { slug: string } }) {
 	} = useProfile({ handle: profileHandle })
 
 	const { data: publications, loading: loadingPublications } = usePublications({
-		profileId: profile?.id || "",
-	})
+		profileId: profile?.id,
+	} as { profileId: string })
 
-	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
-		profileId: profile?.id || "",
-	})
-
-	if (
-		loading ||
-		loadingPublications ||
-		loadingFollowers ||
-		!profile ||
-		!publications ||
-		!followers
-	) {
+	if (loading || loadingPublications || !profile || !publications) {
 		return <div>Loading profile...</div>
 	}
 
@@ -175,52 +165,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 					<p className="text-xl max-w-[80%]">{profile.bio}</p>
 
 					{/* Contacts */}
-					<ul className="flex text-xl flex-col gap-4">
-						<div className="flex flex-row gap-4">
-							<Link
-								href={`Profile/${profile.handle}/Contacts?=followers`}
-								className="font-semibold hover:underline text-gray-900 dark:text-white"
-							>
-								{profile.stats.totalFollowers} Followers
-							</Link>
-							<Link
-								href={`Profile/${profile.handle}/Contacts?=following`}
-								className="font-semibold hover:underline text-gray-900 dark:text-white"
-							>
-								{profile.stats.totalFollowing} Following
-							</Link>
-						</div>
-
-						<WhenLoggedInWithProfile>
-							{() => (
-								<Link
-									href={`Profile/${profile.handle}/Contacts?=mutual`}
-									className="font-semibold hover:underline text-gray-900 dark:text-white"
-								>
-									18 Mutual
-								</Link>
-							)}
-						</WhenLoggedInWithProfile>
-
-						<div className="flex -space-x-3">
-							{followers.map((follower, idx) => {
-								if (idx > 3) return null
-
-								return (
-									<ProfileFollower
-										picture={follower.wallet.defaultProfile?.picture}
-										key={idx}
-									/>
-								)
-							})}
-							<Link
-								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
-								href="#"
-							>
-								+3
-							</Link>
-						</div>
-					</ul>
+					<ProfileContacts profile={profile} />
 				</div>
 
 				{/* Right Side */}
@@ -231,6 +176,67 @@ export default function Profile({ params }: { params: { slug: string } }) {
 				</div>
 			</div>
 		</div>
+	)
+}
+
+function ProfileContacts({ profile }: { profile: ProfileFragment }) {
+	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
+		profileId: profile.id,
+	})
+
+	const isMyProfile = isProfileOwnedByMe(profile)
+
+	return (
+		<ul className="flex text-xl flex-col gap-4">
+			<div className="flex flex-row gap-4">
+				<Link
+					href={`Profile/${profile.handle}/Contacts?=followers`}
+					className="font-semibold hover:underline text-gray-900 dark:text-white"
+				>
+					{profile.stats.totalFollowers} Followers
+				</Link>
+				<Link
+					href={`Profile/${profile.handle}/Contacts?=following`}
+					className="font-semibold hover:underline text-gray-900 dark:text-white"
+				>
+					{profile.stats.totalFollowing} Following
+				</Link>
+			</div>
+
+			<WhenLoggedInWithProfile>
+				{() =>
+					isMyProfile ? (
+						<></>
+					) : (
+						<Link
+							href={`Profile/${profile.handle}/Contacts?=mutual`}
+							className="font-semibold hover:underline text-gray-900 dark:text-white"
+						>
+							18 Mutual
+						</Link>
+					)
+				}
+			</WhenLoggedInWithProfile>
+
+			<div className="flex -space-x-3">
+				{followers?.map((follower, idx) => {
+					if (idx > 3) return null
+
+					return (
+						<ProfileFollower
+							picture={follower.wallet.defaultProfile?.picture}
+							key={idx}
+						/>
+					)
+				})}
+				<Link
+					className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
+					href="#"
+				>
+					+3
+				</Link>
+			</div>
+		</ul>
 	)
 }
 

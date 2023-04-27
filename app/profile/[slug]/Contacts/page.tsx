@@ -14,6 +14,7 @@ import { ContactsTabs } from "../../../components/ContactsTabs"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import {
 	MediaSetFragment,
+	isProfileOwnedByMe,
 	useProfile,
 	useProfileFollowers,
 } from "@lens-protocol/react-web"
@@ -54,15 +55,15 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 
 	const { data: profileFollowers, loading: loadingFollowers } =
 		useProfileFollowers({
-			profileId: profile?.id || "",
-		})
+			profileId: profile?.id,
+		} as { profileId: string })
 
 	if (loading || loadingFollowers || !profile || !profileFollowers)
 		return <>Loading...</>
 
 	return (
 		<div className="flex flex-col gap-6">
-			<ContactsTabs />
+			<ContactsTabs profile={profile} />
 			<div className="flex flex-col gap-6">
 				<a className="text-xl font-semibold">Contacts</a>
 
