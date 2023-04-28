@@ -1,3 +1,4 @@
+"use client"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { MediaSetFragment, ProfileFragment } from "@lens-protocol/react-web"
 import { MediaRenderer } from "@thirdweb-dev/react"

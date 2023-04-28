@@ -18,7 +18,7 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 		publicationTypes: [PublicationTypes.Post],
 	})
 
-	if (loadingPublications) {
+	if (loadingPublications || !publications) {
 		return <div>Loading...</div>
 	}
 

@@ -23,7 +23,7 @@ export default function Home() {
 		publicationTypes: [PublicationTypes.Post],
 	})
 
-	if (!publications) {
+	if (!publications || loadingPublications) {
 		return <div>Loading...</div>
 	}
 

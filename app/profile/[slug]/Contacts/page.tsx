@@ -42,7 +42,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		return <>Loading...</>
 
 	return (
-		<div className="flex flex-col gap-6">
+		<div className="flex flex-col gap-6 mb-8">
 			<ContactsTabs profile={profile} />
 			<div className="flex flex-col gap-6">
 				<a className="text-xl font-semibold">Contacts</a>
