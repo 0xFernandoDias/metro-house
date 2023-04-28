@@ -16,39 +16,7 @@ import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/decla
 import { MediaRenderer } from "@thirdweb-dev/react"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-
-function ProfilePicture({
-	picture,
-	profile,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
-	profile: ProfileFragment
-}) {
-	if (!picture)
-		return (
-			<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
-		)
-
-	if (!profile) <>...loading</>
-
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
-				<Link href={`/Profile/${profile.handle}`}>
-					<MediaRenderer
-						className="rounded-full"
-						height="32px"
-						width="32px"
-						src={picture.original.url}
-					/>
-				</Link>
-			)
-		default:
-			return (
-				<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
-			)
-	}
-}
+import { ProfilePicture } from "../ProfilePicture"
 
 export const Publication = ({
 	publication,
@@ -119,23 +87,27 @@ export const Publication = ({
 
 						return (
 							<ProfilePicture
+								design="small"
 								profile={profile.profile}
 								picture={profile.profile.picture}
-								key={idx}
+								key={profile.profile.id}
 							/>
 						)
 					})}
-					<Link
-						className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
-						href="#"
-					>
-						+3
-					</Link>
+
+					{whoReacted && whoReacted.length > 3 && (
+						<Link
+							className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
+							href={`/Publication/${publication.id}/WhoReacted`}
+						>
+							+{whoReacted.length - 3}
+						</Link>
+					)}
 				</div>
 
 				<div className="text-md text-gray-500 dark:text-gray-400">
 					<Link href={`/Publication/${post.id}/WhoReacted`}>
-						See who liked, shared or collected
+						See who liked, shared or collected the post.
 					</Link>
 					{!profile && (
 						<div className="flex items-center space-x-3">

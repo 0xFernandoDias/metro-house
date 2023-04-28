@@ -23,70 +23,14 @@ import Link from "next/link"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-
-function ProfileFollower({
-	picture,
-	profile,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null | undefined
-	profile: ProfileFragment | null | undefined
-}) {
-	if (!picture)
-		return (
-			<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
-		)
-
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
-				<Link href={`/Profile/${profile?.handle}`}>
-					<MediaRenderer
-						className="rounded-full"
-						height="40px"
-						width="40px"
-						src={picture.original.url}
-					/>
-				</Link>
-			)
-		default:
-			return (
-				<div className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800" />
-			)
-	}
-}
-
-function ProfilePicture({
-	picture,
-	profile,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
-	profile: ProfileFragment
-}) {
-	if (!picture) return <>Loading...</>
-
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
-				<Link href={`/Profile/${profile.handle}`}>
-					<MediaRenderer
-						className="rounded-full"
-						height="144px"
-						width="144px"
-						src={picture.original.url}
-					/>
-				</Link>
-			)
-		default:
-			return <>Loading...</>
-	}
-}
+import { ProfilePicture } from "@/app/components/ProfilePicture"
 
 function ProfileCover({
 	picture,
 }: {
 	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
 }) {
-	if (!picture) return <>Loading...</>
+	if (!picture) return null
 
 	switch (picture.__typename) {
 		case "MediaSet":
@@ -100,7 +44,7 @@ function ProfileCover({
 				/>
 			)
 		default:
-			return <>Loading...</>
+			return <></>
 	}
 }
 
@@ -135,7 +79,11 @@ export default function Profile({ params }: { params: { slug: string } }) {
 				<div className="flex flex-col gap-4 md:max-w-[50%]">
 					{/* Avatar */}
 
-					<ProfilePicture profile={profile} picture={profile.picture} />
+					<ProfilePicture
+						design="profileLarge"
+						profile={profile}
+						picture={profile.picture}
+					/>
 
 					{/* Name */}
 					<div className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
@@ -247,23 +195,25 @@ function ProfileContacts({
 			</WhenLoggedInWithProfile>
 
 			<div className="flex -space-x-3">
-				{followers?.map((follower, idx) => {
+				{mutual?.map((mutual, idx) => {
 					if (idx > 3) return null
 
 					return (
-						<ProfileFollower
-							picture={follower.wallet.defaultProfile?.picture}
-							profile={follower.wallet.defaultProfile}
-							key={idx}
+						<ProfilePicture
+							picture={mutual.picture}
+							profile={mutual}
+							key={mutual.id}
 						/>
 					)
 				})}
-				<Link
-					className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
-					href="#"
-				>
-					+3
-				</Link>
+				{mutual && mutual.length > 3 && (
+					<Link
+						className="flex items-center justify-center w-12 h-12 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
+						href={`/Profile/${profile.handle}/Contacts?=mutual`}
+					>
+						+{mutual.length - 3}
+					</Link>
+				)}
 			</div>
 		</ul>
 	)

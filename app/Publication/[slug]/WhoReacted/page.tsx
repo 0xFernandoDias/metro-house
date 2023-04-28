@@ -12,28 +12,7 @@ import { MediaRenderer } from "@thirdweb-dev/react"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-
-function ProfilePicture({
-	picture,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
-}) {
-	if (!picture) return <>Loading...</>
-
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
-				<MediaRenderer
-					className="rounded-full"
-					height="48px"
-					width="48px"
-					src={picture.original.url}
-				/>
-			)
-		default:
-			return <>Loading...</>
-	}
-}
+import { ProfilePicture } from "@/app/components/ProfilePicture"
 
 export default function WhoReacted({ params }: { params: { slug: string } }) {
 	const { slug: publicationId } = params
@@ -54,21 +33,31 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 
 				{/* Profiles */}
 				<ul className="max-w-md gap-6 flex flex-col">
-					{whoReacted?.map((profile, idx) => (
-						<Link
-							href={`/Profile/${profile.profile.handle}`}
-							className="flex items-center space-x-4"
-							key={idx}
+					{whoReacted?.map((profile) => (
+						<div
+							className="flex items-center justify-between space-x-4"
+							key={profile.profile.id}
 						>
-							<ProfilePicture picture={profile.profile.picture} />
+							<div className="flex items-center gap-1 space-x-4">
+								<ProfilePicture
+									profile={profile.profile}
+									picture={profile.profile.picture}
+								/>
 
-							<div className="flex-1 min-w-0">
-								<div className="text-xl font-medium text-gray-900 truncate dark:text-white">
-									{profile.profile.name}
+								<div className="flex flex-col min-w-0">
+									<Link
+										href={`/Profile/${profile.profile.handle}`}
+										className="text-xl font-medium text-gray-900 truncate dark:text-white"
+									>
+										{profile.profile.name}
+									</Link>
+									<Link
+										href={`/Profile/${profile.profile.handle}`}
+										className="text-xl text-gray-500 truncate dark:text-gray-400"
+									>
+										@{profile.profile.handle}
+									</Link>
 								</div>
-								<p className="text-xl text-gray-500 truncate dark:text-gray-400">
-									@{profile.profile.handle}
-								</p>
 							</div>
 
 							{/* Follow Button */}
@@ -80,7 +69,7 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 									/>
 								)}
 							</WhenLoggedInWithProfile>
-						</Link>
+						</div>
 					))}
 				</ul>
 			</div>

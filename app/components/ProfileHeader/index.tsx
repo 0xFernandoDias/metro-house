@@ -11,6 +11,7 @@ import {
 } from "@lens-protocol/react-web"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
+import { ProfilePicture } from "../ProfilePicture"
 
 export function ProfileHeader({
 	profile,
@@ -26,18 +27,16 @@ export function ProfileHeader({
 		viewingProfileId: profile.id,
 	})
 
-	if (!profile) {
-		return <>Loading profile</>
-	}
-
 	return (
 		<div className="flex items-center space-x-4">
 			{/* Avatar */}
-			<ProfilePicture picture={profile.picture} />
+			<ProfilePicture profile={profile} picture={profile?.picture} />
 			{/* Profile Info */}
 			<div className="space-y-1 font-medium dark:text-white">
 				<div className="text-xl flex flex-row gap-3">
-					<Link href={`/Profile/${profile.handle}`}>{profile.name}</Link>
+					{profile.name && (
+						<Link href={`/Profile/${profile.handle}`}>{profile.name}</Link>
+					)}
 					<Link
 						className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
 						href={`/Profile/${profile.handle}`}
@@ -82,28 +81,4 @@ export function ProfileHeader({
 			</div>
 		</div>
 	)
-}
-
-function ProfilePicture({
-	picture,
-	profile,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
-	profile?: ProfileOwnedByMeFragment
-}) {
-	if (!picture) return <>Loading...</>
-
-	if (picture.__typename === "MediaSet") {
-		return (
-			<Link href={`/Profile/${profile?.handle}`}>
-				<MediaRenderer
-					className="rounded-full"
-					height="48px"
-					width="48px"
-					src={picture.original.url}
-				/>
-			</Link>
-		)
-	}
-	return <></>
 }

@@ -16,6 +16,7 @@ import { useEffect } from "react"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { FollowUnfollowButton } from "../FollowUnfollowButton"
+import { ProfilePicture } from "../ProfilePicture"
 
 export function NavbarWithSidebars({
 	children,
@@ -245,32 +246,6 @@ function UserMenu() {
 	)
 }
 
-function ProfilePicture({
-	picture,
-	profile,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | undefined | null
-	profile: ProfileFragment
-}) {
-	if (!picture) return <>Loading...</>
-
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
-				<Link href={`/Profile/${profile.handle}`}>
-					<MediaRenderer
-						className="rounded-full"
-						height="48px"
-						width="48px"
-						src={picture.original.url}
-					/>
-				</Link>
-			)
-		default:
-			return <>Loading...</>
-	}
-}
-
 function SuggestedProfiles() {
 	const { data: profiles } = useExploreProfiles({ limit: 5 })
 
@@ -280,10 +255,13 @@ function SuggestedProfiles() {
 
 			{/* Profiles */}
 			<ul className="max-w-md gap-6 flex flex-col">
-				{profiles?.map((profile, idx) => {
+				{profiles?.map((profile) => {
 					return (
-						<div className="flex items-center gap-1 justify-between" key={idx}>
-							<div className="flex items-center gap-1 space-x-4" key={idx}>
+						<div
+							className="flex items-center gap-1 justify-between"
+							key={profile.id}
+						>
+							<div className="flex items-center gap-1 space-x-4">
 								<ProfilePicture profile={profile} picture={profile.picture} />
 
 								<div className="flex flex-col min-w-0">

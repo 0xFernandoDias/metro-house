@@ -22,32 +22,7 @@ import {
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-
-function ProfilePicture({
-	picture,
-	profile,
-}: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null | undefined
-	profile: ProfileFragment | null | undefined
-}) {
-	if (!picture) return <>Loading...</>
-
-	switch (picture.__typename) {
-		case "MediaSet":
-			return (
-				<Link href={`/Profile/${profile?.handle}`}>
-					<MediaRenderer
-						className="rounded-full"
-						height="48px"
-						width="48px"
-						src={picture.original.url}
-					/>
-				</Link>
-			)
-		default:
-			return <>Loading...</>
-	}
-}
+import { ProfilePicture } from "@/app/components/ProfilePicture"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
 	const { slug: profileHandle } = params
@@ -72,42 +47,49 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 			<div className="flex flex-col gap-6">
 				<a className="text-xl font-semibold">Contacts</a>
 
-				{profileFollowers.map((profile, idx) => {
+				{profileFollowers.map((profile) => {
+					if (!profile.wallet.defaultProfile) return null
+
 					return (
-						<div className="flex items-center space-x-4" key={idx}>
-							<ProfilePicture
-								profile={profile?.wallet.defaultProfile}
-								picture={profile?.wallet.defaultProfile?.picture}
-							/>
-
-							<div className="flex-1 min-w-0">
-								<Link
-									href={`/Profile/${profile?.wallet?.defaultProfile?.handle}`}
-									className="text-xl font-medium text-gray-900 truncate dark:text-white"
-								>
-									{profile?.wallet?.defaultProfile?.name}
-								</Link>
-								<Link
-									href={`/Profile/${profile?.wallet?.defaultProfile?.handle}`}
-									className="text-xl text-gray-500 truncate dark:text-gray-400"
-								>
-									@{profile?.wallet?.defaultProfile?.handle}
-								</Link>
-							</div>
-
-							{/* Follow Button */}
-							<WhenLoggedInWithProfile>
-								{({ profile: activeProfile }) => (
-									<FollowUnfollowButton
-										follower={activeProfile}
-										followee={profile.wallet.defaultProfile!}
-									/>
-								)}
-							</WhenLoggedInWithProfile>
-						</div>
+						<Follower
+							key={profile.wallet.defaultProfile.id}
+							profile={profile.wallet.defaultProfile}
+						/>
 					)
 				})}
 			</div>
+		</div>
+	)
+}
+
+function Follower({ profile }: { profile: ProfileFragment }) {
+	return (
+		<div className="flex justify-between items-center space-x-4">
+			<div className="flex items-center gap-1 space-x-4">
+				<ProfilePicture profile={profile} picture={profile.picture} />
+
+				<div className="flex flex-col min-w-0">
+					<Link
+						href={`/Profile/${profile.handle}`}
+						className="text-xl font-medium text-gray-900 truncate dark:text-white"
+					>
+						{profile.name}
+					</Link>
+					<Link
+						href={`/Profile/${profile.handle}`}
+						className="text-xl text-gray-500 truncate dark:text-gray-400"
+					>
+						@{profile.handle}
+					</Link>
+				</div>
+			</div>
+
+			{/* Follow Button */}
+			<WhenLoggedInWithProfile>
+				{({ profile: activeProfile }) => (
+					<FollowUnfollowButton follower={activeProfile} followee={profile!} />
+				)}
+			</WhenLoggedInWithProfile>
 		</div>
 	)
 }
