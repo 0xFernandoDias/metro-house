@@ -34,9 +34,11 @@ export function ProfileHeader({
 			<ProfilePicture profile={profile} picture={profile?.picture} />
 			{/* Profile Info */}
 			<div className="space-y-1 font-medium dark:text-white">
-				<div className="text-xl flex flex-row gap-3">
+				<div className="flex items-center flex-row gap-3">
 					{profile.name && (
-						<Link href={`/Profile/${profile.handle}`}>{profile.name}</Link>
+						<Link className="text-lg" href={`/Profile/${profile.handle}`}>
+							{profile.name}
+						</Link>
 					)}
 					<Link
 						className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
@@ -61,6 +63,14 @@ export function ProfileHeader({
 							</svg>
 							<span className="sr-only">Verified</span>
 						</div>
+					)}
+					{profile.followStatus?.isFollowedByMe && (
+						<Link
+							className="text-sm font-medium text-gray-500 truncate dark:text-gray-300"
+							href={`/Profile/${profile.handle}`}
+						>
+							is followed by me
+						</Link>
 					)}
 				</div>
 				<div className="text-md text-gray-500 dark:text-gray-400">

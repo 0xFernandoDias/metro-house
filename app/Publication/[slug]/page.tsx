@@ -3,13 +3,24 @@ import Link from "next/link"
 import { CommentsSection } from "../../components/CommentsSection"
 import { Publication as PublicationComponent } from "../../components/Publication"
 import Image from "next/image"
-import { isMirrorPublication, usePublication } from "@lens-protocol/react-web"
+import {
+	isMirrorPublication,
+	useActiveProfile,
+	usePublication,
+} from "@lens-protocol/react-web"
 
 export default function Publication({ params }: { params: { slug: string } }) {
 	const { slug } = params
 
+	const {
+		data: profile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
 	const { data: publication, loading } = usePublication({
 		publicationId: slug,
+		observerId: profile?.id,
 	})
 
 	if (!publication) {

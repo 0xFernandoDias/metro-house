@@ -12,7 +12,6 @@ import {
 	useUnfollow,
 	usePublications,
 	useProfileFollowers,
-	useActiveWalletSigner,
 	isProfileOwnedByMe,
 	useMutualFollowers,
 	useActiveProfile,
@@ -66,6 +65,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 
 	const { data: publications, loading: loadingPublications } = usePublications({
 		profileId: profile?.id,
+		observerId: myProfile?.id,
 	} as { profileId: string })
 
 	if (loading || loadingPublications || !profile || !publications) {

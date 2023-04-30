@@ -4,6 +4,7 @@ import Link from "next/link"
 import { WhoReactedTabs } from "../../../components/WhoReactedTabs"
 import {
 	MediaSetFragment,
+	useActiveProfile,
 	useEncryptedPublication,
 	usePublication,
 	useWhoReacted,
@@ -17,8 +18,15 @@ import { ProfilePicture } from "@/app/components/ProfilePicture"
 export default function WhoReacted({ params }: { params: { slug: string } }) {
 	const { slug: publicationId } = params
 
+	const {
+		data: profile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
 	const { data: whoReacted, loading } = useWhoReacted({
 		publicationId: publicationId,
+		observerId: profile?.id,
 	})
 
 	if (loading) {

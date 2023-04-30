@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation"
 import {
 	MediaSetFragment,
 	ProfileFragment,
+	useActiveProfile,
 	useActiveWallet,
 	useExploreProfiles,
+	useProfilesToFollow,
 } from "@lens-protocol/react-web"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
@@ -26,7 +28,7 @@ export function NavbarWithSidebars({
 	return (
 		<div className="flex flex-col">
 			<TopNavbar />
-			<div className="flex flex-col min-w-min gap-6 mx-4 lg:mx-96">
+			<div className="flex flex-col gap-6 mx-4 lg:mx-96">
 				{/* I'll use this on Mobile too */}
 				<LeftSidebar />
 				<BottomNavbar />
@@ -149,12 +151,12 @@ export function RightSidebar() {
 	return (
 		<aside
 			id="logo-sidebar"
-			className="fixed top-0 right-0 z-40 w-80 h-screen pt-28 transition-transform translate-x-full bg-white lg:translate-x-0 "
+			className="fixed top-0 right-0 z-40 w-96 h-screen pt-28 transition-transform translate-x-full bg-white lg:translate-x-0 "
 			aria-label="Sidebar"
 		>
-			<div className="h-full px-4 pb-4 overflow-y-auto bg-white items-center dark:bg-gray-800 justify-between  flex flex-col">
+			<div className="h-full px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800 justify-between  flex flex-col">
 				{/* Search */}
-				<form className="flex flex-col items-center gap-6 ">
+				<form className="flex flex-col max-w-min gap-6 ">
 					<label htmlFor="discovery-search" className="sr-only">
 						Search
 					</label>
@@ -247,7 +249,18 @@ function UserMenu() {
 }
 
 function SuggestedProfiles() {
-	const { data: profiles } = useExploreProfiles({ limit: 5 })
+	// const { data: profiles } = useExploreProfiles({ limit: 5 })
+	const {
+		data: profile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
+	const {
+		data: profiles,
+		error,
+		loading,
+	} = useProfilesToFollow({ observerId: profile?.id || undefined })
 
 	return (
 		<div className="flex flex-col items-center gap-6">
@@ -255,7 +268,8 @@ function SuggestedProfiles() {
 
 			{/* Profiles */}
 			<ul className="max-w-md gap-6 flex flex-col">
-				{profiles?.map((profile) => {
+				{profiles?.map((profile, idx) => {
+					if (idx > 4) return null
 					return (
 						<div
 							className="flex items-center gap-1 justify-between"

@@ -118,10 +118,6 @@ export function LoginButton() {
 	}
 
 	if (activeWallet && !signer) {
-		if (profileLoading || isDisconnectLoading || isLogoutPending) {
-			return <>...Loading</>
-		}
-
 		return (
 			<div className="flex flex-col sm:flex-row gap-3">
 				<button
@@ -142,11 +138,11 @@ export function LoginButton() {
 		)
 	}
 
-	if (activeWallet && !profile) {
-		if (profileLoading || isDisconnectLoading || isLogoutPending) {
-			return <>...Loading</>
-		}
+	if (profileLoading || isDisconnectLoading || isLogoutPending) {
+		return <>...Loading</>
+	}
 
+	if (activeWallet && !profile) {
 		return (
 			<div className="flex flex-col sm:flex-row gap-3">
 				<Link

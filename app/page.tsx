@@ -4,6 +4,7 @@ import {
 	useExplorePublications,
 	PublicationSortCriteria,
 	PublicationTypes,
+	useActiveProfile,
 } from "@lens-protocol/react-web"
 import { useEffect } from "react"
 import { Publications } from "./components/Publications"
@@ -12,6 +13,11 @@ import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfi
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
+	const {
+		data: profile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
 
 	const {
 		data: publications,
@@ -21,6 +27,7 @@ export default function Home() {
 	} = useExplorePublications({
 		sortCriteria: PublicationSortCriteria.TopMirrored,
 		publicationTypes: [PublicationTypes.Post],
+		observerId: profile ? profile.id : undefined,
 	})
 
 	if (!publications || loadingPublications) {
@@ -30,7 +37,7 @@ export default function Home() {
 	return (
 		<>
 			<title>Metro House</title>
-			<div className="flex flex-col gap-6">
+			<div className="flex flex-col gap-6 sm:max-w-max">
 				{/* <div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
 						<b>Address: {address}</b>
 						<b>Active wallet: {wallet?.address}</b>

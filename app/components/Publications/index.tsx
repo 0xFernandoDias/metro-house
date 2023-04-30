@@ -497,7 +497,7 @@ export function Publications({
 
 			{/* Publications */}
 			<div className="flex flex-col gap-16 mb-6">
-				{publications.map((publication: AnyPublicationFragment, idx) => {
+				{publications.map((publication: AnyPublicationFragment) => {
 					return (
 						<div className="flex flex-col gap-4 max-w-5xl" key={publication.id}>
 							<Publication
