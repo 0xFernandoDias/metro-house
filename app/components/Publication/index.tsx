@@ -11,6 +11,9 @@ import {
 	usePublication,
 	useReaction,
 	useWhoReacted,
+	useCreateMirror,
+	ProfileOwnedByMeFragment,
+	useCollect,
 } from "@lens-protocol/react-web"
 import { CommentsSection } from "../CommentsSection"
 import Link from "next/link"
@@ -22,6 +25,7 @@ import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 import { useState } from "react"
+import { profile } from "console"
 
 export const Publication = ({
 	publication,
@@ -186,10 +190,9 @@ export const Publication = ({
 							{/* Reactions buttons */}
 							{/* Like */}
 
-							<LikeUnlikeButton
-								profile={activeProfile}
-								publicationId={post.id}
-							/>
+							<LikeUnlikeButton profile={activeProfile} publication={post} />
+							<MirrorButton profile={activeProfile} publication={post} />
+							<CollectButton profile={activeProfile} publication={post} />
 
 							{/* Comment */}
 							{/* <Link
@@ -213,46 +216,8 @@ export const Publication = ({
 				</Link> */}
 
 							{/* Mirror */}
-							<button
-								type="button"
-								className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-							>
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-									/>
-								</svg>
-								{post.stats.totalAmountOfMirrors}
-							</button>
 
 							{/* Collect */}
-							<button
-								type="button"
-								className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-							>
-								<svg
-									className="h-6 w-6 fill-white stroke-gray-500"
-									strokeWidth={1.5}
-									viewBox="0 0 24 24"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-									/>
-								</svg>
-								{post.stats.totalAmountOfCollects}
-							</button>
 						</div>
 					)}
 				</WhenLoggedInWithProfile>
@@ -261,35 +226,137 @@ export const Publication = ({
 	)
 }
 
-function LikeUnlikeButton({
+function CollectButton({
 	profile,
-	publicationId,
+	publication,
 }: {
-	profile: ProfileFragment
-	publicationId: string
+	profile: ProfileOwnedByMeFragment
+	publication: ContentPublicationFragment
 }) {
-	const {
-		data: publication,
-		error,
-		loading,
-	} = usePublication({
-		publicationId: publicationId,
-		observerId: profile.id,
+	return <Collect publication={publication} profile={profile} />
+}
+
+function Collect({
+	publication,
+	profile,
+}: {
+	publication: ContentPublicationFragment
+	profile: ProfileOwnedByMeFragment
+}) {
+	const { execute, isPending } = useCollect({
+		collector: profile,
+		publication,
 	})
 
-	if (loading) {
+	const { totalAmountOfCollects: collects } = publication.stats
+
+	const [totalAmountOfCollects, setTotalAmountOfCollects] = useState(collects)
+
+	const handleCollect = async () => {
+		await execute().then(() => {
+			setTotalAmountOfCollects((prevState) => prevState + 1)
+		})
+	}
+
+	if (isPending) {
 		return <>...loading</>
 	}
 
-	if (error) {
-		return <>{error}</>
+	return (
+		<button
+			type="button"
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+			onClick={handleCollect}
+		>
+			<svg
+				className="h-6 w-6 fill-white stroke-gray-500"
+				strokeWidth={1.5}
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+			>
+				<path
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
+				/>
+			</svg>
+			{totalAmountOfCollects}
+		</button>
+	)
+}
+
+function MirrorButton({
+	profile,
+	publication,
+}: {
+	profile: ProfileOwnedByMeFragment
+	publication: ContentPublicationFragment
+}) {
+	return <Mirror publication={publication} profile={profile} />
+}
+
+function Mirror({
+	publication,
+	profile,
+}: {
+	publication: ContentPublicationFragment
+	profile: ProfileOwnedByMeFragment
+}) {
+	const { execute, isPending } = useCreateMirror({
+		publisher: profile,
+	})
+
+	const { totalAmountOfMirrors: mirrors } = publication.stats
+
+	const [totalAmountOfMirrors, setTotalAmountOfMirrors] = useState(mirrors)
+
+	const handleMirror = async () => {
+		await execute({
+			publication,
+		}).then(() => {
+			setTotalAmountOfMirrors((prevState) => prevState + 1)
+		})
+	}
+
+	if (isPending) {
+		return <>...loading</>
 	}
 
 	return (
+		<button
+			type="button"
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+			onClick={handleMirror}
+		>
+			<svg
+				className="h-6 w-6 fill-white stroke-gray-500"
+				strokeWidth={1.5}
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+			>
+				<path
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+				/>
+			</svg>
+			{totalAmountOfMirrors}
+		</button>
+	)
+}
+
+function LikeUnlikeButton({
+	profile,
+	publication,
+}: {
+	profile: ProfileFragment
+	publication: ContentPublicationFragment
+}) {
+	return (
 		<ReactionButton
-			publication={
-				isMirrorPublication(publication) ? publication.mirrorOf : publication
-			}
+			publication={publication}
 			profileId={profile.id}
 			reactionType={ReactionType.UPVOTE}
 		/>
