@@ -42,9 +42,11 @@ import { useRouter } from "next/router"
 export function Publications({
 	publications,
 	isProfile = false,
+	isDiscovery = false,
 }: {
 	publications: AnyPublicationFragment[]
 	isProfile?: boolean
+	isDiscovery?: boolean
 }) {
 	// const { query } = useRouter()
 
@@ -59,17 +61,35 @@ export function Publications({
 			>
 				<Link
 					className="inline-block p-4 border-b-2 rounded-t-lg"
-					id={isProfile ? "profileposts-tab" : "latest-tab"}
-					data-tabs-target={isProfile ? "/Profile" : ""}
+					id={
+						isProfile
+							? "profileposts-tab"
+							: isDiscovery
+							? "discoverylatest-tab"
+							: "latest-tab"
+					}
+					data-tabs-target={
+						isProfile ? "/Profile" : isDiscovery ? "/Discovery" : ""
+					}
 					href={
 						isProfile
 							? {
 									pathname: "Profile",
 							  }
+							: isDiscovery
+							? {
+									pathname: "Discovery",
+							  }
 							: ""
 					}
 					role="tab"
-					aria-controls={isProfile ? "profileposts" : "latest"}
+					aria-controls={
+						isProfile
+							? "profileposts"
+							: isDiscovery
+							? "discoverylatest"
+							: "latest"
+					}
 					aria-selected="false"
 				>
 					{isProfile ? (
@@ -113,13 +133,24 @@ export function Publications({
 
 				<Link
 					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-					id={isProfile ? "profilecollects-tab" : "topcollected-tab"}
+					id={
+						isProfile
+							? "profilecollects-tab"
+							: isDiscovery
+							? "discoverytopcollected-tab"
+							: "topcollected-tab"
+					}
 					href={
 						isProfile
 							? {
 									pathname: "Profile",
 									// query: { ...query, tab: "collects" },
 									query: { tab: "collects" },
+							  }
+							: isDiscovery
+							? {
+									pathname: "Discovery",
+									query: { tab: "topcollected" },
 							  }
 							: {
 									pathname: "/",
@@ -128,10 +159,20 @@ export function Publications({
 							  }
 					}
 					data-tabs-target={
-						isProfile ? "/Profile?tab=collects" : "?tab=topcollected"
+						isProfile
+							? "/Profile?tab=collects"
+							: isDiscovery
+							? "/Discovery?tab=topcollected"
+							: "?tab=topcollected"
 					}
 					role="tab"
-					aria-controls={isProfile ? "profilecollects" : "topcollected"}
+					aria-controls={
+						isProfile
+							? "profilecollects"
+							: isDiscovery
+							? "discoverytopcollected"
+							: "topcollected"
+					}
 					aria-selected="false"
 				>
 					{isProfile ? (
@@ -173,9 +214,19 @@ export function Publications({
 
 				<Link
 					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-					id={isProfile ? "profilemirrors-tab" : "topcommented-tab"}
+					id={
+						isProfile
+							? "profilemirrors-tab"
+							: isDiscovery
+							? "Discovery/topcommented-tab"
+							: "topcommented-tab"
+					}
 					data-tabs-target={
-						isProfile ? "/Profile?tab=mirrors" : "?tab=topcommented"
+						isProfile
+							? "/Profile?tab=mirrors"
+							: isDiscovery
+							? "/Discovery?tab=topcommented"
+							: "?tab=topcommented"
 					}
 					href={
 						isProfile
@@ -184,6 +235,11 @@ export function Publications({
 									// query: { ...query, tab: "mirrors" },
 									query: { tab: "mirrors" },
 							  }
+							: isDiscovery
+							? {
+									pathname: "Discovery",
+									query: { tab: "topcommented" },
+							  }
 							: {
 									pathname: "/",
 									// query: { ...query, tab: "topcommented" },
@@ -191,7 +247,13 @@ export function Publications({
 							  }
 					}
 					role="tab"
-					aria-controls={isProfile ? "profilemirrors" : "topcommented"}
+					aria-controls={
+						isProfile
+							? "profilemirrors"
+							: isDiscovery
+							? "discoverytopcommented"
+							: "topcommented"
+					}
 					aria-selected="false"
 				>
 					{isProfile ? (
@@ -233,13 +295,24 @@ export function Publications({
 
 				<Link
 					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-					id={isProfile ? "profilenfts-tab" : "topmirrored-tab"}
+					id={
+						isProfile
+							? "profilenfts-tab"
+							: isDiscovery
+							? "discoverytopmirrored-tab"
+							: "topmirrored-tab"
+					}
 					href={
 						isProfile
 							? {
 									pathname: "/Profile",
 									// query: { ...query, tab: "nfts" },
 									query: { tab: "nfts" },
+							  }
+							: isDiscovery
+							? {
+									pathname: "/Discovery",
+									query: { tab: "topmirrored" },
 							  }
 							: {
 									pathname: "/",
@@ -248,10 +321,20 @@ export function Publications({
 							  }
 					}
 					data-tabs-target={
-						isProfile ? "/Profile?tab=nfts" : "?tab=topmirrored"
+						isProfile
+							? "/Profile?tab=nfts"
+							: isDiscovery
+							? "/Discovery?tab=topmirrored"
+							: "?tab=topmirrored"
 					}
 					role="tab"
-					aria-controls={isProfile ? "profilenfts" : "topmirrored"}
+					aria-controls={
+						isProfile
+							? "profilenfts"
+							: isDiscovery
+							? "discoverytopmirrored"
+							: "topmirrored"
+					}
 					aria-selected="false"
 				>
 					{isProfile ? (

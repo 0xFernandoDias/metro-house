@@ -6,15 +6,38 @@ import {
 	useExplorePublications,
 } from "@lens-protocol/react-web"
 import { Publications } from "../components/Publications"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
-export default function Discovery({ params }: { params: { slug: string } }) {
+export default function Discovery() {
+	const { get } = useSearchParams()
+
+	const tab = get("tab")
+
+	const [sortCriteria, setSortCriteria] = useState(
+		PublicationSortCriteria.Latest
+	)
+
+	useEffect(() => {
+		const query =
+			tab === "topcollected"
+				? PublicationSortCriteria.TopCollected
+				: tab === "topcommented"
+				? PublicationSortCriteria.TopCommented
+				: tab === "topmirrored"
+				? PublicationSortCriteria.TopMirrored
+				: PublicationSortCriteria.Latest
+
+		setSortCriteria(query)
+	}, [tab])
+
 	const {
 		data: publications,
 		loading: loadingPublications,
 		hasMore,
 		next,
 	} = useExplorePublications({
-		sortCriteria: PublicationSortCriteria.TopCommented,
+		sortCriteria: sortCriteria,
 		publicationTypes: [PublicationTypes.Post],
 	})
 
@@ -78,7 +101,7 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 					</button>
 				</form>
 
-				<Publications publications={publications} />
+				<Publications publications={publications} isDiscovery />
 			</div>
 		)
 	}

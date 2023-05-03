@@ -6,13 +6,36 @@ import {
 	PublicationTypes,
 	useActiveProfile,
 } from "@lens-protocol/react-web"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Publications } from "./components/Publications"
 import { CreatePublication } from "./components/CreatePublication"
 import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
+import { useSearchParams } from "next/navigation"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
+
+	const { get } = useSearchParams()
+
+	const tab = get("tab")
+
+	const [sortCriteria, setSortCriteria] = useState(
+		PublicationSortCriteria.Latest
+	)
+
+	useEffect(() => {
+		const query =
+			tab === "topcollected"
+				? PublicationSortCriteria.TopCollected
+				: tab === "topcommented"
+				? PublicationSortCriteria.TopCommented
+				: tab === "topmirrored"
+				? PublicationSortCriteria.TopMirrored
+				: PublicationSortCriteria.Latest
+
+		setSortCriteria(query)
+	}, [tab])
+
 	const {
 		data: profile,
 		error: profileError,
@@ -25,7 +48,7 @@ export default function Home() {
 		hasMore,
 		next,
 	} = useExplorePublications({
-		sortCriteria: PublicationSortCriteria.TopMirrored,
+		sortCriteria: sortCriteria,
 		publicationTypes: [PublicationTypes.Post],
 		observerId: profile ? profile.id : undefined,
 	})
