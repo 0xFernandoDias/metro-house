@@ -3,6 +3,7 @@
 import {
 	PublicationSortCriteria,
 	PublicationTypes,
+	useActiveProfile,
 	useExplorePublications,
 } from "@lens-protocol/react-web"
 import { Publications } from "../components/Publications"
@@ -32,6 +33,12 @@ export default function Discovery() {
 	}, [tab])
 
 	const {
+		data: profile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
+	const {
 		data: publications,
 		loading: loadingPublications,
 		hasMore,
@@ -41,7 +48,7 @@ export default function Discovery() {
 		publicationTypes: [PublicationTypes.Post],
 	})
 
-	if (loadingPublications || !publications) {
+	if (loadingPublications || !publications || profileLoading) {
 		return <div>Loading...</div>
 	}
 

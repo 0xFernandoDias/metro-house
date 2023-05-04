@@ -33,22 +33,50 @@
 "use client"
 import {
 	AnyPublicationFragment,
+	ProfileFragment,
 	isMirrorPublication,
 } from "@lens-protocol/react-web"
 import { Publication } from "../Publication"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useSearchParams } from "next/navigation"
+import {
+	ThirdwebNftMedia,
+	useContract,
+	useNFTs,
+	useOwnedNFTs,
+} from "@thirdweb-dev/react"
 
 export function Publications({
 	publications,
 	isProfile = false,
+	profile,
 	isDiscovery = false,
 }: {
 	publications: AnyPublicationFragment[]
 	isProfile?: boolean
+	profile?: ProfileFragment
 	isDiscovery?: boolean
 }) {
 	// const { query } = useRouter()
+
+	// const { get } = useSearchParams()
+
+	// const profileAddress = profile?.ownedBy || ""
+
+	// const contractAddress = "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
+
+	// const { contract } = useContract(contractAddress)
+
+	// const { data: nfts, isLoading } = useOwnedNFTs(contract, profileAddress)
+
+	// const tab = get("tab")
+
+	// const isNftsTab = tab === "nfts"
+
+	// if (isLoading) {
+	// 	return <>...loading</>
+	// }
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -69,12 +97,16 @@ export function Publications({
 							: "latest-tab"
 					}
 					data-tabs-target={
-						isProfile ? "/Profile" : isDiscovery ? "/Discovery" : ""
+						isProfile
+							? `Profile/${profile?.handle}`
+							: isDiscovery
+							? "/Discovery"
+							: ""
 					}
 					href={
 						isProfile
 							? {
-									pathname: "Profile",
+									pathname: `Profile/${profile?.handle}`,
 							  }
 							: isDiscovery
 							? {
@@ -135,7 +167,7 @@ export function Publications({
 					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
 					id={
 						isProfile
-							? "profilecollects-tab"
+							? "profilenfts-tab"
 							: isDiscovery
 							? "discoverytopcollected-tab"
 							: "topcollected-tab"
@@ -143,9 +175,9 @@ export function Publications({
 					href={
 						isProfile
 							? {
-									pathname: "Profile",
+									pathname: `Profile/${profile?.handle}`,
 									// query: { ...query, tab: "collects" },
-									query: { tab: "collects" },
+									query: { tab: "nfts" },
 							  }
 							: isDiscovery
 							? {
@@ -160,7 +192,7 @@ export function Publications({
 					}
 					data-tabs-target={
 						isProfile
-							? "/Profile?tab=collects"
+							? `Profile/${profile?.handle}?tab=nfts`
 							: isDiscovery
 							? "/Discovery?tab=topcollected"
 							: "?tab=topcollected"
@@ -168,31 +200,14 @@ export function Publications({
 					role="tab"
 					aria-controls={
 						isProfile
-							? "profilecollects"
+							? "profilenfts"
 							: isDiscovery
 							? "discoverytopcollected"
 							: "topcollected"
 					}
 					aria-selected="false"
 				>
-					{isProfile ? (
-						<div className="flex flex-row gap-2 items-center">
-							<svg
-								className="h-6 w-6 fill-white stroke-gray-500"
-								strokeWidth={1.5}
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-								/>
-							</svg>
-							Collects
-						</div>
-					) : (
+					{!isProfile && (
 						<div className="flex flex-row gap-2 items-center">
 							<svg
 								className="h-6 w-6 fill-white stroke-gray-500"
@@ -209,33 +224,34 @@ export function Publications({
 							</svg>
 							Top Collected
 						</div>
+
+						// <div className="flex flex-row gap-2 items-center">
+						// 	<svg
+						// 		className="h-6 w-6 fill-white stroke-gray-500"
+						// 		strokeWidth={1.5}
+						// 		viewBox="0 0 24 24"
+						// 		xmlns="http://www.w3.org/2000/svg"
+						// 		aria-hidden="true"
+						// 	>
+						// 		<path
+						// 			strokeLinecap="round"
+						// 			strokeLinejoin="round"
+						// 			d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
+						// 		/>
+						// 	</svg>
+						// 	NFTS
+						// </div>
 					)}
 				</Link>
 
 				<Link
 					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-					id={
-						isProfile
-							? "profilemirrors-tab"
-							: isDiscovery
-							? "Discovery/topcommented-tab"
-							: "topcommented-tab"
-					}
+					id={isDiscovery ? "Discovery/topcommented-tab" : "topcommented-tab"}
 					data-tabs-target={
-						isProfile
-							? "/Profile?tab=mirrors"
-							: isDiscovery
-							? "/Discovery?tab=topcommented"
-							: "?tab=topcommented"
+						isDiscovery ? "/Discovery?tab=topcommented" : "?tab=topcommented"
 					}
 					href={
-						isProfile
-							? {
-									pathname: "Profile",
-									// query: { ...query, tab: "mirrors" },
-									query: { tab: "mirrors" },
-							  }
-							: isDiscovery
+						isDiscovery
 							? {
 									pathname: "Discovery",
 									query: { tab: "topcommented" },
@@ -247,33 +263,10 @@ export function Publications({
 							  }
 					}
 					role="tab"
-					aria-controls={
-						isProfile
-							? "profilemirrors"
-							: isDiscovery
-							? "discoverytopcommented"
-							: "topcommented"
-					}
+					aria-controls={isDiscovery ? "discoverytopcommented" : "topcommented"}
 					aria-selected="false"
 				>
-					{isProfile ? (
-						<div className="flex flex-row gap-2 items-center">
-							<svg
-								className="h-6 w-6 fill-white stroke-gray-500"
-								strokeWidth={1.5}
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-								/>
-							</svg>
-							Mirrors
-						</div>
-					) : (
+					{!isProfile && (
 						<div className="flex flex-row gap-2 items-center">
 							<svg
 								className="h-6 w-6 fill-white stroke-gray-500"
@@ -295,21 +288,9 @@ export function Publications({
 
 				<Link
 					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-					id={
-						isProfile
-							? "profilenfts-tab"
-							: isDiscovery
-							? "discoverytopmirrored-tab"
-							: "topmirrored-tab"
-					}
+					id={isDiscovery ? "discoverytopmirrored-tab" : "topmirrored-tab"}
 					href={
-						isProfile
-							? {
-									pathname: "/Profile",
-									// query: { ...query, tab: "nfts" },
-									query: { tab: "nfts" },
-							  }
-							: isDiscovery
+						isDiscovery
 							? {
 									pathname: "/Discovery",
 									query: { tab: "topmirrored" },
@@ -321,40 +302,13 @@ export function Publications({
 							  }
 					}
 					data-tabs-target={
-						isProfile
-							? "/Profile?tab=nfts"
-							: isDiscovery
-							? "/Discovery?tab=topmirrored"
-							: "?tab=topmirrored"
+						isDiscovery ? "/Discovery?tab=topmirrored" : "?tab=topmirrored"
 					}
 					role="tab"
-					aria-controls={
-						isProfile
-							? "profilenfts"
-							: isDiscovery
-							? "discoverytopmirrored"
-							: "topmirrored"
-					}
+					aria-controls={isDiscovery ? "discoverytopmirrored" : "topmirrored"}
 					aria-selected="false"
 				>
-					{isProfile ? (
-						<div className="flex flex-row gap-2 items-center">
-							<svg
-								className="h-6 w-6 fill-white stroke-gray-500"
-								strokeWidth={1.5}
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
-								/>
-							</svg>
-							NFTS
-						</div>
-					) : (
+					{!isProfile && (
 						<div className="flex flex-row gap-2 items-center">
 							<svg
 								className="h-6 w-6 fill-white stroke-gray-500"
@@ -489,7 +443,7 @@ export function Publications({
 			{/* Dropdown radio */}
 			{isProfile ? (
 				<>
-					<button
+					{/* <button
 						id="dropdownRadioButton"
 						data-dropdown-toggle="dropdownDefaultRadio"
 						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-800 dark:hover:bg-gray-700"
@@ -511,7 +465,7 @@ export function Publications({
 								d="M19 9l-7 7-7-7"
 							></path>
 						</svg>
-					</button>
+					</button> */}
 
 					{/* <div
 						id="dropdownDefaultRadio"
@@ -582,15 +536,14 @@ export function Publications({
 			<div className="flex flex-col gap-16 mb-6">
 				{publications.map((publication: AnyPublicationFragment) => {
 					return (
-						<div className="flex flex-col gap-4 max-w-5xl" key={publication.id}>
-							<Publication
-								publication={
-									isMirrorPublication(publication)
-										? publication.mirrorOf
-										: publication
-								}
-							/>
-						</div>
+						<Publication
+							key={publication.id}
+							publication={
+								isMirrorPublication(publication)
+									? publication.mirrorOf
+									: publication
+							}
+						/>
 					)
 				})}
 			</div>

@@ -154,9 +154,9 @@ export function RightSidebar() {
 			className="fixed top-0 right-0 z-40 w-96 h-screen pt-28 transition-transform translate-x-full bg-white lg:translate-x-0 "
 			aria-label="Sidebar"
 		>
-			<div className="h-full px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800 justify-between  flex flex-col">
+			<div className="h-full items-end px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800 justify-between  flex flex-col">
 				{/* Search */}
-				<form className="flex flex-col max-w-min gap-6 ">
+				<form className="flex flex-col max-w-max gap-6">
 					<label htmlFor="discovery-search" className="sr-only">
 						Search
 					</label>

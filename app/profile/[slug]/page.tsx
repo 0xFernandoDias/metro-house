@@ -15,12 +15,18 @@ import {
 	isProfileOwnedByMe,
 	useMutualFollowers,
 	useActiveProfile,
+	useFeed,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
 import Image from "next/image"
 import Link from "next/link"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
-import { MediaRenderer } from "@thirdweb-dev/react"
+import {
+	MediaRenderer,
+	ThirdwebNftMedia,
+	useContract,
+	useOwnedNFTs,
+} from "@thirdweb-dev/react"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 
@@ -64,11 +70,29 @@ export default function Profile({ params }: { params: { slug: string } }) {
 	} = useProfile({ handle: profileHandle })
 
 	const { data: publications, loading: loadingPublications } = usePublications({
-		profileId: profile?.id,
+		profileId: profile?.id || "",
 		observerId: myProfile?.id,
-	} as { profileId: string })
+	})
 
-	if (loading || loadingPublications || !profile || !publications) {
+	const profileAddress = profile?.ownedBy
+
+	const contractAddress = "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
+	// const contractAddress = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
+
+	const { contract, isLoading: contractLoading } = useContract(contractAddress)
+
+	const { data: nfts, isLoading } = useOwnedNFTs(contract, profileAddress)
+
+	// const {} = useFeed({ profileId: profile?.id || "" })
+
+	if (
+		loading ||
+		loadingPublications ||
+		isLoading ||
+		contractLoading ||
+		!profile ||
+		!publications
+	) {
 		return <div>Loading profile...</div>
 	}
 
@@ -129,13 +153,29 @@ export default function Profile({ params }: { params: { slug: string } }) {
 
 					{/* Contacts */}
 					<ProfileContacts viewingProfileId={myProfile?.id} profile={profile} />
+
+					{/* Profile NFTs */}
+					{nfts?.map((nft, idx) => {
+						return (
+							<ThirdwebNftMedia
+								key={idx}
+								metadata={nft.metadata}
+								height="200px"
+								width="200px"
+							/>
+						)
+					})}
 				</div>
 
 				{/* Right Side */}
-				<div className="flex flex-col gap-4 md:max-w-[50%]">
+				<div className="flex flex-col gap-4 md:w-[50%]">
 					{/* Cover */}
 					<ProfileCover picture={profile.coverPicture} />
-					<Publications isProfile publications={publications} />
+					<Publications
+						isProfile
+						profile={profile}
+						publications={publications}
+					/>
 				</div>
 			</div>
 		</div>

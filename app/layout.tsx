@@ -21,7 +21,7 @@ import { ApplicationBar } from "./components/ApplicationBar"
 import { useEffect } from "react"
 
 const { provider, webSocketProvider } = configureChains(
-	[polygonMumbai],
+	[polygon, polygonMumbai],
 	[publicProvider()]
 )
 
@@ -45,7 +45,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain="mumbai">
+				<ThirdwebProvider activeChain="polygon">
 					<WagmiConfig client={wagmiClient}>
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
