@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-export function WhoReactedTabs({ reactions = false }) {
+export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 	return (
 		<ul
 			className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
@@ -13,8 +13,11 @@ export function WhoReactedTabs({ reactions = false }) {
 			<Link
 				className="inline-block p-4 border-b-2 rounded-t-lg"
 				id="likes-tab"
-				data-tabs-target={"/WhoReacted?tab=likes" || "/WhoReacted"}
-				href="/WhoReacted?tab=likes"
+				data-tabs-target={
+					`/Publication/${publicationId}/WhoReacted?tab=likes` ||
+					`/Publication/${publicationId}/WhoReacted`
+				}
+				href={`/Publication/${publicationId}/WhoReacted?tab=likes`}
 				role="tab"
 				aria-controls="likes"
 				aria-selected="false"
@@ -40,8 +43,8 @@ export function WhoReactedTabs({ reactions = false }) {
 			<Link
 				className="inline-block p-4 border-b-2 rounded-t-lg"
 				id="mirrors-tab"
-				data-tabs-target={"/WhoReacted?tab=mirrors"}
-				href="/WhoReacted?tab=mirrors"
+				data-tabs-target={`/Publication/${publicationId}/WhoReacted?tab=mirrors`}
+				href={`/Publication/${publicationId}/WhoReacted?tab=mirrors`}
 				role="tab"
 				aria-controls="mirrors"
 				aria-selected="false"
@@ -67,8 +70,8 @@ export function WhoReactedTabs({ reactions = false }) {
 			<Link
 				className="inline-block p-4 border-b-2 rounded-t-lg"
 				id="collects-tab"
-				data-tabs-target={"/WhoReacted?tab=collects"}
-				href="/WhoReacted?tab=collects"
+				data-tabs-target={`/Publication/${publicationId}/WhoReacted?tab=collects`}
+				href={`/Publication/${publicationId}/WhoReacted?tab=collects`}
 				role="tab"
 				aria-controls="collects"
 				aria-selected="false"
