@@ -3,8 +3,11 @@
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfileFragment, isProfileOwnedByMe } from "@lens-protocol/react-web"
+import { useSearchParams } from "next/navigation"
 
 export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
+	const { get } = useSearchParams()
+	const tab = get("tab")
 	const isMyProfile = isProfileOwnedByMe(profile)
 
 	return (
@@ -15,7 +18,9 @@ export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
 			role="tablist"
 		>
 			<Link
-				className="inline-block p-4 border-b-2 rounded-t-lg"
+				className={`inline-block p-4 ${
+					tab === "followers" || !tab ? "border-b-2 border-blue-700" : ""
+				} rounded-t-lg`}
 				id="followers-tab"
 				data-tabs-target={
 					`/Profile/${profile.handle}/Contacts?tab=followers` ||
@@ -30,7 +35,9 @@ export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
 			</Link>
 
 			<Link
-				className="inline-block p-4 border-b-2 rounded-t-lg"
+				className={`inline-block p-4 ${
+					tab === "following" && "border-b-2 border-blue-700"
+				} rounded-t-lg`}
 				id="following-tab"
 				data-tabs-target={`/Profile/${profile.handle}/Contacts?tab=following`}
 				href={`/Profile/${profile.handle}/Contacts?tab=following`}
@@ -47,7 +54,9 @@ export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
 						<></>
 					) : (
 						<Link
-							className="inline-block p-4 border-b-2 rounded-t-lg"
+							className={`inline-block p-4 ${
+								tab === "mutual" && "border-b-2 border-blue-700"
+							} rounded-t-lg`}
 							id="mutual-tab"
 							data-tabs-target={`/Profile/${profile.handle}/Contacts?tab=mutual`}
 							href={`/Profile/${profile.handle}/Contacts?tab=mutual`}

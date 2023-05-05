@@ -13,19 +13,30 @@ import Link from "next/link"
 import { ContactsTabs } from "../../../components/ContactsTabs"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import {
+	FollowerFragment,
+	FollowingFragment,
 	MediaSetFragment,
 	ProfileFragment,
 	isProfileOwnedByMe,
+	useActiveProfile,
+	useMutualFollowers,
 	useProfile,
 	useProfileFollowers,
+	useProfileFollowing,
 } from "@lens-protocol/react-web"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
 	const { slug: profileHandle } = params
+
+	const { get } = useSearchParams()
+
+	const tab = get("tab")
 
 	const {
 		data: profile,
@@ -33,12 +44,55 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		loading,
 	} = useProfile({ handle: profileHandle })
 
+	const {
+		data: activeProfile,
+		error: profileError,
+		loading: profileLoading,
+	} = useActiveProfile()
+
 	const { data: profileFollowers, loading: loadingFollowers } =
 		useProfileFollowers({
-			profileId: profile?.id,
-		} as { profileId: string })
+			profileId: profile?.id || "",
+		})
 
-	if (loading || loadingFollowers || !profile || !profileFollowers)
+	const { data: profileFollowing, loading: loadingFollowing } =
+		useProfileFollowing({
+			walletAddress: profile?.ownedBy || "",
+		})
+
+	const { data: mutualFollowers, loading: loadingMutualFollowers } =
+		useMutualFollowers({
+			viewingProfileId: profile?.id || "",
+			observerId: activeProfile?.id || "",
+		})
+
+	const [contacts, setContacts] = useState(
+		profileFollowers as (ProfileFragment[] | null) | undefined
+	)
+
+	useEffect(() => {
+		const followers = profileFollowers?.map((e) => e.wallet.defaultProfile!)
+		const following = profileFollowing?.map((e) => e.profile)
+		const mutual = mutualFollowers
+
+		const query =
+			tab === "followers"
+				? setContacts(followers)
+				: tab === "following"
+				? setContacts(following)
+				: tab === "mutual"
+				? setContacts(mutual)
+				: setContacts(followers)
+	}, [tab, profileFollowers, profileFollowing, mutualFollowers])
+
+	if (
+		loading ||
+		loadingFollowers ||
+		loadingFollowing ||
+		loadingMutualFollowers ||
+		!profile ||
+		!profileFollowers
+	)
 		return <>Loading...</>
 
 	return (
@@ -46,17 +100,11 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 			<ContactsTabs profile={profile} />
 			<div className="flex flex-col gap-6">
 				<a className="text-xl font-semibold">Contacts</a>
-
-				{profileFollowers.map((profile) => {
-					if (!profile.wallet.defaultProfile) return null
-
-					return (
-						<Follower
-							key={profile.wallet.defaultProfile.id}
-							profile={profile.wallet.defaultProfile}
-						/>
-					)
-				})}
+				<ul className="max-w-md gap-6 flex flex-col">
+					{contacts?.map((profile) => {
+						return <Follower key={profile.id} profile={profile} />
+					})}
+				</ul>
 			</div>
 		</div>
 	)

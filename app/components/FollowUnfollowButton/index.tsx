@@ -34,14 +34,11 @@ export function FollowUnfollowButton({
 
 	if (isMyProfile) return null
 
-	if (followee.followStatus === null) return null
-
 	if (unfollowLoading || followLoading) return <>loading...</>
 
 	if (
-		followee.followStatus.isFollowedByMe &&
+		followee?.followStatus?.isFollowedByMe &&
 		!unfollowLoading &&
-		signer &&
 		!followLoading
 	) {
 		return (
@@ -72,7 +69,7 @@ export function FollowUnfollowButton({
 	}
 
 	if (
-		!followee.followStatus.isFollowedByMe &&
+		!followee?.followStatus?.isFollowedByMe &&
 		!followLoading &&
 		!unfollowLoading
 	) {

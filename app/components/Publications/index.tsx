@@ -60,7 +60,7 @@ export function Publications({
 }) {
 	// const { query } = useRouter()
 
-	// const { get } = useSearchParams()
+	const { get } = useSearchParams()
 
 	// const profileAddress = profile?.ownedBy || ""
 
@@ -70,7 +70,7 @@ export function Publications({
 
 	// const { data: nfts, isLoading } = useOwnedNFTs(contract, profileAddress)
 
-	// const tab = get("tab")
+	const tab = get("tab")
 
 	// const isNftsTab = tab === "nfts"
 
@@ -88,7 +88,9 @@ export function Publications({
 				role="tablist"
 			>
 				<Link
-					className="inline-block p-4 border-b-2 rounded-t-lg"
+					className={`inline-block p-4 ${
+						!tab && "border-b-2 border-blue-700"
+					} rounded-t-lg`}
 					id={
 						isProfile
 							? "profileposts-tab"
@@ -164,7 +166,11 @@ export function Publications({
 				</Link>
 
 				<Link
-					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+					className={`inline-block p-4 ${
+						tab === "nfts" || tab === "topcollected"
+							? "border-b-2 border-blue-700"
+							: ""
+					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
 					id={
 						isProfile
 							? "profilenfts-tab"
@@ -245,7 +251,9 @@ export function Publications({
 				</Link>
 
 				<Link
-					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+					className={`inline-block p-4 ${
+						tab === "topcommented" && "border-b-2 border-blue-700"
+					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
 					id={isDiscovery ? "Discovery/topcommented-tab" : "topcommented-tab"}
 					data-tabs-target={
 						isDiscovery ? "/Discovery?tab=topcommented" : "?tab=topcommented"
@@ -287,7 +295,9 @@ export function Publications({
 				</Link>
 
 				<Link
-					className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+					className={`inline-block p-4 ${
+						tab === "topmirrored" && "border-b-2 border-blue-700"
+					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
 					id={isDiscovery ? "discoverytopmirrored-tab" : "topmirrored-tab"}
 					href={
 						isDiscovery

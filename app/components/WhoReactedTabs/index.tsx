@@ -1,8 +1,12 @@
 "use client"
 
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
 export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
+	const { get } = useSearchParams()
+	const tab = get("tab")
+
 	return (
 		<ul
 			className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
@@ -11,7 +15,9 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 			role="tablist"
 		>
 			<Link
-				className="inline-block p-4 border-b-2 rounded-t-lg"
+				className={`inline-block p-4 ${
+					tab === "likes" || !tab ? "border-b-2 border-blue-700" : ""
+				} rounded-t-lg`}
 				id="likes-tab"
 				data-tabs-target={
 					`/Publication/${publicationId}/WhoReacted?tab=likes` ||
@@ -41,7 +47,9 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 			</Link>
 
 			<Link
-				className="inline-block p-4 border-b-2 rounded-t-lg"
+				className={`inline-block p-4 ${
+					tab === "mirrors" && "border-b-2 border-blue-700"
+				} rounded-t-lg`}
 				id="mirrors-tab"
 				data-tabs-target={`/Publication/${publicationId}/WhoReacted?tab=mirrors`}
 				href={`/Publication/${publicationId}/WhoReacted?tab=mirrors`}
@@ -68,7 +76,9 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 			</Link>
 
 			<Link
-				className="inline-block p-4 border-b-2 rounded-t-lg"
+				className={`inline-block p-4 ${
+					tab === "collects" && "border-b-2 border-blue-700"
+				} rounded-t-lg`}
 				id="collects-tab"
 				data-tabs-target={`/Publication/${publicationId}/WhoReacted?tab=collects`}
 				href={`/Publication/${publicationId}/WhoReacted?tab=collects`}
