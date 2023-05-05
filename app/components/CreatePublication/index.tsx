@@ -9,9 +9,107 @@
 
 "use client"
 
-export function CreatePublication() {
+import {
+	ContentFocus,
+	ProfileOwnedByMeFragment,
+	useCreatePost,
+} from "@lens-protocol/react-web"
+import { providers, utils } from "ethers"
+import { fetchSigner } from "wagmi/actions"
+import { WebBundlr } from "@bundlr-network/client"
+
+const TOP_UP = "200000000000000000" // 0.2 MATIC
+const MIN_FUNDS = 0.05
+
+export function never(message = "Unexpected call to never()"): never {
+	throw new Error(message)
+}
+
+async function getBundlr() {
+	const signer = (await fetchSigner()) ?? never("Cannot get signer")
+	const provider = signer?.provider ?? never("Cannot get provider")
+
+	if (provider instanceof providers.JsonRpcProvider) {
+		await provider.send("wallet_switchEthereumChain", [
+			{ chainId: utils.hexValue(80001) },
+		])
+	}
+
+	const bundlr = new WebBundlr(
+		"https://devnet.bundlr.network",
+		"matic",
+		signer?.provider,
+		{
+			providerUrl: "https://rpc-mumbai.maticvigil.com/",
+		}
+	)
+
+	await bundlr.ready()
+
+	const balance = await bundlr.getBalance(
+		(await signer?.getAddress()) ?? never()
+	)
+
+	if (bundlr.utils.unitConverter(balance).toNumber() < MIN_FUNDS) {
+		await bundlr.fund(TOP_UP)
+	}
+
+	return bundlr
+}
+
+export async function upload(data: unknown): Promise<string> {
+	const confirm = window.confirm(
+		`In this example we will now upload metadata file via the Bundlr Network.
+  
+  Please make sure your wallet is connected to the Polygon Mumbai testnet.
+  
+  You can get some Mumbai MATIC from the Mumbai Faucet: https://mumbaifaucet.com/`
+	)
+
+	if (!confirm) {
+		throw new Error("User cancelled")
+	}
+
+	const bundlr = await getBundlr()
+
+	const serialized = JSON.stringify(data)
+	const tx = await bundlr.upload(serialized, {
+		tags: [{ name: "Content-Type", value: "application/json" }],
+	})
+
+	return `https://arweave.net/${tx.id}`
+}
+
+export function CreatePublication({
+	publisher,
+}: {
+	publisher: ProfileOwnedByMeFragment
+}) {
+	const {
+		execute: create,
+		error,
+		isPending,
+	} = useCreatePost({ publisher, upload })
+
+	const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault()
+
+		const form = event.currentTarget
+
+		const formData = new FormData(form)
+		const content = (formData.get("content") as string | null) ?? never()
+
+		await create({
+			content,
+			contentFocus: ContentFocus.TEXT,
+			locale: "en",
+		})
+
+		form.reset()
+	}
+
 	return (
-		<form className="flex flex-col gap-4">
+		<form className="flex flex-col gap-4" onSubmit={submit}>
 			{/* Text field */}
 			<div className="border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 				<div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
@@ -182,10 +280,12 @@ export function CreatePublication() {
 					</label>
 					<textarea
 						id="editor"
+						name="content"
 						rows={8}
 						className="block w-full h-32 px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
 						placeholder="Write your post..."
 						required
+						disabled={isPending}
 					></textarea>
 				</div>
 			</div>
@@ -193,6 +293,7 @@ export function CreatePublication() {
 			<button
 				type="submit"
 				className="inline-flex items-center gap-2 max-w-min px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+				disabled={isPending}
 			>
 				<svg
 					className="h-6 w-6 fill-blue-700 stroke-white"

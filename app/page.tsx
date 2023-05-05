@@ -69,7 +69,7 @@ export default function Home() {
 						<b>Signer: {signer}</b>
 					</div> */}
 				<WhenLoggedInWithProfile>
-					{() => <CreatePublication />}
+					{({ profile }) => <CreatePublication publisher={profile} />}
 				</WhenLoggedInWithProfile>
 
 				<Publications publications={publications} />
