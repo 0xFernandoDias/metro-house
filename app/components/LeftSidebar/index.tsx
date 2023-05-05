@@ -28,13 +28,16 @@ export function LeftSidebar() {
 								"Top Commented",
 								"Top Mirrored",
 								"Notifications",
+								"My Default Profile",
 							].map((item, idx) => {
 								return (
 									<Link
 										key={idx}
 										className="flex p-2 text-xl items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
 										href={
-											item === "Contacts"
+											item === "My Default Profile"
+												? `/Profile/${profile.handle}`
+												: item === "Contacts"
 												? `/Profile/${profile.handle}/Contacts`
 												: item === "Discovery"
 												? "/Discovery"
@@ -145,6 +148,22 @@ export function LeftSidebar() {
 													strokeLinecap="round"
 													strokeLinejoin="round"
 													d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+												/>
+											</svg>
+										) : item === "My Default Profile" ? (
+											<svg
+												className="w-8 h-8 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+												fill="none"
+												stroke="currentColor"
+												strokeWidth={1.5}
+												viewBox="0 0 24 24"
+												xmlns="http://www.w3.org/2000/svg"
+												aria-hidden="true"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
 												/>
 											</svg>
 										) : (

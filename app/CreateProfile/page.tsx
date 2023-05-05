@@ -3,7 +3,14 @@
 import { useAccount } from "wagmi"
 import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
 import { LoginButton } from "../components/auth/LoginButton"
-import { useActiveWallet } from "@lens-protocol/react-web"
+import { useActiveWallet, useCreateProfile } from "@lens-protocol/react-web"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+
+export function never(message = "Unexpected call to never()"): never {
+	throw new Error(message)
+}
 
 export default function CreateProfile({
 	params,
@@ -11,6 +18,30 @@ export default function CreateProfile({
 	params: { slug: string }
 }) {
 	const { data: activeWallet, loading: activeWalletLoading } = useActiveWallet()
+
+	const { execute, error, isPending } = useCreateProfile()
+
+	const [result, setResult] = useState<string | null>(null)
+	const [createdProfileHandle, setCreatedProfileHandle] = useState<string>("")
+
+	const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault()
+
+		const form = event.currentTarget
+
+		const formData = new FormData(form)
+		const handle = (formData.get("handle") as string) ?? never()
+
+		const result = await execute(handle)
+
+		if (result.isSuccess()) {
+			setResult("Profile created")
+			setCreatedProfileHandle(handle)
+			event.currentTarget.innerText = ""
+		}
+
+		form.reset()
+	}
 
 	if (!activeWallet) {
 		return (
@@ -25,9 +56,9 @@ export default function CreateProfile({
 	}
 
 	return (
-		<form className="flex flex-col gap-6">
+		<form className="flex flex-col gap-6" onSubmit={submit}>
 			{/* Name */}
-			<div className="relative z-0 w-full group">
+			{/* <div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="floating_name"
@@ -42,20 +73,24 @@ export default function CreateProfile({
 				>
 					Name*
 				</label>
-			</div>
+			</div> */}
 
+			<a className="text-xl font-semibold">Create Profile</a>
 			{/* Handle */}
 			<div className="relative z-0 w-full group">
 				<input
 					type="text"
-					name="floating_handle"
-					id="floating_handle"
+					name="handle"
+					id="handle"
 					className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 					placeholder=" "
 					required
+					minLength={5}
+					maxLength={31}
+					disabled={isPending}
 				/>
 				<label
-					htmlFor="floating_handle"
+					htmlFor="handle"
 					className="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 				>
 					@Handle*
@@ -63,7 +98,7 @@ export default function CreateProfile({
 			</div>
 
 			{/* Bio */}
-			<div className="relative z-0 w-full group">
+			{/* <div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="bio"
@@ -78,10 +113,10 @@ export default function CreateProfile({
 				>
 					Bio
 				</label>
-			</div>
+			</div> */}
 
 			{/* Location */}
-			<div className="relative z-0 w-full group">
+			{/* <div className="relative z-0 w-full group">
 				<input
 					type="text"
 					name="location"
@@ -96,12 +131,12 @@ export default function CreateProfile({
 				>
 					Location
 				</label>
-			</div>
+			</div> */}
 
 			{/* Group */}
-			<div className="grid md:grid-cols-2 md:gap-6">
-				{/* Website */}
-				<div className="relative z-0 w-full group">
+			{/* <div className="grid md:grid-cols-2 md:gap-6"> */}
+			{/* Website */}
+			{/* <div className="relative z-0 w-full group">
 					<input
 						type="text"
 						name="floating_website"
@@ -116,10 +151,10 @@ export default function CreateProfile({
 					>
 						Website
 					</label>
-				</div>
+				</div> */}
 
-				{/* Twitter */}
-				<div className="relative z-0 w-full group">
+			{/* Twitter */}
+			{/* <div className="relative z-0 w-full group">
 					<input
 						type="text"
 						name="floating_twitter"
@@ -134,10 +169,10 @@ export default function CreateProfile({
 					>
 						@Twitter
 					</label>
-				</div>
+				</div> */}
 
-				{/* Avatar */}
-				<div className="relative z-0 w-full group gap-2">
+			{/* Avatar */}
+			{/* <div className="relative z-0 w-full group gap-2">
 					<label
 						className="block text-lg font-medium text-gray-900 dark:text-white"
 						htmlFor="user_avatar"
@@ -156,10 +191,10 @@ export default function CreateProfile({
 					>
 						Avatar*
 					</div>
-				</div>
+				</div> */}
 
-				{/* Cover */}
-				<div className="relative z-0 w-full gap-1 group">
+			{/* Cover */}
+			{/* <div className="relative z-0 w-full gap-1 group">
 					<label
 						className="block text-lg font-medium text-gray-900 dark:text-white"
 						htmlFor="user_avatar"
@@ -178,16 +213,29 @@ export default function CreateProfile({
 					>
 						Cover
 					</div>
-				</div>
-			</div>
+				</div> */}
+			{/* </div> */}
 
 			{/* Create */}
 			<button
 				type="submit"
-				className="text-white max-w-min bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				className="text-white max-w-[20%] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				disabled={isPending}
 			>
-				Create
+				{isPending ? "Creating..." : "Create profile"}
 			</button>
+
+			{result && (
+				<Link
+					className="text-xl font-semibold"
+					href={`/Profile/${createdProfileHandle}.test`}
+				>
+					{result}. Click here to goes to the {createdProfileHandle}
+					{"'"}s profile.
+				</Link>
+			)}
+
+			{error && <p>{error.message}</p>}
 		</form>
 	)
 }
