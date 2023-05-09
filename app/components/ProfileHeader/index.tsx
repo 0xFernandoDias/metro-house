@@ -17,9 +17,11 @@ import { ProfilePicture } from "../ProfilePicture"
 export function ProfileHeader({
 	profile,
 	viewingProfileId,
+	isComment,
 }: {
 	profile: ProfileFragment
 	viewingProfileId?: string
+	isComment?: boolean
 }) {
 	const isMyProfile = isProfileOwnedByMe(profile)
 

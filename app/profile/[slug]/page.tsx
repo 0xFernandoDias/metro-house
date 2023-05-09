@@ -246,12 +246,12 @@ function ProfileContacts({
 						/>
 					)
 				})}
-				{mutual && mutual.length > 3 && (
+				{mutual && mutual.length > 4 && (
 					<Link
 						className="flex items-center justify-center w-12 h-12 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
 						href={`/Profile/${profile.handle}/Contacts?=mutual`}
 					>
-						+{mutual.length - 3}
+						+{mutual.length - 4}
 					</Link>
 				)}
 			</div>

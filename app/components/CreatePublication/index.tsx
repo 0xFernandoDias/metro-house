@@ -21,7 +21,7 @@ import { WebBundlr } from "@bundlr-network/client"
 const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
 
-export function never(message = "Unexpected call to never()"): never {
+export function never(message = "Unexpected call to never()") {
 	throw new Error(message)
 }
 
@@ -46,9 +46,7 @@ async function getBundlr() {
 
 	await bundlr.ready()
 
-	const balance = await bundlr.getBalance(
-		(await signer?.getAddress()) ?? never()
-	)
+	const balance = await bundlr.getBalance((await signer?.getAddress()) ?? "")
 
 	if (bundlr.utils.unitConverter(balance).toNumber() < MIN_FUNDS) {
 		await bundlr.fund(TOP_UP)
@@ -97,7 +95,7 @@ export function CreatePublication({
 		const form = event.currentTarget
 
 		const formData = new FormData(form)
-		const content = (formData.get("content") as string | null) ?? never()
+		const content = (formData.get("content") as string | null) ?? ""
 
 		await create({
 			content,

@@ -36,7 +36,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 						: publication
 				}
 			/>
-			{/* <CommentsSection /> */}
+			<CommentsSection commentsOf={publication.id} />
 		</div>
 	)
 }

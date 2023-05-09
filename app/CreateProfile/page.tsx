@@ -8,10 +8,6 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
-export function never(message = "Unexpected call to never()"): never {
-	throw new Error(message)
-}
-
 export default function CreateProfile({
 	params,
 }: {
@@ -30,7 +26,7 @@ export default function CreateProfile({
 		const form = event.currentTarget
 
 		const formData = new FormData(form)
-		const handle = (formData.get("handle") as string) ?? never()
+		const handle = (formData.get("handle") as string) ?? null
 
 		const result = await execute(handle)
 
