@@ -3,7 +3,11 @@ import Link from "next/link"
 import { LoginButton } from "../auth/LoginButton"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
-import { useActiveProfile } from "@lens-protocol/react-web"
+import {
+	ProfileOwnedByMeFragment,
+	useActiveProfile,
+	useUnreadNotificationCount,
+} from "@lens-protocol/react-web"
 
 export function LeftSidebar() {
 	const { data: profile, error, loading: profileLoading } = useActiveProfile()
@@ -186,9 +190,7 @@ export function LeftSidebar() {
 										<div className="ml-3">
 											{item}
 											{item === "Notifications" && (
-												<span className="inline-flex items-center justify-center w-4 h-4 ml-2 text-md font-semibold text-blue-800 bg-blue-200 rounded-full">
-													2
-												</span>
+												<NotificationsCount profile={profile} />
 											)}
 										</div>
 									</Link>
@@ -330,5 +332,25 @@ export function LeftSidebar() {
 				)}
 			</div>
 		</aside>
+	)
+}
+
+function NotificationsCount({
+	profile,
+}: {
+	profile: ProfileOwnedByMeFragment
+}) {
+	const {
+		loading: loadingCount,
+		unreadNotificationCount,
+		clear,
+	} = useUnreadNotificationCount({ profileId: profile.id })
+
+	if (unreadNotificationCount === 0 || loadingCount) return null
+
+	return (
+		<span className="inline-flex items-center justify-center w-4 h-4 ml-2 text-md font-semibold text-blue-800 bg-blue-200 rounded-full">
+			{unreadNotificationCount}
+		</span>
 	)
 }
