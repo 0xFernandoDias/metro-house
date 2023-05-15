@@ -30,6 +30,7 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
 	const { slug: profileHandle } = params
@@ -50,40 +51,39 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		loading: profileLoading,
 	} = useActiveProfile()
 
-	const { data: profileFollowers, loading: loadingFollowers } =
+	const {
+		data: profileFollowers,
+		loading: loadingFollowers,
+		hasMore: hasMoreFollowers,
+		observeRef: observeFollowersRef,
+	} = useInfiniteScroll(
 		useProfileFollowers({
 			profileId: profile?.id || "",
 		})
+	)
 
-	const { data: profileFollowing, loading: loadingFollowing } =
+	const {
+		data: profileFollowing,
+		loading: loadingFollowing,
+		hasMore: hasMoreFollowing,
+		observeRef: observeFollowingRef,
+	} = useInfiniteScroll(
 		useProfileFollowing({
 			walletAddress: profile?.ownedBy || "",
 		})
+	)
 
-	const { data: mutualFollowers, loading: loadingMutualFollowers } =
+	const {
+		data: mutualFollowers,
+		loading: loadingMutualFollowers,
+		hasMore: hasMoreMutualFollowers,
+		observeRef: observeMutualFollowersRef,
+	} = useInfiniteScroll(
 		useMutualFollowers({
 			viewingProfileId: profile?.id || "",
 			observerId: activeProfile?.id || "",
 		})
-
-	const [contacts, setContacts] = useState(
-		profileFollowers as (ProfileFragment[] | null) | undefined
 	)
-
-	useEffect(() => {
-		const followers = profileFollowers?.map((e) => e.wallet.defaultProfile!)
-		const following = profileFollowing?.map((e) => e.profile)
-		const mutual = mutualFollowers
-
-		const query =
-			tab === "followers"
-				? setContacts(followers)
-				: tab === "following"
-				? setContacts(following)
-				: tab === "mutual"
-				? setContacts(mutual)
-				: setContacts(followers)
-	}, [tab, profileFollowers, profileFollowing, mutualFollowers])
 
 	if (
 		loading ||
@@ -96,17 +96,60 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		return <>Loading...</>
 
 	return (
-		<div className="flex flex-col gap-6 mb-8">
-			<ContactsTabs profile={profile} />
-			<div className="flex flex-col gap-6">
-				<a className="text-xl font-semibold">Contacts</a>
-				<ul className="max-w-md gap-6 flex flex-col">
-					{contacts?.map((profile) => {
-						return <Follower key={profile.id} profile={profile} />
-					})}
-				</ul>
+		<>
+			<title>
+				@{profile.handle}
+				{"'"}s Contacts / Metro House
+			</title>
+			<div className="flex flex-col gap-6 mb-8">
+				<ContactsTabs profile={profile} />
+				<div className="flex flex-col gap-6">
+					<a className="text-xl font-semibold">Contacts</a>
+					<ul className="max-w-md gap-6 flex flex-col">
+						{tab === "followers" ? (
+							<>
+								{profileFollowers?.map((e) => (
+									<Follower
+										key={e.wallet.defaultProfile?.id}
+										profile={e.wallet.defaultProfile!}
+									/>
+								))}
+								{hasMoreFollowers && (
+									<p ref={observeFollowersRef}>Loading more...</p>
+								)}
+							</>
+						) : tab === "following" ? (
+							<>
+								{profileFollowing?.map((e) => (
+									<Follower key={e.profile!.id} profile={e.profile} />
+								))}
+								{hasMoreFollowing && (
+									<p ref={observeFollowingRef}>Loading more...</p>
+								)}
+							</>
+						) : tab === "mutual" ? (
+							<>
+								{mutualFollowers?.map((e) => (
+									<Follower key={e.id} profile={e} />
+								))}
+								{hasMoreMutualFollowers && (
+									<p ref={observeMutualFollowersRef}>Loading more...</p>
+								)}
+							</>
+						) : (
+							<>
+								{profileFollowers?.map((e) => (
+									<Follower
+										key={e.wallet.defaultProfile?.id}
+										profile={e.wallet.defaultProfile!}
+									/>
+								))}
+							</>
+						)}
+					</ul>
+				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

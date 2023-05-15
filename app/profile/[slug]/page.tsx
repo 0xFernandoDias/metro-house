@@ -29,6 +29,7 @@ import {
 } from "@thirdweb-dev/react"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 function ProfileCover({
 	picture,
@@ -69,10 +70,17 @@ export default function Profile({ params }: { params: { slug: string } }) {
 		loading,
 	} = useProfile({ handle: profileHandle })
 
-	const { data: publications, loading: loadingPublications } = usePublications({
-		profileId: profile?.id || "",
-		observerId: myProfile?.id,
-	})
+	const {
+		data: publications,
+		loading: loadingPublications,
+		hasMore,
+		observeRef,
+	} = useInfiniteScroll(
+		usePublications({
+			profileId: profile?.id || "",
+			observerId: myProfile?.id,
+		})
+	)
 
 	const profileAddress = profile?.ownedBy
 
@@ -97,88 +105,98 @@ export default function Profile({ params }: { params: { slug: string } }) {
 	}
 
 	return (
-		<div className="flex flex-col">
-			<div className="md:flex-row gap-8 flex flex-col justify-between">
-				{/* Left Side */}
-				<div className="flex flex-col gap-4 md:max-w-[50%]">
-					{/* Avatar */}
+		<>
+			<title>
+				{profile.name} (@{profile.handle}) / Metro House
+			</title>
+			<div className="flex flex-col">
+				<div className="md:flex-row gap-8 flex flex-col justify-between">
+					{/* Left Side */}
+					<div className="flex flex-col gap-4 md:max-w-[50%]">
+						{/* Avatar */}
 
-					<ProfilePicture
-						design="profileLarge"
-						profile={profile}
-						picture={profile.picture}
-					/>
+						<ProfilePicture
+							design="profileLarge"
+							profile={profile}
+							picture={profile.picture}
+						/>
 
-					{/* Name */}
-					<div className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
-						{profile.name}
-						{profile.onChainIdentity.proofOfHumanity && (
-							<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
-								<svg
-									aria-hidden="true"
-									className="w-3.5 h-3.5"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-										clipRule="evenodd"
-									></path>
-								</svg>
-								<span className="sr-only">Verified</span>
-							</div>
-						)}
+						{/* Name */}
+						<div className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
+							{profile.name}
+							{profile.onChainIdentity.proofOfHumanity && (
+								<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
+									<svg
+										aria-hidden="true"
+										className="w-3.5 h-3.5"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fillRule="evenodd"
+											d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+											clipRule="evenodd"
+										></path>
+									</svg>
+									<span className="sr-only">Verified</span>
+								</div>
+							)}
+						</div>
+
+						{/* Handle */}
+						<p className="text-xl font-normal">@{profile.handle}</p>
+
+						{/* Wallet address */}
+						{/* <p className="text-xl font-normal">0x798...E559</p> */}
+
+						{/* Follow */}
+						<WhenLoggedInWithProfile>
+							{({ profile: activeProfile }) => (
+								<FollowUnfollowButton
+									follower={activeProfile}
+									followee={profile}
+								/>
+							)}
+						</WhenLoggedInWithProfile>
+
+						{/* Bio */}
+						<p className="text-xl max-w-[80%]">{profile.bio}</p>
+
+						{/* Contacts */}
+						<ProfileContacts
+							viewingProfileId={myProfile?.id}
+							profile={profile}
+						/>
+
+						{/* Profile NFTs */}
+						{nfts?.map((nft, idx) => {
+							return (
+								<ThirdwebNftMedia
+									key={idx}
+									metadata={nft.metadata}
+									height="200px"
+									width="200px"
+								/>
+							)
+						})}
 					</div>
 
-					{/* Handle */}
-					<p className="text-xl font-normal">@{profile.handle}</p>
-
-					{/* Wallet address */}
-					{/* <p className="text-xl font-normal">0x798...E559</p> */}
-
-					{/* Follow */}
-					<WhenLoggedInWithProfile>
-						{({ profile: activeProfile }) => (
-							<FollowUnfollowButton
-								follower={activeProfile}
-								followee={profile}
-							/>
-						)}
-					</WhenLoggedInWithProfile>
-
-					{/* Bio */}
-					<p className="text-xl max-w-[80%]">{profile.bio}</p>
-
-					{/* Contacts */}
-					<ProfileContacts viewingProfileId={myProfile?.id} profile={profile} />
-
-					{/* Profile NFTs */}
-					{nfts?.map((nft, idx) => {
-						return (
-							<ThirdwebNftMedia
-								key={idx}
-								metadata={nft.metadata}
-								height="200px"
-								width="200px"
-							/>
-						)
-					})}
-				</div>
-
-				{/* Right Side */}
-				<div className="flex flex-col gap-4 md:w-[50%]">
-					{/* Cover */}
-					<ProfileCover picture={profile.coverPicture} />
-					<Publications
-						isProfile
-						profile={profile}
-						publications={publications}
-					/>
+					{/* Right Side */}
+					<div className="flex flex-col gap-4 md:w-[50%]">
+						{/* Cover */}
+						<ProfileCover picture={profile.coverPicture} />
+						<Publications
+							isProfile
+							profile={profile}
+							publications={publications}
+							hasMore={hasMore}
+							observeRef={observeRef}
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

@@ -29,6 +29,7 @@ import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 import { useState } from "react"
 import { profile } from "console"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 export const Publication = ({
 	publication,
@@ -204,7 +205,7 @@ export const Publication = ({
 								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
 								href={`/Publication/${publication.id}/WhoReacted`}
 							>
-								+{whoReacted.length - 3}
+								+{whoReacted.length - 4}
 							</Link>
 						)}
 					</div>

@@ -16,6 +16,7 @@ import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { WebBundlr } from "@bundlr-network/client"
 import { providers, utils } from "ethers"
 import { fetchSigner } from "wagmi/actions"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
@@ -354,7 +355,9 @@ export function CommentsSection({
 	commentsOf: string
 	observerId?: string
 }) {
-	const { data, loading } = useComments({ commentsOf, observerId })
+	const { data, loading, hasMore, observeRef } = useInfiniteScroll(
+		useComments({ commentsOf, observerId })
+	)
 
 	if (loading) return <div>Loading comments...</div>
 
@@ -400,6 +403,7 @@ export function CommentsSection({
 						<Publication isComment key={comment.id} publication={comment} />
 					)
 				})}
+				{hasMore && <p ref={observeRef}>Loading more...</p>}
 			</ol>
 		</div>
 	)

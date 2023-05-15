@@ -28,16 +28,22 @@ export default function Publication({ params }: { params: { slug: string } }) {
 	}
 
 	return (
-		<div className="flex flex-col gap-8">
-			<PublicationComponent
-				publication={
-					publication.__typename === "Mirror"
-						? publication.mirrorOf
-						: publication
-				}
-			/>
-			<CommentsSection commentsOf={publication.id} />
-		</div>
+		<>
+			<title>
+				@{publication.profile.handle}
+				{"'s"} Publication / Metro House
+			</title>
+			<div className="flex flex-col gap-8">
+				<PublicationComponent
+					publication={
+						publication.__typename === "Mirror"
+							? publication.mirrorOf
+							: publication
+					}
+				/>
+				<CommentsSection commentsOf={publication.id} />
+			</div>
+		</>
 	)
 }
 

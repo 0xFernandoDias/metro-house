@@ -1,3 +1,8 @@
 export default function About({ params }: { params: { slug: string } }) {
-	return <div></div>
+	return (
+		<>
+			<title>About / Metro House</title>
+			<div></div>
+		</>
+	)
 }

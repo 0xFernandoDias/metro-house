@@ -21,6 +21,7 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 export default function WhoReacted({ params }: { params: { slug: string } }) {
 	const { slug: publicationId } = params
@@ -35,91 +36,131 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 		loading: profileLoading,
 	} = useActiveProfile()
 
-	const { data: whoReacted, loading } = useWhoReacted({
-		publicationId: publicationId,
-		observerId: profile?.id,
-	})
+	const {
+		data: whoReacted,
+		loading,
+		hasMore: hasMoreReactions,
+		observeRef: observeReactionsRef,
+	} = useInfiniteScroll(
+		useWhoReacted({
+			publicationId: publicationId,
+			observerId: profile?.id,
+		})
+	)
 
-	const { data: whoMirrored, loading: whoMirroredLoading } =
+	const {
+		data: whoMirrored,
+		loading: whoMirroredLoading,
+		hasMore: hasMoreMirrors,
+		observeRef: observeMirrorsRef,
+	} = useInfiniteScroll(
 		useWhoMirroredPublication({
 			publicationId: publicationId,
 			observerId: profile?.id,
 		})
+	)
 
-	const { data: whoCollected, loading: whoCollectedLoading } =
+	const {
+		data: whoCollected,
+		loading: whoCollectedLoading,
+		hasMore: hasMoreCollects,
+		observeRef: observeCollectsRef,
+	} = useInfiniteScroll(
 		useWhoCollectedPublication({
 			publicationId: publicationId,
 			observerId: profile?.id,
 		})
-
-	const [reactions, setReactions] = useState(
-		whoReacted as (ProfileFragment[] | null) | undefined
 	)
-
-	useEffect(() => {
-		const reactions = whoReacted?.map((e) => e.profile)
-		const mirrors = whoMirrored
-		const collects = whoCollected?.map((e) => e.defaultProfile!)
-
-		const query =
-			tab === "likes"
-				? setReactions(reactions)
-				: tab === "mirrors"
-				? setReactions(mirrors)
-				: tab === "collects"
-				? setReactions(collects)
-				: setReactions(reactions)
-	}, [tab, whoCollected, whoMirrored, whoReacted])
 
 	if (loading) {
 		return <div>Loading...</div>
 	}
 
 	return (
-		<div className="flex flex-col gap-6 mb-8">
-			<WhoReactedTabs publicationId={publicationId} />
-			<div className="flex flex-col gap-6">
-				<a className="text-xl font-semibold">Who Reacted</a>
+		<>
+			<title>Publication Reactions / Metro House</title>
+			<div className="flex flex-col gap-6 mb-8">
+				<WhoReactedTabs publicationId={publicationId} />
+				<div className="flex flex-col gap-6">
+					<a className="text-xl font-semibold">Who Reacted</a>
 
-				{/* Profiles */}
-				<ul className="max-w-md gap-6 flex flex-col">
-					{reactions?.map((profile) => (
-						<div
-							className="flex items-center justify-between space-x-4"
-							key={profile.id}
-						>
-							<div className="flex items-center gap-1 space-x-4">
-								<ProfilePicture profile={profile} picture={profile.picture} />
-
-								<div className="flex flex-col min-w-0">
-									<Link
-										href={`/Profile/${profile.handle}`}
-										className="text-xl font-medium text-gray-900 truncate dark:text-white"
-									>
-										{profile.name}
-									</Link>
-									<Link
-										href={`/Profile/${profile.handle}`}
-										className="text-xl text-gray-500 truncate dark:text-gray-400"
-									>
-										@{profile.handle}
-									</Link>
-								</div>
-							</div>
-
-							{/* Follow Button */}
-							<WhenLoggedInWithProfile>
-								{({ profile: activeProfile }) => (
-									<FollowUnfollowButton
-										follower={activeProfile}
-										followee={profile}
-									/>
+					{/* Profiles */}
+					<ul className="max-w-md gap-6 flex flex-col">
+						{tab === "likes" ? (
+							<>
+								{whoReacted?.map((profile) => (
+									<Profile profile={profile.profile} key={profile.profile.id} />
+								))}
+								{hasMoreReactions && (
+									<p ref={observeReactionsRef}>Loading more...</p>
 								)}
-							</WhenLoggedInWithProfile>
-						</div>
-					))}
-				</ul>
+							</>
+						) : tab === "mirrors" ? (
+							<>
+								{whoMirrored?.map((profile) => (
+									<Profile profile={profile} key={profile.id} />
+								))}
+								{hasMoreMirrors && (
+									<p ref={observeMirrorsRef}>Loading more...</p>
+								)}
+							</>
+						) : tab === "collects" ? (
+							<>
+								{whoCollected?.map((profile, idx) => (
+									<Profile
+										profile={profile.defaultProfile!}
+										key={profile.defaultProfile?.id}
+									/>
+								))}
+								{hasMoreCollects && (
+									<p ref={observeCollectsRef}>Loading more...</p>
+								)}
+							</>
+						) : (
+							<>
+								{whoReacted?.map((profile) => (
+									<Profile profile={profile.profile} key={profile.profile.id} />
+								))}
+								{hasMoreReactions && (
+									<p ref={observeReactionsRef}>Loading more...</p>
+								)}
+							</>
+						)}
+					</ul>
+				</div>
 			</div>
+		</>
+	)
+}
+
+function Profile({ profile }: { profile: ProfileFragment }) {
+	return (
+		<div className="flex items-center justify-between space-x-4">
+			<div className="flex items-center gap-1 space-x-4">
+				<ProfilePicture profile={profile} picture={profile.picture} />
+
+				<div className="flex flex-col min-w-0">
+					<Link
+						href={`/Profile/${profile.handle}`}
+						className="text-xl font-medium text-gray-900 truncate dark:text-white"
+					>
+						{profile.name}
+					</Link>
+					<Link
+						href={`/Profile/${profile.handle}`}
+						className="text-xl text-gray-500 truncate dark:text-gray-400"
+					>
+						@{profile.handle}
+					</Link>
+				</div>
+			</div>
+
+			{/* Follow Button */}
+			<WhenLoggedInWithProfile>
+				{({ profile: activeProfile }) => (
+					<FollowUnfollowButton follower={activeProfile} followee={profile} />
+				)}
+			</WhenLoggedInWithProfile>
 		</div>
 	)
 }

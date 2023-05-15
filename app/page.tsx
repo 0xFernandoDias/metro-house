@@ -11,6 +11,7 @@ import { Publications } from "./components/Publications"
 import { CreatePublication } from "./components/CreatePublication"
 import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
 import { useSearchParams } from "next/navigation"
+import { useInfiniteScroll } from "./hooks/useInfiniteScroll"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -46,12 +47,15 @@ export default function Home() {
 		data: publications,
 		loading: loadingPublications,
 		hasMore,
+		observeRef,
 		next,
-	} = useExplorePublications({
-		sortCriteria: sortCriteria,
-		publicationTypes: [PublicationTypes.Post],
-		observerId: profile ? profile.id : undefined,
-	})
+	} = useInfiniteScroll(
+		useExplorePublications({
+			sortCriteria: sortCriteria,
+			publicationTypes: [PublicationTypes.Post],
+			observerId: profile ? profile.id : undefined,
+		})
+	)
 
 	if (!publications || loadingPublications) {
 		return <div>Loading...</div>
@@ -72,7 +76,11 @@ export default function Home() {
 					{({ profile }) => <CreatePublication publisher={profile} />}
 				</WhenLoggedInWithProfile>
 
-				<Publications publications={publications} />
+				<Publications
+					publications={publications}
+					observeRef={observeRef}
+					hasMore={hasMore}
+				/>
 			</div>
 		</>
 	)

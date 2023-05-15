@@ -24,6 +24,7 @@
 		"flowbite-react": "^0.4.2",
 		"next": "13.2.4",
 		"react": "18.2.0",
+		"react-cool-inview": "^3.0.1",
 		"react-dom": "18.2.0",
 		"typescript": "5.0.2",
 		"wagmi": "^0.11.7"

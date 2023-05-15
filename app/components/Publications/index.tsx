@@ -46,17 +46,22 @@ import {
 	useNFTs,
 	useOwnedNFTs,
 } from "@thirdweb-dev/react"
+import { RefCallback } from "react"
 
 export function Publications({
 	publications,
 	isProfile = false,
 	profile,
 	isDiscovery = false,
+	observeRef,
+	hasMore,
 }: {
 	publications: AnyPublicationFragment[]
 	isProfile?: boolean
 	profile?: ProfileFragment
 	isDiscovery?: boolean
+	observeRef?: RefCallback<unknown>
+	hasMore?: boolean
 }) {
 	// const { query } = useRouter()
 
@@ -556,6 +561,8 @@ export function Publications({
 						/>
 					)
 				})}
+
+				{hasMore && <p ref={observeRef}>Loading more...</p>}
 			</div>
 		</div>
 	)

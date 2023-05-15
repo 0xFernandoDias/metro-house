@@ -10,66 +10,68 @@ export default function Notifications({
 	params: { slug: string }
 }) {
 	return (
-		<WhenLoggedInWithProfile>
-			{() => (
-				<div className="flex flex-col min-w-full gap-8">
-					{/* Day */}
-					<div className="flex flex-col gap-6 rounded-lg">
-						{/* Header */}
-						<time className="text-xl font-semibold text-gray-900 dark:text-white">
-							January 13th, 2022
-						</time>
+		<>
+			<title>Notifications / Metro House</title>
+			<WhenLoggedInWithProfile>
+				{() => (
+					<div className="flex flex-col min-w-full gap-8">
+						{/* Day */}
+						<div className="flex flex-col gap-6 rounded-lg">
+							{/* Header */}
+							<time className="text-xl font-semibold text-gray-900 dark:text-white">
+								January 13th, 2022
+							</time>
 
-						{/* Notifications */}
-						<ol className="divide-y divider-gray-200 dark:divide-gray-700">
-							<Link
-								href="#"
-								className="items-center block py-4 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
-							>
-								{/* Notification */}
-								<div className="flex-shrink-0">
-									<Image
-										className="rounded-full mx-3"
-										width={48}
-										height={48}
-										src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-										alt="Bonnie image"
-									/>
-									<div className="absolute items-center justify-center w-5 h-5 ml-10 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
-										<svg
-											className="w-3 h-3 text-white"
-											aria-hidden="true"
-											fill="currentColor"
-											viewBox="0 0 20 10"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												fillRule="evenodd"
-												d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-												clipRule="evenodd"
-											></path>
-										</svg>
+							{/* Notifications */}
+							<ol className="divide-y divider-gray-200 dark:divide-gray-700">
+								<Link
+									href="#"
+									className="items-center block py-4 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
+								>
+									{/* Notification */}
+									<div className="flex-shrink-0">
+										<Image
+											className="rounded-full mx-3"
+											width={48}
+											height={48}
+											src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+											alt="Bonnie image"
+										/>
+										<div className="absolute items-center justify-center w-5 h-5 ml-10 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
+											<svg
+												className="w-3 h-3 text-white"
+												aria-hidden="true"
+												fill="currentColor"
+												viewBox="0 0 20 10"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+													clipRule="evenodd"
+												></path>
+											</svg>
+										</div>
 									</div>
-								</div>
-								{/* Notification */}
-								<div className="text-gray-600 dark:text-gray-400 flex gap-1">
-									<div className="text-base font-normal flex gap-1">
-										<span className="font-medium text-gray-900 dark:text-white">
-											Jese Leos
-										</span>
-										likes
-										<span className="font-medium text-gray-900 dark:text-white">
-											Bonnie Greens
-										</span>
-										post in
-										<span className="font-medium text-gray-900 dark:text-white">
-											How to start with Flowbite library
-										</span>
-									</div>
-									<div className="text-lg font-normal">
-										I wanted to share a webinar zeroheight.
-									</div>
-									{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
+									{/* Notification */}
+									<div className="text-gray-600 dark:text-gray-400 flex gap-1">
+										<div className="text-base font-normal flex gap-1">
+											<span className="font-medium text-gray-900 dark:text-white">
+												Jese Leos
+											</span>
+											likes
+											<span className="font-medium text-gray-900 dark:text-white">
+												Bonnie Greens
+											</span>
+											post in
+											<span className="font-medium text-gray-900 dark:text-white">
+												How to start with Flowbite library
+											</span>
+										</div>
+										<div className="text-lg font-normal">
+											I wanted to share a webinar zeroheight.
+										</div>
+										{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 										<svg
 											aria-hidden="true"
 											className="w-3 h-3 mr-1"
@@ -85,52 +87,52 @@ export default function Notifications({
 										</svg>
 										Public
 									</span> */}
-								</div>
-							</Link>
+									</div>
+								</Link>
 
-							{/* Notifications */}
-							<Link
-								href="#"
-								className="items-center block py-4 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
-							>
-								{/* Notification */}
-								<div className="flex-shrink-0">
-									<Image
-										className="rounded-full mx-3"
-										width={48}
-										height={48}
-										src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-										alt="Bonnie image"
-									/>
-									<div className="absolute items-center justify-center w-5 h-5 ml-10 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
-										<svg
-											className="w-3 h-3 text-white"
-											aria-hidden="true"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												fillRule="evenodd"
-												d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-												clipRule="evenodd"
-											></path>
-										</svg>
+								{/* Notifications */}
+								<Link
+									href="#"
+									className="items-center block py-4 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
+								>
+									{/* Notification */}
+									<div className="flex-shrink-0">
+										<Image
+											className="rounded-full mx-3"
+											width={48}
+											height={48}
+											src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+											alt="Bonnie image"
+										/>
+										<div className="absolute items-center justify-center w-5 h-5 ml-10 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
+											<svg
+												className="w-3 h-3 text-white"
+												aria-hidden="true"
+												fill="currentColor"
+												viewBox="0 0 20 20"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+													clipRule="evenodd"
+												></path>
+											</svg>
+										</div>
 									</div>
-								</div>
-								{/* Notification */}
-								<div>
-									<div className="text-base font-normal text-gray-600 dark:text-gray-400 flex gap-1">
-										<span className="font-medium text-gray-900 dark:text-white flex gap-1">
-											Bonnie Green
-										</span>
-										react to
-										<span className="font-medium text-gray-900 dark:text-white">
-											Thomas Leans
-										</span>
-										comment
-									</div>
-									{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
+									{/* Notification */}
+									<div>
+										<div className="text-base font-normal text-gray-600 dark:text-gray-400 flex gap-1">
+											<span className="font-medium text-gray-900 dark:text-white flex gap-1">
+												Bonnie Green
+											</span>
+											react to
+											<span className="font-medium text-gray-900 dark:text-white">
+												Thomas Leans
+											</span>
+											comment
+										</div>
+										{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
 										<svg
 											aria-hidden="true"
 											className="w-3 h-3 mr-1"
@@ -147,13 +149,14 @@ export default function Notifications({
 										</svg>
 										Private
 									</span> */}
-								</div>
-							</Link>
-						</ol>
+									</div>
+								</Link>
+							</ol>
+						</div>
 					</div>
-				</div>
-			)}
-		</WhenLoggedInWithProfile>
+				)}
+			</WhenLoggedInWithProfile>
+		</>
 	)
 }
 

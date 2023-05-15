@@ -3,5 +3,10 @@ export default function TermsAndPrivacy({
 }: {
 	params: { slug: string }
 }) {
-	return <div></div>
+	return (
+		<>
+			<title>Terms and Privacy / Metro House</title>
+			<div></div>
+		</>
+	)
 }
