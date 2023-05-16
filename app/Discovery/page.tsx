@@ -143,7 +143,7 @@ export default function Discovery() {
 							isDiscovery
 							hasMore={hasMore}
 							observeRef={observeRef}
-							isLoading={loadingPublications}
+							isLoading={loadingPublications || profileLoading}
 						/>
 					)}
 				</div>

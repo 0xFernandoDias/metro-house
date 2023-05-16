@@ -27,7 +27,7 @@ export default function Publication({
 		observerId: profile?.id,
 	})
 
-	if (!publication || loading) {
+	if (!publication || loading || profileLoading) {
 		return <div>Loading pub...</div>
 	}
 
@@ -45,7 +45,10 @@ export default function Publication({
 							: publication
 					}
 				/>
-				<CommentsSection isLoading={loading} commentsOf={publication.id} />
+				<CommentsSection
+					isLoading={loading || profileLoading}
+					commentsOf={publication.id}
+				/>
 			</div>
 		</>
 	)

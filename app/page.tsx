@@ -57,7 +57,7 @@ export default function Home() {
 		})
 	)
 
-	if (!publications || loadingPublications) {
+	if (!publications || loadingPublications || profileLoading) {
 		return <div>Loading...</div>
 	}
 
@@ -80,7 +80,7 @@ export default function Home() {
 					publications={publications}
 					observeRef={observeRef}
 					hasMore={hasMore}
-					isLoading={loadingPublications}
+					isLoading={loadingPublications || profileLoading}
 				/>
 			</div>
 		</>

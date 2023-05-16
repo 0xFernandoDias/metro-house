@@ -92,7 +92,8 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 		isLoading ||
 		contractLoading ||
 		!profile ||
-		!publications
+		!publications ||
+		profileLoading
 	) {
 		return <div>Loading profile...</div>
 	}
@@ -185,7 +186,7 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 							publications={publications}
 							hasMore={hasMore}
 							observeRef={observeRef}
-							isLoading={loadingPublications}
+							isLoading={profileLoading || loading || loadingPublications}
 						/>
 					</div>
 				</div>
