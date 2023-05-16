@@ -1,26 +1,19 @@
 "use client"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import {
-	MediaSetFragment,
-	ProfileFragment,
-	ProfileOwnedByMeFragment,
-	PublicationSortCriteria,
-	PublicationTypes,
-	useExplorePublications,
-	useFollow,
 	useProfile,
-	useUnfollow,
 	usePublications,
 	useProfileFollowers,
 	isProfileOwnedByMe,
 	useMutualFollowers,
 	useActiveProfile,
-	useFeed,
+	ProfileId,
+	ProfileMedia,
+	MediaSet,
+	Profile as ProfileType,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
-import Image from "next/image"
 import Link from "next/link"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import {
 	MediaRenderer,
 	ThirdwebNftMedia,
@@ -34,7 +27,7 @@ import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 function ProfileCover({
 	picture,
 }: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
+	picture: MediaSet | ProfileMedia | null
 }) {
 	if (!picture) return null
 
@@ -55,7 +48,7 @@ function ProfileCover({
 }
 
 // export default function Profile({ params }: { params: { slug: string } }) {
-export default function Profile({ params }: { params: { slug: string } }) {
+export default function Profile({ params }: { params: { slug: ProfileId } }) {
 	const { slug: profileHandle } = params
 
 	const {
@@ -77,7 +70,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 		observeRef,
 	} = useInfiniteScroll(
 		usePublications({
-			profileId: profile?.id || "",
+			profileId: profile?.id!,
 			observerId: myProfile?.id,
 		})
 	)
@@ -192,6 +185,7 @@ export default function Profile({ params }: { params: { slug: string } }) {
 							publications={publications}
 							hasMore={hasMore}
 							observeRef={observeRef}
+							isLoading={loadingPublications}
 						/>
 					</div>
 				</div>
@@ -204,8 +198,8 @@ function ProfileContacts({
 	profile,
 	viewingProfileId,
 }: {
-	profile: ProfileFragment
-	viewingProfileId?: string
+	profile: ProfileType
+	viewingProfileId?: ProfileId
 }) {
 	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
 		profileId: profile.id,
@@ -213,10 +207,12 @@ function ProfileContacts({
 
 	const isMyProfile = isProfileOwnedByMe(profile)
 
-	const { data: mutual } = useMutualFollowers({
-		observerId: viewingProfileId || "",
+	const { data: mutual, loading: loadingMutual } = useMutualFollowers({
+		observerId: viewingProfileId!,
 		viewingProfileId: profile.id,
 	})
+
+	if (loadingFollowers || loadingMutual) return <>...loading</>
 
 	return (
 		<ul className="flex text-xl flex-col gap-4">

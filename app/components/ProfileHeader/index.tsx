@@ -1,16 +1,11 @@
 "use client"
-import Image from "next/image"
 import Link from "next/link"
-
-import { MediaRenderer } from "@thirdweb-dev/react"
 import {
-	MediaSetFragment,
-	ProfileFragment,
-	ProfileOwnedByMeFragment,
+	Profile as ProfileType,
+	ProfileId,
 	isProfileOwnedByMe,
 	useMutualFollowers,
 } from "@lens-protocol/react-web"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 
@@ -19,14 +14,14 @@ export function ProfileHeader({
 	viewingProfileId,
 	isComment,
 }: {
-	profile: ProfileFragment
-	viewingProfileId?: string
+	profile: ProfileType
+	viewingProfileId?: ProfileId
 	isComment?: boolean
 }) {
 	const isMyProfile = isProfileOwnedByMe(profile)
 
 	const { data: mutual } = useMutualFollowers({
-		observerId: viewingProfileId || "",
+		observerId: viewingProfileId!,
 		viewingProfileId: profile.id,
 	})
 

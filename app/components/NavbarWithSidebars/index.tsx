@@ -4,19 +4,13 @@ import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
 import { usePathname, useRouter } from "next/navigation"
 import {
-	MediaSetFragment,
-	ProfileFragment,
 	useActiveProfile,
 	useActiveWallet,
-	useExploreProfiles,
 	useProfilesToFollow,
 } from "@lens-protocol/react-web"
-import { MediaRenderer } from "@thirdweb-dev/react"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { LoginButton } from "../auth/LoginButton"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { FollowUnfollowButton } from "../FollowUnfollowButton"
 import { ProfilePicture } from "../ProfilePicture"
 
@@ -274,6 +268,8 @@ function SuggestedProfiles() {
 		error,
 		loading,
 	} = useProfilesToFollow({ observerId: profile?.id || undefined })
+
+	if (loading || profileLoading) return <>...loading</>
 
 	return (
 		<div className="flex flex-col items-center gap-6">

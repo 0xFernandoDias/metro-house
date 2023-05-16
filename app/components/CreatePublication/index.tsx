@@ -8,10 +8,9 @@
 // reference: policy
 
 "use client"
-
 import {
 	ContentFocus,
-	ProfileOwnedByMeFragment,
+	ProfileOwnedByMe,
 	useCreatePost,
 } from "@lens-protocol/react-web"
 import { providers, utils } from "ethers"
@@ -81,7 +80,7 @@ export async function upload(data: unknown): Promise<string> {
 export function CreatePublication({
 	publisher,
 }: {
-	publisher: ProfileOwnedByMeFragment
+	publisher: ProfileOwnedByMe
 }) {
 	const {
 		execute: create,

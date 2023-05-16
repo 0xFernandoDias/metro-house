@@ -1,41 +1,32 @@
 "use client"
 import {
-	AnyPublicationFragment,
-	ContentPublicationFragment,
-	MediaSetFragment,
-	ProfileFragment,
+	ContentPublication,
+	Profile as ProfileType,
 	ReactionType,
-	isMirrorPublication,
 	useActiveProfile,
 	useEncryptedPublication,
-	usePublication,
-	useReaction,
 	useWhoReacted,
 	useCreateMirror,
-	ProfileOwnedByMeFragment,
+	ProfileOwnedByMe,
 	useCollect,
-	CommentWithFirstCommentFragment,
+	CommentWithFirstComment,
 	isProfileOwnedByMe,
 	useMutualFollowers,
+	ProfileId,
+	useReaction,
 } from "@lens-protocol/react-web"
-import { CommentsSection } from "../CommentsSection"
 import Link from "next/link"
-import Image from "next/image"
 import { ProfileHeader } from "../ProfileHeader"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
-import { MediaRenderer } from "@thirdweb-dev/react"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 import { useState } from "react"
-import { profile } from "console"
-import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 export const Publication = ({
 	publication,
 	isComment,
 }: {
-	publication: ContentPublicationFragment | CommentWithFirstCommentFragment
+	publication: ContentPublication | CommentWithFirstComment
 	isComment?: boolean
 }) => {
 	const { data: post, isPending } = useEncryptedPublication({
@@ -55,12 +46,7 @@ export const Publication = ({
 
 	const isMyProfile = isProfileOwnedByMe(post.profile)
 
-	const { data: mutual } = useMutualFollowers({
-		observerId: profile?.id || "",
-		viewingProfileId: post.profile.id,
-	})
-
-	if (isPending || loading) {
+	if (isPending || loading || profileLoading) {
 		return <div>Loading...</div>
 	}
 
@@ -143,14 +129,14 @@ export const Publication = ({
 								{post.profile.stats.totalFollowers} followers
 							</Link>
 							<WhenLoggedInWithProfile>
-								{() =>
+								{({ profile }) =>
 									isMyProfile ? (
 										""
 									) : (
 										<Link
 											href={`/Profile/${post.profile.handle}/Contacts?tab=mutual`}
 										>
-											{mutual?.length ? `, ${mutual?.length} mutual` : ""}
+											<Mutual post={post} profile={profile} />
 										</Link>
 									)
 								}
@@ -323,11 +309,7 @@ export const Publication = ({
 	)
 }
 
-function CommentButton({
-	publication,
-}: {
-	publication: ContentPublicationFragment
-}) {
+function CommentButton({ publication }: { publication: ContentPublication }) {
 	const { totalAmountOfComments } = publication.stats
 	return (
 		<Link
@@ -356,8 +338,8 @@ function CollectButton({
 	profile,
 	publication,
 }: {
-	profile: ProfileOwnedByMeFragment
-	publication: ContentPublicationFragment
+	profile: ProfileOwnedByMe
+	publication: ContentPublication
 }) {
 	return <Collect publication={publication} profile={profile} />
 }
@@ -366,8 +348,8 @@ function Collect({
 	publication,
 	profile,
 }: {
-	publication: ContentPublicationFragment
-	profile: ProfileOwnedByMeFragment
+	publication: ContentPublication
+	profile: ProfileOwnedByMe
 }) {
 	const { execute, isPending } = useCollect({
 		collector: profile,
@@ -416,8 +398,8 @@ function MirrorButton({
 	profile,
 	publication,
 }: {
-	profile: ProfileOwnedByMeFragment
-	publication: ContentPublicationFragment
+	profile: ProfileOwnedByMe
+	publication: ContentPublication
 }) {
 	return <Mirror publication={publication} profile={profile} />
 }
@@ -426,8 +408,8 @@ function Mirror({
 	publication,
 	profile,
 }: {
-	publication: ContentPublicationFragment
-	profile: ProfileOwnedByMeFragment
+	publication: ContentPublication
+	profile: ProfileOwnedByMe
 }) {
 	const { execute, isPending } = useCreateMirror({
 		publisher: profile,
@@ -477,8 +459,8 @@ function LikeUnlikeButton({
 	profile,
 	publication,
 }: {
-	profile: ProfileFragment
-	publication: ContentPublicationFragment
+	profile: ProfileType
+	publication: ContentPublication
 }) {
 	return (
 		<ReactionButton
@@ -494,8 +476,8 @@ function ReactionButton({
 	profileId,
 	reactionType,
 }: {
-	publication: ContentPublicationFragment
-	profileId: string
+	publication: ContentPublication
+	profileId: ProfileId
 	reactionType: ReactionType
 }) {
 	const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
@@ -563,4 +545,19 @@ function ReactionButton({
 			{totalUpvotes}
 		</button>
 	)
+}
+
+const Mutual = ({
+	profile,
+	post,
+}: {
+	profile: ProfileType
+	post: ContentPublication | CommentWithFirstComment
+}) => {
+	const { data: mutual } = useMutualFollowers({
+		observerId: profile.id,
+		viewingProfileId: post.profile.id,
+	})
+
+	return <>{mutual?.length ? `, ${mutual?.length} mutual` : ""}</>
 }

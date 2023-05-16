@@ -1,20 +1,14 @@
-"use client"
 import {
 	WalletData,
-	ProfileOwnedByMeFragment,
+	ProfileOwnedByMe,
 	useActiveWallet,
 	useActiveProfile,
-	useActiveWalletSigner,
-	useWalletLogin,
-	useWalletLogout,
 } from "@lens-protocol/react-web"
-import { useAccount, useConnect, useDisconnect } from "wagmi"
 import { ReactNode } from "react"
-import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 
 type LoggedInConfig = {
 	wallet: WalletData
-	profile: ProfileOwnedByMeFragment
+	profile: ProfileOwnedByMe
 }
 
 export type WhenLoggedInWithProfileProps = {

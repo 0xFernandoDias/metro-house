@@ -80,6 +80,7 @@ export default function Home() {
 					publications={publications}
 					observeRef={observeRef}
 					hasMore={hasMore}
+					isLoading={loadingPublications}
 				/>
 			</div>
 		</>

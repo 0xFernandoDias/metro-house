@@ -1,7 +1,7 @@
 "use client"
 
 import {
-	ProfileFragment,
+	Profile as ProfileType,
 	PublicationSortCriteria,
 	PublicationTypes,
 	useActiveProfile,
@@ -143,6 +143,7 @@ export default function Discovery() {
 							isDiscovery
 							hasMore={hasMore}
 							observeRef={observeRef}
+							isLoading={loadingPublications}
 						/>
 					)}
 				</div>
@@ -219,7 +220,7 @@ function SearchResult({ query }: { query: string }) {
 	)
 }
 
-function Profile({ profile }: { profile: ProfileFragment }) {
+function Profile({ profile }: { profile: ProfileType }) {
 	return (
 		<div className="flex items-center justify-between space-x-4">
 			<div className="flex items-center gap-1 space-x-4">

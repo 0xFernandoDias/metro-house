@@ -32,33 +32,28 @@
 
 "use client"
 import {
-	AnyPublicationFragment,
-	ProfileFragment,
+	AnyPublication,
+	Profile as ProfileType,
 	isMirrorPublication,
 } from "@lens-protocol/react-web"
 import { Publication } from "../Publication"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useSearchParams } from "next/navigation"
-import {
-	ThirdwebNftMedia,
-	useContract,
-	useNFTs,
-	useOwnedNFTs,
-} from "@thirdweb-dev/react"
 import { RefCallback } from "react"
 
 export function Publications({
 	publications,
+	isLoading,
 	isProfile = false,
 	profile,
 	isDiscovery = false,
 	observeRef,
 	hasMore,
 }: {
-	publications: AnyPublicationFragment[]
+	publications: AnyPublication[]
+	isLoading: boolean
 	isProfile?: boolean
-	profile?: ProfileFragment
+	profile?: ProfileType
 	isDiscovery?: boolean
 	observeRef?: RefCallback<unknown>
 	hasMore?: boolean
@@ -79,9 +74,9 @@ export function Publications({
 
 	// const isNftsTab = tab === "nfts"
 
-	// if (isLoading) {
-	// 	return <>...loading</>
-	// }
+	if (isLoading) {
+		return <>...loading</>
+	}
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -549,7 +544,7 @@ export function Publications({
 
 			{/* Publications */}
 			<div className="flex flex-col gap-16 mb-6">
-				{publications.map((publication: AnyPublicationFragment) => {
+				{publications.map((publication: AnyPublication) => {
 					return (
 						<Publication
 							key={publication.id}

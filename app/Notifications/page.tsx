@@ -1,25 +1,23 @@
 "use client"
-
-import Image from "next/image"
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
 import {
-	ProfileOwnedByMeFragment,
+	ProfileOwnedByMe,
 	useNotifications,
 	useUnreadNotificationCount,
 	Notification as NotificationType,
-	NewFollowerNotificationFragment,
-	NewCollectNotificationFragment,
-	NewCommentNotificationFragment,
-	NewMentionNotificationFragment,
-	NewMirrorNotificationFragment,
-	NewReactionNotificationFragment,
-	MediaSetFragment,
-	ProfileFragment,
+	NewFollowerNotification,
+	NewCollectNotification,
+	NewCommentNotification,
+	NewMentionNotification,
+	NewMirrorNotification,
+	NewReactionNotification,
+	MediaSet,
+	Profile as ProfileType,
+	ProfileMedia,
 } from "@lens-protocol/react-web"
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll"
 import { ProfilePicture } from "../components/ProfilePicture"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { useEffect } from "react"
 
 export default function Notifications({
@@ -38,11 +36,7 @@ export default function Notifications({
 	)
 }
 
-function NotificationsComponent({
-	profile,
-}: {
-	profile: ProfileOwnedByMeFragment
-}) {
+function NotificationsComponent({ profile }: { profile: ProfileOwnedByMe }) {
 	const {
 		data: notifications,
 		hasMore,
@@ -60,7 +54,7 @@ function NotificationsComponent({
 		if (clear && unreadNotificationCount) clear()
 	}, [clear, unreadNotificationCount])
 
-	if (loading) return <p>Loading...</p>
+	if (loading || loadingCount) return <p>Loading...</p>
 
 	return (
 		<div className="flex flex-col min-w-full gap-8">
@@ -87,8 +81,8 @@ function NotificationItemWrapper({
 	children,
 }: {
 	text: string
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
-	profile: ProfileFragment
+	picture: MediaSet | ProfileMedia | null
+	profile: ProfileType
 	notificationLink: string
 	date: string
 	children: React.ReactNode
@@ -148,7 +142,7 @@ function NotificationItemWrapper({
 function NewReactionNotification({
 	notification,
 }: {
-	notification: NewReactionNotificationFragment
+	notification: NewReactionNotification
 }) {
 	return (
 		<NotificationItemWrapper
@@ -166,7 +160,7 @@ function NewReactionNotification({
 function NewMirrorNotification({
 	notification,
 }: {
-	notification: NewMirrorNotificationFragment
+	notification: NewMirrorNotification
 }) {
 	return (
 		<NotificationItemWrapper
@@ -197,7 +191,7 @@ function NewMirrorNotification({
 function NewMentionNotification({
 	notification,
 }: {
-	notification: NewMentionNotificationFragment
+	notification: NewMentionNotification
 }) {
 	return (
 		<NotificationItemWrapper
@@ -230,7 +224,7 @@ function NewMentionNotification({
 function NewCommentNotification({
 	notification,
 }: {
-	notification: NewCommentNotificationFragment
+	notification: NewCommentNotification
 }) {
 	return (
 		<NotificationItemWrapper
@@ -263,7 +257,7 @@ function NewCommentNotification({
 function NewCollectNotification({
 	notification,
 }: {
-	notification: NewCollectNotificationFragment
+	notification: NewCollectNotification
 }) {
 	return (
 		<NotificationItemWrapper
@@ -296,7 +290,7 @@ function NewCollectNotification({
 function NewFollowerNotification({
 	notification,
 }: {
-	notification: NewFollowerNotificationFragment
+	notification: NewFollowerNotification
 }) {
 	return (
 		<NotificationItemWrapper

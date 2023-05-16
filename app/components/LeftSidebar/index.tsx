@@ -1,10 +1,8 @@
 "use client"
 import Link from "next/link"
-import { LoginButton } from "../auth/LoginButton"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import {
-	ProfileOwnedByMeFragment,
+	ProfileOwnedByMe,
 	useActiveProfile,
 	useUnreadNotificationCount,
 } from "@lens-protocol/react-web"
@@ -335,11 +333,7 @@ export function LeftSidebar() {
 	)
 }
 
-function NotificationsCount({
-	profile,
-}: {
-	profile: ProfileOwnedByMeFragment
-}) {
+function NotificationsCount({ profile }: { profile: ProfileOwnedByMe }) {
 	const {
 		loading: loadingCount,
 		unreadNotificationCount,

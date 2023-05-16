@@ -8,28 +8,20 @@
 // Proof of humanity - https://flowbite.com/docs/components/badge/#badges-with-icon
 
 "use client"
-import Image from "next/image"
 import Link from "next/link"
 import { ContactsTabs } from "../../../components/ContactsTabs"
-import { MediaRenderer } from "@thirdweb-dev/react"
 import {
-	FollowerFragment,
-	FollowingFragment,
-	MediaSetFragment,
-	ProfileFragment,
-	isProfileOwnedByMe,
+	Profile as ProfileType,
 	useActiveProfile,
 	useMutualFollowers,
 	useProfile,
 	useProfileFollowers,
 	useProfileFollowing,
 } from "@lens-protocol/react-web"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
@@ -58,7 +50,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		observeRef: observeFollowersRef,
 	} = useInfiniteScroll(
 		useProfileFollowers({
-			profileId: profile?.id || "",
+			profileId: profile?.id!,
 		})
 	)
 
@@ -80,8 +72,8 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		observeRef: observeMutualFollowersRef,
 	} = useInfiniteScroll(
 		useMutualFollowers({
-			viewingProfileId: profile?.id || "",
-			observerId: activeProfile?.id || "",
+			viewingProfileId: profile?.id!,
+			observerId: activeProfile?.id!,
 		})
 	)
 
@@ -91,7 +83,8 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		loadingFollowing ||
 		loadingMutualFollowers ||
 		!profile ||
-		!profileFollowers
+		!profileFollowers ||
+		profileLoading
 	)
 		return <>Loading...</>
 
@@ -153,7 +146,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 	)
 }
 
-function Follower({ profile }: { profile: ProfileFragment }) {
+function Follower({ profile }: { profile: ProfileType }) {
 	return (
 		<div className="flex justify-between items-center space-x-4">
 			<div className="flex items-center gap-1 space-x-4">

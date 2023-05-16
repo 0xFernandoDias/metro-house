@@ -5,7 +5,7 @@ import { Publication } from "@/app/components/Publication"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import {
-	ProfileFragment,
+	Profile as ProfileType,
 	useActiveProfile,
 	useSearchProfiles,
 	useSearchPublications,
@@ -156,7 +156,7 @@ function SearchResult({ query }: { query: string }) {
 	)
 }
 
-function Profile({ profile }: { profile: ProfileFragment }) {
+function Profile({ profile }: { profile: ProfileType }) {
 	return (
 		<div className="flex items-center justify-between space-x-4">
 			<div className="flex items-center gap-1 space-x-4">

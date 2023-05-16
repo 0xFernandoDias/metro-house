@@ -1,6 +1,9 @@
 "use client"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
-import { MediaSetFragment, ProfileFragment } from "@lens-protocol/react-web"
+import {
+	MediaSet,
+	Profile as ProfileType,
+	ProfileMedia,
+} from "@lens-protocol/react-web"
 import { MediaRenderer } from "@thirdweb-dev/react"
 import Link from "next/link"
 
@@ -9,8 +12,8 @@ export function ProfilePicture({
 	profile,
 	design = "profileSmall",
 }: {
-	picture: MediaSetFragment | ProfileMedia_NftImage_Fragment | null
-	profile: ProfileFragment
+	picture: MediaSet | ProfileMedia | null
+	profile: ProfileType
 	design?: "small" | "profileSmall" | "profileLarge"
 }) {
 	if (!picture) {

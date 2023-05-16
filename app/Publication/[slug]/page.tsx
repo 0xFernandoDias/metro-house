@@ -2,14 +2,18 @@
 import Link from "next/link"
 import { CommentsSection } from "../../components/CommentsSection"
 import { Publication as PublicationComponent } from "../../components/Publication"
-import Image from "next/image"
 import {
+	PublicationId,
 	isMirrorPublication,
 	useActiveProfile,
 	usePublication,
 } from "@lens-protocol/react-web"
 
-export default function Publication({ params }: { params: { slug: string } }) {
+export default function Publication({
+	params,
+}: {
+	params: { slug: PublicationId }
+}) {
 	const { slug } = params
 
 	const {
@@ -23,7 +27,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 		observerId: profile?.id,
 	})
 
-	if (!publication) {
+	if (!publication || loading) {
 		return <div>Loading pub...</div>
 	}
 
@@ -41,7 +45,7 @@ export default function Publication({ params }: { params: { slug: string } }) {
 							: publication
 					}
 				/>
-				<CommentsSection commentsOf={publication.id} />
+				<CommentsSection isLoading={loading} commentsOf={publication.id} />
 			</div>
 		</>
 	)

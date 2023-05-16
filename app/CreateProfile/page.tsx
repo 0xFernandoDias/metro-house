@@ -1,11 +1,8 @@
 "use client"
 
-import { useAccount } from "wagmi"
-import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
 import { LoginButton } from "../components/auth/LoginButton"
 import { useActiveWallet, useCreateProfile } from "@lens-protocol/react-web"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 export default function CreateProfile({
@@ -28,7 +25,7 @@ export default function CreateProfile({
 		const formData = new FormData(form)
 		const handle = (formData.get("handle") as string) ?? null
 
-		const result = await execute(handle)
+		const result = await execute({ handle })
 
 		if (result.isSuccess()) {
 			setResult("Profile created")

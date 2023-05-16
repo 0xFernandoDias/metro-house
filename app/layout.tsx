@@ -9,16 +9,13 @@ import {
 	LensConfig,
 	LensProvider,
 	production,
-	staging,
-	useActiveWallet,
-	useWalletLogout,
+	development,
 } from "@lens-protocol/react-web"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
 import "./global.css"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
-import { useEffect } from "react"
 
 const { provider, webSocketProvider } = configureChains(
 	[polygon, polygonMumbai],
@@ -27,13 +24,13 @@ const { provider, webSocketProvider } = configureChains(
 
 const wagmiClient = createClient({
 	autoConnect: true,
-	webSocketProvider,
 	provider,
+	webSocketProvider,
 })
 
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
-	environment: staging,
+	environment: development,
 	appId: appId("metro-house"),
 }
 

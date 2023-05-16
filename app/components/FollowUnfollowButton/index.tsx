@@ -1,7 +1,7 @@
 "use client"
 import {
-	ProfileFragment,
-	ProfileOwnedByMeFragment,
+	Profile as ProfileType,
+	ProfileOwnedByMe,
 	useActiveWalletSigner,
 	useFollow,
 	useUnfollow,
@@ -13,8 +13,8 @@ export function FollowUnfollowButton({
 	followee,
 	onlyIcon = false,
 }: {
-	follower: ProfileOwnedByMeFragment
-	followee: ProfileFragment
+	follower: ProfileOwnedByMe
+	followee: ProfileType
 	onlyIcon?: boolean
 }) {
 	const {

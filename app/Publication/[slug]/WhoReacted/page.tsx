@@ -1,29 +1,25 @@
 "use client"
-import Image from "next/image"
 import Link from "next/link"
 import { WhoReactedTabs } from "../../../components/WhoReactedTabs"
 import {
-	MediaSetFragment,
-	ProfileFragment,
-	WalletFragment,
-	WhoReactedResultFragment,
+	Profile as ProfileType,
+	PublicationId,
 	useActiveProfile,
-	useEncryptedPublication,
-	usePublication,
 	useWhoCollectedPublication,
 	useWhoMirroredPublication,
 	useWhoReacted,
 } from "@lens-protocol/react-web"
-import { MediaRenderer } from "@thirdweb-dev/react"
-import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 
-export default function WhoReacted({ params }: { params: { slug: string } }) {
+export default function WhoReacted({
+	params,
+}: {
+	params: { slug: PublicationId }
+}) {
 	const { slug: publicationId } = params
 
 	const { get } = useSearchParams()
@@ -43,7 +39,7 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 		observeRef: observeReactionsRef,
 	} = useInfiniteScroll(
 		useWhoReacted({
-			publicationId: publicationId,
+			publicationId,
 			observerId: profile?.id,
 		})
 	)
@@ -72,7 +68,7 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 		})
 	)
 
-	if (loading) {
+	if (loading || profileLoading || whoMirroredLoading || whoCollectedLoading) {
 		return <div>Loading...</div>
 	}
 
@@ -133,7 +129,7 @@ export default function WhoReacted({ params }: { params: { slug: string } }) {
 	)
 }
 
-function Profile({ profile }: { profile: ProfileFragment }) {
+function Profile({ profile }: { profile: ProfileType }) {
 	return (
 		<div className="flex items-center justify-between space-x-4">
 			<div className="flex items-center gap-1 space-x-4">

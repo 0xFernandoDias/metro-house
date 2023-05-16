@@ -3,16 +3,14 @@
 import {
 	CollectPolicyType,
 	ContentFocus,
-	ProfileOwnedByMeFragment,
-	useActiveProfile,
+	ProfileId,
+	ProfileOwnedByMe,
+	PublicationId,
 	useComments,
 	useCreateComment,
 } from "@lens-protocol/react-web"
-import Image from "next/image"
-import Link from "next/link"
 import { Publication } from "../Publication"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-
 import { WebBundlr } from "@bundlr-network/client"
 import { providers, utils } from "ethers"
 import { fetchSigner } from "wagmi/actions"
@@ -112,8 +110,8 @@ function CreateComment({
 	publisher,
 	publicationId,
 }: {
-	publisher: ProfileOwnedByMeFragment
-	publicationId: string
+	publisher: ProfileOwnedByMe
+	publicationId: PublicationId
 }) {
 	const {
 		execute: create,
@@ -352,16 +350,18 @@ export function CommentsSection({
 	commentsOf,
 	observerId,
 	commentsQuantity,
+	isLoading,
 }: {
-	commentsOf: string
-	observerId?: string
+	commentsOf: PublicationId
+	observerId?: ProfileId
 	commentsQuantity?: number
+	isLoading: boolean
 }) {
 	const { data, loading, hasMore, observeRef } = useInfiniteScroll(
 		useComments({ commentsOf, observerId })
 	)
 
-	if (loading) return <div>Loading comments...</div>
+	if (loading || isLoading) return <div>Loading comments...</div>
 
 	return (
 		<div className="flex flex-col gap-14 mb-6">

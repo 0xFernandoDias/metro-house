@@ -2,10 +2,13 @@
 
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { ProfileFragment, isProfileOwnedByMe } from "@lens-protocol/react-web"
+import {
+	Profile as ProfileType,
+	isProfileOwnedByMe,
+} from "@lens-protocol/react-web"
 import { useSearchParams } from "next/navigation"
 
-export function ContactsTabs({ profile }: { profile: ProfileFragment }) {
+export function ContactsTabs({ profile }: { profile: ProfileType }) {
 	const { get } = useSearchParams()
 	const tab = get("tab")
 	const isMyProfile = isProfileOwnedByMe(profile)
