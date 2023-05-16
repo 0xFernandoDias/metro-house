@@ -1,34 +1,24 @@
 "use client"
-
+import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
+import { ProfilePicture } from "@/app/components/ProfilePicture"
+import { Publication } from "@/app/components/Publication"
+import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import {
 	ProfileFragment,
-	PublicationSortCriteria,
-	PublicationTypes,
 	useActiveProfile,
-	useExplorePublications,
 	useSearchProfiles,
 	useSearchPublications,
 } from "@lens-protocol/react-web"
-import { Publications } from "../components/Publications"
+import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
-import { useInfiniteScroll } from "../hooks/useInfiniteScroll"
-import { Publication } from "../components/Publication"
-import { ProfilePicture } from "../components/ProfilePicture"
-import Link from "next/link"
-import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
-import { FollowUnfollowButton } from "../components/FollowUnfollowButton"
 
-export default function Discovery() {
-	const { get } = useSearchParams()
+export default function Discovery({ params }: { params: { slug: string } }) {
+	const { slug } = params
 
-	const tab = get("tab")
-
-	const [sortCriteria, setSortCriteria] = useState(
-		PublicationSortCriteria.Latest
-	)
-	const [inputValue, setInputValue] = useState("")
-	const [selectedQuery, setSelectedQuery] = useState<string>()
+	const [inputValue, setInputValue] = useState(slug)
+	const [selectedQuery, setSelectedQuery] = useState<string>(inputValue)
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
@@ -38,48 +28,13 @@ export default function Discovery() {
 		setSelectedQuery(inputValue)
 	}, [inputValue])
 
-	useEffect(() => {
-		const query =
-			tab === "topcollected"
-				? PublicationSortCriteria.TopCollected
-				: tab === "topcommented"
-				? PublicationSortCriteria.TopCommented
-				: tab === "topmirrored"
-				? PublicationSortCriteria.TopMirrored
-				: PublicationSortCriteria.Latest
-
-		setSortCriteria(query)
-	}, [tab])
-
-	const {
-		data: profile,
-		error: profileError,
-		loading: profileLoading,
-	} = useActiveProfile()
-
-	const {
-		data: publications,
-		loading: loadingPublications,
-		hasMore,
-		observeRef,
-		next,
-	} = useInfiniteScroll(
-		useExplorePublications({
-			sortCriteria: sortCriteria,
-			publicationTypes: [PublicationTypes.Post],
-		})
-	)
-
-	if (loadingPublications || !publications || profileLoading) {
-		return <div>Loading...</div>
-	}
-
-	if (publications) {
-		return (
-			<>
-				<title>Discovery / Metro House</title>
+	return (
+		<>
+			<title>Discovery / Metro House</title>
+			<div className="flex flex-col gap-6 mb-8">
 				<div className="flex flex-col gap-6">
 					<a className="text-xl font-semibold">Discovery</a>
+
 					{/* Search */}
 					<form className="flex items-center gap-2">
 						<label htmlFor="simple-search" className="sr-only">
@@ -109,6 +64,7 @@ export default function Discovery() {
 								placeholder="Search"
 								required
 								onChange={handleChange}
+								value={inputValue}
 							/>
 						</div>
 
@@ -135,31 +91,12 @@ export default function Discovery() {
 						</Link>
 					</form>
 
-					{selectedQuery ? (
-						<SearchResult query={selectedQuery} />
-					) : (
-						<Publications
-							publications={publications}
-							isDiscovery
-							hasMore={hasMore}
-							observeRef={observeRef}
-						/>
-					)}
+					{selectedQuery && <SearchResult query={selectedQuery} />}
 				</div>
-			</>
-		)
-	}
+			</div>
+		</>
+	)
 }
-
-// when searchbar filled:
-// profiles
-// publications, mirrors
-// search profiles, search publications
-
-// when searchbar empty:
-// use explore profiles, suggested component, use explore publications, feed
-// SUGGESTED
-// Trending
 
 function SearchResult({ query }: { query: string }) {
 	const { data: profile, loading: profileLoading } = useActiveProfile()

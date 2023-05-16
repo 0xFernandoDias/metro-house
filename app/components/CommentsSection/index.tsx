@@ -351,9 +351,11 @@ function CreateComment({
 export function CommentsSection({
 	commentsOf,
 	observerId,
+	commentsQuantity,
 }: {
 	commentsOf: string
 	observerId?: string
+	commentsQuantity?: number
 }) {
 	const { data, loading, hasMore, observeRef } = useInfiniteScroll(
 		useComments({ commentsOf, observerId })
@@ -368,6 +370,10 @@ export function CommentsSection({
 					<CreateComment publisher={profile} publicationId={commentsOf} />
 				)}
 			</WhenLoggedInWithProfile>
+			<a className="text-xl font-semibold">
+				{commentsQuantity} Comments
+				{commentsQuantity && commentsQuantity > 1 && "s"}
+			</a>
 			<ol className="flex w-full flex-col justify-between">
 				{/* <li className="flex gap-6">
 					<Image

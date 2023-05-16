@@ -72,9 +72,7 @@ export const Publication = ({
 	}
 
 	return (
-		<article
-			className={`max-w-max flex gap-4 ${isComment ? "px-6" : "flex-col"}`}
-		>
+		<article className={`max-w-max flex gap-4 ${isComment ? "" : "flex-col"}`}>
 			{/* Post Header */}
 
 			{!isComment ? (

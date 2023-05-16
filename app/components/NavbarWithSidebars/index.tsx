@@ -2,7 +2,7 @@
 import Link from "next/link"
 import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
 	MediaSetFragment,
 	ProfileFragment,
@@ -14,7 +14,7 @@ import {
 import { MediaRenderer } from "@thirdweb-dev/react"
 import { ProfileMedia_NftImage_Fragment } from "@lens-protocol/client/dist/declarations/src/graphql/fragments.generated"
 import { LoginButton } from "../auth/LoginButton"
-import { useEffect } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { FollowUnfollowButton } from "../FollowUnfollowButton"
@@ -148,6 +148,18 @@ function BottomNavbar() {
 }
 
 export function RightSidebar() {
+	const { push } = useRouter()
+	const [inputValue, setInputValue] = useState("")
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value)
+	}
+
+	const handleSubmit = (e: any) => {
+		e.preventDefault()
+		push(`/Discovery/${inputValue}`)
+	}
+
 	return (
 		<aside
 			id="logo-sidebar"
@@ -156,7 +168,7 @@ export function RightSidebar() {
 		>
 			<div className="h-full items-end px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800 justify-between  flex flex-col">
 				{/* Search */}
-				<form className="flex flex-col max-w-max gap-6">
+				<form className="flex flex-col max-w-max gap-6" onSubmit={handleSubmit}>
 					<label htmlFor="discovery-search" className="sr-only">
 						Search
 					</label>
@@ -183,6 +195,7 @@ export function RightSidebar() {
 							className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							placeholder="Search"
 							required
+							onChange={handleChange}
 						/>
 					</div>
 					<SuggestedProfiles />
