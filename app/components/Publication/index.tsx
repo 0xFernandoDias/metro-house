@@ -50,7 +50,7 @@ export const Publication = ({
 	const isMyProfile = isProfileOwnedByMe(post.profile)
 
 	if (isPending || loading || profileLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	{
