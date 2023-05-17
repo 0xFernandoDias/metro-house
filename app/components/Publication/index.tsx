@@ -169,7 +169,14 @@ export const Publication = ({
 
 					{post.metadata.media.map((media, idx) => {
 						if (idx > 0) return null
-						return <MediaRenderer key={idx} src={media.original.url} alt="" />
+						return (
+							<MediaRenderer
+								key={idx}
+								width="390px"
+								src={media.original.url}
+								alt=""
+							/>
+						)
 					})}
 				</Link>
 
