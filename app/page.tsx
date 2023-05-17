@@ -125,20 +125,14 @@ function Feed({ profile }: { profile: ProfileType }) {
 	)
 }
 
-export function FeedItems({
+function FeedItems({
 	publications,
 	isLoading,
-	isProfile = false,
-	profile,
-	isDiscovery = false,
 	observeRef,
 	hasMore,
 }: {
 	publications: FeedItem[]
 	isLoading: boolean
-	isProfile?: boolean
-	profile?: ProfileType
-	isDiscovery?: boolean
 	observeRef?: RefCallback<unknown>
 	hasMore?: boolean
 }) {
