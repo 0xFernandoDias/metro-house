@@ -14,6 +14,7 @@ import {
 	useMutualFollowers,
 	ProfileId,
 	useReaction,
+	MetadataOutput,
 } from "@lens-protocol/react-web"
 import Link from "next/link"
 import { ProfileHeader } from "../ProfileHeader"
@@ -22,6 +23,7 @@ import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 import { useState } from "react"
 import { Spinner } from "../Spinner"
+import { MediaRenderer } from "@thirdweb-dev/react"
 
 export const Publication = ({
 	publication,
@@ -48,7 +50,7 @@ export const Publication = ({
 	const isMyProfile = isProfileOwnedByMe(post.profile)
 
 	if (isPending || loading || profileLoading) {
-		return <Spinner />
+		return <div>Loading...</div>
 	}
 
 	{
@@ -157,9 +159,18 @@ export const Publication = ({
 				{/* Post Metadata Content */}
 				<Link
 					href={`/publication/${publication.id}`}
-					className="text-lg dark:text-gray-400"
+					className="text-lg dark:text-gray-400 flex flex-col gap-8"
 				>
 					{post.metadata.content}
+
+					{/* {post.metadata.image !== post.metadata.media[0]?.original.url && (
+						<MediaRenderer src={post.metadata.image} />
+					)} */}
+
+					{post.metadata.media.map((media, idx) => {
+						if (idx > 0) return null
+						return <MediaRenderer key={idx} src={media.original.url} alt="" />
+					})}
 				</Link>
 
 				{/* <Link

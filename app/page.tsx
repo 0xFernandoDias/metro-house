@@ -5,14 +5,21 @@ import {
 	PublicationSortCriteria,
 	PublicationTypes,
 	useActiveProfile,
+	Profile as ProfileType,
+	useFeed,
+	FeedItem,
+	isMirrorPublication,
 } from "@lens-protocol/react-web"
-import { useEffect, useState } from "react"
+import { RefCallback, useEffect, useState } from "react"
 import { Publications } from "./components/Publications"
 import { CreatePublication } from "./components/CreatePublication"
 import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
 import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll"
 import { Spinner } from "./components/Spinner"
+import { WhenLoggedOut } from "./components/auth/WhenLoggedOut"
+import Link from "next/link"
+import { Publication } from "./components/Publication"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -65,25 +72,99 @@ export default function Home() {
 	return (
 		<>
 			<title>Metro House</title>
-			<div className="flex flex-col gap-6 sm:max-w-max">
-				{/* <div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
+
+			{/* <div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
 						<b>Address: {address}</b>
 						<b>Active wallet: {wallet?.address}</b>
 						<b>Hello {profile?.handle}</b>
 						<b>Active profile: {profile?.handle}</b>
 						<b>Signer: {signer}</b>
 					</div> */}
-				<WhenLoggedInWithProfile>
-					{({ profile }) => <CreatePublication publisher={profile} />}
-				</WhenLoggedInWithProfile>
+			<WhenLoggedInWithProfile>
+				{({ profile }) => (
+					<div className="flex flex-col gap-12 sm:max-w-max">
+						<CreatePublication publisher={profile} />
+						<Feed profile={profile} />
+					</div>
+				)}
+			</WhenLoggedInWithProfile>
 
-				<Publications
-					publications={publications}
-					observeRef={observeRef}
-					hasMore={hasMore}
-					isLoading={loadingPublications || profileLoading}
-				/>
-			</div>
+			<WhenLoggedOut>
+				<div className="flex flex-col gap-6 sm:max-w-max">
+					<Publications
+						publications={publications}
+						observeRef={observeRef}
+						hasMore={hasMore}
+						isLoading={loadingPublications || profileLoading}
+					/>
+				</div>
+			</WhenLoggedOut>
 		</>
+	)
+}
+
+function Feed({ profile }: { profile: ProfileType }) {
+	const { data, hasMore, loading, observeRef } = useInfiniteScroll(
+		useFeed({
+			profileId: profile.id,
+			observerId: profile.id,
+		})
+	)
+
+	if (!data || loading) {
+		return <Spinner />
+	}
+
+	return (
+		<FeedItems
+			publications={data}
+			observeRef={observeRef}
+			hasMore={hasMore}
+			isLoading={loading}
+		/>
+	)
+}
+
+export function FeedItems({
+	publications,
+	isLoading,
+	isProfile = false,
+	profile,
+	isDiscovery = false,
+	observeRef,
+	hasMore,
+}: {
+	publications: FeedItem[]
+	isLoading: boolean
+	isProfile?: boolean
+	profile?: ProfileType
+	isDiscovery?: boolean
+	observeRef?: RefCallback<unknown>
+	hasMore?: boolean
+}) {
+	if (isLoading) {
+		return <Spinner />
+	}
+
+	return (
+		<div className="flex flex-col gap-6">
+			{/* Publications */}
+			<div className="flex flex-col gap-16 mb-6">
+				{publications.map((publication: FeedItem) => {
+					return (
+						<Publication
+							key={publication.root.id}
+							publication={publication.root}
+						/>
+					)
+				})}
+
+				{hasMore && (
+					<div ref={observeRef}>
+						<Spinner />
+					</div>
+				)}
+			</div>
+		</div>
 	)
 }
