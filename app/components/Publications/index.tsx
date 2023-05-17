@@ -102,7 +102,7 @@ export function Publications({
 						isProfile
 							? `Profile/${profile?.handle}`
 							: isDiscovery
-							? "/Discovery"
+							? "/discovery"
 							: ""
 					}
 					href={
@@ -200,7 +200,7 @@ export function Publications({
 						isProfile
 							? `Profile/${profile?.handle}?tab=nfts`
 							: isDiscovery
-							? "/Discovery?tab=topcollected"
+							? "/discovery?tab=topcollected"
 							: "?tab=topcollected"
 					}
 					role="tab"
@@ -256,7 +256,7 @@ export function Publications({
 					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
 					id={isDiscovery ? "Discovery/topcommented-tab" : "topcommented-tab"}
 					data-tabs-target={
-						isDiscovery ? "/Discovery?tab=topcommented" : "?tab=topcommented"
+						isDiscovery ? "/discovery?tab=topcommented" : "?tab=topcommented"
 					}
 					href={
 						isDiscovery
@@ -302,7 +302,7 @@ export function Publications({
 					href={
 						isDiscovery
 							? {
-									pathname: "/Discovery",
+									pathname: "/discovery",
 									query: { tab: "topmirrored" },
 							  }
 							: {
@@ -312,7 +312,7 @@ export function Publications({
 							  }
 					}
 					data-tabs-target={
-						isDiscovery ? "/Discovery?tab=topmirrored" : "?tab=topmirrored"
+						isDiscovery ? "/discovery?tab=topmirrored" : "?tab=topmirrored"
 					}
 					role="tab"
 					aria-controls={isDiscovery ? "discoverytopmirrored" : "topmirrored"}

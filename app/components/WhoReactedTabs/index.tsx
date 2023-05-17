@@ -19,10 +19,10 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 				} rounded-t-lg`}
 				id="likes-tab"
 				data-tabs-target={
-					`/Publication/${publicationId}/WhoReacted?tab=likes` ||
-					`/Publication/${publicationId}/WhoReacted`
+					`/publication/${publicationId}/whoReacted?tab=likes` ||
+					`/publication/${publicationId}/whoReacted`
 				}
-				href={`/Publication/${publicationId}/WhoReacted?tab=likes`}
+				href={`/publication/${publicationId}/whoReacted?tab=likes`}
 				role="tab"
 				aria-controls="likes"
 				aria-selected="false"
@@ -50,8 +50,8 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 					tab === "mirrors" && "border-b-2 border-blue-700"
 				} rounded-t-lg`}
 				id="mirrors-tab"
-				data-tabs-target={`/Publication/${publicationId}/WhoReacted?tab=mirrors`}
-				href={`/Publication/${publicationId}/WhoReacted?tab=mirrors`}
+				data-tabs-target={`/publication/${publicationId}/whoReacted?tab=mirrors`}
+				href={`/publication/${publicationId}/whoReacted?tab=mirrors`}
 				role="tab"
 				aria-controls="mirrors"
 				aria-selected="false"
@@ -79,8 +79,8 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 					tab === "collects" && "border-b-2 border-blue-700"
 				} rounded-t-lg`}
 				id="collects-tab"
-				data-tabs-target={`/Publication/${publicationId}/WhoReacted?tab=collects`}
-				href={`/Publication/${publicationId}/WhoReacted?tab=collects`}
+				data-tabs-target={`/publication/${publicationId}/whoReacted?tab=collects`}
+				href={`/publication/${publicationId}/whoReacted?tab=collects`}
 				role="tab"
 				aria-controls="collects"
 				aria-selected="false"

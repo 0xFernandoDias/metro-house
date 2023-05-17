@@ -146,7 +146,7 @@ function NewReactionNotification({
 }) {
 	return (
 		<NotificationItemWrapper
-			notificationLink={`/Publication/${notification.publication.id}`}
+			notificationLink={`/publication/${notification.publication.id}`}
 			picture={notification.profile.picture}
 			profile={notification.profile}
 			text={`${notification.profile.handle} reacted ${notification.reaction} to
@@ -164,7 +164,7 @@ function NewMirrorNotification({
 }) {
 	return (
 		<NotificationItemWrapper
-			notificationLink={`/Publication/${notification.publication.id}`}
+			notificationLink={`/publication/${notification.publication.id}`}
 			picture={notification.profile.picture}
 			profile={notification.profile}
 			text={`Publication ${notification.publication.id} collected by${" "}
@@ -195,7 +195,7 @@ function NewMentionNotification({
 }) {
 	return (
 		<NotificationItemWrapper
-			notificationLink={`/Publication/${notification.mentionPublication.id}`}
+			notificationLink={`/publication/${notification.mentionPublication.id}`}
 			picture={notification.mentionPublication.profile.picture}
 			profile={notification.mentionPublication.profile}
 			text={`Mentioned ${`"`}
@@ -228,7 +228,7 @@ function NewCommentNotification({
 }) {
 	return (
 		<NotificationItemWrapper
-			notificationLink={`/Publication/${notification.comment.id}`}
+			notificationLink={`/publication/${notification.comment.id}`}
 			picture={notification.profile.picture}
 			profile={notification.profile}
 			text={`Comment ${`"`}
@@ -261,7 +261,7 @@ function NewCollectNotification({
 }) {
 	return (
 		<NotificationItemWrapper
-			notificationLink={`/Publication/${notification.collectedPublication.id}`}
+			notificationLink={`/publication/${notification.collectedPublication.id}`}
 			picture={notification.collectedPublication.profile.picture}
 			profile={notification.collectedPublication.profile}
 			text={`Publication ${
@@ -294,7 +294,7 @@ function NewFollowerNotification({
 }) {
 	return (
 		<NotificationItemWrapper
-			notificationLink={`/Profile/${notification.wallet.defaultProfile
+			notificationLink={`/profile/${notification.wallet.defaultProfile
 				?.handle!}`}
 			picture={notification.wallet.defaultProfile?.picture!}
 			profile={notification.wallet.defaultProfile!}

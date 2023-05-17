@@ -145,7 +145,7 @@ export function LoginButton() {
 		return (
 			<div className="flex flex-col sm:flex-row gap-3">
 				<Link
-					href="/CreateProfile"
+					href="/createProfile"
 					className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
 					// disabled={isDisconnectLoading || isLogoutPending}
 				>

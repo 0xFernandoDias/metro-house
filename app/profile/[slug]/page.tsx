@@ -219,13 +219,13 @@ function ProfileContacts({
 		<ul className="flex text-xl flex-col gap-4">
 			<div className="flex flex-row gap-4">
 				<Link
-					href={`/Profile/${profile.handle}/Contacts?tab=followers`}
+					href={`/profile/${profile.handle}/contacts?tab=followers`}
 					className="font-semibold hover:underline text-gray-900 dark:text-white"
 				>
 					{profile.stats.totalFollowers} Followers
 				</Link>
 				<Link
-					href={`/Profile/${profile.handle}/Contacts?tab=following`}
+					href={`/profile/${profile.handle}/contacts?tab=following`}
 					className="font-semibold hover:underline text-gray-900 dark:text-white"
 				>
 					{profile.stats.totalFollowing} Following
@@ -238,7 +238,7 @@ function ProfileContacts({
 						<></>
 					) : (
 						<Link
-							href={`/Profile/${profile.handle}/Contacts?tab=mutual`}
+							href={`/profile/${profile.handle}/contacts?tab=mutual`}
 							className="font-semibold hover:underline text-gray-900 dark:text-white"
 						>
 							{isMyProfile
@@ -264,7 +264,7 @@ function ProfileContacts({
 				{mutual && mutual.length > 4 && (
 					<Link
 						className="flex items-center justify-center w-12 h-12 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
-						href={`/Profile/${profile.handle}/Contacts?=mutual`}
+						href={`/profile/${profile.handle}/contacts?=mutual`}
 					>
 						+{mutual.length - 4}
 					</Link>

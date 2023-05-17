@@ -38,11 +38,11 @@ export function LeftSidebar() {
 										className="flex p-2 text-xl items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
 										href={
 											item === "My Default Profile"
-												? `/Profile/${profile.handle}`
+												? `/profile/${profile.handle}`
 												: item === "Contacts"
-												? `/Profile/${profile.handle}/Contacts`
-												: item === "Discovery"
-												? "/Discovery"
+												? `/profile/${profile.handle}/contacts`
+												: item === "discovery"
+												? "/discovery"
 												: item === "Latest"
 												? "/"
 												: item === "Top Collected"
@@ -52,7 +52,7 @@ export function LeftSidebar() {
 												: item === "Top Mirrored"
 												? "/?tab=topmirrored"
 												: item === "Notifications"
-												? "/Notifications"
+												? "/notifications"
 												: "/"
 										}
 									>
@@ -213,7 +213,7 @@ export function LeftSidebar() {
 									className="flex p-2 text-xl items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
 									href={
 										item === "Discovery"
-											? "/Discovery"
+											? "/discovery"
 											: item === "Latest"
 											? "/"
 											: item === "Top Collected"

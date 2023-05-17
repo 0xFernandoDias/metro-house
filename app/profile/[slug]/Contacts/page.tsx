@@ -154,13 +154,13 @@ function Follower({ profile }: { profile: ProfileType }) {
 
 				<div className="flex flex-col min-w-0">
 					<Link
-						href={`/Profile/${profile.handle}`}
+						href={`/profile/${profile.handle}`}
 						className="text-xl font-medium text-gray-900 truncate dark:text-white"
 					>
 						{profile.name}
 					</Link>
 					<Link
-						href={`/Profile/${profile.handle}`}
+						href={`/profile/${profile.handle}`}
 						className="text-xl text-gray-500 truncate dark:text-gray-400"
 					>
 						@{profile.handle}

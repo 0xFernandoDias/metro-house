@@ -26,10 +26,10 @@ export function ContactsTabs({ profile }: { profile: ProfileType }) {
 				} rounded-t-lg`}
 				id="followers-tab"
 				data-tabs-target={
-					`/Profile/${profile.handle}/Contacts?tab=followers` ||
-					`/Profile/${profile.handle}/Contacts`
+					`/profile/${profile.handle}/contacts?tab=followers` ||
+					`/profile/${profile.handle}/contacts`
 				}
-				href={`/Profile/${profile.handle}/Contacts?tab=followers`}
+				href={`/profile/${profile.handle}/contacts?tab=followers`}
 				role="tab"
 				aria-controls="followers"
 				aria-selected="false"
@@ -42,8 +42,8 @@ export function ContactsTabs({ profile }: { profile: ProfileType }) {
 					tab === "following" && "border-b-2 border-blue-700"
 				} rounded-t-lg`}
 				id="following-tab"
-				data-tabs-target={`/Profile/${profile.handle}/Contacts?tab=following`}
-				href={`/Profile/${profile.handle}/Contacts?tab=following`}
+				data-tabs-target={`/profile/${profile.handle}/contacts?tab=following`}
+				href={`/profile/${profile.handle}/contacts?tab=following`}
 				role="tab"
 				aria-controls="following"
 				aria-selected="false"
@@ -61,8 +61,8 @@ export function ContactsTabs({ profile }: { profile: ProfileType }) {
 								tab === "mutual" && "border-b-2 border-blue-700"
 							} rounded-t-lg`}
 							id="mutual-tab"
-							data-tabs-target={`/Profile/${profile.handle}/Contacts?tab=mutual`}
-							href={`/Profile/${profile.handle}/Contacts?tab=mutual`}
+							data-tabs-target={`/Profile/${profile.handle}/contacts?tab=mutual`}
+							href={`/Profile/${profile.handle}/contacts?tab=mutual`}
 							role="tab"
 							aria-controls="mutual"
 							aria-selected="false"

@@ -151,7 +151,7 @@ export function RightSidebar() {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
-		push(`/Discovery/${inputValue}`)
+		push(`/discovery/${inputValue}`)
 	}
 
 	return (
@@ -236,7 +236,7 @@ function UserMenu() {
 				</button>
 
 				<Link
-					href="/Settings"
+					href="/settings"
 					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
 					role="menuitem"
 				>
@@ -289,13 +289,13 @@ function SuggestedProfiles() {
 
 								<div className="flex flex-col min-w-0">
 									<Link
-										href={`/Profile/${profile.handle}`}
+										href={`/profile/${profile.handle}`}
 										className="text-xl font-medium text-gray-900 truncate dark:text-white"
 									>
 										{profile.name}
 									</Link>
 									<Link
-										href={`/Profile/${profile.handle}`}
+										href={`/profile/${profile.handle}`}
 										className="text-xl text-gray-500 truncate dark:text-gray-400"
 									>
 										@{profile.handle}
@@ -330,29 +330,29 @@ function Footer() {
 					Home
 				</Link>
 
-				<Link href="/About" className="hover:underline">
+				<Link href="/about" className="hover:underline">
 					About
 				</Link>
 
 				{activeWallet && (
-					<Link href="/CreateProfile" className="hover:underline">
+					<Link href="/createProfile" className="hover:underline">
 						Create Profile
 					</Link>
 				)}
 
-				<Link href="/Discovery" className="hover:underline">
+				<Link href="/discovery" className="hover:underline">
 					Discovery
 				</Link>
 
 				<WhenLoggedInWithProfile>
 					{() => (
-						<Link href="/Settings" className="hover:underline">
+						<Link href="/settings" className="hover:underline">
 							Settings
 						</Link>
 					)}
 				</WhenLoggedInWithProfile>
 
-				<Link href="/TermsAndPrivacy" className="hover:underline">
+				<Link href="/termsAndPrivacy" className="hover:underline">
 					Learn Blockchain
 				</Link>
 			</ul>

@@ -226,7 +226,7 @@ export default function CreateProfile({
 				{result && (
 					<Link
 						className="text-xl font-semibold"
-						href={`/Profile/${createdProfileHandle}.test`}
+						href={`/profile/${createdProfileHandle}.test`}
 					>
 						{result}. Click here to goes to the {createdProfileHandle}
 						{"'"}s profile.

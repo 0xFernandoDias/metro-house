@@ -33,13 +33,13 @@ export function ProfileHeader({
 			<div className="space-y-1 font-medium dark:text-white">
 				<div className="flex items-center flex-row gap-3">
 					{profile.name && (
-						<Link className="text-lg" href={`/Profile/${profile.handle}`}>
+						<Link className="text-lg" href={`/profile/${profile.handle}`}>
 							{profile.name}
 						</Link>
 					)}
 					<Link
 						className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
-						href={`/Profile/${profile.handle}`}
+						href={`/profile/${profile.handle}`}
 					>
 						@{profile.handle}
 					</Link>
@@ -64,14 +64,14 @@ export function ProfileHeader({
 					{profile.followStatus?.isFollowedByMe && (
 						<Link
 							className="text-sm font-medium text-gray-500 truncate dark:text-gray-300"
-							href={`/Profile/${profile.handle}`}
+							href={`/profile/${profile.handle}`}
 						>
 							is followed by me
 						</Link>
 					)}
 				</div>
 				<div className="text-md text-gray-500 dark:text-gray-400">
-					<Link href={`/Profile/${profile.handle}/Contacts?tab=followers`}>
+					<Link href={`/profile/${profile.handle}/contacts?tab=followers`}>
 						{profile.stats.totalFollowers} followers
 					</Link>
 					<WhenLoggedInWithProfile>
@@ -79,7 +79,7 @@ export function ProfileHeader({
 							isMyProfile ? (
 								""
 							) : (
-								<Link href={`/Profile/${profile.handle}/Contacts?tab=mutual`}>
+								<Link href={`/profile/${profile.handle}/contacts?tab=mutual`}>
 									{mutual?.length ? `, ${mutual?.length} mutual` : ""}
 								</Link>
 							)

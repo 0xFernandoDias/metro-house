@@ -19,7 +19,7 @@ export function ProfilePicture({
 	if (!picture) {
 		return (
 			<Link
-				href={`/Profile/${profile.handle}`}
+				href={`/profile/${profile.handle}`}
 				className={`flex w-${
 					design === "profileSmall"
 						? "16"
@@ -53,7 +53,7 @@ export function ProfilePicture({
 
 	if (picture.__typename === "MediaSet") {
 		return (
-			<Link href={`/Profile/${profile.handle}`}>
+			<Link href={`/profile/${profile.handle}`}>
 				{!picture.original.url.includes("https://test.com") ? (
 					<MediaRenderer
 						className="rounded-full"
