@@ -255,7 +255,7 @@ export function Publications({
 					className={`inline-block p-4 ${
 						tab === "topcommented" && "border-b-2 border-blue-700"
 					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
-					id={isDiscovery ? "Discovery/topcommented-tab" : "topcommented-tab"}
+					id={isDiscovery ? "discovery/topcommented-tab" : "topcommented-tab"}
 					data-tabs-target={
 						isDiscovery ? "/discovery?tab=topcommented" : "?tab=topcommented"
 					}
