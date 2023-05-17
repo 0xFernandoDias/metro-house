@@ -101,7 +101,7 @@ export function Publications({
 					}
 					data-tabs-target={
 						isProfile
-							? `Profile/${profile?.handle}`
+							? `profile/${profile?.handle}`
 							: isDiscovery
 							? "/discovery"
 							: ""
@@ -109,11 +109,11 @@ export function Publications({
 					href={
 						isProfile
 							? {
-									pathname: `Profile/${profile?.handle}`,
+									pathname: `profile/${profile?.handle}`,
 							  }
 							: isDiscovery
 							? {
-									pathname: "Discovery",
+									pathname: "discovery",
 							  }
 							: ""
 					}
@@ -182,13 +182,13 @@ export function Publications({
 					href={
 						isProfile
 							? {
-									pathname: `Profile/${profile?.handle}`,
+									pathname: `profile/${profile?.handle}`,
 									// query: { ...query, tab: "collects" },
 									query: { tab: "nfts" },
 							  }
 							: isDiscovery
 							? {
-									pathname: "Discovery",
+									pathname: "discovery",
 									query: { tab: "topcollected" },
 							  }
 							: {
