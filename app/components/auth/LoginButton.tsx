@@ -23,6 +23,22 @@ import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import Link from "next/link"
 import { Spinner } from "../Spinner"
 
+const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
+
+const CHAIN_ID =
+	ENVIRONMENT === "development"
+		? 80001
+		: ENVIRONMENT === "production"
+		? 137
+		: 80001
+
+const CHAINID =
+	ENVIRONMENT === "development"
+		? ChainId.Mumbai
+		: ENVIRONMENT === "production"
+		? ChainId.Polygon
+		: ChainId.Mumbai
+
 export function LoginButton() {
 	const {
 		execute: login,
@@ -52,7 +68,7 @@ export function LoginButton() {
 	})
 
 	const { chain } = useNetwork()
-	const isWrongNetwork = isConnected && chain?.id !== 80001
+	const isWrongNetwork = isConnected && chain?.id !== CHAIN_ID
 	const {
 		switchNetwork,
 		isLoading: isSwitchNetworkLoading,
@@ -104,11 +120,16 @@ export function LoginButton() {
 					type="button"
 					className="min-w-min flex focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
 					onClick={() => {
-						switchNetwork?.(ChainId.Mumbai)
+						switchNetwork?.(CHAINID)
 					}}
 					disabled={isSwitchNetworkLoading}
 				>
-					Switch to Mumbai
+					Switch to{" "}
+					{ENVIRONMENT === "development"
+						? "Mumbai"
+						: ENVIRONMENT === "production"
+						? "Polygon"
+						: "Mumbai"}
 				</button>
 				<span className="text-red-500">
 					{switchNetworkError && "User did not switch to correct network."}
@@ -145,13 +166,33 @@ export function LoginButton() {
 	if (activeWallet && !profile) {
 		return (
 			<div className="flex flex-col sm:flex-row gap-3">
-				<Link
-					href="/createProfile"
-					className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
-					// disabled={isDisconnectLoading || isLogoutPending}
-				>
-					Create a profile
-				</Link>
+				{ENVIRONMENT === "development" ? (
+					<Link
+						href="/createProfile"
+						className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
+						// disabled={isDisconnectLoading || isLogoutPending}
+					>
+						Create a profile
+					</Link>
+				) : (
+					<div className="flex flex-col sm:flex-row gap-3">
+						<Link
+							href="https://opensea.io/collection/lens-protocol-profiles"
+							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
+							// disabled={isDisconnectLoading || isLogoutPending}
+						>
+							Buy a profile
+						</Link>
+						<Link
+							href="https://claim.lens.xyz/"
+							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
+							// disabled={isDisconnectLoading || isLogoutPending}
+						>
+							Claim a profile
+						</Link>
+					</div>
+				)}
+
 				<button
 					onClick={logout}
 					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"

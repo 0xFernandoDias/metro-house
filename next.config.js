@@ -3,6 +3,9 @@ const nextConfig = {
 	experimental: {
 		appDir: true,
 	},
+	env: {
+		ENVIRONMENT: process.env.ENVIRONMENT,
+	},
 	images: {
 		remotePatterns: [
 			{
