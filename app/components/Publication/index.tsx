@@ -14,7 +14,6 @@ import {
 	useMutualFollowers,
 	ProfileId,
 	useReaction,
-	MetadataOutput,
 } from "@lens-protocol/react-web"
 import Link from "next/link"
 import { ProfileHeader } from "../ProfileHeader"
@@ -172,7 +171,7 @@ export const Publication = ({
 						return (
 							<MediaRenderer
 								key={idx}
-								width="390px"
+								width={"530px"}
 								src={media.original.url}
 								alt=""
 							/>
@@ -420,10 +419,10 @@ function MirrorButton({
 	profile: ProfileOwnedByMe
 	publication: ContentPublication
 }) {
-	return <Mirror publication={publication} profile={profile} />
+	return <MirrorButtonn publication={publication} profile={profile} />
 }
 
-function Mirror({
+function MirrorButtonn({
 	publication,
 	profile,
 }: {

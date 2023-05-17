@@ -36,12 +36,7 @@ function ProfileCover({
 		case "MediaSet":
 			return (
 				// eslint-disable-next-line react/jsx-no-undef
-				<MediaRenderer
-					className="rounded-full"
-					height="100px"
-					width="650px"
-					src={picture.original.url}
-				/>
+				<MediaRenderer width={"530px"} src={picture.original.url} />
 			)
 		default:
 			return <></>
