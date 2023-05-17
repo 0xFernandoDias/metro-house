@@ -65,7 +65,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain={activeChain}>
+				<ThirdwebProvider activeChain={"polygon"}>
 					<WagmiConfig client={wagmiClient}>
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
