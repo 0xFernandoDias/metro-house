@@ -87,12 +87,17 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		!profileFollowers ||
 		profileLoading
 	)
-		return <Spinner />
+		return (
+			<>
+				<title>Profile Contacts / Metro House</title>
+				<Spinner />
+			</>
+		)
 
 	return (
 		<>
 			<title>
-				@{profile.handle}
+				{`@${profile?.handle}`}
 				{"'"}s Contacts / Metro House
 			</title>
 			<div className="flex flex-col gap-6 mb-8">

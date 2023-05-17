@@ -96,13 +96,18 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 		!publications ||
 		profileLoading
 	) {
-		return <Spinner />
+		return (
+			<>
+				<title>Profile / Metro House</title>
+				<Spinner />
+			</>
+		)
 	}
 
 	return (
 		<>
 			<title>
-				{profile.name} (@{profile.handle}) / Metro House
+				{profile.name} {`@${profile?.handle}`}/ Metro House
 			</title>
 			<div className="flex flex-col">
 				<div className="md:flex-row gap-8 flex flex-col justify-between">

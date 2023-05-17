@@ -29,14 +29,19 @@ export default function Publication({
 	})
 
 	if (!publication || loading || profileLoading) {
-		return <Spinner />
+		return (
+			<>
+				<title>Publication / Metro House</title>
+				<Spinner />
+			</>
+		)
 	}
 
 	return (
 		<>
 			<title>
-				@{publication.profile.handle}
-				{"'s"} Publication / Metro House
+				{`@${publication.profile?.handle}'s`}
+				Publication / Metro House
 			</title>
 			<div className="flex flex-col gap-8">
 				<PublicationComponent
