@@ -5,6 +5,8 @@ import { useActiveWallet, useCreateProfile } from "@lens-protocol/react-web"
 import { useState } from "react"
 import Link from "next/link"
 
+const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
+
 export default function CreateProfile({
 	params,
 }: {
@@ -35,6 +37,8 @@ export default function CreateProfile({
 
 		form.reset()
 	}
+
+	if (ENVIRONMENT !== "development") return null
 
 	if (!activeWallet) {
 		return (

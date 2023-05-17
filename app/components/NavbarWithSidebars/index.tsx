@@ -15,6 +15,8 @@ import { FollowUnfollowButton } from "../FollowUnfollowButton"
 import { ProfilePicture } from "../ProfilePicture"
 import { Spinner } from "../Spinner"
 
+const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
+
 export function NavbarWithSidebars({
 	children,
 }: {
@@ -335,7 +337,7 @@ function Footer() {
 					About
 				</Link>
 
-				{activeWallet && (
+				{activeWallet && ENVIRONMENT === "development" && (
 					<Link href="/createProfile" className="hover:underline">
 						Create Profile
 					</Link>

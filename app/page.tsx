@@ -89,7 +89,7 @@ export default function Home() {
 				)}
 			</WhenLoggedInWithProfile>
 
-			<WhenLoggedOut>
+			{!profile && (
 				<div className="flex flex-col gap-6 sm:max-w-max">
 					<Publications
 						publications={publications}
@@ -98,7 +98,7 @@ export default function Home() {
 						isLoading={loadingPublications || profileLoading}
 					/>
 				</div>
-			</WhenLoggedOut>
+			)}
 		</>
 	)
 }

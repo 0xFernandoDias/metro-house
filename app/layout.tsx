@@ -17,8 +17,17 @@ import "./global.css"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
 
+const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
+
+const chain =
+	ENVIRONMENT === "development"
+		? polygonMumbai
+		: ENVIRONMENT === "production"
+		? polygon
+		: polygonMumbai
+
 const { provider, webSocketProvider } = configureChains(
-	[polygon, polygonMumbai],
+	[chain],
 	[publicProvider()]
 )
 
@@ -28,9 +37,23 @@ const wagmiClient = createClient({
 	webSocketProvider,
 })
 
+const environment =
+	ENVIRONMENT === "development"
+		? development
+		: ENVIRONMENT === "production"
+		? production
+		: development
+
+const activeChain =
+	ENVIRONMENT === "development"
+		? "mumbai"
+		: ENVIRONMENT === "production"
+		? "polygon"
+		: "mumbai"
+
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
-	environment: development,
+	environment,
 	appId: appId("metro-house"),
 }
 
@@ -42,7 +65,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain="polygon">
+				<ThirdwebProvider activeChain={activeChain}>
 					<WagmiConfig client={wagmiClient}>
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
