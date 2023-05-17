@@ -324,7 +324,8 @@ function SuggestedProfiles() {
 }
 
 function Footer() {
-	const { data: activeWallet, loading: activeWalletLoading } = useActiveWallet()
+	const { data: activeWallet, loading: activeWalletLoading } =
+		useActiveProfile()
 
 	return (
 		<footer className="w-full bg-white rounded-lg dark:bg-gray-800 mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
