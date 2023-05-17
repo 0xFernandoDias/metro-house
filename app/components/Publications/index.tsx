@@ -262,7 +262,7 @@ export function Publications({
 					href={
 						isDiscovery
 							? {
-									pathname: "Discovery",
+									pathname: "discovery",
 									query: { tab: "topcommented" },
 							  }
 							: {
