@@ -40,6 +40,7 @@ import { Publication } from "../Publication"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { RefCallback } from "react"
+import { Spinner } from "../Spinner"
 
 export function Publications({
 	publications,
@@ -75,7 +76,7 @@ export function Publications({
 	// const isNftsTab = tab === "nfts"
 
 	if (isLoading) {
-		return <>...loading</>
+		return <Spinner />
 	}
 
 	return (
@@ -557,7 +558,11 @@ export function Publications({
 					)
 				})}
 
-				{hasMore && <p ref={observeRef}>Loading more...</p>}
+				{hasMore && (
+					<div ref={observeRef}>
+						<Spinner />
+					</div>
+				)}
 			</div>
 		</div>
 	)

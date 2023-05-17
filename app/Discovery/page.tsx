@@ -18,6 +18,7 @@ import { ProfilePicture } from "../components/ProfilePicture"
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "../components/FollowUnfollowButton"
+import { Spinner } from "../components/Spinner"
 
 export default function Discovery() {
 	const { get } = useSearchParams()
@@ -71,7 +72,7 @@ export default function Discovery() {
 	)
 
 	if (loadingPublications || !publications || profileLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	if (publications) {
@@ -184,7 +185,7 @@ function SearchResult({ query }: { query: string }) {
 	)
 
 	if (profilesLoading || publicationsLoading || profileLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	return (
@@ -199,7 +200,11 @@ function SearchResult({ query }: { query: string }) {
 				) : (
 					<p>No profiles found</p>
 				)}
-				{hasMoreProfiles && <p ref={observeProfilesRef}>Loading more...</p>}
+				{hasMoreProfiles && (
+					<div ref={observeProfilesRef}>
+						<Spinner />
+					</div>
+				)}
 			</ul>
 
 			{/* Publications */}
@@ -213,7 +218,9 @@ function SearchResult({ query }: { query: string }) {
 					<p>No publications found</p>
 				)}
 				{hasMorePublications && (
-					<p ref={observePublicationsRef}>Loading more...</p>
+					<div ref={observePublicationsRef}>
+						<Spinner />
+					</div>
 				)}
 			</ul>
 		</div>

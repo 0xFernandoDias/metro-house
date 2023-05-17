@@ -8,6 +8,7 @@ import {
 	useActiveProfile,
 	usePublication,
 } from "@lens-protocol/react-web"
+import { Spinner } from "@/app/components/Spinner"
 
 export default function Publication({
 	params,
@@ -28,7 +29,7 @@ export default function Publication({
 	})
 
 	if (!publication || loading || profileLoading) {
-		return <div>Loading pub...</div>
+		return <Spinner />
 	}
 
 	return (

@@ -2,6 +2,7 @@
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { Publication } from "@/app/components/Publication"
+import { Spinner } from "@/app/components/Spinner"
 import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import {
@@ -120,7 +121,7 @@ function SearchResult({ query }: { query: string }) {
 	)
 
 	if (profilesLoading || publicationsLoading || profileLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	return (
@@ -135,7 +136,11 @@ function SearchResult({ query }: { query: string }) {
 				) : (
 					<p>No profiles found</p>
 				)}
-				{hasMoreProfiles && <p ref={observeProfilesRef}>Loading more...</p>}
+				{hasMoreProfiles && (
+					<div ref={observeProfilesRef}>
+						<Spinner />
+					</div>
+				)}
 			</ul>
 
 			{/* Publications */}
@@ -149,7 +154,9 @@ function SearchResult({ query }: { query: string }) {
 					<p>No publications found</p>
 				)}
 				{hasMorePublications && (
-					<p ref={observePublicationsRef}>Loading more...</p>
+					<div ref={observePublicationsRef}>
+						<Spinner />
+					</div>
 				)}
 			</ul>
 		</div>

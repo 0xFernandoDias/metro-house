@@ -7,6 +7,7 @@ import {
 	useUnfollow,
 	isProfileOwnedByMe,
 } from "@lens-protocol/react-web"
+import { Spinner } from "../Spinner"
 
 export function FollowUnfollowButton({
 	follower,
@@ -34,7 +35,7 @@ export function FollowUnfollowButton({
 
 	if (isMyProfile) return null
 
-	if (unfollowLoading || followLoading) return <>loading...</>
+	if (unfollowLoading || followLoading) return <Spinner />
 
 	if (
 		followee?.followStatus?.isFollowedByMe &&

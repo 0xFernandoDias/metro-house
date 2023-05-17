@@ -15,6 +15,7 @@ import { WebBundlr } from "@bundlr-network/client"
 import { providers, utils } from "ethers"
 import { fetchSigner } from "wagmi/actions"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { Spinner } from "../Spinner"
 
 const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
@@ -361,7 +362,7 @@ export function CommentsSection({
 		useComments({ commentsOf, observerId })
 	)
 
-	if (loading || isLoading) return <div>Loading comments...</div>
+	if (loading || isLoading) return <Spinner />
 
 	return (
 		<div className="flex flex-col gap-14 mb-6">
@@ -409,7 +410,11 @@ export function CommentsSection({
 						<Publication isComment key={comment.id} publication={comment} />
 					)
 				})}
-				{hasMore && <p ref={observeRef}>Loading more...</p>}
+				{hasMore && (
+					<div ref={observeRef}>
+						<Spinner />
+					</div>
+				)}
 			</ol>
 		</div>
 	)

@@ -61,8 +61,8 @@ export function ContactsTabs({ profile }: { profile: ProfileType }) {
 								tab === "mutual" && "border-b-2 border-blue-700"
 							} rounded-t-lg`}
 							id="mutual-tab"
-							data-tabs-target={`/Profile/${profile.handle}/contacts?tab=mutual`}
-							href={`/Profile/${profile.handle}/contacts?tab=mutual`}
+							data-tabs-target={`/profile/${profile.handle}/contacts?tab=mutual`}
+							href={`/profile/${profile.handle}/contacts?tab=mutual`}
 							role="tab"
 							aria-controls="mutual"
 							aria-selected="false"

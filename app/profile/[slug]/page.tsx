@@ -23,6 +23,7 @@ import {
 import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { Spinner } from "@/app/components/Spinner"
 
 function ProfileCover({
 	picture,
@@ -95,7 +96,7 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 		!publications ||
 		profileLoading
 	) {
-		return <div>Loading profile...</div>
+		return <Spinner />
 	}
 
 	return (
@@ -213,7 +214,7 @@ function ProfileContacts({
 		viewingProfileId: profile.id,
 	})
 
-	if (loadingFollowers || loadingMutual) return <>...loading</>
+	if (loadingFollowers || loadingMutual) return <Spinner />
 
 	return (
 		<ul className="flex text-xl flex-col gap-4">

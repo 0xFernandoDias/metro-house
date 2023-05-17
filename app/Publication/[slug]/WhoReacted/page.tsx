@@ -14,6 +14,7 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { Spinner } from "@/app/components/Spinner"
 
 export default function WhoReacted({
 	params,
@@ -69,7 +70,7 @@ export default function WhoReacted({
 	)
 
 	if (loading || profileLoading || whoMirroredLoading || whoCollectedLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	return (
@@ -88,7 +89,9 @@ export default function WhoReacted({
 									<Profile profile={profile.profile} key={profile.profile.id} />
 								))}
 								{hasMoreReactions && (
-									<p ref={observeReactionsRef}>Loading more...</p>
+									<div ref={observeReactionsRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						) : tab === "mirrors" ? (
@@ -97,7 +100,9 @@ export default function WhoReacted({
 									<Profile profile={profile} key={profile.id} />
 								))}
 								{hasMoreMirrors && (
-									<p ref={observeMirrorsRef}>Loading more...</p>
+									<div ref={observeMirrorsRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						) : tab === "collects" ? (
@@ -109,7 +114,9 @@ export default function WhoReacted({
 									/>
 								))}
 								{hasMoreCollects && (
-									<p ref={observeCollectsRef}>Loading more...</p>
+									<div ref={observeCollectsRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						) : (
@@ -118,7 +125,9 @@ export default function WhoReacted({
 									<Profile profile={profile.profile} key={profile.profile.id} />
 								))}
 								{hasMoreReactions && (
-									<p ref={observeReactionsRef}>Loading more...</p>
+									<div ref={observeReactionsRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						)}

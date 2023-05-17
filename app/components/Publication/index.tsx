@@ -21,6 +21,7 @@ import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 import { useState } from "react"
+import { Spinner } from "../Spinner"
 
 export const Publication = ({
 	publication,
@@ -47,7 +48,7 @@ export const Publication = ({
 	const isMyProfile = isProfileOwnedByMe(post.profile)
 
 	if (isPending || loading || profileLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	{
@@ -367,7 +368,7 @@ function Collect({
 	}
 
 	if (isPending) {
-		return <>...loading</>
+		return <Spinner />
 	}
 
 	return (
@@ -428,7 +429,7 @@ function Mirror({
 	}
 
 	if (isPending) {
-		return <>...loading</>
+		return <Spinner />
 	}
 
 	return (
@@ -516,7 +517,7 @@ function ReactionButton({
 	}
 
 	if (isPending) {
-		return <>...loading</>
+		return <Spinner />
 	}
 
 	return (

@@ -12,6 +12,7 @@ import { CreatePublication } from "./components/CreatePublication"
 import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
 import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll"
+import { Spinner } from "./components/Spinner"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()
@@ -58,7 +59,7 @@ export default function Home() {
 	)
 
 	if (!publications || loadingPublications || profileLoading) {
-		return <div>Loading...</div>
+		return <Spinner />
 	}
 
 	return (

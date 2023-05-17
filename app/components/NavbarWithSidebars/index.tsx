@@ -13,6 +13,7 @@ import { ChangeEvent, useState } from "react"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "../FollowUnfollowButton"
 import { ProfilePicture } from "../ProfilePicture"
+import { Spinner } from "../Spinner"
 
 export function NavbarWithSidebars({
 	children,
@@ -269,7 +270,7 @@ function SuggestedProfiles() {
 		loading,
 	} = useProfilesToFollow({ observerId: profile?.id || undefined })
 
-	if (loading || profileLoading) return <>...loading</>
+	if (loading || profileLoading) return <Spinner />
 
 	return (
 		<div className="flex flex-col items-center gap-6">

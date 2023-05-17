@@ -21,6 +21,7 @@ import {
 } from "wagmi"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import Link from "next/link"
+import { Spinner } from "../Spinner"
 
 export function LoginButton() {
 	const {
@@ -138,7 +139,7 @@ export function LoginButton() {
 	}
 
 	if (profileLoading || isDisconnectLoading || isLogoutPending) {
-		return <>...Loading</>
+		return <Spinner />
 	}
 
 	if (activeWallet && !profile) {

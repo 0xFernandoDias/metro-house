@@ -19,6 +19,7 @@ import {
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll"
 import { ProfilePicture } from "../components/ProfilePicture"
 import { useEffect } from "react"
+import { Spinner } from "../components/Spinner"
 
 export default function Notifications({
 	params,
@@ -54,7 +55,7 @@ function NotificationsComponent({ profile }: { profile: ProfileOwnedByMe }) {
 		if (clear && unreadNotificationCount) clear()
 	}, [clear, unreadNotificationCount])
 
-	if (loading || loadingCount) return <p>Loading...</p>
+	if (loading || loadingCount) return <Spinner />
 
 	return (
 		<div className="flex flex-col min-w-full gap-8">
@@ -67,7 +68,11 @@ function NotificationsComponent({ profile }: { profile: ProfileOwnedByMe }) {
 				))}
 			</ol>
 
-			{hasMore && <p ref={observeRef}>Loading more...</p>}
+			{hasMore && (
+				<div ref={observeRef}>
+					<Spinner />
+				</div>
+			)}
 		</div>
 	)
 }

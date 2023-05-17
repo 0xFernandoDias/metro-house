@@ -23,6 +23,7 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { Spinner } from "@/app/components/Spinner"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
 	const { slug: profileHandle } = params
@@ -86,7 +87,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 		!profileFollowers ||
 		profileLoading
 	)
-		return <>Loading...</>
+		return <Spinner />
 
 	return (
 		<>
@@ -108,7 +109,9 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 									/>
 								))}
 								{hasMoreFollowers && (
-									<p ref={observeFollowersRef}>Loading more...</p>
+									<div ref={observeFollowersRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						) : tab === "following" ? (
@@ -117,7 +120,9 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 									<Follower key={e.profile!.id} profile={e.profile} />
 								))}
 								{hasMoreFollowing && (
-									<p ref={observeFollowingRef}>Loading more...</p>
+									<div ref={observeFollowingRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						) : tab === "mutual" ? (
@@ -126,7 +131,9 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 									<Follower key={e.id} profile={e} />
 								))}
 								{hasMoreMutualFollowers && (
-									<p ref={observeMutualFollowersRef}>Loading more...</p>
+									<div ref={observeMutualFollowersRef}>
+										<Spinner />
+									</div>
 								)}
 							</>
 						) : (
