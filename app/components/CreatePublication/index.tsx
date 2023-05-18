@@ -106,7 +106,7 @@ export function CreatePublication({
 	}
 
 	return (
-		<form className="flex flex-col gap-4" onSubmit={submit}>
+		<form className="flex flex-col sm:max-w-[80%] gap-4" onSubmit={submit}>
 			{/* Text field */}
 			<div className="border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 				<div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
