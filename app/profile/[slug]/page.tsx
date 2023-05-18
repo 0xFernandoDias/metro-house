@@ -303,13 +303,9 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
 
-export function never(message = "Unexpected call to never()") {
-	throw new Error(message)
-}
-
 async function getBundlr() {
-	const signer = (await fetchSigner()) ?? never("Cannot get signer")
-	const provider = signer?.provider ?? never("Cannot get provider")
+	const signer = (await fetchSigner()) ?? null
+	const provider = signer?.provider ?? null
 
 	if (provider instanceof providers.JsonRpcProvider) {
 		await provider.send("wallet_switchEthereumChain", [
@@ -337,7 +333,7 @@ async function getBundlr() {
 	return bundlr
 }
 
-export async function upload(data: unknown): Promise<string> {
+async function upload(data: unknown): Promise<string> {
 	const confirm = window.confirm(
 		`In this example we will now upload metadata file via the Bundlr Network.
   

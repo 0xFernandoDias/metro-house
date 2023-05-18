@@ -20,7 +20,7 @@ import { WebBundlr } from "@bundlr-network/client"
 const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
 
-export function never(message = "Unexpected call to never()") {
+function never(message = "Unexpected call to never()") {
 	throw new Error(message)
 }
 
@@ -54,7 +54,7 @@ async function getBundlr() {
 	return bundlr
 }
 
-export async function upload(data: unknown): Promise<string> {
+async function upload(data: unknown): Promise<string> {
 	const confirm = window.confirm(
 		`In this example we will now upload metadata file via the Bundlr Network.
   

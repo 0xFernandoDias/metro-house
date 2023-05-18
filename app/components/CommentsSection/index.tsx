@@ -20,7 +20,7 @@ import { Spinner } from "../Spinner"
 const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
 
-export function never(message = "Unexpected call to never()") {
+function never(message = "Unexpected call to never()") {
 	throw new Error(message)
 }
 
@@ -84,7 +84,7 @@ async function getBundlr() {
 // useCreateComment AUTHENTICATED https://flowbite.com/docs/forms/textarea/#comment-box (publicationId, profileId, Content, ContentFocus, locale, collect, reference)
 // use Reaction?? AUTHENTICATED
 
-export async function upload(data: unknown): Promise<string> {
+async function upload(data: unknown): Promise<string> {
 	const confirm = window.confirm(
 		`In this example we will now upload metadata file via the Bundlr Network.
   
