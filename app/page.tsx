@@ -82,7 +82,7 @@ export default function Home() {
 					</div> */}
 			<WhenLoggedInWithProfile>
 				{({ profile }) => (
-					<div className="flex flex-col gap-12 sm:max-w-max">
+					<div className="flex flex-col gap-12 sm:min-w-[80%]">
 						<CreatePublication publisher={profile} />
 						<Feed profile={profile} />
 					</div>
@@ -90,7 +90,7 @@ export default function Home() {
 			</WhenLoggedInWithProfile>
 
 			{!profile && (
-				<div className="flex flex-col gap-6 sm:max-w-max">
+				<div className="flex flex-col gap-6 sm:min-w-[80%]">
 					<Publications
 						publications={publications}
 						observeRef={observeRef}
