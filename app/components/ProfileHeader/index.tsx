@@ -28,10 +28,10 @@ export function ProfileHeader({
 	return (
 		<div className="flex items-center space-x-4">
 			{/* Avatar */}
-			<ProfilePicture profile={profile} picture={profile?.picture} />
+			<ProfilePicture profile={profile} picture={profile.picture} />
 			{/* Profile Info */}
 			<div className="space-y-1 font-medium dark:text-white">
-				<div className="flex items-center flex-row gap-3">
+				<div className="flex flex-row gap-3">
 					{profile.name && (
 						<Link className="text-lg" href={`/profile/${profile.handle}`}>
 							{profile.name}
