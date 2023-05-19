@@ -276,7 +276,7 @@ function SuggestedProfiles() {
 
 	return (
 		<div className="flex flex-col items-center gap-6">
-			<a className="text-xl font-semibold">Suggested</a>
+			<a className="text-xl font-semibold">Who To Follow</a>
 
 			{/* Profiles */}
 			<ul className="max-w-md gap-6 flex flex-col">

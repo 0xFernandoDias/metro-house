@@ -46,10 +46,14 @@ export default function Publication({
 			<div className="flex flex-col gap-8">
 				<PublicationComponent
 					publication={
-						publication.__typename === "Mirror"
+						isMirrorPublication(publication)
 							? publication.mirrorOf
 							: publication
 					}
+					mirrorHandle={
+						isMirrorPublication(publication) ? publication.profile.handle : ""
+					}
+					mirrorId={isMirrorPublication(publication) && publication.id}
 				/>
 				<CommentsSection
 					isLoading={loading || profileLoading}

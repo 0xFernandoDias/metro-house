@@ -401,8 +401,14 @@ function EditableProfile({
 		const formData = new FormData(form)
 		const name = (formData.get("name") as string) ?? ""
 		const bio = (formData.get("bio") as string) ?? ""
+		const attributes = {
+			statusMessage: (formData.get("statusMessage") as string | null) || null,
+			location: (formData.get("location") as string | null) || null,
+			website: (formData.get("website") as string | null) || null,
+			twitter: (formData.get("twitter") as string | null) || null,
+		}
 
-		const result = await execute({ name, bio })
+		const result = await execute({ name, bio, attributes })
 
 		if (result.isSuccess()) {
 			setProfile(profile && { ...profile, name, bio })
@@ -428,6 +434,28 @@ function EditableProfile({
 				{/* Handle */}
 
 				<p className="text-xl font-normal">@{profile.handle}</p>
+
+				{Object.entries(profile.attributes).map(([key, value]) => {
+					if (key !== "statusMessage") return null
+
+					return (
+						<div className="relative z-0 w-full group font-semibold" key={key}>
+							<input
+								type="text"
+								name={key}
+								id={key}
+								className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+								placeholder=""
+							/>
+							<label
+								htmlFor="bio"
+								className="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+							>
+								{key}
+							</label>
+						</div>
+					)
+				})}
 
 				{/* Name */}
 				<div className="text-3xl font-semibold leading-none items-center text-gray-900 dark:text-white gap-2 flex">
@@ -501,8 +529,7 @@ function EditableProfile({
 								name={key}
 								id={key}
 								className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-								placeholder=" "
-								value={value.toString()}
+								placeholder=""
 							/>
 							<label
 								htmlFor="bio"
@@ -518,9 +545,7 @@ function EditableProfile({
 					<button
 						type="submit"
 						className="text-white disabled:bg-blue-400 max-w-min flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-						disabled={
-							isPending || (name === profile.name && bio === profile.bio)
-						}
+						disabled={isPending}
 					>
 						Save
 					</button>

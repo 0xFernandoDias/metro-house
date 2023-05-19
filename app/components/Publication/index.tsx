@@ -14,6 +14,7 @@ import {
 	useMutualFollowers,
 	ProfileId,
 	useReaction,
+	PublicationId,
 } from "@lens-protocol/react-web"
 import Link from "next/link"
 import { ProfileHeader } from "../ProfileHeader"
@@ -27,9 +28,13 @@ import { MediaRenderer } from "@thirdweb-dev/react"
 export const Publication = ({
 	publication,
 	isComment,
+	mirrorHandle,
+	mirrorId,
 }: {
 	publication: ContentPublication | CommentWithFirstComment
 	isComment?: boolean
+	mirrorHandle?: string
+	mirrorId?: PublicationId | false
 }) => {
 	const { data: post, isPending } = useEncryptedPublication({
 		publication,
@@ -60,8 +65,33 @@ export const Publication = ({
 	}
 
 	return (
-		<article className={`max-w-max flex gap-4 ${isComment ? "" : "flex-col"}`}>
+		<div className={`max-w-max flex gap-4 ${isComment ? "" : "flex-col"}`}>
 			{/* Post Header */}
+
+			{mirrorHandle && (
+				<Link
+					href={`/publication/${mirrorId}`}
+					className="text-lg flex gap-2 items-center"
+				>
+					<svg
+						className="h-4 w-4 fill-white stroke-gray-500"
+						strokeWidth={1.5}
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+						/>
+					</svg>
+					<Link className="font-semibold" href={`/profile/${mirrorHandle}`}>
+						@{mirrorHandle}
+					</Link>
+					mirrored
+				</Link>
+			)}
 
 			{!isComment ? (
 				<ProfileHeader
@@ -323,7 +353,7 @@ export const Publication = ({
 					</WhenLoggedInWithProfile>
 				</aside>
 			</div>
-		</article>
+		</div>
 	)
 }
 
