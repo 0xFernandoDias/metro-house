@@ -143,7 +143,7 @@ function FeedItems({
 	return (
 		<div className="flex flex-col gap-6">
 			{/* Publications */}
-			<div className="flex flex-col gap-16 mb-6">
+			<div className="flex flex-col gap-24 mb-6">
 				{publications.map((publication: FeedItem) => {
 					return (
 						<Publication

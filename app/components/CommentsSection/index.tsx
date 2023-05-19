@@ -405,11 +405,15 @@ export function CommentsSection({
 					</div>
 				</li> */}
 
-				{data?.map((comment) => {
-					return (
-						<Publication isComment key={comment.id} publication={comment} />
-					)
-				})}
+				{data?.length ? (
+					data.map((comment) => {
+						return (
+							<Publication isComment key={comment.id} publication={comment} />
+						)
+					})
+				) : (
+					<>No comments.</>
+				)}
 				{hasMore && (
 					<div ref={observeRef}>
 						<Spinner />

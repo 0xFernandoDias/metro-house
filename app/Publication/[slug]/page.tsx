@@ -7,6 +7,7 @@ import {
 	isMirrorPublication,
 	useActiveProfile,
 	usePublication,
+	isCommentPublication,
 } from "@lens-protocol/react-web"
 import { Spinner } from "@/app/components/Spinner"
 
@@ -28,6 +29,12 @@ export default function Publication({
 		observerId: profile?.id,
 	})
 
+	const postOriginal =
+		publication && isCommentPublication(publication) && publication.mainPost
+
+	const tratedPostOriginal =
+		postOriginal && !isMirrorPublication(postOriginal) && postOriginal
+
 	if (!publication || loading || profileLoading) {
 		return (
 			<>
@@ -44,17 +51,28 @@ export default function Publication({
 				Publication / Metro House
 			</title>
 			<div className="flex flex-col gap-8">
-				<PublicationComponent
-					publication={
-						isMirrorPublication(publication)
-							? publication.mirrorOf
-							: publication
-					}
-					mirrorHandle={
-						isMirrorPublication(publication) ? publication.profile.handle : ""
-					}
-					mirrorId={isMirrorPublication(publication) && publication.id}
-				/>
+				<div className="flex flex-col">
+					{tratedPostOriginal && (
+						<div className="flex flex-col">
+							<PublicationComponent isPage publication={tratedPostOriginal} />
+							<div className="flex h-[150px] w-[2px] bg-gray-200" />
+						</div>
+					)}
+
+					<PublicationComponent
+						isPage
+						publication={
+							isMirrorPublication(publication)
+								? publication.mirrorOf
+								: publication
+						}
+						mirrorHandle={
+							isMirrorPublication(publication) ? publication.profile.handle : ""
+						}
+						mirrorId={isMirrorPublication(publication) && publication.id}
+					/>
+				</div>
+
 				<CommentsSection
 					isLoading={loading || profileLoading}
 					commentsOf={publication.id}
