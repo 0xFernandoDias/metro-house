@@ -84,7 +84,7 @@ export function Publications({
 		<div className="flex flex-col gap-6">
 			{/* Tabs */}
 			<ul
-				className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
+				className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 "
 				id="myTab"
 				data-tabs-toggle="#myTabContent"
 				role="tablist"
@@ -172,7 +172,7 @@ export function Publications({
 						tab === "nfts" || tab === "topcollected"
 							? "border-b-2 border-blue-700"
 							: ""
-					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
+					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 `}
 					id={
 						isProfile
 							? "profilenfts-tab"
@@ -255,7 +255,7 @@ export function Publications({
 				<Link
 					className={`inline-block p-4 ${
 						tab === "topcommented" && "border-b-2 border-blue-700"
-					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
+					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 `}
 					id={isDiscovery ? "discovery/topcommented-tab" : "topcommented-tab"}
 					data-tabs-target={
 						isDiscovery ? "/discovery?tab=topcommented" : "?tab=topcommented"
@@ -299,7 +299,7 @@ export function Publications({
 				<Link
 					className={`inline-block p-4 ${
 						tab === "topmirrored" && "border-b-2 border-blue-700"
-					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}
+					} rounded-t-lg hover:text-gray-600 hover:border-gray-300 `}
 					id={isDiscovery ? "discoverytopmirrored-tab" : "topmirrored-tab"}
 					href={
 						isDiscovery
@@ -343,7 +343,7 @@ export function Publications({
 
 			{/* Button tabs */}
 			{/* 
-				<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 dark:text-gray-400 gap-2">
+				<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500  gap-2">
 				<Link
 					// href={{ query: { ...query, format: "" } }}
 					href={{ query: { format: "" } }}
@@ -368,7 +368,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "audio" } }}
 					href={{ query: { format: "audio" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  dark:hover:bg-gray-800 dark:hover:text-white"
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100   "
 				>
 					<svg
 						className="h-6 w-6 fill-white stroke-gray-500"
@@ -388,7 +388,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "image" } }}
 					href={{ query: { format: "image" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  "
 				>
 					<svg
 						className="h-6 w-6 fill-white stroke-gray-500"
@@ -408,7 +408,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "text" } }}
 					href={{ query: { format: "text" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  "
 				>
 					<svg
 						className="h-6 w-6 fill-white stroke-gray-500"
@@ -428,7 +428,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "video" } }}
 					href={{ query: { format: "video" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white"
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  "
 				>
 					<svg
 						className="h-6 w-6 fill-gray-500 stroke-gray-500"
@@ -446,7 +446,7 @@ export function Publications({
 				</Link>
 
 				{/* <li>
-					<a className="inline-block px-4 py-3 text-gray-400 cursor-not-allowed dark:text-gray-500">
+					<a className="inline-block px-4 py-3 text-gray-400 cursor-not-allowed">
 						Tab 5
 					</a>
 				</li>
@@ -458,7 +458,7 @@ export function Publications({
 					{/* <button
 						id="dropdownRadioButton"
 						data-dropdown-toggle="dropdownDefaultRadio"
-						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-800 dark:hover:bg-gray-700"
+						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center   "
 						type="button"
 					>
 						Latest
@@ -481,10 +481,10 @@ export function Publications({
 
 					{/* <div
 						id="dropdownDefaultRadio"
-						className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+						className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow  "
 					>
 						<ul
-							className="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
+							className="p-3 space-y-3 text-sm text-gray-700"
 							aria-labelledby="dropdownRadioButton"
 						>
 							<li>
@@ -494,11 +494,11 @@ export function Publications({
 										type="radio"
 										value=""
 										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500    focus:ring-2  "
 									/>
 									<label
 										htmlFor="default-radio-1"
-										className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+										className="ml-2 text-sm font-medium text-gray-900 "
 									>
 										Default radio
 									</label>
@@ -512,11 +512,11 @@ export function Publications({
 										type="radio"
 										value=""
 										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500    focus:ring-2  "
 									/>
 									<label
 										htmlFor="default-radio-2"
-										className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+										className="ml-2 text-sm font-medium text-gray-900 "
 									>
 										Checked state
 									</label>
@@ -529,11 +529,11 @@ export function Publications({
 										type="radio"
 										value=""
 										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500    focus:ring-2  "
 									/>
 									<label
 										htmlFor="default-radio-3"
-										className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+										className="ml-2 text-sm font-medium text-gray-900 "
 									>
 										Default radio
 									</label>

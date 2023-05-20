@@ -30,7 +30,7 @@ export function ProfileHeader({
 			{/* Avatar */}
 			<ProfilePicture profile={profile} picture={profile.picture} />
 			{/* Profile Info */}
-			<div className="space-y-1 font-medium dark:text-white">
+			<div className="space-y-1 font-medium ">
 				<div className="flex flex-row gap-3">
 					{profile.name && (
 						<Link className="text-lg" href={`/profile/${profile.handle}`}>
@@ -38,13 +38,13 @@ export function ProfileHeader({
 						</Link>
 					)}
 					<Link
-						className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
+						className="text-lg font-medium text-gray-900 truncate "
 						href={`/profile/${profile.handle}`}
 					>
 						@{profile.handle}
 					</Link>
 					{profile.onChainIdentity.proofOfHumanity && (
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"
@@ -63,14 +63,14 @@ export function ProfileHeader({
 					)}
 					{profile.followStatus?.isFollowedByMe && (
 						<Link
-							className="text-sm font-medium text-gray-500 truncate dark:text-gray-300"
+							className="text-sm font-medium text-gray-500 truncate "
 							href={`/profile/${profile.handle}`}
 						>
 							is followed by me
 						</Link>
 					)}
 				</div>
-				<div className="text-md text-gray-500 dark:text-gray-400">
+				<div className="text-md text-gray-500 ">
 					<Link href={`/profile/${profile.handle}/contacts?tab=followers`}>
 						{profile.stats.totalFollowers} followers
 					</Link>

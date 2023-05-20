@@ -118,7 +118,7 @@ export function LoginButton() {
 			<>
 				<button
 					type="button"
-					className="min-w-min flex focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+					className="min-w-min flex focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 mb-2"
 					onClick={() => {
 						switchNetwork?.(CHAINID)
 					}}
@@ -143,14 +143,14 @@ export function LoginButton() {
 			<div className="flex flex-col sm:flex-row gap-3">
 				<button
 					type="button"
-					className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700`}
+					className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    `}
 					onClick={onLoginClick}
 				>
 					Sign in with Lens
 				</button>
 				<button
 					onClick={logout}
-					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200      "
 					// disabled={isDisconnectLoading || isLogoutPending}
 				>
 					Disconnect wallet
@@ -169,7 +169,7 @@ export function LoginButton() {
 				{ENVIRONMENT === "development" ? (
 					<Link
 						href="/createProfile"
-						className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
+						className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    "
 						// disabled={isDisconnectLoading || isLogoutPending}
 					>
 						Create a profile
@@ -178,14 +178,14 @@ export function LoginButton() {
 					<div className="flex flex-col sm:flex-row gap-3">
 						<Link
 							href="https://opensea.io/collection/lens-protocol-profiles"
-							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
+							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    "
 							// disabled={isDisconnectLoading || isLogoutPending}
 						>
 							Buy a profile
 						</Link>
 						<Link
 							href="https://claim.lens.xyz/"
-							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700"
+							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    "
 							// disabled={isDisconnectLoading || isLogoutPending}
 						>
 							Claim a profile
@@ -195,7 +195,7 @@ export function LoginButton() {
 
 				<button
 					onClick={logout}
-					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200      "
 					// disabled={isDisconnectLoading || isLogoutPending}
 				>
 					Disconnect wallet
@@ -211,7 +211,7 @@ export function LoginButton() {
 					signer ? (
 						<button
 							type="button"
-							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200      "
 							onClick={onLogoutClick}
 							disabled={isDisconnectLoading || isLogoutPending}
 						>
@@ -220,7 +220,7 @@ export function LoginButton() {
 					) : (
 						<button
 							type="button"
-							className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700`}
+							className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    `}
 							onClick={onLoginClick}
 						>
 							Sign in with Lens
@@ -236,7 +236,7 @@ export function LoginButton() {
 							isConnected ? "[#ABFE2C]" : "gray-800"
 						} hover:bg-${
 							isConnected ? "[#ABFE2C]" : "gray-900"
-						} hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 dark:bg-[#ABFE2C] dark:hover:bg-[#c2fa6c] dark:focus:ring-gray-700 dark:border-gray-700`}
+						} hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    `}
 						onClick={
 							isConnected
 								? () => {
@@ -693,7 +693,7 @@ export function LoginButton() {
 					{isConnected && (
 						<button
 							onClick={() => disconnectAsync()}
-							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200      "
 							// disabled={isDisconnectLoading || isLogoutPending}
 						>
 							Disconnect wallet

@@ -157,7 +157,7 @@ export const Publication = ({
 
 			<div className="max-w-max flex flex-col gap-4 py-2">
 				{isComment && (
-					<div className="space-y-1 font-medium dark:text-white">
+					<div className="space-y-1 font-medium ">
 						<div className="flex items-center flex-row gap-3">
 							{post.profile.name && (
 								<Link
@@ -168,13 +168,13 @@ export const Publication = ({
 								</Link>
 							)}
 							<Link
-								className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
+								className="text-lg font-medium text-gray-900 truncate "
 								href={`/profile/${post.profile.handle}`}
 							>
 								@{post.profile.handle}
 							</Link>
 							{post.profile.onChainIdentity.proofOfHumanity && (
-								<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
+								<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
 									<svg
 										aria-hidden="true"
 										className="w-3.5 h-3.5"
@@ -193,14 +193,14 @@ export const Publication = ({
 							)}
 							{post.profile.followStatus?.isFollowedByMe && (
 								<Link
-									className="text-sm font-medium text-gray-500 truncate dark:text-gray-300"
+									className="text-sm font-medium text-gray-500 truncate "
 									href={`/profile/${post.profile.handle}`}
 								>
 									is followed by me
 								</Link>
 							)}
 						</div>
-						<div className="text-md text-gray-500 dark:text-gray-400">
+						<div className="text-md text-gray-500 ">
 							<Link
 								href={`/profile/${post.profile.handle}/contacts?tab=followers`}
 							>
@@ -226,7 +226,7 @@ export const Publication = ({
 				{/* Created At */}
 				<time
 					dateTime="2020-08-25 19:00"
-					className="block text-md text-gray-500 dark:text-gray-400"
+					className="block text-md text-gray-500 "
 				>
 					<Link href={`/publication/${publication.id}`}>{post.createdAt}</Link>
 				</time>
@@ -234,7 +234,7 @@ export const Publication = ({
 				{/* Post Metadata Content */}
 				<Link
 					href={`/publication/${publication.id}`}
-					className="text-lg dark:text-gray-400 flex flex-col gap-8"
+					className="text-lg  flex flex-col gap-8"
 				>
 					{post.metadata.content}
 
@@ -253,7 +253,7 @@ export const Publication = ({
 
 				{/* <Link
 				href="#"
-				className="block text-md font-medium text-blue-600 hover:underline dark:text-blue-500"
+				className="block text-md font-medium text-blue-600 hover:underline "
 			>
 				Read more
 			</Link> */}
@@ -276,7 +276,7 @@ export const Publication = ({
 
 						{whoReacted && whoReacted.length > 3 && (
 							<Link
-								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
+								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 "
 								href={`/publication/${publication.id}/whoReacted`}
 							>
 								+{whoReacted.length - 4}
@@ -287,17 +287,15 @@ export const Publication = ({
 					{publication.stats.totalAmountOfCollects ||
 					publication.stats.totalAmountOfMirrors ||
 					publication.stats.totalUpvotes ? (
-						<div className="text-md text-gray-500 dark:text-gray-400">
+						<div className="text-md text-gray-500 ">
 							<Link href={`/publication/${post.id}/whoReacted`}>
 								See who liked, shared or collected the post.
 							</Link>
 						</div>
 					) : profile ? (
-						<div className="text-md text-gray-500 dark:text-gray-400">
-							Be the first to react.
-						</div>
+						<div className="text-md text-gray-500 ">Be the first to react.</div>
 					) : (
-						<div className="text-md text-gray-500 dark:text-gray-400">
+						<div className="text-md text-gray-500 ">
 							Sign In and be the first to react.
 						</div>
 					)}
@@ -307,7 +305,7 @@ export const Publication = ({
 							{/* Like */}
 							<Link
 								href={`/publication/${post.id}/whoReacted?tab=likes`}
-								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -329,7 +327,7 @@ export const Publication = ({
 							{/* Comment */}
 							<Link
 								href={`/publication/${publication.id}`}
-								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -350,7 +348,7 @@ export const Publication = ({
 							{/* Mirror */}
 							<Link
 								href={`/publication/${post.id}/whoReacted?tab=mirrors`}
-								className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+								className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5      "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -373,7 +371,7 @@ export const Publication = ({
 							{!isComment && (
 								<Link
 									href={`/publication/${post.id}/whoReacted?tab=collects`}
-									className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+									className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5      "
 								>
 									<svg
 										className="h-6 w-6 fill-white stroke-gray-500"
@@ -396,7 +394,7 @@ export const Publication = ({
 					</WhenLoggedOut>
 					<WhenLoggedInWithProfile>
 						{({ profile: activeProfile }) => (
-							<div className="flex items-center space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
+							<div className="flex items-center space-x-3 divide-x divide-gray-200 ">
 								{/* Reactions buttons */}
 								{/* Like */}
 
@@ -412,6 +410,7 @@ export const Publication = ({
 				</aside>
 			</div>
 			{!isPage &&
+				!isComment &&
 				comments?.map((comment, idx) => {
 					if (idx > 0) return null
 					return (
@@ -465,7 +464,7 @@ function CommentComponent({
 			</div>
 
 			<div className="max-w-max flex flex-col gap-4 py-2">
-				<div className="space-y-1 font-medium dark:text-white">
+				<div className="space-y-1 font-medium ">
 					<div className="flex items-center flex-row gap-3">
 						{post.profile.name && (
 							<Link
@@ -476,13 +475,13 @@ function CommentComponent({
 							</Link>
 						)}
 						<Link
-							className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
+							className="text-lg font-medium text-gray-900 truncate "
 							href={`/profile/${post.profile.handle}`}
 						>
 							@{post.profile.handle}
 						</Link>
 						{post.profile.onChainIdentity.proofOfHumanity && (
-							<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">
+							<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
 								<svg
 									aria-hidden="true"
 									className="w-3.5 h-3.5"
@@ -501,14 +500,14 @@ function CommentComponent({
 						)}
 						{post.profile.followStatus?.isFollowedByMe && (
 							<Link
-								className="text-sm font-medium text-gray-500 truncate dark:text-gray-300"
+								className="text-sm font-medium text-gray-500 truncate "
 								href={`/profile/${post.profile.handle}`}
 							>
 								is followed by me
 							</Link>
 						)}
 					</div>
-					<div className="text-md text-gray-500 dark:text-gray-400">
+					<div className="text-md text-gray-500 ">
 						<Link
 							href={`/profile/${post.profile.handle}/contacts?tab=followers`}
 						>
@@ -533,7 +532,7 @@ function CommentComponent({
 				{/* Created At */}
 				<time
 					dateTime="2020-08-25 19:00"
-					className="block text-md text-gray-500 dark:text-gray-400"
+					className="block text-md text-gray-500 "
 				>
 					<Link href={`/publication/${post.id}`}>{post.createdAt}</Link>
 				</time>
@@ -541,7 +540,7 @@ function CommentComponent({
 				{/* Post Metadata Content */}
 				<Link
 					href={`/publication/${post.id}`}
-					className="text-lg dark:text-gray-400 flex flex-col gap-8"
+					className="text-lg  flex flex-col gap-8"
 				>
 					{post.metadata.content}
 
@@ -560,7 +559,7 @@ function CommentComponent({
 
 				{/* <Link
 				href="#"
-				className="block text-md font-medium text-blue-600 hover:underline dark:text-blue-500"
+				className="block text-md font-medium text-blue-600 hover:underline "
 			>
 				Read more
 			</Link> */}
@@ -583,7 +582,7 @@ function CommentComponent({
 
 						{whoReacted && whoReacted.length > 3 && (
 							<Link
-								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
+								className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 "
 								href={`/publication/${post.id}/whoReacted`}
 							>
 								+{whoReacted.length - 4}
@@ -594,17 +593,15 @@ function CommentComponent({
 					{post.stats.totalAmountOfCollects ||
 					post.stats.totalAmountOfMirrors ||
 					post.stats.totalUpvotes ? (
-						<div className="text-md text-gray-500 dark:text-gray-400">
+						<div className="text-md text-gray-500 ">
 							<Link href={`/publication/${post.id}/whoReacted`}>
 								See who liked, shared or collected the post.
 							</Link>
 						</div>
 					) : profile ? (
-						<div className="text-md text-gray-500 dark:text-gray-400">
-							Be the first to react.
-						</div>
+						<div className="text-md text-gray-500 ">Be the first to react.</div>
 					) : (
-						<div className="text-md text-gray-500 dark:text-gray-400">
+						<div className="text-md text-gray-500 ">
 							Sign In and be the first to react.
 						</div>
 					)}
@@ -614,7 +611,7 @@ function CommentComponent({
 							{/* Like */}
 							<Link
 								href={`/publication/${post.id}/whoReacted?tab=likes`}
-								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -636,7 +633,7 @@ function CommentComponent({
 							{/* Comment */}
 							<Link
 								href={`/publication/${post.id}`}
-								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -657,7 +654,7 @@ function CommentComponent({
 							{/* Mirror */}
 							<Link
 								href={`/publication/${post.id}/whoReacted?tab=mirrors`}
-								className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5  dark:text-white dark:border-gray-600 dark:hover:bg-gray-70  "
+								className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5      "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -679,7 +676,7 @@ function CommentComponent({
 					</WhenLoggedOut>
 					<WhenLoggedInWithProfile>
 						{({ profile: activeProfile }) => (
-							<div className="flex items-center space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
+							<div className="flex items-center space-x-3 divide-x divide-gray-200 ">
 								{/* Reactions buttons */}
 								{/* Like */}
 
@@ -700,7 +697,7 @@ function CommentButton({ publication }: { publication: ContentPublication }) {
 	return (
 		<Link
 			href={`/publication/${publication.id}`}
-			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      "
 		>
 			<svg
 				className="h-6 w-6 fill-white stroke-gray-500"
@@ -759,7 +756,7 @@ function Collect({
 	return (
 		<button
 			type="button"
-			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      "
 			onClick={handleCollect}
 		>
 			<svg
@@ -820,7 +817,7 @@ function MirrorButtonn({
 	return (
 		<button
 			type="button"
-			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      "
 			onClick={handleMirror}
 		>
 			<svg
@@ -912,7 +909,7 @@ function ReactionButton({
 				hasReactionType ? "blue-600" : "white"
 			} border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-${
 				hasReactionType ? "blue-800" : "gray-100"
-			} focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700`}
+			} focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      `}
 			onClick={toggleReaction}
 		>
 			<svg

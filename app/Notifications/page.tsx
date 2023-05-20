@@ -59,7 +59,7 @@ function NotificationsComponent({ profile }: { profile: ProfileOwnedByMe }) {
 
 	return (
 		<div className="flex flex-col min-w-full gap-8">
-			<ol className="divide-y divider-gray-200 dark:divide-gray-700">
+			<ol className="divide-y divider-gray-200 ">
 				{notifications?.map((notification) => (
 					<Notification
 						notification={notification}
@@ -95,14 +95,14 @@ function NotificationItemWrapper({
 	return (
 		<Link
 			href={notificationLink}
-			className="items-center block justify-between p-4 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
+			className="items-center block justify-between p-4 sm:flex hover:bg-gray-100 "
 		>
 			<div className="flex gap-4 items-center">
 				<div className="flex">{children}</div>
 				{/* Notification */}
 				<div className="flex-shrink-0">
 					<ProfilePicture picture={picture} profile={profile} />
-					{/* <div className="absolute items-center justify-center w-5 h-5 ml-10 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
+					{/* <div className="absolute items-center justify-center w-5 h-5 ml-10 -mt-5 bg-red-600 border border-white rounded-full ">
 			<svg
 				className="w-3 h-3 text-white"
 				aria-hidden="true"
@@ -119,9 +119,9 @@ function NotificationItemWrapper({
 		</div> */}
 				</div>
 				{/* Notification */}
-				<div className="text-gray-600 dark:text-gray-400">
+				<div className="text-gray-600 ">
 					{text}
-					{/* <span className="inline-flex items-center text-md font-normal text-gray-500 dark:text-gray-400">
+					{/* <span className="inline-flex items-center text-md font-normal text-gray-500 ">
 		<svg
 			aria-hidden="true"
 			className="w-3 h-3 mr-1"
@@ -139,7 +139,7 @@ function NotificationItemWrapper({
 	</span> */}
 				</div>
 			</div>
-			<div className="text-gray-600 dark:text-gray-400">{date}</div>
+			<div className="text-gray-600 ">{date}</div>
 		</Link>
 	)
 }

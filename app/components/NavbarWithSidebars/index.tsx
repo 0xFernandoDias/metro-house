@@ -38,11 +38,11 @@ export function NavbarWithSidebars({
 
 function TopNavbar() {
 	return (
-		<nav className="sticky p-3 lg:p-6 top-0 z-50 w-full bg-white dark:bg-gray-800">
+		<nav className="sticky p-3 lg:p-6 top-0 z-50 w-full bg-white ">
 			<div className="flex flex-col gap-6 sm:flex-row items-center justify-between">
 				<Logo />
 
-				{/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+				{/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ">
 						Hello @fernando.dias
 				</span> */}
 
@@ -51,7 +51,7 @@ function TopNavbar() {
 					{/* Avatar */}
 					{/* <button
 						type="button"
-						className="flex text-lg bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+						className="flex text-lg bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 "
 						aria-expanded="false"
 						data-dropdown-toggle="dropdown-user"
 					>
@@ -82,7 +82,7 @@ function BottomNavbar() {
 		<div className="flex flex-col">
 			<nav className="flex max-w-min text-gray-700" aria-label="Breadcrumb">
 				<ol className="inline-flex items-center space-x-1 md:space-x-3">
-					{/* <a className="inline-flex items-center gap-3 text-2xl font-semibold text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+					{/* <a className="inline-flex items-center gap-3 text-2xl font-semibold text-gray-700 hover:text-blue-600  ">
 						<svg
 							aria-hidden="true"
 							className="w-4 h-4"
@@ -112,7 +112,7 @@ function BottomNavbar() {
 									</svg>
 									<a
 										href="#"
-										className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
+										className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2  "
 									>
 										Templates
 									</a>
@@ -133,7 +133,7 @@ function BottomNavbar() {
 											clipRule="evenodd"
 										></path>
 									</svg>
-									<span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+									<span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 ">
 										Flowbite
 									</span>
 								</div>
@@ -163,7 +163,7 @@ export function RightSidebar() {
 			className="fixed top-0 right-0 z-40 w-96 h-screen pt-28 transition-transform translate-x-full bg-white lg:translate-x-0 "
 			aria-label="Sidebar"
 		>
-			<div className="h-full items-end px-4 pb-4 overflow-y-auto bg-white dark:bg-gray-800 justify-between  flex flex-col">
+			<div className="h-full items-end px-4 pb-4 overflow-y-auto bg-white  justify-between  flex flex-col">
 				{/* Search */}
 				<form className="flex flex-col max-w-max gap-6" onSubmit={handleSubmit}>
 					<label htmlFor="discovery-search" className="sr-only">
@@ -174,7 +174,7 @@ export function RightSidebar() {
 						<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								className="w-5 h-5 text-gray-500 dark:text-gray-400"
+								className="w-5 h-5 text-gray-500 "
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +189,7 @@ export function RightSidebar() {
 						<input
 							type="text"
 							id="discovery-search"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5       "
 							placeholder="Search"
 							required
 							onChange={handleChange}
@@ -206,17 +206,14 @@ export function RightSidebar() {
 function UserMenu() {
 	return (
 		<div
-			className="my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+			className="my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow  "
 			id="dropdown-user"
 		>
 			<div className="px-4 py-3" role="none">
-				<p className="text-lg text-gray-900 dark:text-white" role="none">
+				<p className="text-lg text-gray-900 " role="none">
 					Neil Sims
 				</p>
-				<p
-					className="text-lg font-medium text-gray-900 truncate dark:text-gray-300"
-					role="none"
-				>
+				<p className="text-lg font-medium text-gray-900 truncate " role="none">
 					@neil.sims
 				</p>
 			</div>
@@ -224,7 +221,7 @@ function UserMenu() {
 			<ul className="py-1" role="none">
 				<button
 					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
 					role="menuitem"
 				>
 					Wrong Network
@@ -232,7 +229,7 @@ function UserMenu() {
 
 				<button
 					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
 					role="menuitem"
 				>
 					Switch Profile
@@ -240,7 +237,7 @@ function UserMenu() {
 
 				<Link
 					href="/settings"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
 					role="menuitem"
 				>
 					Settings
@@ -248,7 +245,7 @@ function UserMenu() {
 
 				<button
 					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
 					role="menuitem"
 				>
 					Logout
@@ -293,13 +290,13 @@ function SuggestedProfiles() {
 								<div className="flex flex-col min-w-0">
 									<Link
 										href={`/profile/${profile.handle}`}
-										className="text-xl font-medium text-gray-900 truncate dark:text-white"
+										className="text-xl font-medium text-gray-900 truncate "
 									>
 										{profile.name}
 									</Link>
 									<Link
 										href={`/profile/${profile.handle}`}
-										className="text-xl text-gray-500 truncate dark:text-gray-400"
+										className="text-xl text-gray-500 truncate "
 									>
 										@{profile.handle}
 									</Link>
@@ -328,8 +325,8 @@ function Footer() {
 		useActiveProfile()
 
 	return (
-		<footer className="w-full bg-white rounded-lg dark:bg-gray-800 mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
-			<ul className="flex flex-wrap gap-2 items-center justify-center mt-3 text-md font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+		<footer className="w-full bg-white rounded-lg  mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
+			<ul className="flex flex-wrap gap-2 items-center justify-center mt-3 text-md font-medium text-gray-500  sm:mt-0">
 				<Link href="/" className="hover:underline">
 					Home
 				</Link>

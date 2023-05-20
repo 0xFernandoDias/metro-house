@@ -8,7 +8,7 @@ export function WhoReactedTabs({ publicationId }: { publicationId: string }) {
 
 	return (
 		<ul
-			className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
+			className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 "
 			id="myTab"
 			data-tabs-toggle="#myTabContent"
 			role="tablist"
