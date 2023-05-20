@@ -405,7 +405,7 @@ export function CommentsSection({
 					</div>
 				</li> */}
 
-				{data?.length ? (
+				{data ? (
 					data.map((comment) => {
 						return (
 							<Publication isComment key={comment.id} publication={comment} />

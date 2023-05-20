@@ -412,6 +412,7 @@ export const Publication = ({
 				</aside>
 			</div>
 			{!isPage &&
+				!isComment &&
 				comments?.map((comment, idx) => {
 					if (idx > 0) return null
 					return (
