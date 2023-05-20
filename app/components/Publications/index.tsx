@@ -81,7 +81,7 @@ export function Publications({
 	}
 
 	return (
-		<div className="flex max-w-[80%] flex-col gap-6">
+		<div className="flex flex-col gap-6">
 			{/* Tabs */}
 			<ul
 				className="flex gap-2 flex-wrap text-lg font-medium text-center border-b border-gray-200 dark:border-gray-700"
