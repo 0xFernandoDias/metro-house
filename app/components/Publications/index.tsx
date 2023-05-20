@@ -34,6 +34,7 @@
 import {
 	AnyPublication,
 	Profile as ProfileType,
+	isCommentPublication,
 	isMirrorPublication,
 } from "@lens-protocol/react-web"
 import { Publication } from "../Publication"
@@ -560,6 +561,11 @@ export function Publications({
 									: ""
 							}
 							mirrorId={isMirrorPublication(publication) && publication.id}
+							mainPost={
+								isCommentPublication(publication)
+									? publication.mainPost.id
+									: undefined
+							}
 						/>
 					)
 				})}
