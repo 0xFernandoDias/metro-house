@@ -1,6 +1,5 @@
 "use client"
 import Link from "next/link"
-import { LoginButton } from "../auth/LoginButton"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 
@@ -92,9 +91,9 @@ export function ApplicationBar() {
 					)}
 				</WhenLoggedInWithProfile>
 
-				<WhenLoggedOut>
+				{/* <WhenLoggedOut>
 					<LoginButton />
-				</WhenLoggedOut>
+				</WhenLoggedOut> */}
 
 				<button
 					data-tooltip-target="tooltip-more"

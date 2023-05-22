@@ -140,7 +140,7 @@ export function LoginButton() {
 
 	if (activeWallet && !signer) {
 		return (
-			<div className="flex flex-col sm:flex-row gap-3">
+			<div className="flex gap-3">
 				<button
 					type="button"
 					className={`min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5    `}
