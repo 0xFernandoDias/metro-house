@@ -23,9 +23,9 @@ export function NavbarWithSidebars({
 	children: React.ReactNode
 }) {
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col overflow-x-hidden">
 			<TopNavbar />
-			<div className="flex flex-col gap-6 mx-4 lg:mx-96">
+			<div className="flex flex-col gap-6 mx-4 mt-32 lg:mx-96">
 				{/* I'll use this on Mobile too */}
 				<LeftSidebar />
 				<BottomNavbar />
@@ -38,7 +38,7 @@ export function NavbarWithSidebars({
 
 function TopNavbar() {
 	return (
-		<nav className="sticky p-3 lg:p-6 top-0 z-50 w-full bg-white ">
+		<nav className="fixed p-3 lg:p-6 top-0 z-50 w-full bg-white ">
 			<div className="flex flex-col gap-6 sm:flex-row items-center justify-between">
 				<Logo />
 

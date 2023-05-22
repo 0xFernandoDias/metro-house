@@ -56,8 +56,8 @@ function ProfileCover({
 				<MediaRenderer
 					className={`${
 						isMobile
-							? "sm:invisible sm:opacity-0 sm:absolute -mb-24"
-							: "opacity-0 invisible sm:opacity-100 sm:visible sm:flex"
+							? "sm:hidden flex opacity-100 sm:opacity-0  -mb-24"
+							: "hidden sm:flex opacity-0 sm:opacity-100"
 					}`}
 					width={"530px"}
 					height={"200px"}
