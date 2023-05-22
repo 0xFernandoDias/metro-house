@@ -19,6 +19,7 @@ import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
 import { FollowUnfollowButton } from "../components/FollowUnfollowButton"
 import { Spinner } from "../components/Spinner"
+import { Profile } from "../components/Profile"
 
 export default function Discovery() {
 	const { get } = useSearchParams()
@@ -223,38 +224,6 @@ function SearchResult({ query }: { query: string }) {
 					</div>
 				)}
 			</ul>
-		</div>
-	)
-}
-
-function Profile({ profile }: { profile: ProfileType }) {
-	return (
-		<div className="flex items-center justify-between space-x-4">
-			<div className="flex items-center gap-1 space-x-4">
-				<ProfilePicture profile={profile} picture={profile.picture} />
-
-				<div className="flex flex-col min-w-0">
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl font-medium text-gray-900 truncate "
-					>
-						{profile.name}
-					</Link>
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl text-gray-500 truncate "
-					>
-						@{profile.handle}
-					</Link>
-				</div>
-			</div>
-
-			{/* Follow Button */}
-			<WhenLoggedInWithProfile>
-				{({ profile: activeProfile }) => (
-					<FollowUnfollowButton follower={activeProfile} followee={profile} />
-				)}
-			</WhenLoggedInWithProfile>
 		</div>
 	)
 }

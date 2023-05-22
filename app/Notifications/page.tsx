@@ -342,10 +342,6 @@ function Notification({ notification }: { notification: NotificationType }) {
 	}
 }
 
-function DaySection() {
-	return <></>
-}
-
 // AUTHENTICATED
 // filters
 // https://flowbite.com/docs/components/badge/#notification-badge

@@ -1,18 +1,14 @@
 "use client"
-import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-import { ProfilePicture } from "@/app/components/ProfilePicture"
+import { Profile } from "@/app/components/Profile"
 import { Publication } from "@/app/components/Publication"
 import { Spinner } from "@/app/components/Spinner"
-import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import {
-	Profile as ProfileType,
 	useActiveProfile,
 	useSearchProfiles,
 	useSearchPublications,
 } from "@lens-protocol/react-web"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
 import { ChangeEvent, useEffect, useState } from "react"
 
 export default function Discovery({ params }: { params: { slug: string } }) {
@@ -159,38 +155,6 @@ function SearchResult({ query }: { query: string }) {
 					</div>
 				)}
 			</ul>
-		</div>
-	)
-}
-
-function Profile({ profile }: { profile: ProfileType }) {
-	return (
-		<div className="flex items-center justify-between space-x-4">
-			<div className="flex items-center gap-1 space-x-4">
-				<ProfilePicture profile={profile} picture={profile.picture} />
-
-				<div className="flex flex-col min-w-0">
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl font-medium text-gray-900 truncate "
-					>
-						{profile.name}
-					</Link>
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl text-gray-500 truncate "
-					>
-						@{profile.handle}
-					</Link>
-				</div>
-			</div>
-
-			{/* Follow Button */}
-			<WhenLoggedInWithProfile>
-				{({ profile: activeProfile }) => (
-					<FollowUnfollowButton follower={activeProfile} followee={profile} />
-				)}
-			</WhenLoggedInWithProfile>
 		</div>
 	)
 }

@@ -1,7 +1,6 @@
 "use client"
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 
 export function ApplicationBar() {
 	return (

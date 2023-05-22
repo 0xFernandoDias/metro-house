@@ -8,7 +8,6 @@
 // Proof of humanity - https://flowbite.com/docs/components/badge/#badges-with-icon
 
 "use client"
-import Link from "next/link"
 import { ContactsTabs } from "../../../components/ContactsTabs"
 import {
 	Profile as ProfileType,
@@ -18,12 +17,10 @@ import {
 	useProfileFollowers,
 	useProfileFollowing,
 } from "@lens-protocol/react-web"
-import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
-import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { Spinner } from "@/app/components/Spinner"
+import { Profile } from "@/app/components/Profile"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
 	const { slug: profileHandle } = params
@@ -108,7 +105,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 						{tab === "followers" ? (
 							<>
 								{profileFollowers?.map((e) => (
-									<Follower
+									<Profile
 										key={e.wallet.defaultProfile?.id}
 										profile={e.wallet.defaultProfile!}
 									/>
@@ -122,7 +119,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 						) : tab === "following" ? (
 							<>
 								{profileFollowing?.map((e) => (
-									<Follower key={e.profile!.id} profile={e.profile} />
+									<Profile key={e.profile!.id} profile={e.profile} />
 								))}
 								{hasMoreFollowing && (
 									<div ref={observeFollowingRef}>
@@ -133,7 +130,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 						) : tab === "mutual" ? (
 							<>
 								{mutualFollowers?.map((e) => (
-									<Follower key={e.id} profile={e} />
+									<Profile key={e.id} profile={e} />
 								))}
 								{hasMoreMutualFollowers && (
 									<div ref={observeMutualFollowersRef}>
@@ -144,7 +141,7 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 						) : (
 							<>
 								{profileFollowers?.map((e) => (
-									<Follower
+									<Profile
 										key={e.wallet.defaultProfile?.id}
 										profile={e.wallet.defaultProfile!}
 									/>
@@ -155,37 +152,5 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 				</div>
 			</div>
 		</>
-	)
-}
-
-function Follower({ profile }: { profile: ProfileType }) {
-	return (
-		<div className="flex justify-between items-center space-x-4">
-			<div className="flex items-center gap-1 space-x-4">
-				<ProfilePicture profile={profile} picture={profile.picture} />
-
-				<div className="flex flex-col min-w-0">
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl font-medium text-gray-900 truncate "
-					>
-						{profile.name}
-					</Link>
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl text-gray-500 truncate "
-					>
-						@{profile.handle}
-					</Link>
-				</div>
-			</div>
-
-			{/* Follow Button */}
-			<WhenLoggedInWithProfile>
-				{({ profile: activeProfile }) => (
-					<FollowUnfollowButton follower={activeProfile} followee={profile!} />
-				)}
-			</WhenLoggedInWithProfile>
-		</div>
 	)
 }

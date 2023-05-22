@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link"
 import { CommentsSection } from "../../components/CommentsSection"
 import { Publication as PublicationComponent } from "../../components/Publication"
 import {

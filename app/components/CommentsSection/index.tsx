@@ -12,48 +12,9 @@ import {
 } from "@lens-protocol/react-web"
 import { Publication } from "../Publication"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { WebBundlr } from "@bundlr-network/client"
-import { providers, utils } from "ethers"
-import { fetchSigner } from "wagmi/actions"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { Spinner } from "../Spinner"
-
-const TOP_UP = "200000000000000000" // 0.2 MATIC
-const MIN_FUNDS = 0.05
-
-function never(message = "Unexpected call to never()") {
-	throw new Error(message)
-}
-
-async function getBundlr() {
-	const signer = (await fetchSigner()) ?? never("Cannot get signer")
-	const provider = signer?.provider ?? never("Cannot get provider")
-
-	if (provider instanceof providers.JsonRpcProvider) {
-		await provider.send("wallet_switchEthereumChain", [
-			{ chainId: utils.hexValue(80001) },
-		])
-	}
-
-	const bundlr = new WebBundlr(
-		"https://devnet.bundlr.network",
-		"matic",
-		signer?.provider,
-		{
-			providerUrl: "https://rpc-mumbai.maticvigil.com/",
-		}
-	)
-
-	await bundlr.ready()
-
-	const balance = await bundlr.getBalance((await signer?.getAddress()) ?? "")
-
-	if (bundlr.utils.unitConverter(balance).toNumber() < MIN_FUNDS) {
-		await bundlr.fund(TOP_UP)
-	}
-
-	return bundlr
-}
+import { upload } from "@/app/helpers/upload"
 
 // https://flowbite.com/docs/components/timeline/#grouped-timeline
 
@@ -84,29 +45,6 @@ async function getBundlr() {
 // Comments
 // useCreateComment AUTHENTICATED https://flowbite.com/docs/forms/textarea/#comment-box (publicationId, profileId, Content, ContentFocus, locale, collect, reference)
 // use Reaction?? AUTHENTICATED
-
-async function upload(data: unknown): Promise<string> {
-	const confirm = window.confirm(
-		`In this example we will now upload metadata file via the Bundlr Network.
-  
-  Please make sure your wallet is connected to the Polygon Mumbai testnet.
-  
-  You can get some Mumbai MATIC from the Mumbai Faucet: https://mumbaifaucet.com/`
-	)
-
-	if (!confirm) {
-		throw new Error("User cancelled")
-	}
-
-	const bundlr = await getBundlr()
-
-	const serialized = JSON.stringify(data)
-	const tx = await bundlr.upload(serialized, {
-		tags: [{ name: "Content-Type", value: "application/json" }],
-	})
-
-	return `https://arweave.net/${tx.id}`
-}
 
 function CreateComment({
 	publisher,

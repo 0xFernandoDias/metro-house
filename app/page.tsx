@@ -105,41 +105,21 @@ export default function Home() {
 }
 
 function Feed({ profile }: { profile: ProfileType }) {
-	const { data, hasMore, loading, observeRef } = useInfiniteScroll(
+	const {
+		data: publications,
+		hasMore,
+		loading,
+		observeRef,
+	} = useInfiniteScroll(
 		useFeed({
 			profileId: profile.id,
 			observerId: profile.id,
 		})
 	)
 
-	if (!data || loading) {
-		return <Spinner />
-	}
-
-	return (
-		<FeedItems
-			publications={data}
-			observeRef={observeRef}
-			hasMore={hasMore}
-			isLoading={loading}
-		/>
-	)
-}
-
-function FeedItems({
-	publications,
-	isLoading,
-	observeRef,
-	hasMore,
-}: {
-	publications: FeedItem[]
-	isLoading: boolean
-	observeRef?: RefCallback<unknown>
-	hasMore?: boolean
-}) {
 	const recentPosts = useRecentPosts()
 
-	if (isLoading) {
+	if (!publications || loading) {
 		return <Spinner />
 	}
 

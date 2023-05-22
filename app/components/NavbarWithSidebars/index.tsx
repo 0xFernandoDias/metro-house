@@ -3,11 +3,7 @@ import Link from "next/link"
 import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
 import { usePathname, useRouter } from "next/navigation"
-import {
-	useActiveProfile,
-	useActiveWallet,
-	useProfilesToFollow,
-} from "@lens-protocol/react-web"
+import { useActiveProfile, useProfilesToFollow } from "@lens-protocol/react-web"
 import { LoginButton } from "../auth/LoginButton"
 import { ChangeEvent, useState } from "react"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"

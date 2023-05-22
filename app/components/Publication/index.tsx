@@ -727,16 +727,6 @@ function CollectButton({
 	profile: ProfileOwnedByMe
 	publication: ContentPublication
 }) {
-	return <Collect publication={publication} profile={profile} />
-}
-
-function Collect({
-	publication,
-	profile,
-}: {
-	publication: ContentPublication
-	profile: ProfileOwnedByMe
-}) {
 	const { execute, isPending } = useCollect({
 		collector: profile,
 		publication,
@@ -786,16 +776,6 @@ function MirrorButton({
 }: {
 	profile: ProfileOwnedByMe
 	publication: ContentPublication
-}) {
-	return <MirrorButtonn publication={publication} profile={profile} />
-}
-
-function MirrorButtonn({
-	publication,
-	profile,
-}: {
-	publication: ContentPublication
-	profile: ProfileOwnedByMe
 }) {
 	const { execute, isPending } = useCreateMirror({
 		publisher: profile,
@@ -848,31 +828,13 @@ function LikeUnlikeButton({
 	profile: ProfileType
 	publication: ContentPublication
 }) {
-	return (
-		<ReactionButton
-			publication={publication}
-			profileId={profile.id}
-			reactionType={ReactionType.UPVOTE}
-		/>
-	)
-}
-
-function ReactionButton({
-	publication,
-	profileId,
-	reactionType,
-}: {
-	publication: ContentPublication
-	profileId: ProfileId
-	reactionType: ReactionType
-}) {
 	const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
-		profileId,
+		profileId: profile.id,
 	})
 
 	const [hasReactionType, setHasReactionType] = useState(
 		hasReaction({
-			reactionType,
+			reactionType: ReactionType.UPVOTE,
 			publication,
 		})
 	)
@@ -884,7 +846,7 @@ function ReactionButton({
 	const toggleReaction = async () => {
 		if (hasReactionType) {
 			await removeReaction({
-				reactionType,
+				reactionType: ReactionType.UPVOTE,
 				publication,
 			})
 
@@ -892,7 +854,7 @@ function ReactionButton({
 			setTotalUpvotes((prevState) => prevState - 1)
 		} else {
 			await addReaction({
-				reactionType,
+				reactionType: ReactionType.UPVOTE,
 				publication,
 			})
 

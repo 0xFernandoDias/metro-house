@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link"
 import { WhoReactedTabs } from "../../../components/WhoReactedTabs"
 import {
 	Profile as ProfileType,
@@ -9,12 +8,10 @@ import {
 	useWhoMirroredPublication,
 	useWhoReacted,
 } from "@lens-protocol/react-web"
-import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
-import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { Spinner } from "@/app/components/Spinner"
+import { Profile } from "@/app/components/Profile"
 
 export default function WhoReacted({
 	params,
@@ -135,37 +132,5 @@ export default function WhoReacted({
 				</div>
 			</div>
 		</>
-	)
-}
-
-function Profile({ profile }: { profile: ProfileType }) {
-	return (
-		<div className="flex items-center justify-between space-x-4">
-			<div className="flex items-center gap-1 space-x-4">
-				<ProfilePicture profile={profile} picture={profile.picture} />
-
-				<div className="flex flex-col min-w-0">
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl font-medium text-gray-900 truncate "
-					>
-						{profile.name}
-					</Link>
-					<Link
-						href={`/profile/${profile.handle}`}
-						className="text-xl text-gray-500 truncate"
-					>
-						@{profile.handle}
-					</Link>
-				</div>
-			</div>
-
-			{/* Follow Button */}
-			<WhenLoggedInWithProfile>
-				{({ profile: activeProfile }) => (
-					<FollowUnfollowButton follower={activeProfile} followee={profile} />
-				)}
-			</WhenLoggedInWithProfile>
-		</div>
 	)
 }
