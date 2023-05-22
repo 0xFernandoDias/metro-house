@@ -1,22 +1,23 @@
 "use client"
 
+import { Publication } from "@lens-protocol/client"
 import { useContext, createContext, useReducer } from "react"
 
 const reducer = (state: any, action: any) => {
 	switch (action.type) {
-		case "Increment":
-			return { count: state.count + 1 }
+		case "SetNewPublications":
+			return { ...state, newPublications: state.newPublications }
 		default:
 			return state
 	}
 }
 
 const GlobalContext = createContext({
-	count: 0,
-	increment: () => {},
+	newPublications: [],
+	setNewPublications: () => {},
 } as {
-	count: number
-	increment: () => void
+	newPublications: Publication[]
+	setNewPublications: (newPublications: Publication[]) => void
 })
 
 export const GlobalContextProvider = ({
@@ -24,14 +25,22 @@ export const GlobalContextProvider = ({
 }: {
 	children: React.ReactNode
 }) => {
-	const [state, dispatch] = useReducer(reducer, { count: 0 })
+	const [state, dispatch] = useReducer(reducer, {
+		count: 0,
+		newPublications: [],
+	})
 
-	function increment() {
-		dispatch({ type: "Increment" })
+	function setNewPublications(newPublications: Publication[]) {
+		dispatch({ type: "SetNewPublications", newPublications })
 	}
 
 	return (
-		<GlobalContext.Provider value={{ count: state.count, increment }}>
+		<GlobalContext.Provider
+			value={{
+				newPublications: state.newPublications,
+				setNewPublications,
+			}}
+		>
 			{children}
 		</GlobalContext.Provider>
 	)

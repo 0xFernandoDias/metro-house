@@ -545,30 +545,34 @@ export function Publications({
 			) : null}
 
 			{/* Publications */}
-			<div className="flex flex-col gap-24 mb-6">
-				{publications.map((publication: AnyPublication) => {
-					return (
-						<Publication
-							key={publication.id}
-							publication={
-								isMirrorPublication(publication)
-									? publication.mirrorOf
-									: publication
-							}
-							mirrorHandle={
-								isMirrorPublication(publication)
-									? publication.profile.handle
-									: ""
-							}
-							mirrorId={isMirrorPublication(publication) && publication.id}
-							mainPost={
-								isCommentPublication(publication)
-									? publication.mainPost.id
-									: undefined
-							}
-						/>
-					)
-				})}
+			<div className="flex flex-col mb-6">
+				{publications.length ? (
+					publications.map((publication: AnyPublication) => {
+						return (
+							<Publication
+								key={publication.id}
+								publication={
+									isMirrorPublication(publication)
+										? publication.mirrorOf
+										: publication
+								}
+								mirrorHandle={
+									isMirrorPublication(publication)
+										? publication.profile.handle
+										: ""
+								}
+								mirrorId={isMirrorPublication(publication) && publication.id}
+								mainPost={
+									isCommentPublication(publication)
+										? publication.mainPost.id
+										: undefined
+								}
+							/>
+						)
+					})
+				) : (
+					<>No posts.</>
+				)}
 
 				{hasMore && (
 					<div ref={observeRef}>

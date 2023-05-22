@@ -9,6 +9,7 @@ import {
 	useFeed,
 	FeedItem,
 	isMirrorPublication,
+	useRecentPosts,
 } from "@lens-protocol/react-web"
 import { RefCallback, useEffect, useState } from "react"
 import { Publications } from "./components/Publications"
@@ -136,6 +137,8 @@ function FeedItems({
 	observeRef?: RefCallback<unknown>
 	hasMore?: boolean
 }) {
+	const recentPosts = useRecentPosts()
+
 	if (isLoading) {
 		return <Spinner />
 	}
@@ -143,7 +146,14 @@ function FeedItems({
 	return (
 		<div className="flex flex-col gap-6">
 			{/* Publications */}
-			<div className="flex flex-col gap-24 mb-6">
+			<div className="flex flex-col mb-6">
+				{recentPosts?.map(
+					(publication) =>
+						publication.__typename !== "PendingPost" && (
+							<Publication key={publication.id} publication={publication} />
+						)
+				)}
+
 				{publications.map((publication: FeedItem) => {
 					return (
 						<Publication

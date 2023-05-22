@@ -43,21 +43,28 @@ import { fetchSigner } from "wagmi/actions"
 
 function ProfileCover({
 	picture,
+	isMobile,
 }: {
 	picture: MediaSet | ProfileMedia | null
+	isMobile?: boolean
 }) {
 	if (!picture) return null
 
 	switch (picture.__typename) {
 		case "MediaSet":
 			return (
-				// eslint-disable-next-line react/jsx-no-undef
 				<MediaRenderer
+					className={`${
+						isMobile
+							? "sm:invisible sm:opacity-0 sm:absolute -mb-24"
+							: "opacity-0 invisible sm:opacity-100 sm:visible sm:flex"
+					}`}
 					width={"530px"}
 					height={"200px"}
 					src={picture.original.url}
 				/>
 			)
+
 		default:
 			return <></>
 	}
@@ -155,6 +162,8 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 					<div className="md:flex-row gap-8 flex flex-col justify-between">
 						{/* Left Side */}
 						<div className="flex flex-col gap-4 md:max-w-[50%]">
+							<ProfileCover isMobile picture={profile.coverPicture} />
+
 							{/* Avatar */}
 
 							<ProfilePicture

@@ -8,6 +8,7 @@ import {
 	PublicationId,
 	useComments,
 	useCreateComment,
+	useRecentPosts,
 } from "@lens-protocol/react-web"
 import { Publication } from "../Publication"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
@@ -362,6 +363,8 @@ export function CommentsSection({
 		useComments({ commentsOf, observerId })
 	)
 
+	const recentPosts = useRecentPosts()
+
 	if (loading || isLoading) return <Spinner />
 
 	return (
@@ -404,6 +407,13 @@ export function CommentsSection({
 						</div>
 					</div>
 				</li> */}
+
+				{recentPosts?.map(
+					(comment) =>
+						comment.__typename !== "PendingPost" && (
+							<Publication isComment key={comment.id} publication={comment} />
+						)
+				)}
 
 				{data ? (
 					data.map((comment) => {

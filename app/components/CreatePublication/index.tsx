@@ -106,15 +106,15 @@ export function CreatePublication({
 	}
 
 	return (
-		<form className="flex flex-col sm:max-w-[60%] gap-4" onSubmit={submit}>
+		<form className="flex flex-col sm:max-w-[80%] gap-4" onSubmit={submit}>
 			{/* Text field */}
-			<div className="border border-gray-200 rounded-lg bg-gray-50  ">
-				<div className="flex items-center justify-between px-3 py-2 border-b ">
-					<div className="flex flex-wrap items-center divide-gray-200 sm:divide-x ">
+			<div className="border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+				<div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
+					<div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
 						<div className="flex items-center space-x-1">
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<div className="w-5 h-5 items-center justify-center font-extrabold text-lg flex">
 									B
@@ -123,7 +123,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<i className="w-5 h-5 items-center justify-center font-semibold text-lg flex">
 									I
@@ -132,7 +132,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									aria-hidden="true"
@@ -151,7 +151,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									aria-hidden="true"
@@ -171,7 +171,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 stroke-gray-50 fill-gray-500"
@@ -191,7 +191,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									aria-hidden="true"
@@ -212,7 +212,7 @@ export function CreatePublication({
 						<div className="flex flex-wrap items-center space-x-1">
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 stroke-gray-50 fill-gray-500"
@@ -231,7 +231,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 fill-gray-50 stroke-gray-500"
@@ -250,7 +250,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 fill-gray-50 stroke-gray-500"
@@ -271,7 +271,7 @@ export function CreatePublication({
 					</div>
 				</div>
 
-				<div className="px-4 py-2 bg-white rounded-b-lg ">
+				<div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
 					<label htmlFor="editor" className="sr-only">
 						Publish
 					</label>
@@ -279,7 +279,7 @@ export function CreatePublication({
 						id="editor"
 						name="content"
 						rows={8}
-						className="block w-full h-32 px-0 text-lg text-gray-800 bg-white border-0  focus:ring-0  "
+						className="block w-full h-32 px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0  dark:placeholder-gray-400"
 						placeholder="Write your post..."
 						required
 						disabled={isPending}
@@ -289,7 +289,7 @@ export function CreatePublication({
 
 			<button
 				type="submit"
-				className="inline-flex items-center gap-2 max-w-min px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800"
+				className="inline-flex items-center gap-2 max-w-min px-5 py-2.5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
 				disabled={isPending}
 			>
 				<svg
