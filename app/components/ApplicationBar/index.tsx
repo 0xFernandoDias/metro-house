@@ -1,14 +1,16 @@
 "use client"
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
+import { ProfilePicture } from "../ProfilePicture"
+import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 
 export function ApplicationBar() {
 	return (
-		<div className="fixed sm:invisible sm:opacity-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2  ">
+		<div className="fixed sm:invisible px-4 sm:opacity-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2  ">
 			<div className="flex h-full max-w-lg justify-between items-center mx-auto">
 				<Link
 					href="/"
-					className="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50  group"
+					className="inline-flex flex-col items-center justify-center px-2 rounded-l-full hover:bg-gray-50  group"
 				>
 					<svg
 						className="w-6 h-6 text-gray-500 fill-gray-500  group-hover:text-blue-600 "
@@ -23,7 +25,7 @@ export function ApplicationBar() {
 
 				<Link
 					href="/discovery"
-					className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50  group"
+					className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50  group"
 				>
 					<svg
 						className="w-6 h-6 stroke-gray-500 fill-white text-gray-500  group-hover:text-blue-600 "
@@ -42,10 +44,11 @@ export function ApplicationBar() {
 				</Link>
 
 				<WhenLoggedInWithProfile>
-					{() => (
+					{({ profile }) => (
 						<>
 							<div className="flex items-center justify-center">
-								<button
+								<Link
+									href="/"
 									data-tooltip-target="tooltip-newpost"
 									type="button"
 									className="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none "
@@ -63,13 +66,13 @@ export function ApplicationBar() {
 										></path>
 									</svg>
 									<span className="sr-only">New Post</span>
-								</button>
+								</Link>
 							</div>
 
-							<button
+							<Link
 								data-tooltip-target="tooltip-notifications"
-								type="button"
-								className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50  group"
+								href="/notifications"
+								className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50  group"
 							>
 								<svg
 									className="w-6 h-6  group-hover:stroke-blue-600  stroke-gray-500 fill-white"
@@ -85,35 +88,38 @@ export function ApplicationBar() {
 									/>
 								</svg>
 								<span className="sr-only">Notifications</span>
-							</button>
+							</Link>
+							<ProfilePicture
+								picture={profile.picture}
+								profile={profile}
+								design={"small"}
+							/>
 						</>
 					)}
 				</WhenLoggedInWithProfile>
 
-				{/* <WhenLoggedOut>
-					<LoginButton />
-				</WhenLoggedOut> */}
-
-				<button
-					data-tooltip-target="tooltip-more"
-					type="button"
-					className="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-50  group"
-				>
-					<svg
-						className="w-6 h-6  group-hover:stroke-blue-600  stroke-gray-500 fill-white"
-						strokeWidth="1.5"
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
+				<WhenLoggedOut>
+					<button
+						data-tooltip-target="tooltip-more"
+						type="button"
+						className="inline-flex flex-col items-center justify-center px-2 rounded-r-full hover:bg-gray-50  group"
 					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-						></path>
-					</svg>
-					<span className="sr-only">More</span>
-				</button>
+						<svg
+							className="w-6 h-6  group-hover:stroke-blue-600  stroke-gray-500 fill-white"
+							strokeWidth="1.5"
+							viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+							></path>
+						</svg>
+						<span className="sr-only">More</span>
+					</button>
+				</WhenLoggedOut>
 			</div>
 		</div>
 	)

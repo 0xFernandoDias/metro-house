@@ -14,6 +14,9 @@ import {
 	useUpdateProfileDetails,
 	AnyPublication,
 	ProfileOwnedByMe,
+	useActiveProfileSwitch,
+	useProfilesOwnedBy,
+	useProfilesOwnedByMe,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
 import Link from "next/link"
@@ -28,6 +31,7 @@ import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
 import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { Spinner } from "@/app/components/Spinner"
+import { Profile as ProfileComponent } from "@/app/components/Profile"
 import {
 	ChangeEvent,
 	Dispatch,
@@ -212,35 +216,40 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 							{/* Follow */}
 							<WhenLoggedInWithProfile>
 								{({ profile: activeProfile }) => (
-									<FollowUnfollowButton
-										follower={activeProfile}
-										followee={profile}
-									/>
+									<>
+										<FollowUnfollowButton
+											follower={activeProfile}
+											followee={profile}
+										/>
+										{isMyProfile && (
+											<div className="flex flex-col gap-2">
+												<button
+													type="button"
+													className="text-white w-48 items-center flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+													onClick={() => setIsEditProfileToggled(true)}
+												>
+													<svg
+														className="h-6 w-6 fill-blue-700 stroke-white"
+														strokeWidth={1.5}
+														viewBox="0 0 24 24"
+														xmlns="http://www.w3.org/2000/svg"
+														aria-hidden="true"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+														/>
+													</svg>
+													Edit Profile
+												</button>
+
+												<SwitchProfile myProfile={activeProfile} />
+											</div>
+										)}
+									</>
 								)}
 							</WhenLoggedInWithProfile>
-
-							{isMyProfile && (
-								<button
-									type="button"
-									className="text-white max-w-20 items-center flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
-									onClick={() => setIsEditProfileToggled(true)}
-								>
-									<svg
-										className="h-6 w-6 fill-blue-700 stroke-white"
-										strokeWidth={1.5}
-										viewBox="0 0 24 24"
-										xmlns="http://www.w3.org/2000/svg"
-										aria-hidden="true"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-										/>
-									</svg>
-									Edit Profile
-								</button>
-							)}
 
 							{/* Bio */}
 							<p className="text-xl max-w-[80%]">{profile.bio}</p>
@@ -303,6 +312,89 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 				)}
 			</div>
 		</>
+	)
+}
+
+function SwitchProfile({ myProfile }: { myProfile: ProfileOwnedByMe }) {
+	const [isSwitchProfileToggled, setIsSwitchProfileToggled] = useState(false)
+	const [selected, setSelected] = useState<ProfileId>("" as ProfileId)
+
+	const { execute: switchProfile, isPending } = useActiveProfileSwitch()
+	const {
+		data: myProfiles,
+		error: myProfilesError,
+		loading: myProfilesLoading,
+	} = useProfilesOwnedByMe()
+
+	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		void switchProfile(selected)
+	}
+
+	if (myProfilesLoading) return <div>Loading...</div>
+
+	if (!isSwitchProfileToggled) {
+		return (
+			<button
+				type="button"
+				className="w-48 flex focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 mb-2"
+				onClick={() => setIsSwitchProfileToggled(true)}
+			>
+				<svg
+					className="h-6 w-6 mr-3 stroke-white"
+					strokeWidth={1.5}
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
+					aria-hidden="true"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+					/>
+				</svg>
+				Switch Profile
+			</button>
+		)
+	}
+
+	return (
+		<form className="flex flex-col gap-4" onSubmit={onSubmit}>
+			{myProfiles?.map((profile) => {
+				if (profile.id === myProfile.id) return null
+
+				return (
+					<label key={profile.id}>
+						<input
+							type="checkbox"
+							name="profile"
+							value={profile.id}
+							checked={profile.id === selected}
+							onChange={() => setSelected(profile.id)}
+						/>
+						<ProfileComponent profile={profile} />
+					</label>
+				)
+			})}
+			<div className="flex gap-4">
+				<button
+					type="submit"
+					className="text-white
+					bg-purple-700 hover:bg-purple-800
+					focus:ring-purple-300 disabled:bg-purple-300 max-w-min flex gap-3 focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+					disabled={isPending || selected === ""}
+				>
+					{isPending ? "Saving..." : "Switch"}
+				</button>
+				<button
+					type="button"
+					className="text-black hover:text-white max-w-min flex gap-3 bg-white hover:bg-gray-500 focus:ring-4 focus:ring-black font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+					onClick={() => setIsSwitchProfileToggled(false)}
+				>
+					Cancel
+				</button>
+			</div>
+		</form>
 	)
 }
 
