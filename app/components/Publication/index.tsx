@@ -71,9 +71,10 @@ export const Publication = ({
 	const { data: comments, loading: loadingComments } = useComments({
 		commentsOf: post.id,
 		observerId: profile?.id,
+		limit: 1,
 	})
 
-	if (isPending || loading || profileLoading) {
+	if (isPending || loading || profileLoading || loadingComments) {
 		return <Spinner />
 	}
 
@@ -418,12 +419,10 @@ export const Publication = ({
 					!isComment &&
 					comments?.map((comment, idx) => {
 						if (idx > 0) return null
+
 						return (
 							<CommentComponent
 								post={comment}
-								whoReacted={whoReacted}
-								loading={loading}
-								isMyProfile={isMyProfile}
 								isPending={isPending}
 								key={comment.id}
 								profile={profile}
@@ -438,19 +437,20 @@ export const Publication = ({
 
 function CommentComponent({
 	post,
-	whoReacted,
-	loading,
-	isMyProfile,
 	isPending,
 	profile,
 }: {
 	post: ContentPublication | CommentWithFirstComment | Post
-	whoReacted: WhoReactedResult[] | undefined
-	loading: boolean
-	isMyProfile: boolean
 	isPending: boolean
 	profile: ProfileOwnedByMe | null | undefined
 }) {
+	const { data: whoReacted, loading } = useWhoReacted({
+		publicationId: post.id,
+		observerId: profile?.id,
+	})
+
+	const isMyProfile = isProfileOwnedByMe(post.profile)
+
 	const isMyPublication = isPublicationOwnedByMe(post)
 
 	if (isPending || loading) {
