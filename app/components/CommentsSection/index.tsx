@@ -306,7 +306,7 @@ export function CommentsSection({
 	if (loading || isLoading) return <Spinner />
 
 	return (
-		<div className="flex flex-col gap-14 mb-6">
+		<div className="flex flex-col gap-8 mb-6">
 			<WhenLoggedInWithProfile>
 				{({ profile }) => (
 					<CreateComment publisher={profile} publicationId={commentsOf} />

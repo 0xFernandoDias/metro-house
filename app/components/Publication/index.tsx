@@ -12,14 +12,15 @@ import {
 	CommentWithFirstComment,
 	isProfileOwnedByMe,
 	useMutualFollowers,
-	ProfileId,
 	useReaction,
 	PublicationId,
 	Post,
 	useComments,
 	WhoReactedResult,
-	Profile,
 	usePublication,
+	isPublicationOwnedByMe,
+	useHidePublication,
+	PublicationOwnedByMe,
 } from "@lens-protocol/react-web"
 import Link from "next/link"
 import { ProfileHeader } from "../ProfileHeader"
@@ -65,6 +66,7 @@ export const Publication = ({
 	})
 
 	const isMyProfile = isProfileOwnedByMe(post.profile)
+	const isMyPublication = isPublicationOwnedByMe(post)
 
 	const { data: comments, loading: loadingComments } = useComments({
 		commentsOf: post.id,
@@ -85,7 +87,7 @@ export const Publication = ({
 	return (
 		<Link
 			href={`/publication/${publication.id}`}
-			className={`min-w-max flex gap-14 flex-col`}
+			className={`min-w-max flex gap-8 flex-col`}
 		>
 			<div className={`flex gap-8 ${isComment ? "" : "flex-col"}`}>
 				{/* Post Header */}
@@ -139,64 +141,74 @@ export const Publication = ({
 				)}
 
 				{!isComment ? (
-					<ProfileHeader
-						viewingProfileId={profile?.id}
-						profile={post.profile}
-						isComment={isComment}
-					/>
+					<div className="flex gap-32 items-center">
+						<ProfileHeader
+							viewingProfileId={profile?.id}
+							profile={post.profile}
+							isComment={isComment}
+						/>
+						{isMyPublication && <HidePublicationButton publication={post} />}
+					</div>
 				) : (
 					<div className="flex flex-col items-center">
-						<ProfilePicture
-							profile={post.profile}
-							picture={post.profile.picture}
-						/>
+						<div className="flex gap-32 items-center">
+							<ProfilePicture
+								profile={post.profile}
+								picture={post.profile.picture}
+							/>
+						</div>
 						{!noHr && <div className="flex h-full w-[2px] bg-gray-200" />}
 					</div>
 				)}
 
-				<div className="max-w-max flex flex-col gap-4 py-2">
+				<div className="max-w-max flex flex-col gap-4">
 					{isComment && (
 						<div className="space-y-1 font-medium ">
-							<div className="flex items-center flex-row gap-3">
-								{post.profile.name && (
-									<Link
-										className="text-lg"
-										href={`/profile/${post.profile.handle}`}
-									>
-										{post.profile.name}
-									</Link>
-								)}
-								<Link
-									className="text-lg font-medium text-gray-900 truncate "
-									href={`/profile/${post.profile.handle}`}
-								>
-									@{post.profile.handle}
-								</Link>
-								{post.profile.onChainIdentity.proofOfHumanity && (
-									<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
-										<svg
-											aria-hidden="true"
-											className="w-3.5 h-3.5"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-											xmlns="http://www.w3.org/2000/svg"
+							<div className="flex gap- items-center">
+								<div className="flex items-center flex-row gap-3">
+									{post.profile.name && (
+										<Link
+											className="text-lg"
+											href={`/profile/${post.profile.handle}`}
 										>
-											<path
-												fillRule="evenodd"
-												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-												clipRule="evenodd"
-											></path>
-										</svg>
-										<span className="sr-only">Verified</span>
-									</div>
-								)}
-								{post.profile.followStatus?.isFollowedByMe && (
+											{post.profile.name}
+										</Link>
+									)}
 									<Link
-										className="text-sm font-medium text-gray-500 truncate "
+										className="text-lg font-medium text-gray-900 truncate "
 										href={`/profile/${post.profile.handle}`}
 									>
-										is followed by me
+										@{post.profile.handle}
 									</Link>
+									{post.profile.onChainIdentity.proofOfHumanity && (
+										<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+											<svg
+												aria-hidden="true"
+												className="w-3.5 h-3.5"
+												fill="currentColor"
+												viewBox="0 0 20 20"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+													clipRule="evenodd"
+												></path>
+											</svg>
+											<span className="sr-only">Verified</span>
+										</div>
+									)}
+									{post.profile.followStatus?.isFollowedByMe && (
+										<Link
+											className="text-sm font-medium text-gray-500 truncate "
+											href={`/profile/${post.profile.handle}`}
+										>
+											is followed by me
+										</Link>
+									)}
+								</div>
+								{isMyPublication && (
+									<HidePublicationButton publication={post} />
 								)}
 							</div>
 							<div className="text-md text-gray-500 ">
@@ -229,9 +241,8 @@ export const Publication = ({
 					>
 						{post.createdAt}
 					</time>
-
 					{/* Post Metadata Content */}
-					<div className="text-lg  flex flex-col gap-8">
+					<div className="text-lg flex flex-col gap-8">
 						{post.metadata.content}
 
 						{post.metadata.media.map((media, idx) => {
@@ -246,13 +257,6 @@ export const Publication = ({
 							)
 						})}
 					</div>
-
-					{/* <Link
-				href="#"
-				className="block text-md font-medium text-blue-600 hover:underline "
-			>
-				Read more
-			</Link> */}
 
 					<aside className="flex flex-col gap-3">
 						{/* Avatars */}
@@ -427,7 +431,7 @@ export const Publication = ({
 						)
 					})}
 			</div>
-			{!isPage && <div className="flex w-full h-[1px] bg-gray-200 mb-14" />}
+			{!isPage && <div className="flex w-full h-[1px] bg-gray-200 mb-8" />}
 		</Link>
 	)
 }
@@ -447,6 +451,8 @@ function CommentComponent({
 	isPending: boolean
 	profile: ProfileOwnedByMe | null | undefined
 }) {
+	const isMyPublication = isPublicationOwnedByMe(post)
+
 	if (isPending || loading) {
 		return <Spinner />
 	}
@@ -462,76 +468,76 @@ function CommentComponent({
 		<Link href={`/publication/${post.id}`} className={`max-w-max flex gap-8 `}>
 			{/* Post Header */}
 
-			<div className="flex flex-col items-center ">
-				<ProfilePicture profile={post.profile} picture={post.profile.picture} />
-			</div>
+			<ProfilePicture profile={post.profile} picture={post.profile.picture} />
 
-			<div className="max-w-max flex flex-col gap-4 py-2">
-				<div className="space-y-1 font-medium ">
-					<div className="flex items-center flex-row gap-3">
-						{post.profile.name && (
-							<Link
-								className="text-lg"
-								href={`/profile/${post.profile.handle}`}
-							>
-								{post.profile.name}
-							</Link>
-						)}
-						<Link
-							className="text-lg font-medium text-gray-900 truncate "
-							href={`/profile/${post.profile.handle}`}
-						>
-							@{post.profile.handle}
-						</Link>
-						{post.profile.onChainIdentity.proofOfHumanity && (
-							<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
-								<svg
-									aria-hidden="true"
-									className="w-3.5 h-3.5"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
+			<div className="max-w-max flex flex-col gap-4">
+				<div className="flex gap-32 items-center">
+					<div className="space-y-1 font-medium ">
+						<div className="flex items-center flex-row gap-3">
+							{post.profile.name && (
+								<Link
+									className="text-lg"
+									href={`/profile/${post.profile.handle}`}
 								>
-									<path
-										fillRule="evenodd"
-										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-										clipRule="evenodd"
-									></path>
-								</svg>
-								<span className="sr-only">Verified</span>
-							</div>
-						)}
-						{post.profile.followStatus?.isFollowedByMe && (
+									{post.profile.name}
+								</Link>
+							)}
 							<Link
-								className="text-sm font-medium text-gray-500 truncate "
+								className="text-lg font-medium text-gray-900 truncate "
 								href={`/profile/${post.profile.handle}`}
 							>
-								is followed by me
+								@{post.profile.handle}
 							</Link>
-						)}
-					</div>
-					<div className="text-md text-gray-500 ">
-						<Link
-							href={`/profile/${post.profile.handle}/contacts?tab=followers`}
-						>
-							{post.profile.stats.totalFollowers} followers
-						</Link>
-						<WhenLoggedInWithProfile>
-							{({ profile }) =>
-								isMyProfile ? (
-									""
-								) : (
-									<Link
-										href={`/profile/${post.profile.handle}/contacts?tab=mutual`}
+							{post.profile.onChainIdentity.proofOfHumanity && (
+								<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+									<svg
+										aria-hidden="true"
+										className="w-3.5 h-3.5"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
 									>
-										<Mutual post={post} profile={profile} />
-									</Link>
-								)
-							}
-						</WhenLoggedInWithProfile>
+										<path
+											fillRule="evenodd"
+											d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+											clipRule="evenodd"
+										></path>
+									</svg>
+									<span className="sr-only">Verified</span>
+								</div>
+							)}
+							{post.profile.followStatus?.isFollowedByMe && (
+								<Link
+									className="text-sm font-medium text-gray-500 truncate "
+									href={`/profile/${post.profile.handle}`}
+								>
+									is followed by me
+								</Link>
+							)}
+						</div>
+						<div className="text-md text-gray-500 ">
+							<Link
+								href={`/profile/${post.profile.handle}/contacts?tab=followers`}
+							>
+								{post.profile.stats.totalFollowers} followers
+							</Link>
+							<WhenLoggedInWithProfile>
+								{({ profile }) =>
+									isMyProfile ? (
+										""
+									) : (
+										<Link
+											href={`/profile/${post.profile.handle}/contacts?tab=mutual`}
+										>
+											<Mutual post={post} profile={profile} />
+										</Link>
+									)
+								}
+							</WhenLoggedInWithProfile>
+						</div>
 					</div>
+					{isMyPublication && <HidePublicationButton publication={post} />}
 				</div>
-
 				{/* Created At */}
 
 				<Link href={`/publication/${post.id}`}>
@@ -692,6 +698,38 @@ function CommentComponent({
 				</aside>
 			</div>
 		</Link>
+	)
+}
+
+function HidePublicationButton({
+	publication,
+}: {
+	publication: PublicationOwnedByMe
+}) {
+	const { execute: hide, isPending: deletePending } = useHidePublication({
+		publication,
+	})
+
+	if (publication.hidden) return null
+
+	if (deletePending) return <Spinner />
+
+	return (
+		<button className="flex" type="button" onClick={hide}>
+			<svg
+				className="h-6 w-6 fill-white stroke-gray-500"
+				strokeWidth={1.5}
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+			>
+				<path
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+				/>
+			</svg>
+		</button>
 	)
 }
 
