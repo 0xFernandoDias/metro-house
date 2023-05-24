@@ -614,9 +614,13 @@ export function Publications({
 			{/* Publications */}
 
 			{tab === "nfts" ? (
-				profileNfts.map((nft, idx) => {
-					return <NftItem key={idx} nft={nft} />
-				})
+				profileNfts.length ? (
+					profileNfts.map((nft, idx) => {
+						return <NftItem key={idx} nft={nft} />
+					})
+				) : (
+					<>No NFTS.</>
+				)
 			) : tab === "collected" ? (
 				<div className="flex flex-col mb-6">
 					{collectedPublications?.length ? (
