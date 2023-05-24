@@ -17,6 +17,7 @@ import {
 	useActiveProfileSwitch,
 	useProfilesOwnedBy,
 	useProfilesOwnedByMe,
+	useCollectedPublications,
 } from "@lens-protocol/react-web"
 import { Publications } from "../../components/Publications"
 import Link from "next/link"
@@ -41,6 +42,9 @@ import {
 	useState,
 } from "react"
 import { upload } from "@/app/helpers/upload"
+import { Nft } from "@ankr.com/ankr.js"
+import { getNfts } from "@/app/apis"
+import { useSearchParams } from "next/navigation"
 
 function ProfileCover({
 	picture,
@@ -96,6 +100,7 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 	const [isEditProfileToggled, setIsEditProfileToggled] = useState(false)
 
 	const isMyProfile = profile && isProfileOwnedByMe(profile)
+	const profileAddress = profile?.ownedBy || ""
 
 	const {
 		data: publications,
@@ -109,7 +114,15 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 		})
 	)
 
-	const profileAddress = profile?.ownedBy
+	const {
+		loading: collectedPublicationsLoading,
+		data: collectedPublications,
+		error: collectedPublicationsError,
+		hasMore: hasMoreCollectedPublications,
+		observeRef: observeCollectedPublicationsRef,
+	} = useInfiniteScroll(
+		useCollectedPublications({ walletAddress: profileAddress })
+	)
 
 	const contractAddress = "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
 	// const contractAddress = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
@@ -120,13 +133,16 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 
 	// const {} = useFeed({ profileId: profile?.id || "" })
 
+	const { get } = useSearchParams()
+	const tab = get("tab")
+
 	if (
 		loading ||
 		loadingPublications ||
 		isLoading ||
 		contractLoading ||
+		collectedPublicationsLoading ||
 		!profile ||
-		!publications ||
 		profileLoading
 	) {
 		return (
@@ -149,9 +165,14 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 							<EditableProfile
 								profile={profile}
 								hasMore={hasMore}
+								collectedPublications={collectedPublications}
+								hasMoreCollectedPublications={hasMoreCollectedPublications}
 								loadingPublications={loadingPublications}
 								nfts={nfts}
 								observeRef={observeRef}
+								observeCollectedPublicationsRef={
+									observeCollectedPublicationsRef
+								}
 								publications={publications}
 								handleSave={() => setIsEditProfileToggled(false)}
 								setProfile={setProfile}
@@ -261,7 +282,8 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 
 									if (
 										value.toString() === "true" ||
-										value.toString() === "false"
+										value.toString() === "false" ||
+										value === null
 									)
 										return null
 
@@ -303,8 +325,13 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 								isProfile
 								profile={profile}
 								publications={publications}
+								collectedPublications={collectedPublications}
 								hasMore={hasMore}
+								hasMoreCollectedPublications={hasMoreCollectedPublications}
 								observeRef={observeRef}
+								observeCollectedPublicationsRef={
+									observeCollectedPublicationsRef
+								}
 								isLoading={profileLoading || loading || loadingPublications}
 							/>
 						</div>
@@ -402,8 +429,11 @@ function EditableProfile({
 	profile,
 	nfts,
 	publications,
+	collectedPublications,
 	hasMore,
+	hasMoreCollectedPublications,
 	observeRef,
+	observeCollectedPublicationsRef,
 	loadingPublications,
 	handleSave,
 	setProfile,
@@ -411,9 +441,12 @@ function EditableProfile({
 }: {
 	profile: ProfileOwnedByMe
 	nfts: NFT[] | undefined
-	publications: AnyPublication[]
+	publications: AnyPublication[] | undefined
+	collectedPublications: AnyPublication[] | undefined
 	hasMore: boolean
+	hasMoreCollectedPublications: boolean
 	observeRef: RefCallback<unknown>
+	observeCollectedPublicationsRef: RefCallback<unknown>
 	loadingPublications: boolean
 	handleSave: () => void
 	setProfile: Dispatch<SetStateAction<ProfileType | undefined>>
@@ -561,7 +594,11 @@ function EditableProfile({
 				{Object.entries(profile.attributes).map(([key, value]) => {
 					if (key === "statusMessage" || key === "statusEmoji") return null
 
-					if (value.toString() === "true" || value.toString() === "false")
+					if (
+						value.toString() === "true" ||
+						value.toString() === "false" ||
+						value === null
+					)
 						return null
 
 					return (
@@ -634,8 +671,11 @@ function EditableProfile({
 					isProfile
 					profile={profile}
 					publications={publications}
+					collectedPublications={collectedPublications}
 					hasMore={hasMore}
+					hasMoreCollectedPublications={hasMoreCollectedPublications}
 					observeRef={observeRef}
+					observeCollectedPublicationsRef={observeCollectedPublicationsRef}
 					isLoading={loadingPublications}
 				/>
 			</div>

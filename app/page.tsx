@@ -21,6 +21,15 @@ import { Spinner } from "./components/Spinner"
 import { WhenLoggedOut } from "./components/auth/WhenLoggedOut"
 import Link from "next/link"
 import { Publication } from "./components/Publication"
+import { getNfts } from "./apis"
+import { Nft } from "@ankr.com/ankr.js"
+import {
+	MediaRenderer,
+	ThirdwebNftMedia,
+	useContract,
+	useContractMetadata,
+	useNFT,
+} from "@thirdweb-dev/react"
 
 export default function Home() {
 	// const { count, increment } = useGlobalContext()

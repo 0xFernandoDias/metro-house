@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@ankr.com/ankr.js": "^0.3.1",
 		"@lens-protocol/client": "^1.0.1",
 		"@lens-protocol/react-web": "^1.0.1",
 		"@lens-protocol/wagmi": "^1.0.1",
