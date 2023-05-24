@@ -17,7 +17,7 @@ export function LeftSidebar() {
 			className="fixed top-0 left-0 z-40 w-80 h-screen pt-28 transition-transform -translate-x-full lg:translate-x-0"
 			aria-label="Sidebar"
 		>
-			<div className="h-full px-4 pb-4 overflow-y-auto bg-white  justify-between flex flex-col items-center">
+			<div className="h-full px-4 pb-4 overflow-y-auto bg-white justify-between flex flex-col items-center">
 				{/* Menu Buttons */}
 
 				<WhenLoggedInWithProfile>
@@ -28,7 +28,7 @@ export function LeftSidebar() {
 									return (
 										<Link
 											key={idx}
-											className="flex p-2 text-xl items-center text-gray-900 rounded-lg  hover:bg-gray-100 "
+											className="flex p-2 text-xl items-center text-gray-900 rounded-lg hover:bg-gray-100 "
 											href={
 												item === "Profile"
 													? `/profile/${profile.handle}`
@@ -43,7 +43,7 @@ export function LeftSidebar() {
 										>
 											{item === "Contacts" ? (
 												<svg
-													className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+													className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 													fill="none"
 													stroke="currentColor"
 													strokeWidth={1.5}
@@ -59,7 +59,7 @@ export function LeftSidebar() {
 												</svg>
 											) : item === "Discovery" ? (
 												<svg
-													className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+													className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 													fill="none"
 													stroke="currentColor"
 													strokeWidth={1.5}
@@ -81,7 +81,7 @@ export function LeftSidebar() {
 												/>
 											) : (
 												<svg
-													className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+													className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 													fill="none"
 													stroke="currentColor"
 													strokeWidth={1.5}
@@ -122,7 +122,7 @@ export function LeftSidebar() {
 							return (
 								<Link
 									key={idx}
-									className="flex p-2 text-xl items-center text-gray-900 rounded-lg  hover:bg-gray-100 "
+									className="flex p-2 text-xl items-center text-gray-900 rounded-lg hover:bg-gray-100 "
 									href={
 										item === "Discovery"
 											? "/discovery"
@@ -139,7 +139,7 @@ export function LeftSidebar() {
 								>
 									{item === "Discovery" ? (
 										<svg
-											className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+											className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 											fill="none"
 											stroke="currentColor"
 											strokeWidth={1.5}
@@ -155,7 +155,7 @@ export function LeftSidebar() {
 										</svg>
 									) : item === "Latest" ? (
 										<svg
-											className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+											className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 											fill="none"
 											stroke="currentColor"
 											strokeWidth={1.5}
@@ -171,7 +171,7 @@ export function LeftSidebar() {
 										</svg>
 									) : item === "Top Collected" ? (
 										<svg
-											className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+											className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 											fill="none"
 											stroke="currentColor"
 											strokeWidth={1.5}
@@ -187,7 +187,7 @@ export function LeftSidebar() {
 										</svg>
 									) : item === "Top Commented" ? (
 										<svg
-											className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+											className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 											fill="none"
 											stroke="currentColor"
 											strokeWidth={1.5}
@@ -203,7 +203,7 @@ export function LeftSidebar() {
 										</svg>
 									) : item === "Top Mirrored" ? (
 										<svg
-											className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+											className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 											fill="none"
 											stroke="currentColor"
 											strokeWidth={1.5}
@@ -219,7 +219,7 @@ export function LeftSidebar() {
 										</svg>
 									) : (
 										<svg
-											className="w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+											className="w-8 h-8 text-gray-500 transition duration-75 group-hover:text-gray-900 "
 											fill="none"
 											stroke="currentColor"
 											strokeWidth={1.5}

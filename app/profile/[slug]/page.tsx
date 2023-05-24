@@ -61,7 +61,7 @@ function ProfileCover({
 				<MediaRenderer
 					className={`${
 						isMobile
-							? "sm:hidden flex opacity-100 sm:opacity-0  -mb-24"
+							? "sm:hidden flex opacity-100 sm:opacity-0 -mb-24"
 							: "hidden sm:flex opacity-0 sm:opacity-100"
 					}`}
 					width={"530px"}
@@ -204,11 +204,11 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 							</div>
 
 							{/* Name */}
-							<div className="text-3xl font-semibold leading-none items-center text-gray-900  gap-2 flex">
+							<div className="text-3xl font-semibold leading-none items-center text-gray-900 gap-2 flex">
 								{profile?.name || ""}
 
 								{profile.onChainIdentity.proofOfHumanity && (
-									<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+									<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full ">
 										<svg
 											aria-hidden="true"
 											className="w-3.5 h-3.5"
@@ -246,7 +246,7 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 											<div className="flex flex-col gap-2">
 												<button
 													type="button"
-													className="text-white w-48 items-center flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+													className="text-white w-48 items-center flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
 													onClick={() => setIsEditProfileToggled(true)}
 												>
 													<svg
@@ -408,14 +408,14 @@ function SwitchProfile({ myProfile }: { myProfile: ProfileOwnedByMe }) {
 					type="submit"
 					className="text-white
 					bg-purple-700 hover:bg-purple-800
-					focus:ring-purple-300 disabled:bg-purple-300 max-w-min flex gap-3 focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+					focus:ring-purple-300 disabled:bg-purple-300 max-w-min flex gap-3 focus:ring-4 font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
 					disabled={isPending || selected === ""}
 				>
 					{isPending ? "Saving..." : "Switch"}
 				</button>
 				<button
 					type="button"
-					className="text-black hover:text-white max-w-min flex gap-3 bg-white hover:bg-gray-500 focus:ring-4 focus:ring-black font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+					className="text-black hover:text-white max-w-min flex gap-3 bg-white hover:bg-gray-500 focus:ring-4 focus:ring-black font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
 					onClick={() => setIsSwitchProfileToggled(false)}
 				>
 					Cancel
@@ -519,12 +519,12 @@ function EditableProfile({
 								type="text"
 								name={key}
 								id={key}
-								className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+								className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 								placeholder=""
 							/>
 							<label
 								htmlFor="bio"
-								className="peer-focus:font-medium absolute text-lg text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+								className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 							>
 								{key}
 							</label>
@@ -533,27 +533,27 @@ function EditableProfile({
 				})}
 
 				{/* Name */}
-				<div className="text-3xl font-semibold leading-none items-center text-gray-900  gap-2 flex">
+				<div className="text-3xl font-semibold leading-none items-center text-gray-900 gap-2 flex">
 					<div className="relative z-0 w-full group">
 						<input
 							type="text"
 							name="name"
 							id="name"
-							className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+							className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 							placeholder=" "
 							value={name}
 							onChange={handleNameChange}
 						/>
 						<label
 							htmlFor="name"
-							className="peer-focus:font-medium absolute text-lg text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+							className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 						>
 							Name
 						</label>
 					</div>
 
 					{profile.onChainIdentity.proofOfHumanity && (
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full ">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"
@@ -578,14 +578,14 @@ function EditableProfile({
 						type="text"
 						name="bio"
 						id="bio"
-						className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+						className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
 						value={bio}
 						onChange={handleBioChange}
 					/>
 					<label
 						htmlFor="bio"
-						className="peer-focus:font-medium absolute text-lg text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+						className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 					>
 						Bio
 					</label>
@@ -607,12 +607,12 @@ function EditableProfile({
 								type="text"
 								name={key}
 								id={key}
-								className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+								className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 								placeholder=""
 							/>
 							<label
 								htmlFor="bio"
-								className="peer-focus:font-medium absolute text-lg text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+								className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 							>
 								{key}
 							</label>
@@ -623,14 +623,14 @@ function EditableProfile({
 				<div className="flex gap-4">
 					<button
 						type="submit"
-						className="text-white disabled:bg-blue-400 max-w-min flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+						className="text-white disabled:bg-blue-400 max-w-min flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
 						disabled={isPending}
 					>
 						Save
 					</button>
 					<button
 						type="button"
-						className="text-black hover:text-white max-w-min flex gap-3 bg-white hover:bg-gray-500 focus:ring-4 focus:ring-black font-medium rounded-lg text-lg px-5 py-2.5   focus:outline-none "
+						className="text-black hover:text-white max-w-min flex gap-3 bg-white hover:bg-gray-500 focus:ring-4 focus:ring-black font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
 						onClick={handleSave}
 						disabled={isPending}
 					>
@@ -816,7 +816,7 @@ function ProfileContacts({
 // bio
 // picture - https://flowbite.com/docs/components/avatar/
 // cover picture - https://flowbite.com/docs/typography/images/#image-caption
-// Follow AUTHENTICATE AT LEAST WITH METAMASK hash  - https://flowbite.com/docs/components/buttons/#default-button
+// Follow AUTHENTICATE AT LEAST WITH METAMASK hash - https://flowbite.com/docs/components/buttons/#default-button
 // View on Opensea
 // Attributes - https://flowbite.com/docs/typography/lists/#list-with-icons
 // Name

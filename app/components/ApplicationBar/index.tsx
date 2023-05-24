@@ -6,14 +6,14 @@ import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 
 export function ApplicationBar() {
 	return (
-		<div className="fixed sm:invisible px-4 sm:opacity-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2  ">
+		<div className="fixed sm:invisible px-4 sm:opacity-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 ">
 			<div className="flex h-full max-w-lg justify-between items-center mx-auto">
 				<Link
 					href="/"
-					className="inline-flex flex-col items-center justify-center px-2 rounded-l-full hover:bg-gray-50  group"
+					className="inline-flex flex-col items-center justify-center px-2 rounded-l-full hover:bg-gray-50 group"
 				>
 					<svg
-						className="w-6 h-6 text-gray-500 fill-gray-500  group-hover:text-blue-600 "
+						className="w-6 h-6 text-gray-500 fill-gray-500 group-hover:text-blue-600 "
 						viewBox="0 0 20 20"
 						xmlns="http://www.w3.org/2000/svg"
 						aria-hidden="true"
@@ -25,10 +25,10 @@ export function ApplicationBar() {
 
 				<Link
 					href="/discovery"
-					className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50  group"
+					className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50 group"
 				>
 					<svg
-						className="w-6 h-6 stroke-gray-500 fill-white text-gray-500  group-hover:text-blue-600 "
+						className="w-6 h-6 stroke-gray-500 fill-white text-gray-500 group-hover:text-blue-600 "
 						strokeWidth={1.5}
 						viewBox="0 0 24 24"
 						xmlns="http://www.w3.org/2000/svg"
@@ -72,10 +72,10 @@ export function ApplicationBar() {
 							<Link
 								data-tooltip-target="tooltip-notifications"
 								href="/notifications"
-								className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50  group"
+								className="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50 group"
 							>
 								<svg
-									className="w-6 h-6  group-hover:stroke-blue-600  stroke-gray-500 fill-white"
+									className="w-6 h-6 group-hover:stroke-blue-600 stroke-gray-500 fill-white"
 									strokeWidth={1.5}
 									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
@@ -102,10 +102,10 @@ export function ApplicationBar() {
 					<button
 						data-tooltip-target="tooltip-more"
 						type="button"
-						className="inline-flex flex-col items-center justify-center px-2 rounded-r-full hover:bg-gray-50  group"
+						className="inline-flex flex-col items-center justify-center px-2 rounded-r-full hover:bg-gray-50 group"
 					>
 						<svg
-							className="w-6 h-6  group-hover:stroke-blue-600  stroke-gray-500 fill-white"
+							className="w-6 h-6 group-hover:stroke-blue-600 stroke-gray-500 fill-white"
 							strokeWidth="1.5"
 							viewBox="0 0 24 24"
 							xmlns="http://www.w3.org/2000/svg"

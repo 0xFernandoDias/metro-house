@@ -82,5 +82,5 @@ export function ContactsTabs({ profile }: { profile: ProfileType }) {
 // https://flowbite.com/docs/components/timeline/#vertical-timeline
 // useFeed (profileId, observerId, metadataFilter)
 // Profile Posts, Collects, Mirrors, NFTS, Media
-// Home Latest, Top Collected, Top Commented, Top Mirrored,             (PublicationTypes.Post && PublicationSortCriteria.Mirror && PublicationSortCriteria.Comment)
+// Home Latest, Top Collected, Top Commented, Top Mirrored, (PublicationTypes.Post && PublicationSortCriteria.Mirror && PublicationSortCriteria.Comment)
 // Both Audio, Image, Text Only, Video

@@ -78,7 +78,7 @@ function BottomNavbar() {
 		<div className="flex flex-col">
 			<nav className="flex max-w-min text-gray-700" aria-label="Breadcrumb">
 				<ol className="inline-flex items-center space-x-1 md:space-x-3">
-					{/* <a className="inline-flex items-center gap-3 text-2xl font-semibold text-gray-700 hover:text-blue-600  ">
+					{/* <a className="inline-flex items-center gap-3 text-2xl font-semibold text-gray-700 hover:text-blue-600 ">
 						<svg
 							aria-hidden="true"
 							className="w-4 h-4"
@@ -108,7 +108,7 @@ function BottomNavbar() {
 									</svg>
 									<a
 										href="#"
-										className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2  "
+										className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 "
 									>
 										Templates
 									</a>
@@ -159,7 +159,7 @@ export function RightSidebar() {
 			className="fixed top-0 right-0 z-40 w-96 h-screen pt-28 transition-transform translate-x-full bg-white lg:translate-x-0 "
 			aria-label="Sidebar"
 		>
-			<div className="h-full items-end px-4 pb-4 overflow-y-auto bg-white  justify-between  flex flex-col">
+			<div className="h-full items-end px-4 pb-4 overflow-y-auto bg-white justify-between flex flex-col">
 				{/* Search */}
 				<form className="flex flex-col max-w-max gap-6" onSubmit={handleSubmit}>
 					<label htmlFor="discovery-search" className="sr-only">
@@ -185,7 +185,7 @@ export function RightSidebar() {
 						<input
 							type="text"
 							id="discovery-search"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5       "
+							className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
 							placeholder="Search"
 							required
 							onChange={handleChange}
@@ -202,7 +202,7 @@ export function RightSidebar() {
 function UserMenu() {
 	return (
 		<div
-			className="my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow  "
+			className="my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow "
 			id="dropdown-user"
 		>
 			<div className="px-4 py-3" role="none">
@@ -217,7 +217,7 @@ function UserMenu() {
 			<ul className="py-1" role="none">
 				<button
 					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
 					role="menuitem"
 				>
 					Wrong Network
@@ -225,7 +225,7 @@ function UserMenu() {
 
 				<button
 					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
 					role="menuitem"
 				>
 					Switch Profile
@@ -233,7 +233,7 @@ function UserMenu() {
 
 				<Link
 					href="/settings"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
 					role="menuitem"
 				>
 					Settings
@@ -241,7 +241,7 @@ function UserMenu() {
 
 				<button
 					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100   "
+					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
 					role="menuitem"
 				>
 					Logout
@@ -321,8 +321,8 @@ function Footer() {
 		useActiveProfile()
 
 	return (
-		<footer className="w-full bg-white rounded-lg  mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
-			<ul className="flex flex-wrap gap-2 items-center justify-center mt-3 text-md font-medium text-gray-500  sm:mt-0">
+		<footer className="w-full bg-white rounded-lg mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
+			<ul className="flex flex-wrap gap-2 items-center justify-center mt-3 text-md font-medium text-gray-500 sm:mt-0">
 				<Link href="/" className="hover:underline">
 					Home
 				</Link>
@@ -359,44 +359,44 @@ function Footer() {
 
 {
 	/*
-            Desktop and Mobile
-            Ref. Twitter
+ Desktop and Mobile
+ Ref. Twitter
 
-            useUnreadNotificationsCount AUTHENTICATED
-            
-            Metro House PAGE NAME Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network (https://flowbite.com/docs/components/avatar/) https://flowbite.com/docs/components/sidebar/#sidebar-with-navbar
-            Latest Top Collected Top Commented Top Mirrored AUTHENTICATED https://flowbite.com/docs/components/tabs/#interactive-tabs
-            (Audio) (Image) (Text) (Only) (Video) with icons https://flowbite.com/docs/components/tabs/#pills-tabs
-            
-            LEFT
-            @handle AUTHENTICATED
-            Contacts  AUTHENTICATED
-            Discovery
-            Latest
-            Top Collected
-            Top Commented
-            Top Mirrored
-            Notifications (count) AUTHENTICATED https://flowbite.com/docs/components/badge/#button-with-badge
-            Profile AUTHENTICATED
-            (CREATE POST) AUTHENTICATED
-            Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network https://flowbite.com/docs/components/avatar/
+ useUnreadNotificationsCount AUTHENTICATED
+ 
+ Metro House PAGE NAME Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network (https://flowbite.com/docs/components/avatar/) https://flowbite.com/docs/components/sidebar/#sidebar-with-navbar
+ Latest Top Collected Top Commented Top Mirrored AUTHENTICATED https://flowbite.com/docs/components/tabs/#interactive-tabs
+ (Audio) (Image) (Text) (Only) (Video) with icons https://flowbite.com/docs/components/tabs/#pills-tabs
+ 
+ LEFT
+ @handle AUTHENTICATED
+ Contacts AUTHENTICATED
+ Discovery
+ Latest
+ Top Collected
+ Top Commented
+ Top Mirrored
+ Notifications (count) AUTHENTICATED https://flowbite.com/docs/components/badge/#button-with-badge
+ Profile AUTHENTICATED
+ (CREATE POST) AUTHENTICATED
+ Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network https://flowbite.com/docs/components/avatar/
 
-            RIGHT
-            Search
-            Suggested
+ RIGHT
+ Search
+ Suggested
 			TRENDING like Lenster
-            Footer https://flowbite.com/docs/components/footer/#Follow-footer
+ Footer https://flowbite.com/docs/components/footer/#Follow-footer
 
-            */
+ */
 }
 
 {
 	/*
-            MOBILE
-            https://flowbite.com/docs/components/bottom-navigation/#application-bar-example
-            https://flowbite.com/docs/components/sidebar/#off-canvas-sidebar
-            https://flowbite.com/docs/components/dropdowns/#menu-icon
-            Home Discovery (CREATE POST) AUTHENTICATED (LOGIN) Notifications  ...More 
+ MOBILE
+ https://flowbite.com/docs/components/bottom-navigation/#application-bar-example
+ https://flowbite.com/docs/components/sidebar/#off-canvas-sidebar
+ https://flowbite.com/docs/components/dropdowns/#menu-icon
+ Home Discovery (CREATE POST) AUTHENTICATED (LOGIN) Notifications ...More 
 				invisible transition-opacity opacity-0
 			*/
 }

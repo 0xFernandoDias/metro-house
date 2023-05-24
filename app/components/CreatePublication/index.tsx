@@ -52,7 +52,7 @@ export function CreatePublication({
 						<div className="flex items-center space-x-1">
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<div className="w-5 h-5 items-center justify-center font-extrabold text-lg flex">
 									B
@@ -61,7 +61,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<i className="w-5 h-5 items-center justify-center font-semibold text-lg flex">
 									I
@@ -70,7 +70,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									aria-hidden="true"
@@ -89,7 +89,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									aria-hidden="true"
@@ -109,7 +109,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 stroke-gray-50 fill-gray-500"
@@ -129,7 +129,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									aria-hidden="true"
@@ -150,7 +150,7 @@ export function CreatePublication({
 						<div className="flex flex-wrap items-center space-x-1">
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 stroke-gray-50 fill-gray-500"
@@ -169,7 +169,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 fill-gray-50 stroke-gray-500"
@@ -188,7 +188,7 @@ export function CreatePublication({
 							</button>
 							<button
 								type="button"
-								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  dark:hover:text-white dark:hover:bg-gray-600"
+								className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
 							>
 								<svg
 									className="w-5 h-5 fill-gray-50 stroke-gray-500"
@@ -217,7 +217,7 @@ export function CreatePublication({
 						id="editor"
 						name="content"
 						rows={8}
-						className="block w-full h-32 px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0  dark:placeholder-gray-400"
+						className="block w-full h-32 px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:placeholder-gray-400"
 						placeholder="Write your post..."
 						required
 						disabled={isPending}

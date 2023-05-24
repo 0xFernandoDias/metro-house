@@ -107,7 +107,7 @@ export default function Discovery() {
 							<input
 								type="text"
 								id="simple-search"
-								className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5       "
+								className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
 								placeholder="Search"
 								required
 								onChange={handleChange}
@@ -116,7 +116,7 @@ export default function Discovery() {
 
 						<Link
 							type="submit"
-							className="p-2.5 text-lg font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300   "
+							className="p-2.5 text-lg font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 "
 							href={`/discovery/${selectedQuery}`}
 						>
 							<svg

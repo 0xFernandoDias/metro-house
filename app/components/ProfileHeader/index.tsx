@@ -44,7 +44,7 @@ export function ProfileHeader({
 						@{profile.handle}
 					</Link>
 					{profile.onChainIdentity.proofOfHumanity && (
-						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+						<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full ">
 							<svg
 								aria-hidden="true"
 								className="w-3.5 h-3.5"

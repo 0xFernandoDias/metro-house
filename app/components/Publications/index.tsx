@@ -410,7 +410,7 @@ export function Publications({
 
 			{/* Button tabs */}
 			{/* 
-				<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500  gap-2">
+				<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 gap-2">
 				<Link
 					// href={{ query: { ...query, format: "" } }}
 					href={{ query: { format: "" } }}
@@ -435,7 +435,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "audio" } }}
 					href={{ query: { format: "audio" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100   "
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
 				>
 					<svg
 						className="h-6 w-6 fill-white stroke-gray-500"
@@ -455,7 +455,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "image" } }}
 					href={{ query: { format: "image" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  "
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
 				>
 					<svg
 						className="h-6 w-6 fill-white stroke-gray-500"
@@ -475,7 +475,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "text" } }}
 					href={{ query: { format: "text" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  "
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
 				>
 					<svg
 						className="h-6 w-6 fill-white stroke-gray-500"
@@ -495,7 +495,7 @@ export function Publications({
 				<Link
 					// href={{ query: { ...query, format: "video" } }}
 					href={{ query: { format: "video" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100  "
+					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
 				>
 					<svg
 						className="h-6 w-6 fill-gray-500 stroke-gray-500"
@@ -525,7 +525,7 @@ export function Publications({
 					{/* <button
 						id="dropdownRadioButton"
 						data-dropdown-toggle="dropdownDefaultRadio"
-						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center   "
+						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center "
 						type="button"
 					>
 						Latest
@@ -548,7 +548,7 @@ export function Publications({
 
 					{/* <div
 						id="dropdownDefaultRadio"
-						className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow  "
+						className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow "
 					>
 						<ul
 							className="p-3 space-y-3 text-sm text-gray-700"
@@ -561,7 +561,7 @@ export function Publications({
 										type="radio"
 										value=""
 										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500    focus:ring-2  "
+										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 "
 									/>
 									<label
 										htmlFor="default-radio-1"
@@ -579,7 +579,7 @@ export function Publications({
 										type="radio"
 										value=""
 										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500    focus:ring-2  "
+										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 "
 									/>
 									<label
 										htmlFor="default-radio-2"
@@ -596,7 +596,7 @@ export function Publications({
 										type="radio"
 										value=""
 										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500    focus:ring-2  "
+										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 "
 									/>
 									<label
 										htmlFor="default-radio-3"

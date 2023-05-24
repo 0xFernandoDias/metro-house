@@ -182,7 +182,7 @@ export const Publication = ({
 										@{post.profile.handle}
 									</Link>
 									{post.profile.onChainIdentity.proofOfHumanity && (
-										<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+										<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full ">
 											<svg
 												aria-hidden="true"
 												className="w-3.5 h-3.5"
@@ -308,7 +308,7 @@ export const Publication = ({
 								{/* Like */}
 								<Link
 									href={`/publication/${post.id}/whoReacted?tab=likes`}
-									className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
+									className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 								>
 									<svg
 										className="h-6 w-6 fill-white stroke-gray-500"
@@ -330,7 +330,7 @@ export const Publication = ({
 								{/* Comment */}
 								<Link
 									href={`/publication/${publication.id}`}
-									className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
+									className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 								>
 									<svg
 										className="h-6 w-6 fill-white stroke-gray-500"
@@ -351,7 +351,7 @@ export const Publication = ({
 								{/* Mirror */}
 								<Link
 									href={`/publication/${post.id}/whoReacted?tab=mirrors`}
-									className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5      "
+									className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 								>
 									<svg
 										className="h-6 w-6 fill-white stroke-gray-500"
@@ -374,7 +374,7 @@ export const Publication = ({
 								{!isComment && (
 									<Link
 										href={`/publication/${post.id}/whoReacted?tab=collects`}
-										className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5      "
+										className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 									>
 										<svg
 											className="h-6 w-6 fill-white stroke-gray-500"
@@ -489,7 +489,7 @@ function CommentComponent({
 								@{post.profile.handle}
 							</Link>
 							{post.profile.onChainIdentity.proofOfHumanity && (
-								<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full  ">
+								<div className="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded-full ">
 									<svg
 										aria-hidden="true"
 										className="w-3.5 h-3.5"
@@ -550,7 +550,7 @@ function CommentComponent({
 				</Link>
 
 				{/* Post Metadata Content */}
-				<div className="text-lg  flex flex-col gap-8">
+				<div className="text-lg flex flex-col gap-8">
 					{post.metadata.content}
 
 					{post.metadata.media.map((media, idx) => {
@@ -620,7 +620,7 @@ function CommentComponent({
 							{/* Like */}
 							<Link
 								href={`/publication/${post.id}/whoReacted?tab=likes`}
-								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
+								className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -642,7 +642,7 @@ function CommentComponent({
 							{/* Comment */}
 							<Link
 								href={`/publication/${post.id}`}
-								className="text-gray-900 bg-white gap-2 flex flex-row  focus:outline-none  font-medium rounded-lg text-md px-2 py-1.5      "
+								className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -663,7 +663,7 @@ function CommentComponent({
 							{/* Mirror */}
 							<Link
 								href={`/publication/${post.id}/whoReacted?tab=mirrors`}
-								className="text-gray-900 bg-white  gap-2 flex flex-row  focus:outline-none font-medium rounded-lg text-md px-2 py-1.5      "
+								className="text-gray-900 bg-white gap-2 flex flex-row focus:outline-none font-medium rounded-lg text-md px-2 py-1.5 "
 							>
 								<svg
 									className="h-6 w-6 fill-white stroke-gray-500"
@@ -738,7 +738,7 @@ function CommentButton({ publication }: { publication: ContentPublication }) {
 	return (
 		<Link
 			href={`/publication/${publication.id}`}
-			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      "
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 "
 		>
 			<svg
 				className="h-6 w-6 fill-white stroke-gray-500"
@@ -787,7 +787,7 @@ function CollectButton({
 	return (
 		<button
 			type="button"
-			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      "
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 "
 			onClick={handleCollect}
 		>
 			<svg
@@ -838,7 +838,7 @@ function MirrorButton({
 	return (
 		<button
 			type="button"
-			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      "
+			className="text-gray-900 bg-white border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 "
 			onClick={handleMirror}
 		>
 			<svg
@@ -912,7 +912,7 @@ function LikeUnlikeButton({
 				hasReactionType ? "blue-600" : "white"
 			} border gap-2 flex flex-row border-gray-300 focus:outline-none hover:bg-${
 				hasReactionType ? "blue-800" : "gray-100"
-			} focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5      `}
+			} focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-md px-2 py-1.5 `}
 			onClick={toggleReaction}
 		>
 			<svg

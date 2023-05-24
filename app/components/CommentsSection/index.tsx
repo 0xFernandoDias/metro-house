@@ -83,7 +83,7 @@ function CreateComment({
 	return (
 		<form
 			onSubmit={submit}
-			className="sm:w-[80%] flex flex-col gap-4 border border-gray-200 rounded-lg bg-gray-50  "
+			className="sm:w-[80%] flex flex-col gap-4 border border-gray-200 rounded-lg bg-gray-50 "
 		>
 			<div className="px-4 py-2 bg-white rounded-t-lg ">
 				<label htmlFor="comment" className="sr-only">
@@ -93,7 +93,7 @@ function CreateComment({
 					id="comment"
 					name="comment"
 					rows={4}
-					className="w-full px-0 text-lg text-gray-900 bg-white border-0  focus:ring-0  "
+					className="w-full px-0 text-lg text-gray-900 bg-white border-0 focus:ring-0 "
 					placeholder="Write your comment..."
 					required
 					disabled={isPending}
@@ -103,7 +103,7 @@ function CreateComment({
 			<div className="flex items-center justify-between px-3 py-2 border-t ">
 				<button
 					type="submit"
-					className="inline-flex gap-2 items-center py-2.5 px-4 text-md font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800"
+					className="inline-flex gap-2 items-center py-2.5 px-4 text-md font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
 					disabled={isPending}
 				>
 					<svg
@@ -125,7 +125,7 @@ function CreateComment({
 					<div className="flex items-center space-x-1">
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<div className="w-5 h-5 items-center justify-center font-extrabold text-lg flex">
 								B
@@ -134,7 +134,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<i className="w-5 h-5 items-center justify-center font-semibold text-lg flex">
 								I
@@ -143,7 +143,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								aria-hidden="true"
@@ -162,7 +162,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								aria-hidden="true"
@@ -182,7 +182,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								className="w-5 h-5 stroke-gray-50 fill-gray-500"
@@ -202,7 +202,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								aria-hidden="true"
@@ -223,7 +223,7 @@ function CreateComment({
 					<div className="flex flex-wrap items-center space-x-1">
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								className="w-5 h-5 stroke-gray-50 fill-gray-500"
@@ -242,7 +242,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								className="w-5 h-5 fill-gray-50 stroke-gray-500"
@@ -261,7 +261,7 @@ function CreateComment({
 						</button>
 						<button
 							type="button"
-							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100   "
+							className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
 						>
 							<svg
 								className="w-5 h-5 fill-gray-50 stroke-gray-500"
@@ -326,7 +326,7 @@ export function CommentsSection({
 						alt=""
 					/>
 
-					<div className="items-center flex gap-3 max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex  ">
+					<div className="items-center flex gap-3 max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex ">
 						<time className="text-md font-normal text-gray-400 sm:order-last">
 							just now
 						</time>
@@ -334,12 +334,12 @@ export function CommentsSection({
 							Bonnie moved
 							<Link
 								href="#"
-								className="font-semibold text-blue-600  hover:underline"
+								className="font-semibold text-blue-600 hover:underline"
 							>
 								Jese Leos
 							</Link>
 							to
-							<span className="bg-gray-100 text-gray-800 text-md font-normal px-2.5 py-0.5 rounded  ">
+							<span className="bg-gray-100 text-gray-800 text-md font-normal px-2.5 py-0.5 rounded ">
 								Funny Group
 							</span>
 						</div>
