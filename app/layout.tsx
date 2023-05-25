@@ -1,4 +1,4 @@
-// https://testnet.lenster.xyz/ + https://lenster.xyz/ + https://www.lensfrens.xyz/ + https://lens-do-it.vercel.app/ +
+// https://testnet.lenster.xyz/ + https://lenster.xyz/ + https://www.lensfrens.xyz/ + https://lens-do-it.vercel.app/ + transfer = METRO HOUSE
 "use client"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
 import { Mumbai, Polygon } from "@thirdweb-dev/chains"
@@ -13,7 +13,6 @@ import {
 	production,
 	development,
 } from "@lens-protocol/react-web"
-import { Provider } from "ankr-react"
 import { GlobalContextProvider } from "./context/store"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
@@ -66,22 +65,20 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body>
-				<Provider>
-					<ThirdwebProvider activeChain={Polygon}>
-						<WagmiConfig client={wagmiClient}>
-							<LensProvider config={lensConfig}>
-								<GlobalContextProvider>
-									<NavbarWithSidebars>
-										{children}
-										<ApplicationBar />
-									</NavbarWithSidebars>
-								</GlobalContextProvider>
-							</LensProvider>
-						</WagmiConfig>
-					</ThirdwebProvider>
-				</Provider>
-			</body>
+			<ThirdwebProvider activeChain={Polygon}>
+				<WagmiConfig client={wagmiClient}>
+					<LensProvider config={lensConfig}>
+						<GlobalContextProvider>
+							<body>
+								<NavbarWithSidebars>
+									{children}
+									<ApplicationBar />
+								</NavbarWithSidebars>
+							</body>
+						</GlobalContextProvider>
+					</LensProvider>
+				</WagmiConfig>
+			</ThirdwebProvider>
 		</html>
 	)
 }

@@ -35,7 +35,7 @@ export function NavbarWithSidebars({
 function TopNavbar() {
 	return (
 		<nav className="fixed p-3 lg:p-6 top-0 z-50 w-full bg-white ">
-			<div className="flex flex-col gap-6 sm:flex-row items-center justify-between">
+			<div className="flex  gap-6  items-center justify-between">
 				<Logo />
 
 				{/* User Avatar and Menu */}

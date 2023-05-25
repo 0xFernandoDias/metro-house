@@ -569,6 +569,7 @@ function EditableProfile({
 			location: (formData.get("location") as string | null) || null,
 			website: (formData.get("website") as string | null) || null,
 			twitter: (formData.get("twitter") as string | null) || null,
+			app: (formData.get("app") as string | null) || null,
 		}
 
 		const result = await execute({ name, bio, attributes })

@@ -19,10 +19,10 @@ import {
 	useNetwork,
 	useSwitchNetwork,
 } from "wagmi"
-import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import { WhenLoggedInWithProfile } from "./WhenLoggedInWithProfile"
 import { WhenLoggedOut } from "./WhenLoggedOut"
 import { Spinner } from "../Spinner"
+import { InjectedConnector } from "wagmi/connectors/injected"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
@@ -61,7 +61,7 @@ export function LoginButton() {
 		isLoading: isConnectLoading,
 		error: connectError,
 	} = useConnect({
-		connector: new MetaMaskConnector({
+		connector: new InjectedConnector({
 			options: {
 				shimDisconnect: true,
 			},
@@ -86,16 +86,6 @@ export function LoginButton() {
 		| undefined
 	>()
 
-	useEffect(() => {
-		if (loginError || profileError || connectError) {
-			setWalletError(loginError! || connectError || profileError)
-		}
-	}, [loginError, profileError, connectError])
-
-	useEffect(() => {
-		setWalletError("")
-	}, [isConnected, activeWallet, profile])
-
 	const onLoginClick = async () => {
 		if (isConnected) {
 			await disconnectAsync()
@@ -103,9 +93,9 @@ export function LoginButton() {
 
 		const { connector } = await connectAsync()
 
-		if (connector instanceof MetaMaskConnector) {
+		if (connector instanceof InjectedConnector) {
 			const signer = await connector.getSigner()
-			await login(signer)
+			await login(signer, profile?.handle)
 		}
 	}
 
@@ -139,28 +129,12 @@ export function LoginButton() {
 		)
 	}
 
-	if (activeWallet && !signer) {
-		return (
-			<div className="flex gap-3">
-				<button
-					type="button"
-					className={`min-w-min flex text-[#00501e] bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 `}
-					onClick={onLoginClick}
-				>
-					Sign in with Lens
-				</button>
-				<button
-					onClick={logout}
-					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
-					// disabled={isDisconnectLoading || isLogoutPending}
-				>
-					Disconnect wallet
-				</button>
-			</div>
-		)
-	}
-
-	if (profileLoading || isDisconnectLoading || isLogoutPending) {
+	if (
+		profileLoading ||
+		isDisconnectLoading ||
+		isLogoutPending ||
+		signerLoading
+	) {
 		return <Spinner />
 	}
 
@@ -171,7 +145,6 @@ export function LoginButton() {
 					<Link
 						href="/createProfile"
 						className="min-w-min flex text-[#00501e] bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 "
-						// disabled={isDisconnectLoading || isLogoutPending}
 					>
 						Create a profile
 					</Link>
@@ -180,14 +153,12 @@ export function LoginButton() {
 						<Link
 							href="https://opensea.io/collection/lens-protocol-profiles"
 							className="min-w-min flex text-[#00501e] bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 "
-							// disabled={isDisconnectLoading || isLogoutPending}
 						>
 							Buy a profile
 						</Link>
 						<Link
 							href="https://claim.lens.xyz/"
 							className="min-w-min flex text-white bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 "
-							// disabled={isDisconnectLoading || isLogoutPending}
 						>
 							Claim a profile
 						</Link>
@@ -195,9 +166,9 @@ export function LoginButton() {
 				)}
 
 				<button
-					onClick={logout}
+					onClick={onLogoutClick}
 					className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
-					// disabled={isDisconnectLoading || isLogoutPending}
+					disabled={isDisconnectLoading || isLogoutPending}
 				>
 					Disconnect wallet
 				</button>

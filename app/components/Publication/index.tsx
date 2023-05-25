@@ -29,6 +29,7 @@ import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { Spinner } from "../Spinner"
 import { ProfilePicture } from "../ProfilePicture"
 import { ProfileHeader } from "../ProfileHeader"
+import moment from "moment"
 
 export const Publication = ({
 	publication,
@@ -73,6 +74,8 @@ export const Publication = ({
 	const isMyProfile = isProfileOwnedByMe(post.profile)
 	const isMyPublication = isPublicationOwnedByMe(post)
 
+	const postDate = moment(post.createdAt).format("MMMM Do YYYY, h:mm:ss a")
+
 	if (isPending || loading || profileLoading || loadingComments) {
 		return <Spinner />
 	}
@@ -84,7 +87,6 @@ export const Publication = ({
 		>
 			<div className={`flex gap-8 ${isComment ? "" : "flex-col"}`}>
 				{/* Post Header */}
-
 				{mainpost && (
 					<Link
 						href={`/profile/${post.profile.handle}`}
@@ -228,7 +230,7 @@ export const Publication = ({
 					)}
 
 					{/* Created At */}
-					<div className="block text-md text-gray-500 ">{post.createdAt}</div>
+					<div className="block text-md text-gray-500 ">{postDate}</div>
 					{/* Post Metadata Content */}
 					<div className="text-lg flex flex-col gap-8">
 						{post.metadata.content}
@@ -385,9 +387,6 @@ export const Publication = ({
 						<WhenLoggedInWithProfile>
 							{({ profile: activeProfile }) => (
 								<div className="flex items-center space-x-3 divide-x divide-gray-200 ">
-									{/* Reactions buttons */}
-									{/* Like */}
-
 									<LikeUnlikeButton
 										profile={activeProfile}
 										publication={post}
@@ -439,14 +438,14 @@ function CommentComponent({
 	const isMyProfile = isProfileOwnedByMe(post.profile)
 	const isMyPublication = isPublicationOwnedByMe(post)
 
+	const postDate = moment(post.createdAt).format("MMMM Do YYYY, h:mm:ss a")
+
 	if (isPending || loading) {
 		return <Spinner />
 	}
 
 	return (
 		<Link href={`/publication/${post.id}`} className={`max-w-max flex gap-8 `}>
-			{/* Post Header */}
-
 			<ProfilePicture profile={post.profile} picture={post.profile.picture} />
 
 			<div className="max-w-max flex flex-col gap-4">
@@ -517,14 +516,12 @@ function CommentComponent({
 					</div>
 					{isMyPublication && <HidePublicationButton publication={post} />}
 				</div>
-				{/* Created At */}
-
 				<Link href={`/publication/${post.id}`}>
 					<time
 						dateTime="2020-08-25 19:00"
 						className="block text-md text-gray-500 "
 					>
-						{post.createdAt}
+						{postDate}
 					</time>
 				</Link>
 
@@ -658,9 +655,6 @@ function CommentComponent({
 					<WhenLoggedInWithProfile>
 						{({ profile: activeProfile }) => (
 							<div className="flex items-center space-x-3 divide-x divide-gray-200 ">
-								{/* Reactions buttons */}
-								{/* Like */}
-
 								<LikeUnlikeButton profile={activeProfile} publication={post} />
 								<CommentButton publication={post} />
 								<MirrorButton profile={activeProfile} publication={post} />

@@ -27,7 +27,6 @@ export function Profile({ profile }: { profile: Profile }) {
 				</div>
 			</div>
 
-			{/* Follow Button */}
 			<WhenLoggedInWithProfile>
 				{({ profile: activeProfile }) => (
 					<FollowUnfollowButton follower={activeProfile} followee={profile} />

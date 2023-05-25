@@ -161,7 +161,6 @@ export function Publications({
 						isProfile
 							? {
 									pathname: `profile/${profile?.handle}`,
-									// query: { ...query, tab: "collects" },
 									query: { tab: "collected" },
 							  }
 							: isDiscovery
@@ -171,7 +170,6 @@ export function Publications({
 							  }
 							: {
 									pathname: "/",
-									// query: { ...query, tab: "topcollected" },
 									query: { tab: "topcommented" },
 							  }
 					}
@@ -246,7 +244,6 @@ export function Publications({
 						isProfile
 							? {
 									pathname: `profile/${profile?.handle}`,
-									// query: { ...query, tab: "collects" },
 									query: { tab: "nfts" },
 							  }
 							: isDiscovery
@@ -256,7 +253,6 @@ export function Publications({
 							  }
 							: {
 									pathname: "/",
-									// query: { ...query, tab: "topcollected" },
 									query: { tab: "topcollected" },
 							  }
 					}
@@ -327,7 +323,6 @@ export function Publications({
 							  }
 							: {
 									pathname: "/",
-									// query: { ...query, tab: "topmirrored" },
 									query: { tab: "topmirrored" },
 							  }
 					}
