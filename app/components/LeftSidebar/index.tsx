@@ -33,7 +33,7 @@ export function LeftSidebar() {
 													? `/profile/${profile.handle}`
 													: item === "Contacts"
 													? `/profile/${profile.handle}/contacts`
-													: item === "discovery"
+													: item === "Discovery"
 													? "/discovery"
 													: item === "Notifications"
 													? "/notifications"
