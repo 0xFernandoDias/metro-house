@@ -1,15 +1,15 @@
 "use client"
+import { ChangeEvent, useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useActiveProfile, useProfilesToFollow } from "@lens-protocol/react-web"
+import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
+import { LoginButton } from "../auth/LoginButton"
+import { Spinner } from "../Spinner"
 import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
-import { usePathname, useRouter } from "next/navigation"
-import { useActiveProfile, useProfilesToFollow } from "@lens-protocol/react-web"
-import { LoginButton } from "../auth/LoginButton"
-import { ChangeEvent, useState } from "react"
-import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { FollowUnfollowButton } from "../FollowUnfollowButton"
 import { ProfilePicture } from "../ProfilePicture"
-import { Spinner } from "../Spinner"
+import { FollowUnfollowButton } from "../FollowUnfollowButton"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
@@ -37,10 +37,6 @@ function TopNavbar() {
 		<nav className="fixed p-3 lg:p-6 top-0 z-50 w-full bg-white ">
 			<div className="flex flex-col gap-6 sm:flex-row items-center justify-between">
 				<Logo />
-
-				{/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ">
-						Hello @fernando.dias
-				</span> */}
 
 				{/* User Avatar and Menu */}
 				<div className="flex items-center">
@@ -72,69 +68,10 @@ function TopNavbar() {
 }
 
 function BottomNavbar() {
-	const pathname = usePathname()
-
 	return (
 		<div className="flex flex-col">
 			<nav className="flex max-w-min text-gray-700" aria-label="Breadcrumb">
-				<ol className="inline-flex items-center space-x-1 md:space-x-3">
-					{/* <a className="inline-flex items-center gap-3 text-2xl font-semibold text-gray-700 hover:text-blue-600 ">
-						<svg
-							aria-hidden="true"
-							className="w-4 h-4"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-						</svg>
-						{pathname === "/" ? "Home" : pathname.substring(1)}
-					</a> */}
-
-					{/* <li>
-								<div className="flex items-center">
-									<svg
-										aria-hidden="true"
-										className="w-6 h-6 text-gray-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											fillRule="evenodd"
-											d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-											clipRule="evenodd"
-										></path>
-									</svg>
-									<a
-										href="#"
-										className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 "
-									>
-										Templates
-									</a>
-								</div>
-							</li>
-							<li aria-current="page">
-								<div className="flex items-center">
-									<svg
-										aria-hidden="true"
-										className="w-6 h-6 text-gray-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											fillRule="evenodd"
-											d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-											clipRule="evenodd"
-										></path>
-									</svg>
-									<span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 ">
-										Flowbite
-									</span>
-								</div>
-							</li> */}
-				</ol>
+				<ol className="inline-flex items-center space-x-1 md:space-x-3"></ol>
 			</nav>
 		</div>
 	)
@@ -252,7 +189,6 @@ function UserMenu() {
 }
 
 function SuggestedProfiles() {
-	// const { data: profiles } = useExploreProfiles({ limit: 5 })
 	const {
 		data: profile,
 		error: profileError,
@@ -355,48 +291,4 @@ function Footer() {
 			</ul>
 		</footer>
 	)
-}
-
-{
-	/*
- Desktop and Mobile
- Ref. Twitter
-
- useUnreadNotificationsCount AUTHENTICATED
- 
- Metro House PAGE NAME Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network (https://flowbite.com/docs/components/avatar/) https://flowbite.com/docs/components/sidebar/#sidebar-with-navbar
- Latest Top Collected Top Commented Top Mirrored AUTHENTICATED https://flowbite.com/docs/components/tabs/#interactive-tabs
- (Audio) (Image) (Text) (Only) (Video) with icons https://flowbite.com/docs/components/tabs/#pills-tabs
- 
- LEFT
- @handle AUTHENTICATED
- Contacts AUTHENTICATED
- Discovery
- Latest
- Top Collected
- Top Commented
- Top Mirrored
- Notifications (count) AUTHENTICATED https://flowbite.com/docs/components/badge/#button-with-badge
- Profile AUTHENTICATED
- (CREATE POST) AUTHENTICATED
- Login/Profile (dark mode)/Settings/ Switch Profile/ Create Profile/ Wrong Network https://flowbite.com/docs/components/avatar/
-
- RIGHT
- Search
- Suggested
-			TRENDING like Lenster
- Footer https://flowbite.com/docs/components/footer/#Follow-footer
-
- */
-}
-
-{
-	/*
- MOBILE
- https://flowbite.com/docs/components/bottom-navigation/#application-bar-example
- https://flowbite.com/docs/components/sidebar/#off-canvas-sidebar
- https://flowbite.com/docs/components/dropdowns/#menu-icon
- Home Discovery (CREATE POST) AUTHENTICATED (LOGIN) Notifications ...More 
-				invisible transition-opacity opacity-0
-			*/
 }

@@ -1,55 +1,18 @@
-// https://flowbite.com/docs/components/rating/#rating-comment
-// https://flowbite.com/docs/components/timeline/#vertical-timeline
-// https://flowbite.com/docs/typography/lists/#advanced-layout
-// (publication id)
-// typename
-// created At
-// hidden?
-// id
-// profile - @handle
-// 	Contacts (Followers, Following, Mutual)
-// 	picture
-// 	Follow AUTHENTICATE AT LEAST WITH METAMASK hash
-// 	Name
-// 	Proof of humanity
-// useEncryptedPublication
-// LOGIN TO DECRYPT - https://testnet.lenster.xyz/posts/0x1b-0x0133
-// canObserverDecrypt?
-// can COMMENT, can MIRROR, Has Collected by me? AUTHENTICATED
-// Metadata
-// mirrors
-// reaction AUTHENTICATED
-// Comments count, total amount of collects, total amount of mirrors, total upvotes, total downvotes
-// Comments
-// use Who react
-// use who collected publication
-// use who mirrored publication
-// use who reacted
-// use Reaction AUTHENTICATED
-// use Hide Publication AUTHENTICATED
-// https://flowbite.com/docs/components/card/#card-with-list
-// ancora no comentario
-
 "use client"
+import { RefCallback, useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
+import { MediaRenderer, useContract, useNFT } from "@thirdweb-dev/react"
 import {
 	AnyPublication,
 	Profile as ProfileType,
 	isCommentPublication,
 	isMirrorPublication,
 } from "@lens-protocol/react-web"
-import { Publication } from "../Publication"
-import Link from "next/link"
-import { useSearchParams } from "next/navigation"
-import { RefCallback, useEffect, useState } from "react"
-import { Spinner } from "../Spinner"
-import {
-	MediaRenderer,
-	ThirdwebNftMedia,
-	useContract,
-	useNFT,
-} from "@thirdweb-dev/react"
-import { getNfts } from "@/app/apis"
 import { Nft } from "@ankr.com/ankr.js"
+import { getNfts } from "@/app/apis"
+import { Spinner } from "../Spinner"
+import { Publication } from "../Publication"
 
 export function Publications({
 	publications,
@@ -74,33 +37,21 @@ export function Publications({
 	hasMore?: boolean
 	hasMoreCollectedPublications?: boolean
 }) {
-	// const { query } = useRouter()
-
 	const { get } = useSearchParams()
-
-	const profileAddress = profile?.ownedBy || ""
-
-	// const contractAddress = "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
-
-	// const { contract } = useContract(contractAddress)
-
-	// const { data: nfts, isLoading } = useOwnedNFTs(contract, profileAddress)
-
 	const tab = get("tab")
 
 	const [profileNfts, setProfileNfts] = useState([] as Nft[])
+	const profileAddress = profile?.ownedBy || ""
+
+	useEffect(() => {
+		returnednfts()
+	})
 
 	const returnednfts = async () => {
 		const { nfts } = await getNfts(profileAddress)
 
 		setProfileNfts(nfts.filter((nft) => nft.imageUrl !== ""))
 	}
-
-	useEffect(() => {
-		returnednfts()
-	})
-
-	// const isNftsTab = tab === "nfts"
 
 	if (isLoading) {
 		return <Spinner />
@@ -408,211 +359,7 @@ export function Publications({
 				</Link>
 			</ul>
 
-			{/* Button tabs */}
-			{/* 
-				<ul className="flex flex-wrap text-lg font-medium text-center text-gray-500 gap-2">
-				<Link
-					// href={{ query: { ...query, format: "" } }}
-					href={{ query: { format: "" } }}
-					className="inline-block px-4 py-3 bg-blue-600 rounded-lg active"
-					aria-current="page"
-				>
-					<svg
-						className="h-6 w-6 fill-blue-600 stroke-white"
-						strokeWidth={1.5}
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-						/>
-					</svg>
-				</Link>
-
-				<Link
-					// href={{ query: { ...query, format: "audio" } }}
-					href={{ query: { format: "audio" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
-				>
-					<svg
-						className="h-6 w-6 fill-white stroke-gray-500"
-						strokeWidth={1.5}
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
-						/>
-					</svg>
-				</Link>
-
-				<Link
-					// href={{ query: { ...query, format: "image" } }}
-					href={{ query: { format: "image" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
-				>
-					<svg
-						className="h-6 w-6 fill-white stroke-gray-500"
-						strokeWidth={1.5}
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-						/>
-					</svg>
-				</Link>
-
-				<Link
-					// href={{ query: { ...query, format: "text" } }}
-					href={{ query: { format: "text" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
-				>
-					<svg
-						className="h-6 w-6 fill-white stroke-gray-500"
-						strokeWidth={1.5}
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-						/>
-					</svg>
-				</Link>
-
-				<Link
-					// href={{ query: { ...query, format: "video" } }}
-					href={{ query: { format: "video" } }}
-					className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 "
-				>
-					<svg
-						className="h-6 w-6 fill-gray-500 stroke-gray-500"
-						strokeWidth={1.5}
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0118 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0118 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 016 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5"
-						/>
-					</svg>
-				</Link>
-
-				{/* <li>
-					<a className="inline-block px-4 py-3 text-gray-400 cursor-not-allowed">
-						Tab 5
-					</a>
-				</li>
-			</ul> */}
-
-			{/* Dropdown radio */}
-			{isProfile ? (
-				<>
-					{/* <button
-						id="dropdownRadioButton"
-						data-dropdown-toggle="dropdownDefaultRadio"
-						className="text-black max-w-max bg-white gap-2 flex hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center "
-						type="button"
-					>
-						Latest
-						<svg
-							className="w-4 h-4"
-							aria-hidden="true"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M19 9l-7 7-7-7"
-							></path>
-						</svg>
-					</button> */}
-
-					{/* <div
-						id="dropdownDefaultRadio"
-						className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow "
-					>
-						<ul
-							className="p-3 space-y-3 text-sm text-gray-700"
-							aria-labelledby="dropdownRadioButton"
-						>
-							<li>
-								<div className="flex items-center">
-									<input
-										id="default-radio-1"
-										type="radio"
-										value=""
-										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 "
-									/>
-									<label
-										htmlFor="default-radio-1"
-										className="ml-2 text-sm font-medium text-gray-900 "
-									>
-										Default radio
-									</label>
-								</div>
-							</li>
-							<li>
-								<div className="flex items-center">
-									<input
-										checked
-										id="default-radio-2"
-										type="radio"
-										value=""
-										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 "
-									/>
-									<label
-										htmlFor="default-radio-2"
-										className="ml-2 text-sm font-medium text-gray-900 "
-									>
-										Checked state
-									</label>
-								</div>
-							</li>
-							<li>
-								<div className="flex items-center">
-									<input
-										id="default-radio-3"
-										type="radio"
-										value=""
-										name="default-radio"
-										className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 "
-									/>
-									<label
-										htmlFor="default-radio-3"
-										className="ml-2 text-sm font-medium text-gray-900 "
-									>
-										Default radio
-									</label>
-								</div>
-							</li>
-						</ul>
-					</div> */}
-				</>
-			) : null}
-
 			{/* Publications */}
-
 			{tab === "nfts" ? (
 				profileNfts.length ? (
 					profileNfts.map((nft, idx) => {

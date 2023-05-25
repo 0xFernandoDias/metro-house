@@ -1,4 +1,4 @@
-export default function Settings({ params }: { params: { slug: string } }) {
+export default function Settings() {
 	return (
 		<>
 			<title>Settings / Metro House</title>

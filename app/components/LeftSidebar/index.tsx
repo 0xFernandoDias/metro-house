@@ -1,11 +1,11 @@
 "use client"
 import Link from "next/link"
-import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import {
 	ProfileOwnedByMe,
 	useActiveProfile,
 	useUnreadNotificationCount,
 } from "@lens-protocol/react-web"
+import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 
 export function LeftSidebar() {
@@ -19,7 +19,6 @@ export function LeftSidebar() {
 		>
 			<div className="h-full px-4 pb-4 overflow-y-auto bg-white justify-between flex flex-col items-center">
 				{/* Menu Buttons */}
-
 				<WhenLoggedInWithProfile>
 					{({ profile }) => (
 						<ul className="space-y-2 font-medium flex flex-col justify-between">
@@ -246,11 +245,8 @@ export function LeftSidebar() {
 }
 
 function NotificationsCount({ profile }: { profile: ProfileOwnedByMe }) {
-	const {
-		loading: loadingCount,
-		unreadNotificationCount,
-		clear,
-	} = useUnreadNotificationCount({ profileId: profile.id })
+	const { loading: loadingCount, unreadNotificationCount } =
+		useUnreadNotificationCount({ profileId: profile.id })
 
 	if (unreadNotificationCount === 0 || loadingCount) return null
 

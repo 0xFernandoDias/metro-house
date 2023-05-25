@@ -1,9 +1,11 @@
 // https://testnet.lenster.xyz/ + https://lenster.xyz/ + https://www.lensfrens.xyz/ + https://lens-do-it.vercel.app/ +
 "use client"
-import { configureChains, createClient, useAccount, WagmiConfig } from "wagmi"
+import { ThirdwebProvider } from "@thirdweb-dev/react"
+import { Mumbai, Polygon } from "@thirdweb-dev/chains"
+import { configureChains, createClient, WagmiConfig } from "wagmi"
 import { polygon, polygonMumbai } from "wagmi/chains"
 import { publicProvider } from "wagmi/providers/public"
-import { ThirdwebProvider } from "@thirdweb-dev/react"
+import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import {
 	appId,
 	LensConfig,
@@ -11,12 +13,10 @@ import {
 	production,
 	development,
 } from "@lens-protocol/react-web"
-import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import { GlobalContextProvider } from "./context/store"
-import "./global.css"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
-import { Mumbai, Polygon } from "@thirdweb-dev/chains"
+import "./global.css"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
@@ -26,6 +26,20 @@ const chain =
 		: ENVIRONMENT === "production"
 		? polygon
 		: polygonMumbai
+
+const environment =
+	ENVIRONMENT === "development"
+		? development
+		: ENVIRONMENT === "production"
+		? production
+		: development
+
+// const activeChain =
+// 	ENVIRONMENT === "development"
+// 		? Mumbai
+// 		: ENVIRONMENT === "production"
+// 		? Polygon
+// 		: Mumbai
 
 const { provider, webSocketProvider } = configureChains(
 	[chain],
@@ -37,20 +51,6 @@ const wagmiClient = createClient({
 	provider,
 	webSocketProvider,
 })
-
-const environment =
-	ENVIRONMENT === "development"
-		? development
-		: ENVIRONMENT === "production"
-		? production
-		: development
-
-const activeChain =
-	ENVIRONMENT === "development"
-		? Mumbai
-		: ENVIRONMENT === "production"
-		? Polygon
-		: Mumbai
 
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
@@ -71,7 +71,6 @@ export default function RootLayout({
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
 								<NavbarWithSidebars>
-									{/* <LoginButton /> */}
 									{children}
 									<ApplicationBar />
 								</NavbarWithSidebars>

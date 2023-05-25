@@ -1,7 +1,6 @@
 "use client"
-
-import { Publication } from "@lens-protocol/client"
 import { useContext, createContext, useReducer } from "react"
+import { Publication } from "@lens-protocol/client"
 
 const reducer = (state: any, action: any) => {
 	switch (action.type) {

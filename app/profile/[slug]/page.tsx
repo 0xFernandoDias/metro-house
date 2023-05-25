@@ -1,5 +1,23 @@
 "use client"
-import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
+import {
+	ChangeEvent,
+	Dispatch,
+	RefCallback,
+	SetStateAction,
+	useEffect,
+	useState,
+} from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
+import {
+	MediaRenderer,
+	NFT,
+	ThirdwebNftMedia,
+	useContract,
+	useOwnedNFTs,
+} from "@thirdweb-dev/react"
+import { usePrepareSendTransaction, useSendTransaction } from "wagmi"
+import { parseEther } from "ethers/lib/utils.js"
 import {
 	useProfile,
 	usePublications,
@@ -15,38 +33,17 @@ import {
 	AnyPublication,
 	ProfileOwnedByMe,
 	useActiveProfileSwitch,
-	useProfilesOwnedBy,
 	useProfilesOwnedByMe,
 	useCollectedPublications,
 } from "@lens-protocol/react-web"
-import { Publications } from "../../components/Publications"
-import Link from "next/link"
-import {
-	MediaRenderer,
-	NFT,
-	ThirdwebNftMedia,
-	useContract,
-	useOwnedNFTs,
-} from "@thirdweb-dev/react"
-import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
-import { ProfilePicture } from "@/app/components/ProfilePicture"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { upload } from "@/app/helpers/upload"
+import { WhenLoggedInWithProfile } from "@/app/components/auth/WhenLoggedInWithProfile"
 import { Spinner } from "@/app/components/Spinner"
 import { Profile as ProfileComponent } from "@/app/components/Profile"
-import {
-	ChangeEvent,
-	Dispatch,
-	RefCallback,
-	SetStateAction,
-	useEffect,
-	useState,
-} from "react"
-import { upload } from "@/app/helpers/upload"
-import { Nft } from "@ankr.com/ankr.js"
-import { getNfts } from "@/app/apis"
-import { useSearchParams } from "next/navigation"
-import { usePrepareSendTransaction, useSendTransaction } from "wagmi"
-import { parseEther } from "ethers/lib/utils.js"
+import { ProfilePicture } from "@/app/components/ProfilePicture"
+import { FollowUnfollowButton } from "@/app/components/FollowUnfollowButton"
+import { Publications } from "@/app/components/Publications"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
@@ -79,9 +76,10 @@ function ProfileCover({
 	}
 }
 
-// export default function Profile({ params }: { params: { slug: string } }) {
 export default function Profile({ params }: { params: { slug: ProfileId } }) {
 	const { slug: profileHandle } = params
+	const { get } = useSearchParams()
+	const tab = get("tab")
 
 	const {
 		data: myProfile,
@@ -96,22 +94,16 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 	} = useProfile({ handle: profileHandle })
 
 	const [profile, setProfile] = useState(originalProfile)
-
-	useEffect(() => {
-		setProfile(originalProfile)
-	}, [originalProfile])
-
 	const [isEditProfileToggled, setIsEditProfileToggled] = useState(false)
 	const [isSendTransactionToggled, setIsSendTransactionToggled] =
 		useState(false)
 	const [transactionValue, setTransactionValue] = useState("")
 
-	const handleTransactionValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setTransactionValue(e.target.value)
-	}
-
 	const isMyProfile = profile && isProfileOwnedByMe(profile)
 	const profileAddress = profile?.ownedBy || ""
+	const contractAddress = "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
+	const { contract, isLoading: contractLoading } = useContract(contractAddress)
+	const { data: nfts, isLoading } = useOwnedNFTs(contract, profileAddress)
 
 	const {
 		data: publications,
@@ -135,18 +127,6 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 		useCollectedPublications({ walletAddress: profileAddress })
 	)
 
-	const contractAddress = "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
-	// const contractAddress = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
-
-	const { contract, isLoading: contractLoading } = useContract(contractAddress)
-
-	const { data: nfts, isLoading } = useOwnedNFTs(contract, profileAddress)
-
-	// const {} = useFeed({ profileId: profile?.id || "" })
-
-	const { get } = useSearchParams()
-	const tab = get("tab")
-
 	const { config } = usePrepareSendTransaction({
 		chainId: ENVIRONMENT === "development" ? 80001 : 137,
 		request: {
@@ -165,10 +145,18 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 	} = useSendTransaction(config)
 
 	useEffect(() => {
+		setProfile(originalProfile)
+	}, [originalProfile])
+
+	useEffect(() => {
 		if (sendTransactionSuccess) {
 			setTransactionValue("")
 		}
 	}, [sendTransactionSuccess])
+
+	const handleTransactionValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setTransactionValue(e.target.value)
+	}
 
 	if (
 		loading ||
@@ -219,9 +207,6 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 						{/* Left Side */}
 						<div className="flex flex-col gap-4 md:max-w-[50%]">
 							<ProfileCover isMobile picture={profile.coverPicture} />
-
-							{/* Avatar */}
-
 							<ProfilePicture
 								design="profileLarge"
 								profile={profile}
@@ -261,17 +246,11 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 								)}
 							</div>
 
-							{/* Handle */}
-
 							<p className="text-xl font-normal">@{profile.handle}</p>
 
-							{/* Wallet address */}
-							{/* <p className="text-xl font-normal">0x798...E559</p> */}
-
-							{/* Follow */}
 							<WhenLoggedInWithProfile>
 								{({ profile: activeProfile }) => (
-									<div className="flex flex-col gap-4">
+									<div className="flex flex-col gap-8">
 										<FollowUnfollowButton
 											follower={activeProfile}
 											followee={profile}
@@ -331,7 +310,7 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 														type="text"
 														name="transactionValue"
 														id="transactionValue"
-														className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+														className="block py-2.5 px-0 max-w-min text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 														placeholder=""
 														value={transactionValue}
 														onChange={handleTransactionValueChange}
@@ -340,7 +319,7 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 														htmlFor="transactionValue"
 														className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
 													>
-														Transaction Value
+														Transaction Value $(MATIC):
 													</label>
 												</div>
 												<div className="flex gap-4">
@@ -386,7 +365,6 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 								)}
 							</WhenLoggedInWithProfile>
 
-							{/* Bio */}
 							<p className="text-xl max-w-[80%]">{profile.bio}</p>
 
 							<div className="flex flex-col gap-2 text-xl max-w-[80%]">
@@ -405,13 +383,11 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 								})}
 							</div>
 
-							{/* Contacts */}
 							<ProfileContacts
 								viewingProfileId={myProfile?.id}
 								profile={profile}
 							/>
 
-							{/* Profile NFTs */}
 							{nfts?.map((nft, idx) => {
 								return (
 									<ThirdwebNftMedia
@@ -431,8 +407,6 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 
 						{/* Right Side */}
 						<div className="flex flex-col gap-4 md:w-[50%]">
-							{/* Cover */}
-
 							<ProfileCover picture={profile.coverPicture} />
 
 							<Publications
@@ -472,7 +446,7 @@ function SwitchProfile({ myProfile }: { myProfile: ProfileOwnedByMe }) {
 		void switchProfile(selected)
 	}
 
-	if (myProfilesLoading) return <div>Loading...</div>
+	if (myProfilesLoading) return <Spinner />
 
 	if (!isSwitchProfileToggled) {
 		return (
@@ -566,13 +540,13 @@ function EditableProfile({
 	setProfile: Dispatch<SetStateAction<ProfileType | undefined>>
 	closeEditProfileToggled: () => void
 }) {
+	const [name, setName] = useState(profile.name as string)
+	const [bio, setBio] = useState(profile.bio as string)
+
 	const { execute, isPending, error } = useUpdateProfileDetails({
 		profile: profile,
 		upload,
 	})
-
-	const [name, setName] = useState(profile.name as string)
-	const [bio, setBio] = useState(profile.bio as string)
 
 	const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setName(e.target.value)
@@ -612,15 +586,11 @@ function EditableProfile({
 		>
 			{/* Left Side */}
 			<div className="flex flex-col gap-4 md:max-w-[50%]">
-				{/* Avatar */}
-
 				<ProfilePicture
 					design="profileLarge"
 					profile={profile}
 					picture={profile.picture}
 				/>
-
-				{/* Handle */}
 
 				<p className="text-xl font-normal">@{profile.handle}</p>
 
@@ -646,7 +616,6 @@ function EditableProfile({
 					)
 				})}
 
-				{/* Name */}
 				<div className="text-3xl font-semibold leading-none items-center text-gray-900 gap-2 flex">
 					<div className="relative z-0 w-full group">
 						<input
@@ -686,7 +655,6 @@ function EditableProfile({
 					)}
 				</div>
 
-				{/* Bio */}
 				<div className="relative z-0 w-full group font-semibold">
 					<input
 						type="text"
@@ -754,10 +722,8 @@ function EditableProfile({
 
 				{error && <p>{error.message}</p>}
 
-				{/* Contacts */}
 				<ProfileContacts viewingProfileId={profile?.id} profile={profile} />
 
-				{/* Profile NFTs */}
 				{nfts?.map((nft, idx) => {
 					return (
 						<ThirdwebNftMedia
@@ -777,8 +743,6 @@ function EditableProfile({
 
 			{/* Right Side */}
 			<div className="flex flex-col gap-4 md:w-[50%]">
-				{/* Cover */}
-
 				<ProfileCover picture={profile.coverPicture} />
 
 				<Publications
@@ -804,10 +768,6 @@ function ProfileContacts({
 	profile: ProfileType
 	viewingProfileId?: ProfileId
 }) {
-	const { data: followers, loading: loadingFollowers } = useProfileFollowers({
-		profileId: profile.id,
-	})
-
 	const isMyProfile = isProfileOwnedByMe(profile)
 
 	const { data: mutual, loading: loadingMutual } = useMutualFollowers({
@@ -815,7 +775,7 @@ function ProfileContacts({
 		viewingProfileId: profile.id,
 	})
 
-	if (loadingFollowers || loadingMutual) return <Spinner />
+	if (loadingMutual) return <Spinner />
 
 	return (
 		<ul className="flex text-xl flex-col gap-4">
@@ -875,69 +835,3 @@ function ProfileContacts({
 		</ul>
 	)
 }
-
-// function FollowButton({
-// 	followee,
-// 	follower,
-// }: {
-// 	followee: ProfileFragment
-// 	follower: ProfileOwnedByMeFragment
-// }) {
-// 	const {
-// 		execute: follow,
-// 		error: followError,
-// 		isPending: isFollowPending,
-// 	} = useFollow({ follower, followee })
-// 	const {
-// 		execute: unfollow,
-// 		error: unfollowError,
-// 		isPending: isUnfollowPending,
-// 	} = useUnfollow({ follower, followee })
-
-// 	if (followee.followStatus === null) {
-// 		return null
-// 	}
-
-// 	if (followee.followStatus.isFollowedByMe) {
-// 		return (
-// 			<>
-// 				<button onClick={unfollow} disabled={isUnfollowPending}>
-// 					Unfollow
-// 				</button>
-// 				{unfollowError && <p>{unfollowError.message}</p>}
-// 			</>
-// 		)
-// 	}
-
-// 	return (
-// 		<>
-// 			<button onClick={follow} disabled={isFollowPending}>
-// 				Follow
-// 			</button>
-// 			{followError && <p>{followError.message}</p>}
-// 		</>
-// 	)
-// }
-
-// https://flowbite.com/docs/components/rating/#review-content
-// https://flowbite.com/docs/components/skeleton/#card-placeholder
-// https://flowbite.com/docs/components/popover/#user-profile
-// @handle - switch
-// Contacts (Followers, Following, Mutual)
-// Feed https://flowbite.com/docs/components/tabs/#tabs-with-icons https://flowbite.com/docs/components/tabs/#pills-tabs
-// (CREATE POST) IF ITS MINE https://flowbite.com/docs/forms/textarea/#wysiwyg-editor
-// address
-// bio
-// picture - https://flowbite.com/docs/components/avatar/
-// cover picture - https://flowbite.com/docs/typography/images/#image-caption
-// Follow AUTHENTICATE AT LEAST WITH METAMASK hash - https://flowbite.com/docs/components/buttons/#default-button
-// View on Opensea
-// Attributes - https://flowbite.com/docs/typography/lists/#list-with-icons
-// Name
-// Proof of humanity - https://flowbite.com/docs/components/badge/#badges-with-icon
-// (id)
-// Edit things IF ITS MINE AUTHENTICATED
-// Profile price
-// Member since??
-// Transfer cash
-// STATUS

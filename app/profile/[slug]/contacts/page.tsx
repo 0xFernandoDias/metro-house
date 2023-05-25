@@ -1,25 +1,15 @@
-// https://flowbite.com/docs/typography/lists/#advanced-layout
-// @handle
-// Contacts (Followers, Following, Mutual)
-// bio
-// picture - https://flowbite.com/docs/components/avatar/
-// Follow AUTHENTICATE AT LEAST WITH METAMASK hash - https://flowbite.com/docs/components/buttons/#default-button
-// Name
-// Proof of humanity - https://flowbite.com/docs/components/badge/#badges-with-icon
-
 "use client"
-import { ContactsTabs } from "../../../components/ContactsTabs"
+import { useSearchParams } from "next/navigation"
 import {
-	Profile as ProfileType,
 	useActiveProfile,
 	useMutualFollowers,
 	useProfile,
 	useProfileFollowers,
 	useProfileFollowing,
 } from "@lens-protocol/react-web"
-import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { Spinner } from "@/app/components/Spinner"
+import { ContactsTabs } from "@/app/components/ContactsTabs"
 import { Profile } from "@/app/components/Profile"
 
 export default function Contacts({ params }: { params: { slug: string } }) {
@@ -30,16 +20,16 @@ export default function Contacts({ params }: { params: { slug: string } }) {
 	const tab = get("tab")
 
 	const {
-		data: profile,
-		error,
-		loading,
-	} = useProfile({ handle: profileHandle })
-
-	const {
 		data: activeProfile,
 		error: profileError,
 		loading: profileLoading,
 	} = useActiveProfile()
+
+	const {
+		data: profile,
+		error,
+		loading,
+	} = useProfile({ handle: profileHandle })
 
 	const {
 		data: profileFollowers,

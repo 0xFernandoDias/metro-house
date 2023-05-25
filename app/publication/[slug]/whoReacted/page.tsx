@@ -1,16 +1,15 @@
 "use client"
-import { WhoReactedTabs } from "../../../components/WhoReactedTabs"
+import { useSearchParams } from "next/navigation"
 import {
-	Profile as ProfileType,
 	PublicationId,
 	useActiveProfile,
 	useWhoCollectedPublication,
 	useWhoMirroredPublication,
 	useWhoReacted,
 } from "@lens-protocol/react-web"
-import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { Spinner } from "@/app/components/Spinner"
+import { WhoReactedTabs } from "@/app/components/WhoReactedTabs"
 import { Profile } from "@/app/components/Profile"
 
 export default function WhoReacted({

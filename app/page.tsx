@@ -1,5 +1,6 @@
 "use client"
-// import { useGlobalContext } from "./context/store"
+import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import {
 	useExplorePublications,
 	PublicationSortCriteria,
@@ -8,32 +9,16 @@ import {
 	Profile as ProfileType,
 	useFeed,
 	FeedItem,
-	isMirrorPublication,
 	useRecentPosts,
 } from "@lens-protocol/react-web"
-import { RefCallback, useEffect, useState } from "react"
-import { Publications } from "./components/Publications"
-import { CreatePublication } from "./components/CreatePublication"
-import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
-import { useSearchParams } from "next/navigation"
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll"
+import { WhenLoggedInWithProfile } from "./components/auth/WhenLoggedInWithProfile"
 import { Spinner } from "./components/Spinner"
-import { WhenLoggedOut } from "./components/auth/WhenLoggedOut"
-import Link from "next/link"
+import { CreatePublication } from "./components/CreatePublication"
+import { Publications } from "./components/Publications"
 import { Publication } from "./components/Publication"
-import { getNfts } from "./apis"
-import { Nft } from "@ankr.com/ankr.js"
-import {
-	MediaRenderer,
-	ThirdwebNftMedia,
-	useContract,
-	useContractMetadata,
-	useNFT,
-} from "@thirdweb-dev/react"
 
 export default function Home() {
-	// const { count, increment } = useGlobalContext()
-
 	const { get } = useSearchParams()
 
 	const tab = get("tab")
@@ -41,19 +26,6 @@ export default function Home() {
 	const [sortCriteria, setSortCriteria] = useState(
 		PublicationSortCriteria.Latest
 	)
-
-	useEffect(() => {
-		const query =
-			tab === "topcollected"
-				? PublicationSortCriteria.TopCollected
-				: tab === "topcommented"
-				? PublicationSortCriteria.TopCommented
-				: tab === "topmirrored"
-				? PublicationSortCriteria.TopMirrored
-				: PublicationSortCriteria.Latest
-
-		setSortCriteria(query)
-	}, [tab])
 
 	const {
 		data: profile,
@@ -75,6 +47,19 @@ export default function Home() {
 		})
 	)
 
+	useEffect(() => {
+		const query =
+			tab === "topcollected"
+				? PublicationSortCriteria.TopCollected
+				: tab === "topcommented"
+				? PublicationSortCriteria.TopCommented
+				: tab === "topmirrored"
+				? PublicationSortCriteria.TopMirrored
+				: PublicationSortCriteria.Latest
+
+		setSortCriteria(query)
+	}, [tab])
+
 	if (!publications || loadingPublications || profileLoading) {
 		return <Spinner />
 	}
@@ -82,14 +67,6 @@ export default function Home() {
 	return (
 		<>
 			<title>Metro House</title>
-
-			{/* <div style={{ display: "flex", flexDirection: "row", gap: "24px" }}>
-						<b>Address: {address}</b>
-						<b>Active wallet: {wallet?.address}</b>
-						<b>Hello {profile?.handle}</b>
-						<b>Active profile: {profile?.handle}</b>
-						<b>Signer: {signer}</b>
-					</div> */}
 			<WhenLoggedInWithProfile>
 				{({ profile }) => (
 					<div className="flex flex-col gap-12">

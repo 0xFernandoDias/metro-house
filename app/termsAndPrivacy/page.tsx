@@ -1,8 +1,4 @@
-export default function TermsAndPrivacy({
-	params,
-}: {
-	params: { slug: string }
-}) {
+export default function TermsAndPrivacy({}: {}) {
 	return (
 		<>
 			<title>Terms and Privacy / Metro House</title>

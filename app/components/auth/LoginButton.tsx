@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import {
 	useWalletLogin,
 	useWalletLogout,
@@ -10,8 +11,6 @@ import {
 	useActiveWalletSigner,
 } from "@lens-protocol/react-web"
 import { ChainId } from "@thirdweb-dev/sdk"
-import { WhenLoggedInWithProfile } from "./WhenLoggedInWithProfile"
-import { WhenLoggedOut } from "./WhenLoggedOut"
 import {
 	useAccount,
 	useConnect,
@@ -20,7 +19,8 @@ import {
 	useSwitchNetwork,
 } from "wagmi"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
-import Link from "next/link"
+import { WhenLoggedInWithProfile } from "./WhenLoggedInWithProfile"
+import { WhenLoggedOut } from "./WhenLoggedOut"
 import { Spinner } from "../Spinner"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
@@ -694,7 +694,7 @@ export function LoginButton() {
 						<button
 							onClick={() => disconnectAsync()}
 							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
-							// disabled={isDisconnectLoading || isLogoutPending}
+							disabled={isDisconnectLoading || isLogoutPending}
 						>
 							Disconnect wallet
 						</button>
@@ -707,5 +707,3 @@ export function LoginButton() {
 		</div>
 	)
 }
-
-// https://flowbite.com/docs/components/buttons/#payment-buttons

@@ -1,4 +1,7 @@
 "use client"
+import { useState } from "react"
+import Link from "next/link"
+import { MediaRenderer } from "@thirdweb-dev/react"
 import {
 	ContentPublication,
 	Profile as ProfileType,
@@ -16,20 +19,16 @@ import {
 	PublicationId,
 	Post,
 	useComments,
-	WhoReactedResult,
 	usePublication,
 	isPublicationOwnedByMe,
 	useHidePublication,
 	PublicationOwnedByMe,
 } from "@lens-protocol/react-web"
-import Link from "next/link"
-import { ProfileHeader } from "../ProfileHeader"
-import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { ProfilePicture } from "../ProfilePicture"
-import { useState } from "react"
+import { WhenLoggedOut } from "../auth/WhenLoggedOut"
 import { Spinner } from "../Spinner"
-import { MediaRenderer } from "@thirdweb-dev/react"
+import { ProfilePicture } from "../ProfilePicture"
+import { ProfileHeader } from "../ProfileHeader"
 
 export const Publication = ({
 	publication,
@@ -48,25 +47,22 @@ export const Publication = ({
 	isPage?: boolean
 	mainPost?: PublicationId
 }) => {
-	const { data: post, isPending } = useEncryptedPublication({
-		publication,
-	})
-
-	const { data: mainpost } = usePublication({ publicationId: mainPost! })
-
 	const {
 		data: profile,
 		error: profileError,
 		loading: profileLoading,
 	} = useActiveProfile()
 
+	const { data: post, isPending } = useEncryptedPublication({
+		publication,
+	})
+
+	const { data: mainpost } = usePublication({ publicationId: mainPost! })
+
 	const { data: whoReacted, loading } = useWhoReacted({
 		publicationId: post.id,
 		observerId: profile?.id,
 	})
-
-	const isMyProfile = isProfileOwnedByMe(post.profile)
-	const isMyPublication = isPublicationOwnedByMe(post)
 
 	const { data: comments, loading: loadingComments } = useComments({
 		commentsOf: post.id,
@@ -74,15 +70,11 @@ export const Publication = ({
 		limit: 1,
 	})
 
+	const isMyProfile = isProfileOwnedByMe(post.profile)
+	const isMyPublication = isPublicationOwnedByMe(post)
+
 	if (isPending || loading || profileLoading || loadingComments) {
 		return <Spinner />
-	}
-
-	{
-		/* <Link className="font-bold" href={`/profile/${data.profile.handle}`}>
-				@{data.profile.handle}
-			</Link>
-			<span>{data.metadata.content}</span> */
 	}
 
 	return (
@@ -445,18 +437,10 @@ function CommentComponent({
 	})
 
 	const isMyProfile = isProfileOwnedByMe(post.profile)
-
 	const isMyPublication = isPublicationOwnedByMe(post)
 
 	if (isPending || loading) {
 		return <Spinner />
-	}
-
-	{
-		/* <Link className="font-bold" href={`/profile/${data.profile.handle}`}>
-				@{data.profile.handle}
-			</Link>
-			<span>{data.metadata.content}</span> */
 	}
 
 	return (
@@ -560,13 +544,6 @@ function CommentComponent({
 						)
 					})}
 				</div>
-
-				{/* <Link
-				href="#"
-				className="block text-md font-medium text-blue-600 hover:underline "
-			>
-				Read more
-			</Link> */}
 
 				<aside className="flex flex-col gap-3">
 					{/* Avatars */}
@@ -730,6 +707,7 @@ function HidePublicationButton({
 
 function CommentButton({ publication }: { publication: ContentPublication }) {
 	const { totalAmountOfComments } = publication.stats
+
 	return (
 		<Link
 			href={`/publication/${publication.id}`}
@@ -760,14 +738,14 @@ function CollectButton({
 	profile: ProfileOwnedByMe
 	publication: ContentPublication
 }) {
+	const { totalAmountOfCollects: collects } = publication.stats
+
+	const [totalAmountOfCollects, setTotalAmountOfCollects] = useState(collects)
+
 	const { execute, isPending } = useCollect({
 		collector: profile,
 		publication,
 	})
-
-	const { totalAmountOfCollects: collects } = publication.stats
-
-	const [totalAmountOfCollects, setTotalAmountOfCollects] = useState(collects)
 
 	const handleCollect = async () => {
 		await execute().then(() => {
@@ -810,13 +788,13 @@ function MirrorButton({
 	profile: ProfileOwnedByMe
 	publication: ContentPublication
 }) {
-	const { execute, isPending } = useCreateMirror({
-		publisher: profile,
-	})
-
 	const { totalAmountOfMirrors: mirrors } = publication.stats
 
 	const [totalAmountOfMirrors, setTotalAmountOfMirrors] = useState(mirrors)
+
+	const { execute, isPending } = useCreateMirror({
+		publisher: profile,
+	})
 
 	const handleMirror = async () => {
 		await execute({
@@ -861,6 +839,10 @@ function LikeUnlikeButton({
 	profile: ProfileType
 	publication: ContentPublication
 }) {
+	const { totalUpvotes: upVotes } = publication.stats
+
+	const [totalUpvotes, setTotalUpvotes] = useState(upVotes)
+
 	const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
 		profileId: profile.id,
 	})
@@ -871,10 +853,6 @@ function LikeUnlikeButton({
 			publication,
 		})
 	)
-
-	const { totalUpvotes: upVotes } = publication.stats
-
-	const [totalUpvotes, setTotalUpvotes] = useState(upVotes)
 
 	const toggleReaction = async () => {
 		if (hasReactionType) {

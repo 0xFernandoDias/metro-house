@@ -1,7 +1,8 @@
 "use client"
-
+import { ChangeEvent, useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 import {
-	Profile as ProfileType,
 	PublicationSortCriteria,
 	PublicationTypes,
 	useActiveProfile,
@@ -9,16 +10,10 @@ import {
 	useSearchProfiles,
 	useSearchPublications,
 } from "@lens-protocol/react-web"
-import { Publications } from "../components/Publications"
-import { useSearchParams } from "next/navigation"
-import { ChangeEvent, useEffect, useState } from "react"
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll"
-import { Publication } from "../components/Publication"
-import { ProfilePicture } from "../components/ProfilePicture"
-import Link from "next/link"
-import { WhenLoggedInWithProfile } from "../components/auth/WhenLoggedInWithProfile"
-import { FollowUnfollowButton } from "../components/FollowUnfollowButton"
 import { Spinner } from "../components/Spinner"
+import { Publications } from "../components/Publications"
+import { Publication } from "../components/Publication"
 import { Profile } from "../components/Profile"
 
 export default function Discovery() {
@@ -32,9 +27,18 @@ export default function Discovery() {
 	const [inputValue, setInputValue] = useState("")
 	const [selectedQuery, setSelectedQuery] = useState<string>()
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputValue(e.target.value)
-	}
+	const {
+		data: publications,
+		loading: loadingPublications,
+		hasMore,
+		observeRef,
+		next,
+	} = useInfiniteScroll(
+		useExplorePublications({
+			sortCriteria: sortCriteria,
+			publicationTypes: [PublicationTypes.Post],
+		})
+	)
 
 	useEffect(() => {
 		setSelectedQuery(inputValue)
@@ -53,26 +57,11 @@ export default function Discovery() {
 		setSortCriteria(query)
 	}, [tab])
 
-	const {
-		data: profile,
-		error: profileError,
-		loading: profileLoading,
-	} = useActiveProfile()
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value)
+	}
 
-	const {
-		data: publications,
-		loading: loadingPublications,
-		hasMore,
-		observeRef,
-		next,
-	} = useInfiniteScroll(
-		useExplorePublications({
-			sortCriteria: sortCriteria,
-			publicationTypes: [PublicationTypes.Post],
-		})
-	)
-
-	if (loadingPublications || !publications || profileLoading) {
+	if (loadingPublications || !publications) {
 		return <Spinner />
 	}
 
@@ -145,7 +134,7 @@ export default function Discovery() {
 							isDiscovery
 							hasMore={hasMore}
 							observeRef={observeRef}
-							isLoading={loadingPublications || profileLoading}
+							isLoading={loadingPublications}
 						/>
 					)}
 				</div>
@@ -153,16 +142,6 @@ export default function Discovery() {
 		)
 	}
 }
-
-// when searchbar filled:
-// profiles
-// publications, mirrors
-// search profiles, search publications
-
-// when searchbar empty:
-// use explore profiles, suggested component, use explore publications, feed
-// SUGGESTED
-// Trending
 
 function SearchResult({ query }: { query: string }) {
 	const { data: profile, loading: profileLoading } = useActiveProfile()

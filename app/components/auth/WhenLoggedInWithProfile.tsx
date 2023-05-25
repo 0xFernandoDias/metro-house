@@ -1,10 +1,10 @@
+import { ReactNode } from "react"
 import {
 	WalletData,
 	ProfileOwnedByMe,
 	useActiveWallet,
 	useActiveProfile,
 } from "@lens-protocol/react-web"
-import { ReactNode } from "react"
 
 type LoggedInConfig = {
 	wallet: WalletData

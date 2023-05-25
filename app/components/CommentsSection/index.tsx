@@ -1,5 +1,4 @@
 "use client"
-
 import {
 	CollectPolicyType,
 	ContentFocus,
@@ -10,41 +9,11 @@ import {
 	useCreateComment,
 	useRecentPosts,
 } from "@lens-protocol/react-web"
-import { Publication } from "../Publication"
-import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
-import { Spinner } from "../Spinner"
 import { upload } from "@/app/helpers/upload"
-
-// https://flowbite.com/docs/components/timeline/#grouped-timeline
-
-// (comment id)
-// first comment AUTHENTICATED
-// comment On AUTHENTICATED
-// use Who react
-// use who collected publication??
-// use who mirrored publication??
-// use who reacted??
-// created At
-// hidden?
-// id
-// Author - profile - @handle
-// 	Contacts (Followers, Following, Mutual)
-// 	picture
-// 	Follow - AUTHENTICATE AT LEAST WITH METAMASK hash
-// 	Name
-// 	Proof of humanity
-// useEncryptedPublication
-// LOGIN TO DECRYPT - https://testnet.lenster.xyz/posts/0x1b-0x0133
-// canObserverDecrypt?
-// can COMMENT, can MIRROR, Has Collected by me? AUTHENTICATED
-// Metadata
-// mirrors
-// reaction
-// Comments count, total amount of collects, total amount of mirrors, total upvotes, total downvotes
-// Comments
-// useCreateComment AUTHENTICATED https://flowbite.com/docs/forms/textarea/#comment-box (publicationId, profileId, Content, ContentFocus, locale, collect, reference)
-// use Reaction?? AUTHENTICATED
+import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
+import { Spinner } from "../Spinner"
+import { Publication } from "../Publication"
 
 function CreateComment({
 	publisher,
@@ -317,35 +286,6 @@ export function CommentsSection({
 				{commentsQuantity && commentsQuantity > 1 && "s"}
 			</a>
 			<ol className="flex w-full flex-col justify-between">
-				{/* <li className="flex gap-6">
-					<Image
-						className="bg-blue-100 rounded-full -left-3 ring-8 ring-white"
-						width={48}
-						height={32}
-						src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-						alt=""
-					/>
-
-					<div className="items-center flex gap-3 max-w-max justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex ">
-						<time className="text-md font-normal text-gray-400 sm:order-last">
-							just now
-						</time>
-						<div className="text-lg font-normal flex gap-3 flex-row text-gray-500 ">
-							Bonnie moved
-							<Link
-								href="#"
-								className="font-semibold text-blue-600 hover:underline"
-							>
-								Jese Leos
-							</Link>
-							to
-							<span className="bg-gray-100 text-gray-800 text-md font-normal px-2.5 py-0.5 rounded ">
-								Funny Group
-							</span>
-						</div>
-					</div>
-				</li> */}
-
 				{recentPosts?.map(
 					(comment) =>
 						comment.__typename !== "PendingPost" && (

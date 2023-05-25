@@ -8,12 +8,12 @@
 // reference: policy
 
 "use client"
-import { upload } from "@/app/helpers/upload"
 import {
 	ContentFocus,
 	ProfileOwnedByMe,
 	useCreatePost,
 } from "@lens-protocol/react-web"
+import { upload } from "@/app/helpers/upload"
 
 export function CreatePublication({
 	publisher,

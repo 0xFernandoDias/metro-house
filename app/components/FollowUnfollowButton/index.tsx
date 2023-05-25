@@ -2,7 +2,6 @@
 import {
 	Profile as ProfileType,
 	ProfileOwnedByMe,
-	useActiveWalletSigner,
 	useFollow,
 	useUnfollow,
 	isProfileOwnedByMe,
@@ -28,8 +27,6 @@ export function FollowUnfollowButton({
 		isPending: unfollowLoading,
 		error: unfollowError,
 	} = useUnfollow({ follower, followee })
-
-	const { data: signer, loading: signerLoading } = useActiveWalletSigner()
 
 	const isMyProfile = isProfileOwnedByMe(followee)
 

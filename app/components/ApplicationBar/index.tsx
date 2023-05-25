@@ -1,8 +1,8 @@
 "use client"
 import Link from "next/link"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
-import { ProfilePicture } from "../ProfilePicture"
 import { WhenLoggedOut } from "../auth/WhenLoggedOut"
+import { ProfilePicture } from "../ProfilePicture"
 
 export function ApplicationBar() {
 	return (

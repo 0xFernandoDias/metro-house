@@ -1,8 +1,8 @@
 import Link from "next/link"
-import { FollowUnfollowButton } from "../FollowUnfollowButton"
+import { Profile } from "@lens-protocol/react-web"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
-import { Profile } from "@lens-protocol/react-web"
+import { FollowUnfollowButton } from "../FollowUnfollowButton"
 
 export function Profile({ profile }: { profile: Profile }) {
 	return (

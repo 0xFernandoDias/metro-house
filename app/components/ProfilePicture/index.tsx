@@ -1,11 +1,11 @@
 "use client"
+import Link from "next/link"
+import { MediaRenderer } from "@thirdweb-dev/react"
 import {
 	MediaSet,
 	Profile as ProfileType,
 	ProfileMedia,
 } from "@lens-protocol/react-web"
-import { MediaRenderer } from "@thirdweb-dev/react"
-import Link from "next/link"
 
 export function ProfilePicture({
 	picture,
