@@ -236,12 +236,7 @@ export const Publication = ({
 					)}
 
 					{/* Created At */}
-					<time
-						dateTime="2020-08-25 19:00"
-						className="block text-md text-gray-500 "
-					>
-						{post.createdAt}
-					</time>
+					<div className="block text-md text-gray-500 ">{post.createdAt}</div>
 					{/* Post Metadata Content */}
 					<div className="text-lg flex flex-col gap-8">
 						{post.metadata.content}

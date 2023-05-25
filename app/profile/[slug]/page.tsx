@@ -45,6 +45,10 @@ import { upload } from "@/app/helpers/upload"
 import { Nft } from "@ankr.com/ankr.js"
 import { getNfts } from "@/app/apis"
 import { useSearchParams } from "next/navigation"
+import { usePrepareSendTransaction, useSendTransaction } from "wagmi"
+import { parseEther } from "ethers/lib/utils.js"
+
+const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
 function ProfileCover({
 	picture,
@@ -98,6 +102,13 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 	}, [originalProfile])
 
 	const [isEditProfileToggled, setIsEditProfileToggled] = useState(false)
+	const [isSendTransactionToggled, setIsSendTransactionToggled] =
+		useState(false)
+	const [transactionValue, setTransactionValue] = useState("")
+
+	const handleTransactionValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setTransactionValue(e.target.value)
+	}
 
 	const isMyProfile = profile && isProfileOwnedByMe(profile)
 	const profileAddress = profile?.ownedBy || ""
@@ -135,6 +146,29 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 
 	const { get } = useSearchParams()
 	const tab = get("tab")
+
+	const { config } = usePrepareSendTransaction({
+		chainId: ENVIRONMENT === "development" ? 80001 : 137,
+		request: {
+			to: profile?.ownedBy || "",
+			from: myProfile?.ownedBy || "",
+			value: transactionValue ? parseEther(transactionValue) : undefined,
+		},
+	})
+
+	const {
+		data: sendTransactionResult,
+		isLoading: sendTransactionLoading,
+		isSuccess: sendTransactionSuccess,
+		error: sendTransactionError,
+		sendTransaction,
+	} = useSendTransaction(config)
+
+	useEffect(() => {
+		if (sendTransactionSuccess) {
+			setTransactionValue("")
+		}
+	}, [sendTransactionSuccess])
 
 	if (
 		loading ||
@@ -237,12 +271,13 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 							{/* Follow */}
 							<WhenLoggedInWithProfile>
 								{({ profile: activeProfile }) => (
-									<>
+									<div className="flex flex-col gap-4">
 										<FollowUnfollowButton
 											follower={activeProfile}
 											followee={profile}
 										/>
-										{isMyProfile && (
+
+										{isMyProfile ? (
 											<div className="flex flex-col gap-2">
 												<button
 													type="button"
@@ -267,8 +302,87 @@ export default function Profile({ params }: { params: { slug: ProfileId } }) {
 
 												<SwitchProfile myProfile={activeProfile} />
 											</div>
+										) : !isSendTransactionToggled ? (
+											<button
+												className="text-white w-36 items-center flex gap-3 bg-[#8345E6] hover:bg-[#5f32a7] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
+												onClick={() => {
+													setIsSendTransactionToggled(true)
+												}}
+											>
+												<svg
+													className="h-6 w-6 fill-[#8345E6] stroke-white"
+													strokeWidth={1.5}
+													viewBox="0 0 24 24"
+													xmlns="http://www.w3.org/2000/svg"
+													aria-hidden="true"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+													/>
+												</svg>
+												Transfer
+											</button>
+										) : (
+											<div className="flex flex-col gap-4">
+												<div className="relative z-0 w-full group font-semibold">
+													<input
+														type="text"
+														name="transactionValue"
+														id="transactionValue"
+														className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+														placeholder=""
+														value={transactionValue}
+														onChange={handleTransactionValueChange}
+													/>
+													<label
+														htmlFor="transactionValue"
+														className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus: peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+													>
+														Transaction Value
+													</label>
+												</div>
+												<div className="flex gap-4">
+													<button
+														onClick={() => sendTransaction?.()}
+														className="text-white disabled:bg-blue-400 max-w-min flex gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
+														disabled={
+															sendTransactionLoading || transactionValue === ""
+														}
+													>
+														Send
+													</button>
+													<button
+														type="button"
+														className="text-black hover:text-white max-w-min flex gap-3 bg-white hover:bg-gray-500 focus:ring-4 focus:ring-black font-medium rounded-lg text-lg px-5 py-2.5 focus:outline-none "
+														onClick={() => setIsSendTransactionToggled(false)}
+														disabled={sendTransactionLoading}
+													>
+														Cancel
+													</button>
+												</div>
+												{sendTransactionSuccess && sendTransactionResult && (
+													<Link
+														className="text-xl font-semibold underline"
+														href={`${
+															ENVIRONMENT === "development"
+																? `https://mumbai.polygonscan.com/tx/${sendTransactionResult.hash}`
+																: `https://polygonscan.com/tx/${sendTransactionResult.hash}`
+														}`}
+													>
+														Success
+													</Link>
+												)}
+												{sendTransactionError && (
+													<div className="text-red-500">
+														{sendTransactionError.name}{" "}
+														{sendTransactionError.message}
+													</div>
+												)}
+											</div>
 										)}
-									</>
+									</div>
 								)}
 							</WhenLoggedInWithProfile>
 

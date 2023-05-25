@@ -13,6 +13,7 @@
 		"@lens-protocol/client": "^1.0.1",
 		"@lens-protocol/react-web": "^1.0.1",
 		"@lens-protocol/wagmi": "^1.0.1",
+		"@thirdweb-dev/chains": "^0.1.18",
 		"@thirdweb-dev/react": "^3.11.11",
 		"@thirdweb-dev/sdk": "^3.10.14",
 		"@types/node": "18.15.6",

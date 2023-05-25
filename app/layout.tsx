@@ -16,6 +16,7 @@ import { GlobalContextProvider } from "./context/store"
 import "./global.css"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
+import { Mumbai, Polygon } from "@thirdweb-dev/chains"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
@@ -46,10 +47,10 @@ const environment =
 
 const activeChain =
 	ENVIRONMENT === "development"
-		? "mumbai"
+		? Mumbai
 		: ENVIRONMENT === "production"
-		? "polygon"
-		: "mumbai"
+		? Polygon
+		: Mumbai
 
 const lensConfig: LensConfig = {
 	bindings: wagmiBindings(),
@@ -65,7 +66,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain={"polygon"}>
+				<ThirdwebProvider activeChain={Polygon}>
 					<WagmiConfig client={wagmiClient}>
 						<LensProvider config={lensConfig}>
 							<GlobalContextProvider>
