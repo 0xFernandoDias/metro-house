@@ -55,7 +55,11 @@ export function LoginButton() {
 	} = useActiveProfile()
 
 	const { isConnected, isConnecting } = useAccount()
-	const { disconnectAsync, isLoading: isDisconnectLoading } = useDisconnect()
+	const {
+		disconnectAsync,
+		isLoading: isDisconnectLoading,
+		disconnect,
+	} = useDisconnect()
 	const {
 		connectAsync,
 		isLoading: isConnectLoading,
@@ -85,6 +89,12 @@ export function LoginButton() {
 		| ""
 		| undefined
 	>()
+
+	useEffect(() => {
+		if (!isConnected && profile) {
+			logout()
+		}
+	}, [isConnected, profile, logout])
 
 	const onLoginClick = async () => {
 		if (isConnected) {
@@ -129,12 +139,7 @@ export function LoginButton() {
 		)
 	}
 
-	if (
-		profileLoading ||
-		isDisconnectLoading ||
-		isLogoutPending ||
-		signerLoading
-	) {
+	if (profileLoading || isDisconnectLoading || isLogoutPending) {
 		return <Spinner />
 	}
 
