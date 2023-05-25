@@ -13,6 +13,7 @@ import {
 	production,
 	development,
 } from "@lens-protocol/react-web"
+import { Provider } from "ankr-react"
 import { GlobalContextProvider } from "./context/store"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
@@ -66,18 +67,20 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<ThirdwebProvider activeChain={Polygon}>
-					<WagmiConfig client={wagmiClient}>
-						<LensProvider config={lensConfig}>
-							<GlobalContextProvider>
-								<NavbarWithSidebars>
-									{children}
-									<ApplicationBar />
-								</NavbarWithSidebars>
-							</GlobalContextProvider>
-						</LensProvider>
-					</WagmiConfig>
-				</ThirdwebProvider>
+				<Provider>
+					<ThirdwebProvider activeChain={Polygon}>
+						<WagmiConfig client={wagmiClient}>
+							<LensProvider config={lensConfig}>
+								<GlobalContextProvider>
+									<NavbarWithSidebars>
+										{children}
+										<ApplicationBar />
+									</NavbarWithSidebars>
+								</GlobalContextProvider>
+							</LensProvider>
+						</WagmiConfig>
+					</ThirdwebProvider>
+				</Provider>
 			</body>
 		</html>
 	)

@@ -1,8 +1,8 @@
 import { AnkrProvider } from "@ankr.com/ankr.js"
 
-const provider = new AnkrProvider("")
-
 export const getNfts = async (address: string) => {
+	const provider = new AnkrProvider()
+
 	const { assets, nextPageToken } = await provider.getNFTsByOwner({
 		walletAddress: address,
 		blockchain: ["polygon", "eth", "eth_goerli"],

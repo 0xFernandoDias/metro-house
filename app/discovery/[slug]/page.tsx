@@ -1,15 +1,15 @@
 "use client"
-import { Profile } from "@/app/components/Profile"
-import { Publication } from "@/app/components/Publication"
-import { Spinner } from "@/app/components/Spinner"
-import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { ChangeEvent, useEffect, useState } from "react"
+import Link from "next/link"
 import {
 	useActiveProfile,
 	useSearchProfiles,
 	useSearchPublications,
 } from "@lens-protocol/react-web"
-import Link from "next/link"
-import { ChangeEvent, useEffect, useState } from "react"
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
+import { Spinner } from "@/app/components/Spinner"
+import { Profile } from "@/app/components/Profile"
+import { Publication } from "@/app/components/Publication"
 
 export default function Discovery({ params }: { params: { slug: string } }) {
 	const { slug } = params
@@ -17,13 +17,13 @@ export default function Discovery({ params }: { params: { slug: string } }) {
 	const [inputValue, setInputValue] = useState(slug)
 	const [selectedQuery, setSelectedQuery] = useState<string>(inputValue)
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputValue(e.target.value)
-	}
-
 	useEffect(() => {
 		setSelectedQuery(inputValue)
 	}, [inputValue])
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value)
+	}
 
 	return (
 		<>

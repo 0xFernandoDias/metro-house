@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import { Profile } from "@lens-protocol/react-web"
 import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
