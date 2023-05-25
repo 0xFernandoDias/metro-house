@@ -70,7 +70,7 @@ export function ProfileHeader({
 						</Link>
 					)}
 				</div>
-				<div className="text-md text-gray-500 ">
+				<div className="text-md flex gap-1 text-gray-500 ">
 					<Link href={`/profile/${profile.handle}/contacts?tab=followers`}>
 						{profile.stats.totalFollowers} followers
 					</Link>
