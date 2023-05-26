@@ -107,7 +107,7 @@ export function RightSidebar() {
 						<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 							<svg
 								aria-hidden="true"
-								className="w-5 h-5 text-gray-500 "
+								className="w-5 h-5 stroke-gray-500 "
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ export function RightSidebar() {
 function UserMenu() {
 	return (
 		<div
-			className="my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow "
+			className="my-4 list-none bg-white divide-y divide-gray-100 rounded shadow "
 			id="dropdown-user"
 		>
 			<div className="px-4 py-3" role="none">

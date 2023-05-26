@@ -27,7 +27,7 @@ export function LeftSidebar() {
 									return (
 										<Link
 											key={idx}
-											className="flex p-2 text-xl items-center text-gray-900 rounded-lg hover:bg-gray-100 "
+											className="flex p-2 text-xl items-center rounded-lg hover:bg-gray-100 "
 											href={
 												item === "Profile"
 													? `/profile/${profile.handle}`
@@ -121,7 +121,7 @@ export function LeftSidebar() {
 							return (
 								<Link
 									key={idx}
-									className="flex p-2 text-xl items-center text-gray-900 rounded-lg hover:bg-gray-100 "
+									className="flex p-2 text-xl items-center rounded-lg hover:bg-gray-100 "
 									href={
 										item === "Discovery"
 											? "/discovery"

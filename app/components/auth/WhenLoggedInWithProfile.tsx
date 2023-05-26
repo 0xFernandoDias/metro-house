@@ -34,5 +34,5 @@ export function WhenLoggedInWithProfile({
 		return null
 	}
 
-	return <div className="flex">{children({ wallet, profile })}</div>
+	return <>{children({ wallet, profile })}</>
 }
