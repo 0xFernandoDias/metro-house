@@ -7,7 +7,6 @@ import {
 	PublicationId,
 	useComments,
 	useCreateComment,
-	useRecentPosts,
 } from "@lens-protocol/react-web"
 import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll"
 import { upload } from "@/app/helpers/upload"
@@ -270,8 +269,6 @@ export function CommentsSection({
 		useComments({ commentsOf, observerId })
 	)
 
-	const recentPosts = useRecentPosts()
-
 	if (loading || isLoading) return <Spinner />
 
 	return (
@@ -286,13 +283,6 @@ export function CommentsSection({
 				{commentsQuantity && commentsQuantity > 1 && "s"}
 			</a>
 			<ol className="flex w-full flex-col justify-between">
-				{recentPosts?.map(
-					(comment) =>
-						comment.__typename !== "PendingPost" && (
-							<Publication isComment key={comment.id} publication={comment} />
-						)
-				)}
-
 				{data ? (
 					data.map((comment) => {
 						return (

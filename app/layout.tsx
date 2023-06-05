@@ -1,25 +1,26 @@
 // https://testnet.lenster.xyz/ + https://lenster.xyz/ + https://www.lensfrens.xyz/ + https://lens-do-it.vercel.app/ + transfer = METRO HOUSE
 "use client"
-import { ThirdwebProvider } from "@thirdweb-dev/react"
-import { Mumbai, Polygon } from "@thirdweb-dev/chains"
 import { configureChains, createClient, WagmiConfig } from "wagmi"
 import { polygon, polygonMumbai } from "wagmi/chains"
 import { publicProvider } from "wagmi/providers/public"
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi"
 import {
-	appId,
-	LensConfig,
-	LensProvider,
 	production,
 	development,
+	LensConfig,
+	appId,
+	LensProvider,
 } from "@lens-protocol/react-web"
-import { GlobalContextProvider } from "./context/store"
+import { ThirdwebProvider } from "@thirdweb-dev/react"
+import { Mumbai, Polygon } from "@thirdweb-dev/chains"
+// import { GlobalContextProvider } from "./context/store"
 import { NavbarWithSidebars } from "./components/NavbarWithSidebars"
 import { ApplicationBar } from "./components/ApplicationBar"
 import "./global.css"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
+// Wagmi Configure Chains
 const chain =
 	ENVIRONMENT === "development"
 		? polygonMumbai
@@ -27,6 +28,7 @@ const chain =
 		? polygon
 		: polygonMumbai
 
+// Lens Config Environment
 const environment =
 	ENVIRONMENT === "development"
 		? development
@@ -68,14 +70,14 @@ export default function RootLayout({
 			<ThirdwebProvider activeChain={Polygon}>
 				<WagmiConfig client={wagmiClient}>
 					<LensProvider config={lensConfig}>
-						<GlobalContextProvider>
-							<body>
-								<NavbarWithSidebars>
-									{children}
-									<ApplicationBar />
-								</NavbarWithSidebars>
-							</body>
-						</GlobalContextProvider>
+						{/* <GlobalContextProvider> */}
+						<body>
+							<NavbarWithSidebars>
+								{children}
+								<ApplicationBar />
+							</NavbarWithSidebars>
+						</body>
+						{/* </GlobalContextProvider> */}
 					</LensProvider>
 				</WagmiConfig>
 			</ThirdwebProvider>

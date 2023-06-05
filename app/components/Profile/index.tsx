@@ -5,7 +5,13 @@ import { WhenLoggedInWithProfile } from "../auth/WhenLoggedInWithProfile"
 import { ProfilePicture } from "../ProfilePicture"
 import { FollowUnfollowButton } from "../FollowUnfollowButton"
 
-export function Profile({ profile }: { profile: Profile }) {
+export function Profile({
+	profile,
+	onlyIcon,
+}: {
+	profile: Profile
+	onlyIcon?: boolean
+}) {
 	return (
 		<div className="flex items-center justify-between space-x-4">
 			<div className="flex items-center gap-1 space-x-4">
@@ -29,7 +35,11 @@ export function Profile({ profile }: { profile: Profile }) {
 
 			<WhenLoggedInWithProfile>
 				{({ profile: activeProfile }) => (
-					<FollowUnfollowButton follower={activeProfile} followee={profile} />
+					<FollowUnfollowButton
+						follower={activeProfile}
+						followee={profile}
+						onlyIcon={onlyIcon}
+					/>
 				)}
 			</WhenLoggedInWithProfile>
 		</div>

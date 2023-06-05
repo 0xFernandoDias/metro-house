@@ -8,8 +8,7 @@ import { LoginButton } from "../auth/LoginButton"
 import { Spinner } from "../Spinner"
 import Logo from "../Logo"
 import { LeftSidebar } from "../LeftSidebar"
-import { ProfilePicture } from "../ProfilePicture"
-import { FollowUnfollowButton } from "../FollowUnfollowButton"
+import { Profile } from "../Profile"
 
 const ENVIRONMENT = process.env.ENVIRONMENT as "development" | "production"
 
@@ -24,7 +23,7 @@ export function NavbarWithSidebars({
 			<div className="flex flex-col gap-6 mx-4 mt-32 lg:mx-96">
 				{/* I'll use this on Mobile too */}
 				<LeftSidebar />
-				<BottomNavbar />
+
 				{children}
 				<RightSidebar />
 			</div>
@@ -67,20 +66,11 @@ function TopNavbar() {
 	)
 }
 
-function BottomNavbar() {
-	return (
-		<div className="flex flex-col">
-			<nav className="flex max-w-min text-gray-700" aria-label="Breadcrumb">
-				<ol className="inline-flex items-center space-x-1 md:space-x-3"></ol>
-			</nav>
-		</div>
-	)
-}
-
 export function RightSidebar() {
 	const { push } = useRouter()
 	const [inputValue, setInputValue] = useState("")
 
+	// Handle input change
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
 	}
@@ -130,76 +120,71 @@ export function RightSidebar() {
 					</div>
 					<SuggestedProfiles />
 				</form>
+
 				<Footer />
 			</div>
 		</aside>
 	)
 }
 
-function UserMenu() {
-	return (
-		<div
-			className="my-4 list-none bg-white divide-y divide-gray-100 rounded shadow "
-			id="dropdown-user"
-		>
-			<div className="px-4 py-3" role="none">
-				<p className="text-lg text-gray-900 " role="none">
-					Neil Sims
-				</p>
-				<p className="text-lg font-medium text-gray-900 truncate " role="none">
-					@neil.sims
-				</p>
-			</div>
+// function UserMenu() {
+// 	return (
+// 		<div
+// 			className="my-4 list-none bg-white divide-y divide-gray-100 rounded shadow "
+// 			id="dropdown-user"
+// 		>
+// 			<div className="px-4 py-3" role="none">
+// 				<p className="text-lg text-gray-900 " role="none">
+// 					Neil Sims
+// 				</p>
+// 				<p className="text-lg font-medium text-gray-900 truncate " role="none">
+// 					@neil.sims
+// 				</p>
+// 			</div>
 
-			<ul className="py-1" role="none">
-				<button
-					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
-					role="menuitem"
-				>
-					Wrong Network
-				</button>
+// 			<ul className="py-1" role="none">
+// 				<button
+// 					type="button"
+// 					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
+// 					role="menuitem"
+// 				>
+// 					Wrong Network
+// 				</button>
 
-				<button
-					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
-					role="menuitem"
-				>
-					Switch Profile
-				</button>
+// 				<button
+// 					type="button"
+// 					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
+// 					role="menuitem"
+// 				>
+// 					Switch Profile
+// 				</button>
 
-				<Link
-					href="/settings"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
-					role="menuitem"
-				>
-					Settings
-				</Link>
+// 				<Link
+// 					href="/settings"
+// 					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
+// 					role="menuitem"
+// 				>
+// 					Settings
+// 				</Link>
 
-				<button
-					type="button"
-					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
-					role="menuitem"
-				>
-					Logout
-				</button>
-			</ul>
-		</div>
-	)
-}
+// 				<button
+// 					type="button"
+// 					className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 "
+// 					role="menuitem"
+// 				>
+// 					Logout
+// 				</button>
+// 			</ul>
+// 		</div>
+// 	)
+// }
 
 function SuggestedProfiles() {
-	const {
-		data: profile,
-		error: profileError,
-		loading: profileLoading,
-	} = useActiveProfile()
+	const { data: activeProfile, loading: profileLoading } = useActiveProfile()
 
-	const {
-		data: profiles,
-		error,
-		loading,
-	} = useProfilesToFollow({ observerId: profile?.id || undefined })
+	const { data: profiles, loading } = useProfilesToFollow({
+		observerId: activeProfile?.id || undefined,
+	})
 
 	if (loading || profileLoading) return <Spinner />
 
@@ -211,41 +196,7 @@ function SuggestedProfiles() {
 			<ul className="max-w-md gap-6 flex flex-col">
 				{profiles?.map((profile, idx) => {
 					if (idx > 4) return null
-					return (
-						<div
-							className="flex items-center gap-1 justify-between"
-							key={profile.id}
-						>
-							<div className="flex items-center gap-1 space-x-4">
-								<ProfilePicture profile={profile} picture={profile.picture} />
-
-								<div className="flex flex-col min-w-0">
-									<Link
-										href={`/profile/${profile.handle}`}
-										className="text-xl font-medium text-gray-900 truncate "
-									>
-										{profile.name}
-									</Link>
-									<Link
-										href={`/profile/${profile.handle}`}
-										className="text-xl text-gray-500 truncate "
-									>
-										@{profile.handle}
-									</Link>
-								</div>
-							</div>
-							{/* Follow Button */}
-							<WhenLoggedInWithProfile>
-								{({ profile: activeProfile }) => (
-									<FollowUnfollowButton
-										follower={activeProfile}
-										followee={profile}
-										onlyIcon
-									/>
-								)}
-							</WhenLoggedInWithProfile>
-						</div>
-					)
+					return <Profile key={profile.id} profile={profile} onlyIcon />
 				})}
 			</ul>
 		</div>
@@ -253,8 +204,7 @@ function SuggestedProfiles() {
 }
 
 function Footer() {
-	const { data: activeWallet, loading: activeWalletLoading } =
-		useActiveProfile()
+	const { data: activeWallet } = useActiveProfile()
 
 	return (
 		<footer className="w-full bg-white rounded-lg mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between flex-col">
@@ -286,7 +236,7 @@ function Footer() {
 				</WhenLoggedInWithProfile>
 
 				<Link href="/termsAndPrivacy" className="hover:underline">
-					Learn Blockchain
+					Terms and Privacy
 				</Link>
 			</ul>
 		</footer>

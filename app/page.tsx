@@ -41,9 +41,12 @@ export default function Home() {
 		next,
 	} = useInfiniteScroll(
 		useExplorePublications({
-			sortCriteria: sortCriteria,
-			publicationTypes: [PublicationTypes.Post],
-			observerId: profile ? profile.id : undefined,
+			sortCriteria,
+			publicationTypes: [
+				PublicationTypes.Comment,
+				PublicationTypes.Post,
+				PublicationTypes.Mirror,
+			],
 		})
 	)
 
@@ -60,7 +63,7 @@ export default function Home() {
 		setSortCriteria(query)
 	}, [tab])
 
-	if (!publications || loadingPublications || profileLoading) {
+	if (!publications || loadingPublications) {
 		return <Spinner />
 	}
 

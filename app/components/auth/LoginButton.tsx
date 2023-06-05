@@ -1,15 +1,11 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Link from "next/link"
 import {
 	useWalletLogin,
 	useWalletLogout,
 	useActiveWallet,
 	useActiveProfile,
-	PendingSigningRequestError,
-	WalletConnectionError,
-	UserRejectedError,
-	useActiveWalletSigner,
 } from "@lens-protocol/react-web"
 import { ChainId } from "@thirdweb-dev/sdk"
 import {
@@ -47,6 +43,7 @@ export function LoginButton() {
 		error: loginError,
 	} = useWalletLogin()
 	const { execute: logout, isPending: isLogoutPending } = useWalletLogout()
+
 	const { data: activeWallet, loading: activeWalletLoading } = useActiveWallet()
 	const {
 		data: profile,
@@ -79,16 +76,6 @@ export function LoginButton() {
 		isLoading: isSwitchNetworkLoading,
 		error: switchNetworkError,
 	} = useSwitchNetwork()
-
-	const { data: signer, loading: signerLoading } = useActiveWalletSigner()
-
-	const [walletError, setWalletError] = useState<
-		| PendingSigningRequestError
-		| WalletConnectionError
-		| UserRejectedError
-		| ""
-		| undefined
-	>()
 
 	useEffect(() => {
 		if (!isConnected && profile) {
@@ -184,26 +171,16 @@ export function LoginButton() {
 	return (
 		<div className="flex min-w-full">
 			<WhenLoggedInWithProfile>
-				{() =>
-					signer ? (
-						<button
-							type="button"
-							className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
-							onClick={onLogoutClick}
-							disabled={isDisconnectLoading || isLogoutPending}
-						>
-							Logout
-						</button>
-					) : (
-						<button
-							type="button"
-							className={`min-w-min flex text-[#00501e] bg-[#ABFE2C] hover:bg-[#c2fa6c] focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 `}
-							onClick={onLoginClick}
-						>
-							Sign in with Lens
-						</button>
-					)
-				}
+				{() => (
+					<button
+						type="button"
+						className="min-w-min flex py-2.5 px-5 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
+						onClick={onLogoutClick}
+						disabled={isDisconnectLoading || isLogoutPending}
+					>
+						Logout
+					</button>
+				)}
 			</WhenLoggedInWithProfile>
 			<WhenLoggedOut>
 				<div className="flex flex-col sm:flex-row gap-3">
@@ -667,6 +644,7 @@ export function LoginButton() {
 							</div>
 						)}
 					</button>
+
 					{isConnected && (
 						<button
 							onClick={() => disconnectAsync()}
@@ -678,9 +656,6 @@ export function LoginButton() {
 					)}
 				</div>
 			</WhenLoggedOut>
-			{walletError && (
-				<span className="text-red-600">{walletError.message}</span>
-			)}
 		</div>
 	)
 }
